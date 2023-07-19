@@ -2,12 +2,7 @@ import { getUserInfo } from '@/services/user'
 
 const Home = ({ data }: any) => {
   console.log(data)
-  return (
-    <div>
-      <p>Home</p>
-      <a href='#'>github login</a>
-    </div>
-  )
+  return <p>home</p>
 }
 
 export default Home
