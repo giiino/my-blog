@@ -9,7 +9,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <Header />
-      <Grid container columnSpacing={2} sx={{ mt: 8 }}>
+      {children}
+      {/* <Grid container columnSpacing={2} sx={{ mt: 8 }}>
         <Grid item xs={3}>
           <Menu />
         </Grid>
@@ -19,7 +20,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         <Grid item xs={3}>
           123
         </Grid>
-      </Grid>
+      </Grid> */}
     </>
   )
 }
