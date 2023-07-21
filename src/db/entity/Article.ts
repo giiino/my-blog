@@ -1,7 +1,10 @@
-import { Entity, ObjectId, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectId, ObjectIdColumn, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "article" })
 export class Article {
+  @PrimaryGeneratedColumn()
+  id: number;
+
   @ObjectIdColumn()
   readonly _id: ObjectId;
 

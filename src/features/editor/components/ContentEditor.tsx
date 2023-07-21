@@ -1,5 +1,3 @@
-import 'react-markdown-editor-lite/lib/index.css'
-
 import { styled } from '@mui/material/styles'
 import MarkdownIt from 'markdown-it'
 import dynamic from 'next/dynamic'
@@ -15,15 +13,6 @@ interface ContentEditorProps {
 
 export function ContentEditor({ value, onChange }: ContentEditorProps) {
   const mdParser = new MarkdownIt()
-
-  // mdParser.renderer.rules.heading_open = (tokens, idx, options, env, self) => {
-  //   const token = tokens[idx]
-
-  //   const marginStyle = `margin: 2px 0`
-
-  //   // 返回自定义的开头标签
-  //   return `<${token.tag} style="${marginStyle}">`
-  // }
 
   return (
     <StyledMdEditor

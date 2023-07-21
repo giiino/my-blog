@@ -8,7 +8,7 @@ import Menu from './Menu'
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {children}
       {/* <Grid container columnSpacing={2} sx={{ mt: 8 }}>
         <Grid item xs={3}>
