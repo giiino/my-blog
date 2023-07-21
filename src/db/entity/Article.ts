@@ -3,7 +3,10 @@ import { Entity, ObjectId, ObjectIdColumn, Column } from "typeorm";
 @Entity({ name: "article" })
 export class Article {
   @ObjectIdColumn()
-  _id: ObjectId;
+  readonly _id: ObjectId;
+
+  @Column()
+  category: string;
 
   @Column()
   title: string;
@@ -19,6 +22,5 @@ export class Article {
 
   @Column()
   is_delete: number;
-
 
 }
