@@ -1,26 +1,12 @@
-import React, { ReactNode } from 'react'
-
-import { Box, Grid } from '@mui/material'
+import { ReactNode } from 'react'
 
 import Header from './Header'
-import Menu from './Menu'
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      {/* <Header /> */}
-      {children}
-      {/* <Grid container columnSpacing={2} sx={{ mt: 8 }}>
-        <Grid item xs={3}>
-          <Menu />
-        </Grid>
-        <Grid item xs={6}>
-          {children}
-        </Grid>
-        <Grid item xs={3}>
-          123
-        </Grid>
-      </Grid> */}
+      <Header />
+      <main style={{ marginTop: '64px' }}>{children}</main>
     </>
   )
 }

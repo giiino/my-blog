@@ -12,7 +12,7 @@ import { styled } from '@mui/material/styles'
 
 export default function Header() {
   return (
-    <Container position='fixed'>
+    <Container position='fixed' color='transparent'>
       <Toolbar>
         <IconButton
           size='large'

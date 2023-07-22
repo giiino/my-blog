@@ -80,12 +80,14 @@ const MarkDownStyle = styled.div`
     li {
       &.count {
         .serial-number {
+          margin-left: 15px;
           margin-right: 10px;
         }
       }
       &.no-count::before {
         content: '•';
-        margin-right: 10px;
+        margin-left: 15px;
+        margin-right: 15px;
         font-weight: bold;
         color: #9696f5;
       }

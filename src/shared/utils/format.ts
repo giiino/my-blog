@@ -10,7 +10,7 @@ export const removeAttrsFromObject = <T extends Object>({
 }: {
   target: T
   removeAttrs: Array<keyof T>
-}) => {
+}): Partial<T> => {
   return Object.keys(target).reduce((acc, key) => {
     if (!isKey(target, key)) {
       return acc

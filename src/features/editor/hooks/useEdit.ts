@@ -1,10 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 
-import { useRouter } from 'next/router'
-
 import { Article } from '@/db/entity/Article'
-
-import { usePublishArticle, useUpdateArticle } from './use-mutations'
 
 export type EditedItems = Omit<
   Article,
@@ -22,10 +18,6 @@ export const useEdit = (intialEditedItems?: Partial<EditedItems>) => {
     ...defaultEditedItems,
     ...intialEditedItems
   })
-  const { query } = useRouter()
-
-  const { mutate: publish } = usePublishArticle()
-  const { mutate: update } = useUpdateArticle()
 
   const onCategoryChange = (_: unknown, value: string | null) => {
     setArticle((prev) => ({
@@ -48,13 +40,10 @@ export const useEdit = (intialEditedItems?: Partial<EditedItems>) => {
     }))
   }
 
-  const handleSubmit = () => (query.id ? update(article) : publish(article))
-
   return {
     article,
     onCategoryChange,
     onTitleChange,
-    onContentChange,
-    handleSubmit
+    onContentChange
   }
 }

@@ -3,23 +3,26 @@ import { Stack } from '@mui/material'
 import { Article } from '@/db/entity/Article'
 import { ContentEditor } from '@/features/editor/components/ContentEditor'
 import { TitleEditor } from '@/features/editor/components/TitleEditor'
+import { usePublishArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
-import { serializeData } from '@/shared/utils/format'
+import { removeAttrsFromObject, serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
 import { getArticleById } from '../api/article/get'
 
 const Editor = ({ articleData }: { articleData: Article }) => {
+  const { mutate: publish } = usePublishArticle()
   const {
     article: { content, title, category },
     onCategoryChange,
     onTitleChange,
-    onContentChange,
-    handleSubmit
+    onContentChange
   } = useEdit(articleData)
 
+  const handleSubmit = () => publish({ content, title, category })
+
   return (
-    <Stack sx={{ mt: 8 }}>
+    <Stack>
       <TitleEditor
         title={title}
         category={category}
@@ -42,17 +45,24 @@ export async function getServerSideProps(context: any) {
     }
   }
 
-  const articleData = await getArticleById(id)
+  const result = await getArticleById(id)
 
-  if (!articleData) {
+  if (!result) {
     return {
       notFound: true
     }
   }
 
+  const articleData = serializeData(
+    removeAttrsFromObject({
+      target: result,
+      removeAttrs: ['_id', 'create_time', 'is_delete', 'update_time', 'views']
+    })
+  )
+
   return {
     props: {
-      articleData: serializeData(articleData)
+      articleData
     }
   }
 }

@@ -18,6 +18,7 @@ export async function getArticleById(id: string, shouldPlusViews = false) {
   if (!resultArticle) {
     return undefined
   }
+
   if (shouldPlusViews) {
     resultArticle.views = resultArticle.views + 1
     await articleRepo.save(resultArticle)
