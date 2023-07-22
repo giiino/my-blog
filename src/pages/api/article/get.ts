@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
+import { removeAttrsFromObject } from '@/shared/utils/format'
 
 export async function getArticleById(id: string, shouldPlusViews = false) {
   const AppDataSource = await getDataSource()
@@ -22,7 +23,10 @@ export async function getArticleById(id: string, shouldPlusViews = false) {
     await articleRepo.save(resultArticle)
   }
 
-  return resultArticle
+  return removeAttrsFromObject({
+    target: resultArticle,
+    removeAttrs: ['is_delete', 'views']
+  })
 }
 
 export default async function handler(

@@ -9,13 +9,13 @@ export const removeAttrsFromObject = <T extends Object>({
   removeAttrs
 }: {
   target: T
-  removeAttrs: Partial<T>
+  removeAttrs: Array<keyof T>
 }) => {
   return Object.keys(target).reduce((acc, key) => {
     if (!isKey(target, key)) {
       return acc
     }
-    if (!(key in removeAttrs)) {
+    if (!removeAttrs.includes(key)) {
       acc[key] = target[key]
     }
     return acc

@@ -8,7 +8,7 @@ import { usePublishArticle, useUpdateArticle } from './use-mutations'
 
 export type EditedItems = Omit<
   Article,
-  '_id' | 'create_time' | 'update_time' | 'is_delete'
+  '_id' | 'create_time' | 'update_time' | 'views' | 'is_delete'
 >
 
 const defaultEditedItems = {
