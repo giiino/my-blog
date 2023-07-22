@@ -6,6 +6,10 @@ interface ArticleContentProps {
 }
 
 export const ArticleContent = ({ article }: ArticleContentProps) => {
-  const { content } = article
-  return <Markdown>{content}</Markdown>
+  const { title, content, create_time, update_time } = article
+  return (
+    <>
+      <Markdown>{content}</Markdown>
+    </>
+  )
 }

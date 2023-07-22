@@ -4,21 +4,30 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 
-export async function getArticleById(id: string) {
+export async function getArticleById(id: string, shouldPlusViews = false) {
   const AppDataSource = await getDataSource()
   const articleRepo = AppDataSource.getRepository(Article)
   const objectId = new ObjectId(id)
-  const result = await articleRepo.findOne({
+  const resultArticle = await articleRepo.findOne({
     where: {
       _id: objectId
     }
   })
-  return result
+
+  if (!resultArticle) {
+    return undefined
+  }
+  if (shouldPlusViews) {
+    resultArticle.views = resultArticle.views + 1
+    await articleRepo.save(resultArticle)
+  }
+
+  return resultArticle
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Article | null | { message: string }>
+  res: NextApiResponse<any>
 ) {
   if (req.method !== 'GET') {
     return res.status(405).end()

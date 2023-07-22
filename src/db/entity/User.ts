@@ -6,8 +6,8 @@ export class User {
   readonly _id: ObjectId;
 
   @Column()
-  avatar_url: string;
+  avatar_url: string = '';
 
   @Column()
-  is_admin: number;
+  is_admin: number = 0;
 }

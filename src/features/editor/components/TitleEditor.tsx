@@ -15,14 +15,14 @@ interface TitleEditorProps {
   category: string
   onTitleChange: (e: ChangeEvent<HTMLInputElement>) => void
   onCategoryChange: (_: unknown, value: string | null) => void
-  handlePublish: () => void
+  handleSubmit: () => void
 }
 
 export const TitleEditor = ({
   title,
   onTitleChange,
   onCategoryChange,
-  handlePublish
+  handleSubmit
 }: TitleEditorProps) => {
   return (
     <Stack direction='row' sx={{ height: '40px' }}>
@@ -47,7 +47,7 @@ export const TitleEditor = ({
         color='info'
         sx={{ p: '10px' }}
         size='small'
-        onClick={handlePublish}
+        onClick={handleSubmit}
       >
         <SaveAltIcon />
       </IconButton>

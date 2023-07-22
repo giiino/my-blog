@@ -2,28 +2,29 @@ import { Entity, ObjectId, ObjectIdColumn, Column, PrimaryGeneratedColumn } from
 
 @Entity({ name: "article" })
 export class Article {
-  @PrimaryGeneratedColumn()
-  id: number;
 
   @ObjectIdColumn()
   readonly _id: ObjectId;
 
   @Column()
-  category: string;
+  category: string = '';
 
   @Column()
-  title: string;
+  title: string = '';
 
   @Column()
-  content: string;
+  content: string = '';
 
   @Column()
-  create_time: number;
+  create_time: number = 0;
 
   @Column()
-  update_time: number;
+  update_time: number = 0;
 
   @Column()
-  is_delete: number;
+  views: number = 0;
+
+  @Column()
+  is_delete: number = 0;
 
 }

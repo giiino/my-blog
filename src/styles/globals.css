@@ -1,14 +1,22 @@
+:root {
+  --main-dark: #444152;
+  --main-blue: #8E8AA5;
+  --main-dark-gray: #CBCAD0;
+  --main-light-gray: #E4E4E6;
+}
+
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
-  
-  html,
-  body {
-    max-width: 100vw;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  font-family: 'Euclid Circular A', 'PingFang TC', 'Heiti TC', '微軟正黑體', sans-serif;
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
   

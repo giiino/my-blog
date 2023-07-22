@@ -1,6 +1,10 @@
+import 'react-markdown-editor-lite/lib/index.css'
+
 import { styled } from '@mui/material/styles'
 import MarkdownIt from 'markdown-it'
 import dynamic from 'next/dynamic'
+
+import { Markdown } from '@/shared/components/Markdown'
 
 const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
   ssr: false
@@ -17,8 +21,9 @@ export function ContentEditor({ value, onChange }: ContentEditorProps) {
   return (
     <StyledMdEditor
       value={value}
-      renderHTML={(text) => mdParser.render(text)}
+      renderHTML={(text) => <Markdown>{text}</Markdown>}
       onChange={onChange}
+      htmlClass='editor'
     />
   )
 }

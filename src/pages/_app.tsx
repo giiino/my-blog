@@ -1,5 +1,3 @@
-import 'react-markdown-editor-lite/lib/index.css'
-
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
