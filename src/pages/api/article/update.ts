@@ -37,4 +37,5 @@ export default async function handler(
   if (resArticle) {
     res.status(201).json({ message: '變更成功', result: resArticle })
   }
+  return res.status(404).json({ message: '變更失敗' })
 }

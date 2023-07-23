@@ -45,7 +45,7 @@ export const TitleEditor = ({
       </Stack>
       <IconButton
         color='info'
-        sx={{ p: '10px' }}
+        sx={{ p: '7px' }}
         size='small'
         onClick={handleSubmit}
       >

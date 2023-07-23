@@ -56,16 +56,17 @@ export const Markdown = ({ children }: { children: string }) => {
 const MarkDownStyle = styled.div`
   .reacr-mark-down {
     > * {
-      margin-bottom: 5px;
+      line-height: 1.5;
+      margin-bottom: 25px;
     }
-    h1,
+    /* h1,
     h2,
     h3,
     h4,
     h5,
     h6 {
-      margin: 16px 0;
-    }
+      margin: 35px 0;
+    } */
     h1 {
       font-size: 30px;
     }

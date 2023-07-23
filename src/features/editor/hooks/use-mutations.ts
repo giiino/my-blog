@@ -5,9 +5,16 @@ import { Article } from '@/db/entity/Article'
 
 import { EditedItems } from './useEdit'
 
+type PublishParams = EditedItems
+
+type UpdateParams = EditedItems & {
+  id: string
+}
+
 export const usePublishArticle = () => {
   return useMutation(
-    (params: EditedItems) => axios.post('/api/article/publish', { ...params }),
+    (params: PublishParams) =>
+      axios.post('/api/article/publish', { ...params }),
     {
       onSuccess: (res) => {}
     }
@@ -16,8 +23,7 @@ export const usePublishArticle = () => {
 
 export const useUpdateArticle = () => {
   return useMutation(
-    (params: Partial<Article>) =>
-      axios.post('/api/article/update', { ...params }),
+    (params: UpdateParams) => axios.post('/api/article/update', { ...params }),
     {
       onSuccess: (res) => {}
     }

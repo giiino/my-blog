@@ -12,12 +12,3 @@ const Layout = ({ children }: { children: ReactNode }) => {
 }
 
 export default Layout
-
-// export async function getServerSideProps() {
-//   const data = await getUserInfo()
-//   return {
-//     props: {
-//       data: JSON.parse(JSON.stringify(data))
-//     }
-//   }
-// }
