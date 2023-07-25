@@ -12,11 +12,11 @@ export default async function handler(
     return res.status(405).end()
   }
 
-  const { _id = '', category = '', title = '', content = '' } = req.body
+  const { id = '', category = '', title = '', content = '' } = req.body
 
   const AppDataSource = await getDataSource()
   const articleRepo = AppDataSource.getRepository(Article)
-  const objectId = new ObjectId(_id)
+  const objectId = new ObjectId(id)
   const targetArticle = await articleRepo.findOne({
     where: {
       _id: objectId

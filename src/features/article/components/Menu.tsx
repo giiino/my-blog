@@ -10,6 +10,8 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import ListSubheader from '@mui/material/ListSubheader'
 
+import { scrollBarStyle } from '@/styles/globals'
+
 export function Menu(props: GridProps) {
   const [open, setOpen] = React.useState(true)
 
@@ -58,33 +60,22 @@ const ListContainer = styled(Grid)`
   max-height: 80vh;
   padding-right: 10px;
 
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: transparent;
-  }
-  &:hover::-webkit-scrollbar-thumb {
-    width: 5px;
-    height: 10px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+  ${scrollBarStyle}
 
   .MuiButtonBase-root {
+    color: var(--primary-gray-300);
     &:hover {
       background-color: transparent;
-      color: var(--main-blue-gray);
+      color: var(--primary-gray-400);
     }
   }
   .Mui-selected {
-    background-color: transparent;
-    color: var(--main-blue);
-    border-radius: 10px;
+    background-color: var(--primary-blue-1) !important;
+    color: var(--primary-blue-4);
+    border-radius: 5px;
     font-weight: bold;
     &:hover {
-      color: var(--main-blue);
+      color: var(--primary-blue-4);
     }
   }
   .MuiTypography-root {

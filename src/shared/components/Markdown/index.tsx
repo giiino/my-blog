@@ -60,14 +60,7 @@ const MarkDownStyle = styled.div`
       line-height: 1.5;
       margin-bottom: 25px;
     }
-    /* h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      margin: 35px 0;
-    } */
+
     h1 {
       font-size: 30px;
     }
@@ -91,7 +84,7 @@ const MarkDownStyle = styled.div`
         margin-left: 15px;
         margin-right: 15px;
         font-weight: bold;
-        color: #9696f5;
+        color: var(--primary-blue-4);
       }
     }
     hr {
@@ -104,16 +97,14 @@ const MarkDownStyle = styled.div`
       margin: 20px 0;
     }
     blockquote {
-      font-size: 14px;
       width: 100%;
       margin: 25px auto;
-      font-family: Open Sans;
-      color: #555555;
+      color: #373223;
       padding: 1.2em 30px 1.2em 30px;
-      border-left: 8px solid #78c0a8;
+      border-left: 8px solid var(--primary-yellow);
       line-height: 1.6;
       position: relative;
-      background: #ededed;
+      background: #f9e3a27e;
     }
   }
 `

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
+import dayjs from 'dayjs'
 
 import { Article } from '@/db/entity/Article'
 import { Markdown } from '@/shared/components/Markdown'
@@ -10,9 +11,16 @@ interface ArticleContentProps extends GridProps {
 
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
   const { title, content, create_time, update_time } = article
+
+  const updateTime = dayjs(update_time).format('YYYY-MM-DD hh:mm:ss')
+
   return (
     <ContentWrapper {...restProps}>
       <Title>{title}</Title>
+      <Time>
+        上次修改時間
+        <span>{updateTime}</span>
+      </Time>
       <Markdown>{content}</Markdown>
     </ContentWrapper>
   )
@@ -31,5 +39,13 @@ const ContentWrapper = styled(Grid)`
 
 const Title = styled.h1`
   font-size: 40px;
-  margin-bottom: 35px;
+`
+
+const Time = styled.div`
+  font-size: 15px;
+  color: var(--primary-gray-200);
+  margin: 30px 0;
+  span {
+    margin-left: 15px;
+  }
 `
