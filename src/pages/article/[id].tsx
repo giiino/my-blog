@@ -1,27 +1,17 @@
-import React from 'react'
-
-import { Grid } from '@mui/material'
-
 import { Article } from '@/db/entity/Article'
-import { ArticleContent } from '@/features/article/components/ArticleContent '
-import Menu from '@/features/article/components/Menu'
+import { ArticleWrapper, Content, Menu } from '@/features/article/components'
+import TocHolder from '@/features/article/components/TocHolder'
 import { getArticleById } from '@/pages/api/article/get'
 import { serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
 const ArticlePage = ({ articleData }: { articleData: Article }) => {
   return (
-    <Grid container columnSpacing={2}>
-      <Grid item xs={3}>
-        <Menu />
-      </Grid>
-      <Grid item xs={6}>
-        <ArticleContent article={articleData} />
-      </Grid>
-      <Grid item xs={3}>
-        123
-      </Grid>
-    </Grid>
+    <ArticleWrapper justifyContent={'center'} container>
+      <Menu item lg={3} md={4} />
+      <Content item lg={7} md={8} xs={12} article={articleData} />
+      <TocHolder item lg={2} />
+    </ArticleWrapper>
   )
 }
 

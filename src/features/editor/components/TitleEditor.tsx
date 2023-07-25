@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react'
 
+import styled from '@emotion/styled'
 import SaveAltIcon from '@mui/icons-material/SaveAlt'
 import {
   Autocomplete,
@@ -8,7 +9,6 @@ import {
   Stack,
   TextField
 } from '@mui/material'
-import { styled } from '@mui/material/styles'
 
 interface TitleEditorProps {
   title: string

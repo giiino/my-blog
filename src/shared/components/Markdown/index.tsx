@@ -37,6 +37,7 @@ export const Markdown = ({ children }: { children: string }) => {
                 language={match?.[1]}
                 showLineNumbers={true}
                 style={dracula as any}
+                customStyle={{ borderRadius: 0 }}
                 PreTag='div'
                 className='syntax-hight-wrapper'
                 {...props}

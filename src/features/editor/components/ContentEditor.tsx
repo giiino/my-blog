@@ -1,6 +1,6 @@
 import 'react-markdown-editor-lite/lib/index.css'
 
-import { styled } from '@mui/material/styles'
+import styled from '@emotion/styled'
 import MarkdownIt from 'markdown-it'
 import dynamic from 'next/dynamic'
 
