@@ -38,7 +38,7 @@ const ContentWrapper = styled(Grid)`
 `
 
 const Title = styled.h1`
-  font-size: 40px;
+  font-size: 35px;
 `
 
 const Time = styled.div`

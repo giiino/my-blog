@@ -1,28 +1,21 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, ReactNode } from 'react'
 
 import styled from '@emotion/styled'
-import SaveAltIcon from '@mui/icons-material/SaveAlt'
-import {
-  Autocomplete,
-  IconButton,
-  InputBase,
-  Stack,
-  TextField
-} from '@mui/material'
+import { Autocomplete, InputBase, Stack, TextField } from '@mui/material'
 
 interface TitleEditorProps {
   title: string
   category: string
+  submitButton: ReactNode
   onTitleChange: (e: ChangeEvent<HTMLInputElement>) => void
   onCategoryChange: (_: unknown, value: string | null) => void
-  handleSubmit: () => void
 }
 
 export const TitleEditor = ({
   title,
+  submitButton,
   onTitleChange,
-  onCategoryChange,
-  handleSubmit
+  onCategoryChange
 }: TitleEditorProps) => {
   return (
     <Stack direction='row' sx={{ height: '40px' }}>
@@ -42,15 +35,8 @@ export const TitleEditor = ({
           placeholder='請填入標題'
           onChange={onTitleChange}
         />
+        {submitButton}
       </Stack>
-      <IconButton
-        color='info'
-        sx={{ p: '7px' }}
-        size='small'
-        onClick={handleSubmit}
-      >
-        <SaveAltIcon />
-      </IconButton>
     </Stack>
   )
 }

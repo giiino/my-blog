@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography'
 
 export default function Header() {
   return (
-    <Container position='fixed' color='inherit'>
+    <Container position='sticky' color='inherit'>
       <Toolbar>
         <IconButton
           size='large'

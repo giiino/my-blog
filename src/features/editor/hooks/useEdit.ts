@@ -18,7 +18,7 @@ export const useEdit = (intialEditedItems?: Partial<EditedItems>) => {
     ...defaultEditedItems,
     ...intialEditedItems
   })
-
+  console.log(article)
   const onCategoryChange = (_: unknown, value: string | null) => {
     setArticle((prev) => ({
       ...prev,

@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material'
+import { Backdrop, Button, CircularProgress, Stack } from '@mui/material'
 import { useRouter } from 'next/router'
 
 import { Article } from '@/db/entity/Article'
@@ -14,7 +14,7 @@ import { getArticleById } from '../api/article/get'
 const Editor = ({ articleData }: { articleData: Article }) => {
   const { query } = useRouter()
   const id = query.id as string
-  const { mutate: update } = useUpdateArticle()
+  const { mutate: update, isLoading } = useUpdateArticle()
   const {
     article: { content, title, category },
     onCategoryChange,
@@ -25,16 +25,32 @@ const Editor = ({ articleData }: { articleData: Article }) => {
   const handleSubmit = () => update({ id, content, title, category })
 
   return (
-    <Stack>
-      <TitleEditor
-        title={title}
-        category={category}
-        onTitleChange={onTitleChange}
-        onCategoryChange={onCategoryChange}
-        handleSubmit={handleSubmit}
-      />
-      <ContentEditor value={content} onChange={onContentChange} />
-    </Stack>
+    <>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isLoading}
+      >
+        <CircularProgress color='inherit' />
+      </Backdrop>
+      <Stack>
+        <TitleEditor
+          title={title}
+          category={category}
+          submitButton={
+            <Button
+              variant='contained'
+              onClick={handleSubmit}
+              disabled={isLoading}
+            >
+              儲存
+            </Button>
+          }
+          onTitleChange={onTitleChange}
+          onCategoryChange={onCategoryChange}
+        />
+        <ContentEditor value={content} onChange={onContentChange} />
+      </Stack>
+    </>
   )
 }
 
