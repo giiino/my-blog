@@ -5,10 +5,19 @@ import { getArticleById } from '@/pages/api/article/get'
 import { serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
-const ArticlePage = ({ articleData }: { articleData: Article }) => {
+import { MenuCategoriesResponse } from '../api/article'
+import { getMenuCategories } from '../api/article/get-menu-categories'
+
+const ArticlePage = ({
+  articleData,
+  menuCategories
+}: {
+  articleData: Article
+  menuCategories: MenuCategoriesResponse[]
+}) => {
   return (
     <ArticleWrapper justifyContent={'center'} container>
-      <Menu item lg={3} md={4} />
+      <Menu item lg={3} md={4} menuCategories={menuCategories} />
       <Content item lg={7} md={8} xs={12} article={articleData} />
       <TocHolder item lg={2} />
     </ArticleWrapper>
@@ -25,7 +34,10 @@ export async function getServerSideProps(context: any) {
     }
   }
 
-  const articleData = await getArticleById(id, true)
+  const [articleData, menuCategories] = await Promise.all([
+    getArticleById(id, true),
+    getMenuCategories()
+  ])
 
   if (!articleData) {
     return {
@@ -35,7 +47,8 @@ export async function getServerSideProps(context: any) {
 
   return {
     props: {
-      articleData: serializeData(articleData)
+      articleData: serializeData(articleData),
+      menuCategories: serializeData(menuCategories)
     }
   }
 }

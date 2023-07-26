@@ -1,3 +1,5 @@
+import { toast } from 'react-hot-toast'
+
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -21,6 +23,7 @@ export const usePublishArticle = () => {
     {
       onSuccess: (res: any) => {
         const { _id } = res?.result
+        toast.success('發布成功')
         push('/article/' + _id)
       }
     }
@@ -35,6 +38,7 @@ export const useUpdateArticle = () => {
     {
       onSuccess: (res: any) => {
         const { _id } = res?.result
+        toast.success('修改成功')
         push('/article/' + _id)
       }
     }

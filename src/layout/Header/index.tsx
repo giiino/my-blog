@@ -9,6 +9,7 @@ import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import Image from 'next/image'
 
 export default function Header() {
   return (
@@ -24,7 +25,14 @@ export default function Header() {
           <MenuIcon />
         </IconButton>
         <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-          News
+          <Image
+            src={'/web-icon.svg'}
+            alt=''
+            width={20}
+            height={20}
+            style={{ marginRight: '15px' }}
+          />
+          程式學習紀錄
         </Typography>
         <DarkModeIcon />
       </Toolbar>

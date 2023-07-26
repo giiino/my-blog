@@ -3,6 +3,8 @@ import { ChangeEvent, ReactNode } from 'react'
 import styled from '@emotion/styled'
 import { Autocomplete, InputBase, Stack, TextField } from '@mui/material'
 
+import { useCategories } from '../hooks/use-queries'
+
 interface TitleEditorProps {
   title: string
   category: string
@@ -13,16 +15,20 @@ interface TitleEditorProps {
 
 export const TitleEditor = ({
   title,
+  category,
   submitButton,
   onTitleChange,
   onCategoryChange
 }: TitleEditorProps) => {
+  const { data: categories } = useCategories()
   return (
     <Stack direction='row' sx={{ height: '40px' }}>
       <Stack direction='row' sx={{ flexGrow: 1 }}>
         <Autocomplete
           disablePortal
-          options={testArr}
+          freeSolo
+          value={category}
+          options={categories || []}
           sx={{ width: 300 }}
           placeholder='分類'
           size='small'
@@ -48,5 +54,3 @@ const TitleInput = styled(InputBase)`
     padding: 0;
   }
 `
-
-const testArr = ['88', '55']

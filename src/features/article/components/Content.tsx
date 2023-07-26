@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
-import { Grid, GridProps } from '@mui/material'
+import EditIcon from '@mui/icons-material/Edit'
+import { Grid, GridProps, IconButton, Stack } from '@mui/material'
 import dayjs from 'dayjs'
+import Link from 'next/link'
 
 import { Article } from '@/db/entity/Article'
 import { Markdown } from '@/shared/components/Markdown'
@@ -10,13 +12,24 @@ interface ArticleContentProps extends GridProps {
 }
 
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
-  const { title, content, create_time, update_time } = article
+  const { _id, title, content, create_time, update_time } = article
 
   const updateTime = dayjs(update_time).format('YYYY-MM-DD hh:mm:ss')
 
   return (
     <ContentWrapper {...restProps}>
-      <Title>{title}</Title>
+      <Stack
+        direction='row'
+        sx={{ justifyContent: 'space-between', alignItems: 'center' }}
+      >
+        <Title>{title}</Title>
+        <Link href={`/edit/${_id}`}>
+          <IconButton>
+            <EditIcon />
+          </IconButton>
+        </Link>
+      </Stack>
+
       <Time>
         上次修改時間
         <span>{updateTime}</span>
@@ -28,7 +41,7 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
 
 const ContentWrapper = styled(Grid)`
   margin-top: 50px;
-  padding: 0 14px;
+  padding: 0 18px;
   @media screen and (max-width: 1100px) {
     padding-right: 0;
   }
@@ -44,7 +57,8 @@ const Title = styled.h1`
 const Time = styled.div`
   font-size: 15px;
   color: var(--primary-gray-200);
-  margin: 30px 0;
+  margin-top: 5px;
+  margin-bottom: 30px;
   span {
     margin-left: 15px;
   }

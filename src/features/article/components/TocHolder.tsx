@@ -4,7 +4,7 @@ import { Grid, GridProps } from '@mui/material'
 const TocHolder = (props: GridProps) => {
   return (
     <ListContainer {...props}>
-      <div style={{ background: 'red' }}>TocHolder</div>
+      <div></div>
     </ListContainer>
   )
 }

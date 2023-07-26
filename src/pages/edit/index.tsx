@@ -3,10 +3,12 @@ import { Backdrop, Button, CircularProgress, Stack } from '@mui/material'
 import { ContentEditor } from '@/features/editor/components/ContentEditor'
 import { TitleEditor } from '@/features/editor/components/TitleEditor'
 import { usePublishArticle } from '@/features/editor/hooks/use-mutations'
+import { useCategories } from '@/features/editor/hooks/use-queries'
 import { useEdit } from '@/features/editor/hooks/useEdit'
 
 const Editor = () => {
   const { mutate: publish, isLoading } = usePublishArticle()
+  const { data: categories } = useCategories()
   const {
     article: { content, title, category },
     onCategoryChange,

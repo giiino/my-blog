@@ -9,16 +9,17 @@ import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import ListSubheader from '@mui/material/ListSubheader'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
+import { MenuCategoriesResponse } from '@/pages/api/article'
 import { scrollBarStyle } from '@/styles/globals'
 
-export function Menu(props: GridProps) {
-  const [open, setOpen] = React.useState(true)
+interface MenuProps extends GridProps {
+  menuCategories: MenuCategoriesResponse[]
+}
 
-  const handleClick = () => {
-    setOpen(!open)
-  }
-
+export function Menu({ menuCategories, ...props }: MenuProps) {
   return (
     <ListContainer {...props}>
       <List
@@ -26,28 +27,43 @@ export function Menu(props: GridProps) {
         aria-labelledby='主題選擇菜單'
         component='nav'
       >
-        <ListItemButton selected>
-          <ListItemText primary='Sent mail' />
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemText primary='Drafts' />
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemText primary='Drafts' />
-        </ListItemButton>
-        <ListItemButton onClick={handleClick}>
-          <ListItemText primary='Inbox' />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-        <Collapse in={open} timeout='auto' unmountOnExit>
-          <List component='div' disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemText primary='Starred' />
-            </ListItemButton>
-          </List>
-        </Collapse>
+        {menuCategories.map((menuCategory) => (
+          <GroupListItem key={menuCategory.category} {...menuCategory} />
+        ))}
       </List>
     </ListContainer>
+  )
+}
+
+const GroupListItem = ({ category, titles }: MenuCategoriesResponse) => {
+  const [open, setOpen] = React.useState(false)
+  const { query } = useRouter()
+  const currentArticleId = query.id as string
+  const isCategorySelected = titles.some(({ _id }) => _id === currentArticleId)
+
+  const handleClick = () => setOpen(!open)
+
+  return (
+    <>
+      <ListItemButton onClick={handleClick} selected={isCategorySelected}>
+        <ListItemText primary={category} />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={open} timeout='auto' unmountOnExit>
+        {titles.map(({ title, _id }) => {
+          const isSelected = _id === currentArticleId
+          return (
+            <List key={_id} component='div' disablePadding>
+              <Link href={`/article/${_id}`}>
+                <ListItemButton selected={isSelected} sx={{ pl: 4 }}>
+                  <ListItemText primary={title} />
+                </ListItemButton>
+              </Link>
+            </List>
+          )
+        })}
+      </Collapse>
+    </>
   )
 }
 
@@ -70,17 +86,17 @@ const ListContainer = styled(Grid)`
     }
   }
   .Mui-selected {
-    background-color: var(--primary-blue-1) !important;
+    background-color: transparent !important;
     color: var(--primary-blue-4);
     border-radius: 5px;
-    font-weight: bold;
     &:hover {
       color: var(--primary-blue-4);
     }
+    .MuiTypography-root {
+      font-weight: bold;
+    }
   }
-  .MuiTypography-root {
-    font-size: 15px;
-  }
+
   @media screen and (max-width: 960px) {
     display: none;
   }

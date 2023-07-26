@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { Toaster } from 'react-hot-toast'
 
 import Header from './Header'
 
@@ -7,6 +8,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
     <>
       <Header />
       <main>{children}</main>
+      <Toaster position='bottom-center' />
     </>
   )
 }
