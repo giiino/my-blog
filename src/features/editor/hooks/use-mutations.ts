@@ -4,16 +4,9 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
-import { Article } from '@/db/entity/Article'
 import { axiosInstance } from '@/shared/utils/axiosInstance'
 
-import { EditedItems } from './useEdit'
-
-type PublishParams = EditedItems
-
-type UpdateParams = EditedItems & {
-  id: string
-}
+import { PublishParams, UpdateParams } from '../types'
 
 export const usePublishArticle = () => {
   const { push } = useRouter()
@@ -21,10 +14,13 @@ export const usePublishArticle = () => {
     (params: PublishParams) =>
       axios.post('/api/article/publish', { ...params }),
     {
-      onSuccess: (res: any) => {
-        const { _id } = res?.result
+      onSuccess: (res) => {
+        const id = res.data.result as string
         toast.success('發布成功')
-        push('/article/' + _id)
+        push('/article/' + id)
+      },
+      onError: (error) => {
+        toast.error(error as string)
       }
     }
   )
@@ -34,12 +30,17 @@ export const useUpdateArticle = () => {
   const { push } = useRouter()
   return useMutation(
     (params: UpdateParams) =>
-      axiosInstance.post('/api/article/update', { ...params }),
+      axiosInstance.post('/api/article/update', {
+        ...params
+      }),
     {
-      onSuccess: (res: any) => {
-        const { _id } = res?.result
+      onSuccess: (res) => {
+        const { _id } = res.data.result as UpdateParams
         toast.success('修改成功')
         push('/article/' + _id)
+      },
+      onError: (error) => {
+        toast.error(error as string)
       }
     }
   )

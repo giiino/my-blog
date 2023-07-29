@@ -3,33 +3,32 @@ import EditIcon from '@mui/icons-material/Edit'
 import { Grid, GridProps, IconButton, Stack } from '@mui/material'
 import dayjs from 'dayjs'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { Article } from '@/db/entity/Article'
+import { ArticleResponse } from '@/pages/api/article'
 import { Markdown } from '@/shared/components/Markdown'
 
 interface ArticleContentProps extends GridProps {
-  article: Article
+  article: ArticleResponse
 }
 
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
-  const { _id, title, content, create_time, update_time } = article
+  const { push } = useRouter()
+  const { _id, title, content, update_time } = article
 
   const updateTime = dayjs(update_time).format('YYYY-MM-DD hh:mm:ss')
 
+  const changeToEdit = () => push(`/edit/${_id}`)
+
   return (
     <ContentWrapper {...restProps}>
-      <Stack
-        direction='row'
-        sx={{ justifyContent: 'space-between', alignItems: 'center' }}
-      >
-        <Title>{title}</Title>
-        <Link href={`/edit/${_id}`}>
-          <IconButton>
-            <EditIcon />
-          </IconButton>
-        </Link>
-      </Stack>
-
+      <Title>
+        {title}
+        <IconButton size='small' onClick={changeToEdit}>
+          <EditIcon fontSize='inherit' />
+        </IconButton>
+      </Title>
       <Time>
         上次修改時間
         <span>{updateTime}</span>

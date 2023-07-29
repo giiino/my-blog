@@ -101,10 +101,11 @@ const MarkDownStyle = styled.div`
       margin: 25px auto;
       color: #373223;
       padding: 1.2em 30px 1.2em 30px;
-      border-left: 8px solid var(--primary-yellow);
+      border-left: 8px solid var(--primary-blue-4);
       line-height: 1.6;
       position: relative;
-      background: #f9e3a27e;
+      background: var(--primary-blue-1);
+      border-radius: 8px;
     }
   }
 `

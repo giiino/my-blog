@@ -5,6 +5,9 @@ import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 import { removeAttrsFromObject } from '@/shared/utils/format'
 
+import { ArticleResponse } from '.'
+import { ApiResponse } from '..'
+
 export async function getArticleById(id: string, shouldPlusViews = false) {
   const AppDataSource = await getDataSource()
   const articleRepo = AppDataSource.getRepository(Article)
@@ -26,13 +29,13 @@ export async function getArticleById(id: string, shouldPlusViews = false) {
 
   return removeAttrsFromObject({
     target: resultArticle,
-    removeAttrs: ['is_delete', 'views']
-  })
+    removeAttrs: ['is_delete', 'views', 'create_time']
+  }) as ArticleResponse
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<any>
+  res: ApiResponse<ArticleResponse>
 ) {
   if (req.method !== 'GET') {
     return res.status(405).end()
@@ -42,7 +45,7 @@ export default async function handler(
   const data = await getArticleById(Array.isArray(id) ? id[0] : id)
 
   if (!data) {
-    res.status(404).json({ message: '未找到資料' })
+    return res.status(404).json({ message: '未找到資料' })
   }
 
   res.status(200).json(data)

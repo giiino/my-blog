@@ -1,11 +1,11 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 export const axiosInstance = axios.create({
   baseURL: '/'
 })
 
 axiosInstance.interceptors.response.use(
-  (response) => response.data,
+  (response) => response,
   (error) => {
     function errorHandler(error: any) {
       if (!error) {

@@ -1,20 +1,18 @@
-import { Article } from '@/db/entity/Article'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
+
 import { ArticleWrapper, Content, Menu } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
-import { getArticleById } from '@/pages/api/article/get'
+import { getArticleById } from '@/pages/api/article/get-article'
 import { serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
-import { MenuCategoriesResponse } from '../api/article'
+import { ArticleResponse, MenuCategoriesResponse } from '../api/article'
 import { getMenuCategories } from '../api/article/get-menu-categories'
 
 const ArticlePage = ({
   articleData,
   menuCategories
-}: {
-  articleData: Article
-  menuCategories: MenuCategoriesResponse[]
-}) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <ArticleWrapper justifyContent={'center'} container>
       <Menu item lg={3} md={4} menuCategories={menuCategories} />
@@ -26,8 +24,11 @@ const ArticlePage = ({
 
 export default ArticlePage
 
-export async function getServerSideProps(context: any) {
-  const id = context.params.id
+export const getServerSideProps: GetServerSideProps<{
+  articleData: ArticleResponse
+  menuCategories: MenuCategoriesResponse[]
+}> = async (context) => {
+  const id = context?.params?.id as string
   if (!isValidObjectId(id)) {
     return {
       notFound: true

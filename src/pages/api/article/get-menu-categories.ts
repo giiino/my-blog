@@ -4,6 +4,7 @@ import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 
 import { MenuCategoriesResponse } from '.'
+import { ApiResponse } from '..'
 
 export async function getMenuCategories() {
   const AppDataSource = await getDataSource()
@@ -21,7 +22,6 @@ export async function getMenuCategories() {
           }
         }
       },
-
       {
         $sort: {
           _id: 1
@@ -42,7 +42,7 @@ export async function getMenuCategories() {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<MenuCategoriesResponse[]>
+  res: ApiResponse<MenuCategoriesResponse[]>
 ) {
   if (req.method !== 'GET') {
     return res.status(405).end()

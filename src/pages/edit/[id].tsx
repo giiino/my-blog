@@ -1,7 +1,6 @@
 import { Backdrop, Button, CircularProgress, Stack } from '@mui/material'
-import { useRouter } from 'next/router'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
-import { Article } from '@/db/entity/Article'
 import { ContentEditor } from '@/features/editor/components/ContentEditor'
 import { TitleEditor } from '@/features/editor/components/TitleEditor'
 import { useUpdateArticle } from '@/features/editor/hooks/use-mutations'
@@ -9,20 +8,22 @@ import { useEdit } from '@/features/editor/hooks/useEdit'
 import { removeAttrsFromObject, serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
-import { getArticleById } from '../api/article/get'
+import { ArticleEditResponse } from '../api/article'
+import { getArticleById } from '../api/article/get-article'
 
-const Editor = ({ articleData }: { articleData: Article }) => {
-  const { query } = useRouter()
-  const id = query.id as string
+const Editor = ({
+  articleData
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { _id, ...restArticleData } = articleData
   const { mutate: update, isLoading } = useUpdateArticle()
   const {
     article: { content, title, category },
     onCategoryChange,
     onTitleChange,
     onContentChange
-  } = useEdit(articleData)
-
-  const handleSubmit = () => update({ id, content, title, category })
+  } = useEdit({ ...restArticleData })
+  const handleSubmit = () =>
+    update({ content, title, category, _id: String(_id) })
 
   return (
     <>
@@ -56,8 +57,11 @@ const Editor = ({ articleData }: { articleData: Article }) => {
 
 export default Editor
 
-export async function getServerSideProps(context: any) {
-  const id = context.params.id
+export const getServerSideProps: GetServerSideProps<{
+  articleData: ArticleEditResponse
+}> = async (context) => {
+  const id = context?.params?.id as string
+
   if (!isValidObjectId(id)) {
     return {
       notFound: true
@@ -75,7 +79,7 @@ export async function getServerSideProps(context: any) {
   const articleData = serializeData(
     removeAttrsFromObject({
       target: result,
-      removeAttrs: ['_id', 'create_time', 'is_delete', 'update_time', 'views']
+      removeAttrs: ['update_time']
     })
   )
 

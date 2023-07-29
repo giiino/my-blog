@@ -21,6 +21,7 @@ export const TitleEditor = ({
   onCategoryChange
 }: TitleEditorProps) => {
   const { data: categories } = useCategories()
+  console.log(categories)
   return (
     <Stack direction='row' sx={{ height: '40px' }}>
       <Stack direction='row' sx={{ flexGrow: 1 }}>

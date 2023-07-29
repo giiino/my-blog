@@ -1,7 +1,17 @@
+import { Button } from '@mui/material'
+import { useRouter } from 'next/router'
+
 import { serializeData } from '@/shared/utils/format'
 
 const Home = ({ data }: any) => {
-  return <p>home</p>
+  const { push } = useRouter()
+  return (
+    <p>
+      <Button onClick={() => push('/article/64baaf42a117d6a94cde65f9')}>
+        Blog
+      </Button>
+    </p>
+  )
 }
 
 export default Home

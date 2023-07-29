@@ -1,16 +1,13 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 
-type ResponseData = {
-  data: Article
-  message: string
-}
+import { ApiResponse } from '..'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
+  res: ApiResponse<string>
 ) {
   if (req.method !== 'POST') {
     return res.status(405).end()
@@ -31,5 +28,5 @@ export default async function handler(
 
   const resArticle = await articleRepo.save(article)
 
-  res.status(200).json({ data: resArticle, message: '發布成功' })
+  res.status(200).json({ result: String(resArticle._id), message: '發布成功' })
 }

@@ -1,22 +1,25 @@
 import { ObjectId } from 'mongodb'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 
+import { ApiResponse } from '..'
+
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<any>
+  res: ApiResponse<Article>
 ) {
   if (req.method !== 'POST') {
     return res.status(405).end()
   }
 
-  const { id = '', category = '', title = '', content = '' } = req.body
+  const { _id = '', category = '', title = '', content = '' } = req.body
 
   const AppDataSource = await getDataSource()
   const articleRepo = AppDataSource.getRepository(Article)
-  const objectId = new ObjectId(id)
+  const objectId = new ObjectId(_id)
+
   const targetArticle = await articleRepo.findOne({
     where: {
       _id: objectId
