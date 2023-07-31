@@ -1,9 +1,14 @@
 import React from 'react'
 
 import styled from '@emotion/styled'
-import { Typography } from '@mui/material'
+import EmailIcon from '@mui/icons-material/Email'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import { Stack, Typography } from '@mui/material'
 import Box from '@mui/material/Box'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
+
+import * as constants from '@/shared/constants'
 
 const Footer = () => {
   const { pathname } = useRouter()
@@ -14,9 +19,26 @@ const Footer = () => {
 
   return (
     <BoxWrapper component={'footer'}>
-      <Typography variant='body2'>
-        © {new Date().getFullYear()} by giiino. All rights reserved.
-      </Typography>
+      <InfoWrapper>
+        <RoutesWrapper>
+          <Link href={'/'}>首頁</Link>
+          <Link href={'/article'}>文章</Link>
+        </RoutesWrapper>
+        <Icons>
+          <Link href={constants.MY_GITHUB_URL}>
+            <GitHubIcon fontSize='large' />
+          </Link>
+          <Link href={constants.MY_MAIL}>
+            <EmailIcon fontSize='large' />
+          </Link>
+        </Icons>
+        <Typography
+          variant='body1'
+          sx={{ textAlign: 'center', justifySelf: 'flex-end' }}
+        >
+          © {new Date().getFullYear()} by giiino. All rights reserved.
+        </Typography>
+      </InfoWrapper>
     </BoxWrapper>
   )
 }
@@ -24,7 +46,43 @@ const Footer = () => {
 export default Footer
 
 const BoxWrapper = styled(Box)`
-  height: 20vh;
-  background-color: var(--primary-blue-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  background-color: var(--primary-gray-100);
   margin-top: 20vh;
+`
+
+const InfoWrapper = styled(Stack)`
+  width: 90%;
+  max-width: 800px;
+`
+
+const RoutesWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 18px;
+  gap: 15px;
+  a {
+    color: var(--primary-gray-400);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`
+
+const Icons = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  gap: 15px;
+  .MuiSvgIcon-root {
+    font-size: 30px;
+    cursor: pointer;
+  }
+  a {
+    color: var(--primary-gray-400);
+  }
 `
