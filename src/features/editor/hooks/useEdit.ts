@@ -8,15 +8,15 @@ export type EditedItems = Omit<
 >
 
 const defaultEditedItems = {
-  category: '88',
+  category: '',
   title: '',
   content: ''
 }
 
-export const useEdit = (intialEditedItems?: Partial<EditedItems>) => {
+export const useEdit = (initialEditedItems?: Partial<EditedItems>) => {
   const [article, setArticle] = useState<EditedItems>({
     ...defaultEditedItems,
-    ...intialEditedItems
+    ...initialEditedItems
   })
 
   const onCategoryChange = (_: unknown, value: string | null) => {

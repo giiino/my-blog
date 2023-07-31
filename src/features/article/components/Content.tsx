@@ -1,11 +1,9 @@
 import styled from '@emotion/styled'
 import EditIcon from '@mui/icons-material/Edit'
-import { Grid, GridProps, IconButton, Stack } from '@mui/material'
+import { Grid, GridProps, IconButton } from '@mui/material'
 import dayjs from 'dayjs'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Article } from '@/db/entity/Article'
 import { ArticleResponse } from '@/pages/api/article'
 import { Markdown } from '@/shared/components/Markdown'
 
@@ -25,7 +23,7 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
     <ContentWrapper {...restProps}>
       <Title>
         {title}
-        <IconButton size='small' onClick={changeToEdit}>
+        <IconButton size='medium' onClick={changeToEdit} sx={{ ml: 3 }}>
           <EditIcon fontSize='inherit' />
         </IconButton>
       </Title>

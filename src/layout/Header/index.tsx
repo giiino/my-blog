@@ -10,8 +10,13 @@ import IconButton from '@mui/material/IconButton'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
+import Link from 'next/link'
 
-export default function Header() {
+interface HeaderProps {
+  setIsSidebarOpen: (isOpen: boolean) => void
+}
+
+export default function Header({ setIsSidebarOpen }: HeaderProps) {
   return (
     <Container position='sticky' color='inherit'>
       <Toolbar>
@@ -21,18 +26,24 @@ export default function Header() {
           color='inherit'
           aria-label='menu'
           sx={{ mr: 2 }}
+          onClick={() => setIsSidebarOpen(true)}
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-          <Image
-            src={'/web-icon.svg'}
-            alt=''
-            width={20}
-            height={20}
-            style={{ marginRight: '15px' }}
-          />
-          程式學習紀錄
+        <Typography
+          variant='h6'
+          component='div'
+          sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
+        >
+          <Link href={'/'} style={{ marginRight: '15px' }}>
+            <Image
+              src={'/logo.svg'}
+              alt='logo'
+              width={120}
+              height={60}
+              style={{ display: 'block' }}
+            />
+          </Link>
         </Typography>
         <DarkModeIcon />
       </Toolbar>

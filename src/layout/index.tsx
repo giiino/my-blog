@@ -1,13 +1,19 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 
+import Footer from './Footer'
 import Header from './Header'
+import Siderbar from './Siderbar'
 
 const Layout = ({ children }: { children: ReactNode }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
   return (
     <>
-      <Header />
+      <Header setIsSidebarOpen={setIsSidebarOpen} />
+      <Siderbar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <main>{children}</main>
+      <Footer />
       <Toaster position='bottom-center' />
     </>
   )

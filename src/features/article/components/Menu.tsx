@@ -78,6 +78,10 @@ const ListContainer = styled(Grid)`
 
   ${scrollBarStyle}
 
+  .MuiList-root {
+    padding: 0;
+  }
+
   .MuiButtonBase-root {
     color: var(--primary-gray-300);
     &:hover {
