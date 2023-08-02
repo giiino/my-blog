@@ -35,7 +35,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
           component='div'
           sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
         >
-          <Link href={'/'} style={{ marginRight: '15px' }}>
+          <Link href={'/'} style={{ marginRight: '20px' }}>
             <Image
               src={'/logo.svg'}
               alt='logo'
@@ -44,6 +44,10 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
               style={{ display: 'block' }}
             />
           </Link>
+          <RouteButton href='/' style={{ marginRight: '20px' }}>
+            首頁
+          </RouteButton>
+          <RouteButton href='/'>文章</RouteButton>
         </Typography>
         <DarkModeIcon />
       </Toolbar>
@@ -55,4 +59,12 @@ const Container = styled(AppBar)`
   z-index: 5;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+`
+
+const RouteButton = styled(Link)`
+  font-size: 16px;
+  color: #000;
+  &:hover {
+    color: var(--primary-blue-4);
+  }
 `

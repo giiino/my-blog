@@ -27,6 +27,11 @@ export function Menu({ menuCategories, ...props }: MenuProps) {
         aria-labelledby='主題選擇菜單'
         component='nav'
       >
+        <Link href={`/article`}>
+          <ListItemButton>
+            <ListItemText primary={'導讀'} />
+          </ListItemButton>
+        </Link>
         {menuCategories.map((menuCategory) => (
           <GroupListItem key={menuCategory.category} {...menuCategory} />
         ))}
