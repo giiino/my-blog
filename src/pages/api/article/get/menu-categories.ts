@@ -2,9 +2,8 @@ import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
-
-import { MenuCategoriesResponse } from '.'
-import { ApiResponse } from '..'
+import { ApiResponse } from '@/pages/api'
+import { MenuCategoriesResponse } from '@/pages/api/article'
 
 export async function getMenuCategories() {
   const AppDataSource = await getDataSource()

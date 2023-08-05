@@ -10,7 +10,7 @@ import { removeAttrsFromObject, serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
 import { ArticleEditResponse } from '../api/article'
-import { getArticleById } from '../api/article/get-article'
+import { getArticleById } from '../api/article/get/article'
 
 const Editor = ({
   articleData

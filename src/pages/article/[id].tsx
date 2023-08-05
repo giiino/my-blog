@@ -2,12 +2,12 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
 import { ArticleWrapper, Content, Menu } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
-import { getArticleById } from '@/pages/api/article/get-article'
+import { getArticleById } from '@/pages/api/article/get/article'
 import { serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
 import { ArticleResponse, MenuCategoriesResponse } from '../api/article'
-import { getMenuCategories } from '../api/article/get-menu-categories'
+import { getMenuCategories } from '../api/article/get/menu-categories'
 
 const ArticlePage = ({
   articleData,

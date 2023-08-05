@@ -3,28 +3,23 @@ import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
-
-import { ApiResponse } from '..'
+import { ApiResponse } from '@/pages/api'
 
 export default async function handler(
   req: NextApiRequest,
   res: ApiResponse<Article>
 ) {
-  if (req.method !== 'POST') {
+  if (req.method !== 'PUT') {
     return res.status(405).end()
   }
 
-  const {
-    _id = '',
-    category = '',
-    title = '',
-    content = '',
-    isReadme = false
-  } = req.body
+  const { id = '' } = req.query as { id: string }
+
+  const { category = '', title = '', content = '', isReadme = false } = req.body
 
   const AppDataSource = await getDataSource()
   const articleRepo = AppDataSource.getRepository(Article)
-  const objectId = new ObjectId(_id)
+  const objectId = new ObjectId(id)
 
   const targetArticle = await articleRepo.findOne({
     where: {

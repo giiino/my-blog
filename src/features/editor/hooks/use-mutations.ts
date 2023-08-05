@@ -28,8 +28,8 @@ export const usePublishArticle = () => {
 export const useUpdateArticle = () => {
   const { push } = useRouter()
   return useMutation(
-    (params: UpdateParams) =>
-      axiosInstance.post('/api/article/update', {
+    ({ _id, ...params }: UpdateParams) =>
+      axiosInstance.put('/api/article/update/' + _id, {
         ...params
       }),
     {

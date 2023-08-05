@@ -3,10 +3,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
+import { ApiResponse } from '@/pages/api'
+import { ArticleResponse } from '@/pages/api/article'
 import { removeAttrsFromObject } from '@/shared/utils/format'
-
-import { ArticleResponse } from '.'
-import { ApiResponse } from '..'
 
 export async function getArticleById(id: string, shouldPlusViews = false) {
   const AppDataSource = await getDataSource()

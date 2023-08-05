@@ -5,12 +5,12 @@ import TocHolder from '@/features/article/components/TocHolder'
 import {
   getArticleById,
   getReadmeArticle
-} from '@/pages/api/article/get-article'
+} from '@/pages/api/article/get/article'
 import { serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
 import { ArticleResponse, MenuCategoriesResponse } from '../api/article'
-import { getMenuCategories } from '../api/article/get-menu-categories'
+import { getMenuCategories } from '../api/article/get/menu-categories'
 
 const ArticleIndexPage = ({
   articleData,
