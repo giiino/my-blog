@@ -13,7 +13,8 @@ export async function getMenuCategories() {
     .aggregate([
       {
         $match: {
-          isReadme: { $ne: 1 }
+          isReadme: 0,
+          isDelete: 0
         }
       },
       {

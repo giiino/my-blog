@@ -1,31 +1,26 @@
 import styled from '@emotion/styled'
-import EditIcon from '@mui/icons-material/Edit'
-import { Grid, GridProps, IconButton } from '@mui/material'
+import { Grid, GridProps } from '@mui/material'
 import dayjs from 'dayjs'
-import { useRouter } from 'next/router'
 
 import { ArticleResponse } from '@/pages/api/article'
 import { Markdown } from '@/shared/components/Markdown'
+
+import { Setting } from './Setting'
 
 interface ArticleContentProps extends GridProps {
   article: ArticleResponse
 }
 
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
-  const { push } = useRouter()
   const { _id, title, content, updateTime } = article
 
   const formattedUpdateTime = dayjs(updateTime).format('YYYY-MM-DD hh:mm:ss')
-
-  const changeToEdit = () => push(`/edit/${_id}`)
 
   return (
     <ContentWrapper {...restProps}>
       <Title>
         {title}
-        <IconButton size='medium' onClick={changeToEdit} sx={{ ml: 3 }}>
-          <EditIcon fontSize='inherit' />
-        </IconButton>
+        <Setting className='setting-btn' editId={_id} />
       </Title>
       <Time>
         上次修改時間
@@ -39,6 +34,7 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
 const ContentWrapper = styled(Grid)`
   margin-top: 50px;
   padding: 0 18px;
+
   @media screen and (max-width: 1100px) {
     padding-right: 0;
   }
@@ -48,7 +44,14 @@ const ContentWrapper = styled(Grid)`
 `
 
 const Title = styled.h1`
+  position: relative;
   font-size: 35px;
+  padding-right: 50px;
+  .setting-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 `
 
 const Time = styled.div`

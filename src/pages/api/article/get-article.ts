@@ -14,7 +14,8 @@ export async function getArticleById(id: string, shouldPlusViews = false) {
   const objectId = new ObjectId(id)
   const resultArticle = await articleRepo.findOne({
     where: {
-      _id: objectId
+      _id: objectId,
+      isDelete: 0
     }
   })
 
@@ -39,7 +40,8 @@ export async function getReadmeArticle() {
 
   const resultArticle = await articleRepo.findOne({
     where: {
-      isReadme: 1
+      isReadme: 1,
+      isDelete: 0
     }
   })
 
