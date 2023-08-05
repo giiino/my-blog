@@ -5,11 +5,8 @@ export type MenuCategoriesResponse = {
   titles: Array<Record<'title' | '_id', string>>
 }
 
-export type ArticleResponse = Omit<
-  Article,
-  'create_time' | 'views' | 'is_delete'
->
+export type ArticleResponse = Omit<Article, 'createTime' | 'views' | 'isDelete'>
 export type ArticleEditResponse = Omit<
   Article,
-  'update_time' | 'create_time' | 'views' | 'is_delete'
+  'updateTime' | 'createTime' | 'views' | 'isDelete'
 >

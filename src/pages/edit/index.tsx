@@ -8,12 +8,13 @@ import { useEdit } from '@/features/editor/hooks/useEdit'
 const Editor = () => {
   const { mutate: publish, isLoading } = usePublishArticle()
   const {
-    article: { content, title, category },
+    article: { content, title, category, isReadme },
     onCategoryChange,
     onTitleChange,
-    onContentChange
+    onContentChange,
+    onIsReadmeCheckChange
   } = useEdit()
-  const handleSubmit = () => publish({ content, title, category })
+  const handleSubmit = () => publish({ content, title, category, isReadme })
 
   return (
     <>
@@ -23,10 +24,11 @@ const Editor = () => {
       >
         <CircularProgress color='inherit' />
       </Backdrop>
-      <Stack sx={{ mt: 8 }}>
+      <Stack>
         <TitleEditor
           title={title}
           category={category}
+          isReadme={isReadme}
           submitButton={
             <Button
               variant='contained'
@@ -38,6 +40,7 @@ const Editor = () => {
           }
           onTitleChange={onTitleChange}
           onCategoryChange={onCategoryChange}
+          onIsReadmeCheckChange={onIsReadmeCheckChange}
         />
         <ContentEditor value={content} onChange={onContentChange} />
       </Stack>

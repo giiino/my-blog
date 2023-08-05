@@ -5,6 +5,7 @@ import { ContentEditor } from '@/features/editor/components/ContentEditor'
 import { TitleEditor } from '@/features/editor/components/TitleEditor'
 import { useUpdateArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
+import { formatArticleResponse } from '@/features/editor/utils/formatter'
 import { removeAttrsFromObject, serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
@@ -17,13 +18,14 @@ const Editor = ({
   const { _id, ...restArticleData } = articleData
   const { mutate: update, isLoading } = useUpdateArticle()
   const {
-    article: { content, title, category },
+    article: { content, title, category, isReadme },
     onCategoryChange,
     onTitleChange,
-    onContentChange
-  } = useEdit({ ...restArticleData })
+    onContentChange,
+    onIsReadmeCheckChange
+  } = useEdit({ ...formatArticleResponse(restArticleData) })
   const handleSubmit = () =>
-    update({ content, title, category, _id: String(_id) })
+    update({ content, title, category, _id: String(_id), isReadme })
 
   return (
     <>
@@ -37,6 +39,7 @@ const Editor = ({
         <TitleEditor
           title={title}
           category={category}
+          isReadme={isReadme}
           submitButton={
             <Button
               variant='contained'
@@ -48,6 +51,7 @@ const Editor = ({
           }
           onTitleChange={onTitleChange}
           onCategoryChange={onCategoryChange}
+          onIsReadmeCheckChange={onIsReadmeCheckChange}
         />
         <ContentEditor value={content} onChange={onContentChange} />
       </Stack>
@@ -79,7 +83,7 @@ export const getServerSideProps: GetServerSideProps<{
   const articleData = serializeData(
     removeAttrsFromObject({
       target: result,
-      removeAttrs: ['update_time']
+      removeAttrs: ['updateTime']
     })
   )
 

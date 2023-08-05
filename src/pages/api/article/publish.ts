@@ -13,7 +13,7 @@ export default async function handler(
     return res.status(405).end()
   }
 
-  const { category = '', title = '', content = '' } = req.body
+  const { category = '', title = '', content = '', isReadme = false } = req.body
 
   const AppDataSource = await getDataSource()
   const articleRepo = AppDataSource.getRepository(Article)
@@ -23,8 +23,9 @@ export default async function handler(
   article.category = category
   article.title = title
   article.content = content
-  article.create_time = Date.now()
-  article.update_time = Date.now()
+  article.isReadme = isReadme ? 1 : 0
+  article.createTime = Date.now()
+  article.updateTime = Date.now()
 
   const resArticle = await articleRepo.save(article)
 

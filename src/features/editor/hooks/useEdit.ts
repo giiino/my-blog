@@ -4,13 +4,16 @@ import { Article } from '@/db/entity/Article'
 
 export type EditedItems = Omit<
   Article,
-  '_id' | 'create_time' | 'update_time' | 'views' | 'is_delete'
->
+  '_id' | 'createTime' | 'updateTime' | 'views' | 'isDelete' | 'isReadme'
+> & {
+  isReadme: boolean
+}
 
 const defaultEditedItems = {
   category: '',
   title: '',
-  content: ''
+  content: '',
+  isReadme: false
 }
 
 export const useEdit = (initialEditedItems?: Partial<EditedItems>) => {
@@ -40,10 +43,18 @@ export const useEdit = (initialEditedItems?: Partial<EditedItems>) => {
     }))
   }
 
+  const onIsReadmeCheckChange = () => {
+    setArticle((prev) => ({
+      ...prev,
+      isReadme: !prev.isReadme
+    }))
+  }
+
   return {
     article,
     onCategoryChange,
     onTitleChange,
-    onContentChange
+    onContentChange,
+    onIsReadmeCheckChange
   }
 }

@@ -2,7 +2,10 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
 import { ArticleWrapper, Content, Menu } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
-import { getArticleById } from '@/pages/api/article/get-article'
+import {
+  getArticleById,
+  getReadmeArticle
+} from '@/pages/api/article/get-article'
 import { serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
@@ -27,16 +30,9 @@ export default ArticleIndexPage
 export const getServerSideProps: GetServerSideProps<{
   articleData: ArticleResponse
   menuCategories: MenuCategoriesResponse[]
-}> = async (context) => {
-  const id = context?.params?.id as string
-  if (!isValidObjectId(id)) {
-    return {
-      notFound: true
-    }
-  }
-
+}> = async () => {
   const [articleData, menuCategories] = await Promise.all([
-    getArticleById(id, true),
+    getReadmeArticle(),
     getMenuCategories()
   ])
 

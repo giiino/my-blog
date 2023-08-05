@@ -47,7 +47,10 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
           <RouteButton href='/' style={{ marginRight: '20px' }}>
             首頁
           </RouteButton>
-          <RouteButton href='/'>文章</RouteButton>
+          <RouteButton href='/article' style={{ marginRight: '20px' }}>
+            文章
+          </RouteButton>
+          <RouteButton href='/edit'>新增文章</RouteButton>
         </Typography>
         <DarkModeIcon />
       </Toolbar>

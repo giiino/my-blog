@@ -29,7 +29,30 @@ export async function getArticleById(id: string, shouldPlusViews = false) {
 
   return removeAttrsFromObject({
     target: resultArticle,
-    removeAttrs: ['is_delete', 'views', 'create_time']
+    removeAttrs: ['isDelete', 'views', 'createTime', 'isReadme']
+  }) as ArticleResponse
+}
+
+export async function getReadmeArticle() {
+  const AppDataSource = await getDataSource()
+  const articleRepo = AppDataSource.getRepository(Article)
+
+  const resultArticle = await articleRepo.findOne({
+    where: {
+      isReadme: 1
+    }
+  })
+
+  if (!resultArticle) {
+    return undefined
+  }
+
+  resultArticle.views = resultArticle.views + 1
+  await articleRepo.save(resultArticle)
+
+  return removeAttrsFromObject({
+    target: resultArticle,
+    removeAttrs: ['isDelete', 'views', 'createTime', 'isReadme']
   }) as ArticleResponse
 }
 

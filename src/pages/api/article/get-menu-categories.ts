@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
@@ -11,6 +11,11 @@ export async function getMenuCategories() {
   const articleRepo = AppDataSource.getMongoRepository(Article)
   const result = await articleRepo
     .aggregate([
+      {
+        $match: {
+          isReadme: { $ne: 1 }
+        }
+      },
       {
         $group: {
           _id: '$category',
@@ -36,7 +41,6 @@ export async function getMenuCategories() {
       }
     ])
     .toArray()
-
   return result as unknown as MenuCategoriesResponse[]
 }
 

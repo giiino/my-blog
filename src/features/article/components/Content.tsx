@@ -13,9 +13,9 @@ interface ArticleContentProps extends GridProps {
 
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
   const { push } = useRouter()
-  const { _id, title, content, update_time } = article
+  const { _id, title, content, updateTime } = article
 
-  const updateTime = dayjs(update_time).format('YYYY-MM-DD hh:mm:ss')
+  const formattedUpdateTime = dayjs(updateTime).format('YYYY-MM-DD hh:mm:ss')
 
   const changeToEdit = () => push(`/edit/${_id}`)
 
@@ -29,7 +29,7 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
       </Title>
       <Time>
         上次修改時間
-        <span>{updateTime}</span>
+        <span>{formattedUpdateTime}</span>
       </Time>
       <Markdown>{content}</Markdown>
     </ContentWrapper>

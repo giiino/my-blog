@@ -16,15 +16,18 @@ export class Article {
   content: string = '';
 
   @Column()
-  create_time: number = 0;
+  createTime: number = 0;
 
   @Column()
-  update_time: number = 0;
+  updateTime: number = 0;
 
   @Column()
   views: number = 0;
 
   @Column()
-  is_delete: number = 0;
+  isReadme: number = 0;
+
+  @Column()
+  isDelete: number = 0;
 
 }
