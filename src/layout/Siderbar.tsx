@@ -7,14 +7,12 @@ import {
   Divider,
   Drawer,
   Link,
-  List,
-  ListItemButton,
-  ListItemText,
   Stack
 } from '@mui/material'
 
 import { Menu } from '@/shared/components/Menu'
 import { useMenuCategory } from '@/shared/hooks/use-queries'
+import { useRouteChange } from '@/shared/hooks/useRouteChange'
 import { scrollBarStyle } from '@/styles/globals'
 
 interface SiderbarProps {
@@ -24,6 +22,10 @@ interface SiderbarProps {
 
 const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
   const { data: categories, isLoading } = useMenuCategory()
+
+  useRouteChange({
+    callback: () => setIsOpen(false)
+  })
 
   const toggleDrawer =
     (_: unknown, open: boolean) =>
@@ -47,7 +49,11 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
     >
       <Container>
         <RouteWrapper direction={'row'}>
-          <RouteButton href='/' style={{ marginRight: '20px' }}>
+          <RouteButton
+            href='/'
+            style={{ marginRight: '20px' }}
+            onClick={() => {}}
+          >
             首頁
           </RouteButton>
           <RouteButton href='/article' style={{ marginRight: '20px' }}>
