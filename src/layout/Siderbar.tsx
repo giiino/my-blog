@@ -3,6 +3,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import {
   Box,
+  CircularProgress,
   Divider,
   Drawer,
   Link,
@@ -22,7 +23,7 @@ interface SiderbarProps {
 }
 
 const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
-  const { data: categories } = useMenuCategory()
+  const { data: categories, isLoading } = useMenuCategory()
 
   const toggleDrawer =
     (_: unknown, open: boolean) =>
@@ -54,9 +55,22 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
           </RouteButton>
           <RouteButton href='/edit'>新增文章</RouteButton>
         </RouteWrapper>
-        <Divider sx={{ margin: '20px 0' }} />
+        <Divider sx={{ margin: '20px 16px' }} />
         <MenuWrapper>
-          <Menu menuCategories={categories || []} />
+          {isLoading ? (
+            <Stack
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%'
+              }}
+            >
+              <CircularProgress style={{ color: 'var(--primary-gray-200)' }} />
+            </Stack>
+          ) : (
+            <Menu menuCategories={categories || []} />
+          )}
         </MenuWrapper>
       </Container>
     </Drawer>
@@ -66,13 +80,13 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
 export default Siderbar
 
 const Container = styled(Stack)`
-  padding: 50px;
+  padding: 50px 25px;
 `
 
 const RouteWrapper = styled(Stack)`
   align-items: center;
   height: 5vh;
-  /* margin: 10px 50px; */
+  padding: 0 16px;
 `
 
 const RouteButton = styled(Link)`
@@ -87,7 +101,6 @@ const RouteButton = styled(Link)`
 const MenuWrapper = styled(Box)`
   width: 70vw;
   height: 70vh;
-  /* margin: 10px 50px 50px 50px; */
   overflow: auto;
   ${scrollBarStyle}
 `
