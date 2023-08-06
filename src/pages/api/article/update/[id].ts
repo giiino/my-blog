@@ -10,7 +10,9 @@ export default async function handler(
   res: ApiResponse<Article>
 ) {
   if (req.method !== 'PUT' && req.method !== 'POST') {
-    return res.status(405).end()
+    return res
+      .status(405)
+      .json({ message: '您的請求格式是' + req.method + '請重新發送' })
   }
 
   const { id = '' } = req.query as { id: string }

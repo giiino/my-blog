@@ -20,7 +20,9 @@ export default async function handler(
   res: ApiResponse<string[]>
 ) {
   if (req.method !== 'GET') {
-    return res.status(405).end()
+    return res
+      .status(405)
+      .json({ message: '您的請求格式是' + req.method + '請重新發送' })
   }
 
   try {

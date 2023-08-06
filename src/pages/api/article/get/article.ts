@@ -62,7 +62,9 @@ export default async function handler(
   res: ApiResponse<ArticleResponse>
 ) {
   if (req.method !== 'GET') {
-    return res.status(405).end()
+    return res
+      .status(405)
+      .json({ message: '您的請求格式是' + req.method + '請重新發送' })
   }
 
   const { id = '' } = req.query
