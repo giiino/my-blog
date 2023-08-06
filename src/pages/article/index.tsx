@@ -1,17 +1,13 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
 import {
+  ArticleMenu,
   ArticleWrapper,
-  Content,
-  ArticleMenu
+  Content
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
-import {
-  getArticleById,
-  getReadmeArticle
-} from '@/pages/api/article/get/article'
-import { serializeData } from '@/shared/utils/format'
-import { isValidObjectId } from '@/shared/utils/isValidObjectId'
+import { getReadmeArticle } from '@/pages/api/article/get/article'
+import { removeAttrsFromObject, serializeData } from '@/shared/utils/format'
 
 import { ArticleResponse, MenuCategoriesResponse } from '../api/article'
 import { getMenuCategories } from '../api/article/get/menu-categories'
@@ -32,7 +28,7 @@ const ArticleIndexPage = ({
 export default ArticleIndexPage
 
 export const getServerSideProps: GetServerSideProps<{
-  articleData: ArticleResponse
+  articleData: Omit<ArticleResponse, 'isReadme'>
   menuCategories: MenuCategoriesResponse[]
 }> = async () => {
   try {
@@ -49,7 +45,12 @@ export const getServerSideProps: GetServerSideProps<{
 
     return {
       props: {
-        articleData: serializeData(articleData),
+        articleData: serializeData(
+          removeAttrsFromObject({
+            target: articleData,
+            removeAttrs: ['isReadme']
+          })
+        ),
         menuCategories: serializeData(menuCategories)
       }
     }

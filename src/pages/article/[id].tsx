@@ -7,7 +7,7 @@ import {
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
 import { getArticleById } from '@/pages/api/article/get/article'
-import { serializeData } from '@/shared/utils/format'
+import { removeAttrsFromObject, serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
 import { ArticleResponse, MenuCategoriesResponse } from '../api/article'
@@ -29,7 +29,7 @@ const ArticlePage = ({
 export default ArticlePage
 
 export const getServerSideProps: GetServerSideProps<{
-  articleData: ArticleResponse
+  articleData: Omit<ArticleResponse, 'isReadme'>
   menuCategories: MenuCategoriesResponse[]
 }> = async (context) => {
   const id = context?.params?.id as string
@@ -53,7 +53,12 @@ export const getServerSideProps: GetServerSideProps<{
 
     return {
       props: {
-        articleData: serializeData(articleData),
+        articleData: serializeData(
+          removeAttrsFromObject({
+            target: articleData,
+            removeAttrs: ['isReadme']
+          })
+        ),
         menuCategories: serializeData(menuCategories)
       }
     }

@@ -29,7 +29,7 @@ export async function getArticleById(id: string, shouldPlusViews = false) {
 
   return removeAttrsFromObject({
     target: resultArticle,
-    removeAttrs: ['isDelete', 'views', 'createTime', 'isReadme']
+    removeAttrs: ['isDelete', 'views', 'createTime']
   }) as ArticleResponse
 }
 

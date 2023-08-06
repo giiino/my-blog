@@ -8,7 +8,7 @@ import { Markdown } from '@/shared/components/Markdown'
 import { Setting } from './Setting'
 
 interface ArticleContentProps extends GridProps {
-  article: ArticleResponse
+  article: Omit<ArticleResponse, 'isReadme'>
 }
 
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {

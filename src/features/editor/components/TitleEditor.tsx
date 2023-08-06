@@ -50,7 +50,7 @@ export const TitleEditor = ({
         <FormControlLabel
           control={
             <Checkbox
-              value={isReadme}
+              checked={isReadme}
               onChange={onIsReadmeCheckChange}
               sx={{ ml: 3 }}
             />
