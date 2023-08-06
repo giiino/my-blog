@@ -39,21 +39,27 @@ export const getServerSideProps: GetServerSideProps<{
     }
   }
 
-  const [articleData, menuCategories] = await Promise.all([
-    getArticleById(id, true),
-    getMenuCategories()
-  ])
+  try {
+    const [articleData, menuCategories] = await Promise.all([
+      getArticleById(id, true),
+      getMenuCategories()
+    ])
 
-  if (!articleData) {
+    if (!articleData) {
+      return {
+        notFound: true
+      }
+    }
+
+    return {
+      props: {
+        articleData: serializeData(articleData),
+        menuCategories: serializeData(menuCategories)
+      }
+    }
+  } catch (error) {
     return {
       notFound: true
-    }
-  }
-
-  return {
-    props: {
-      articleData: serializeData(articleData),
-      menuCategories: serializeData(menuCategories)
     }
   }
 }

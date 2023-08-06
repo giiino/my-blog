@@ -15,19 +15,26 @@ export default async function handler(
 
   const { category = '', title = '', content = '', isReadme = false } = req.body
 
-  const AppDataSource = await getDataSource()
-  const articleRepo = AppDataSource.getRepository(Article)
+  try {
+    const AppDataSource = await getDataSource()
+    const articleRepo = AppDataSource.getRepository(Article)
 
-  const article = new Article()
+    const article = new Article()
 
-  article.category = category
-  article.title = title
-  article.content = content
-  article.isReadme = isReadme ? 1 : 0
-  article.createTime = Date.now()
-  article.updateTime = Date.now()
+    article.category = category
+    article.title = title
+    article.content = content
+    article.isReadme = isReadme ? 1 : 0
+    article.createTime = Date.now()
+    article.updateTime = Date.now()
 
-  const resArticle = await articleRepo.save(article)
+    const resArticle = await articleRepo.save(article)
 
-  res.status(200).json({ result: String(resArticle._id), message: '發布成功' })
+    res
+      .status(200)
+      .json({ result: String(resArticle._id), message: '發布成功' })
+  } catch (error) {
+    console.error('資料庫出錯' + error)
+    return res.status(500).json({ message: '資料庫發生錯誤' })
+  }
 }

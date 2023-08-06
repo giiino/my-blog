@@ -12,7 +12,6 @@ export async function getCategories() {
     { isDelete: 0 },
     {}
   )
-  // const result2 = await articleRepo.find('category', {}, {})
   return result
 }
 
@@ -24,7 +23,11 @@ export default async function handler(
     return res.status(405).end()
   }
 
-  const data = await getCategories()
-
-  res.status(200).json(data)
+  try {
+    const data = await getCategories()
+    res.status(200).json(data)
+  } catch (error) {
+    console.error('資料庫出錯' + error)
+    return res.status(500).json({ message: '資料庫發生錯誤' })
+  }
 }

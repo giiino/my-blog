@@ -16,8 +16,8 @@ export const useMenuCategory = () => {
       return response.data
     },
     {
-      onError: () => {
-        toast.error('選單資料獲取失敗')
+      onError: (error) => {
+        toast.error(error as string)
       }
     }
   )

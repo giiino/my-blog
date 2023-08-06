@@ -35,21 +35,27 @@ export const getServerSideProps: GetServerSideProps<{
   articleData: ArticleResponse
   menuCategories: MenuCategoriesResponse[]
 }> = async () => {
-  const [articleData, menuCategories] = await Promise.all([
-    getReadmeArticle(),
-    getMenuCategories()
-  ])
+  try {
+    const [articleData, menuCategories] = await Promise.all([
+      getReadmeArticle(),
+      getMenuCategories()
+    ])
 
-  if (!articleData) {
+    if (!articleData) {
+      return {
+        notFound: true
+      }
+    }
+
+    return {
+      props: {
+        articleData: serializeData(articleData),
+        menuCategories: serializeData(menuCategories)
+      }
+    }
+  } catch (error) {
     return {
       notFound: true
-    }
-  }
-
-  return {
-    props: {
-      articleData: serializeData(articleData),
-      menuCategories: serializeData(menuCategories)
     }
   }
 }

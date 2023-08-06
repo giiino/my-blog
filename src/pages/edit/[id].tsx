@@ -72,24 +72,30 @@ export const getServerSideProps: GetServerSideProps<{
     }
   }
 
-  const result = await getArticleById(id)
+  try {
+    const result = await getArticleById(id)
 
-  if (!result) {
+    if (!result) {
+      return {
+        notFound: true
+      }
+    }
+
+    const articleData = serializeData(
+      removeAttrsFromObject({
+        target: result,
+        removeAttrs: ['updateTime']
+      })
+    )
+
+    return {
+      props: {
+        articleData
+      }
+    }
+  } catch (error) {
     return {
       notFound: true
-    }
-  }
-
-  const articleData = serializeData(
-    removeAttrsFromObject({
-      target: result,
-      removeAttrs: ['updateTime']
-    })
-  )
-
-  return {
-    props: {
-      articleData
     }
   }
 }

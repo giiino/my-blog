@@ -15,26 +15,31 @@ export default async function handler(
 
   const { id } = req.query as { id: string }
 
-  const AppDataSource = await getDataSource()
-  const articleRepo = AppDataSource.getRepository(Article)
-  const objectId = new ObjectId(id)
+  try {
+    const AppDataSource = await getDataSource()
+    const articleRepo = AppDataSource.getRepository(Article)
+    const objectId = new ObjectId(id)
 
-  const targetArticle = await articleRepo.findOne({
-    where: {
-      _id: objectId
+    const targetArticle = await articleRepo.findOne({
+      where: {
+        _id: objectId
+      }
+    })
+
+    if (!targetArticle) {
+      return res.status(404).json({ message: '刪除目標不存在' })
     }
-  })
 
-  if (!targetArticle) {
-    return res.status(404).json({ message: '刪除目標不存在' })
+    targetArticle.isDelete = 1
+
+    const resArticle = await articleRepo.save(targetArticle)
+
+    if (resArticle) {
+      res.status(201).json({ message: '刪除成功' })
+    }
+    return res.status(404).json({ message: '刪除失敗' })
+  } catch (error) {
+    console.error('資料庫出錯' + error)
+    return res.status(500).json({ message: '資料庫發生錯誤' })
   }
-
-  targetArticle.isDelete = 1
-
-  const resArticle = await articleRepo.save(targetArticle)
-
-  if (resArticle) {
-    res.status(201).json({ message: '刪除成功' })
-  }
-  return res.status(404).json({ message: '刪除失敗' })
 }
