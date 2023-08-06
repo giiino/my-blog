@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { AppProps } from 'next/app'
 
 import Layout from '@/layout'
+import SEO from '@/shared/components/SEO'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -37,13 +38,19 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   })
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <>
+      <SEO title='GN的程式開發筆記' description={''}>
+        <meta name='viewport' content='width=device-width, user-scalable=no' />
+        <meta property='og:image' content='' />
+      </SEO>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </>
   )
 }
 // App.getInitialProps = async ({ ctx }: { ctx: any }) => {
