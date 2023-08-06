@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { Grid } from '@mui/material'
 
 export * from './Content'
-export * from './Menu'
+export * from './ArticleMenu'
 
 export const ArticleWrapper = styled(Grid)`
   width: 95%;

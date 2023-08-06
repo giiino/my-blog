@@ -13,15 +13,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { MenuCategoriesResponse } from '@/pages/api/article'
-import { scrollBarStyle } from '@/styles/globals'
 
-interface MenuProps extends GridProps {
+interface MenuProps {
   menuCategories: MenuCategoriesResponse[]
 }
 
-export function Menu({ menuCategories, ...props }: MenuProps) {
+export function Menu({ menuCategories }: MenuProps) {
   return (
-    <ListContainer {...props}>
+    <ListContainer>
       <List
         sx={{ bgcolor: 'background.paper' }}
         aria-labelledby='主題選擇菜單'
@@ -67,17 +66,7 @@ const GroupListItem = ({ category, titles }: MenuCategoriesResponse) => {
   )
 }
 
-const ListContainer = styled(Grid)`
-  position: sticky;
-  top: 100px;
-  align-self: flex-start;
-  font-size: 14px;
-  overflow-y: auto;
-  max-height: 80vh;
-  padding-right: 10px;
-
-  ${scrollBarStyle}
-
+const ListContainer = styled.div`
   .MuiList-root {
     padding: 0;
   }
@@ -99,9 +88,5 @@ const ListContainer = styled(Grid)`
     .MuiTypography-root {
       font-weight: bold;
     }
-  }
-
-  @media screen and (max-width: 960px) {
-    display: none;
   }
 `

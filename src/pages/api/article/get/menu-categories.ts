@@ -51,8 +51,10 @@ export default async function handler(
   if (req.method !== 'GET') {
     return res.status(405).end()
   }
-
-  const data = await getMenuCategories()
-
-  res.status(200).json(data)
+  try {
+    const data = await getMenuCategories()
+    res.status(200).json(data)
+  } catch (e) {
+    return res.status(500).json({ message: '資料庫發生錯誤' })
+  }
 }

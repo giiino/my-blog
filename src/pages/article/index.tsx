@@ -1,6 +1,10 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
-import { ArticleWrapper, Content, Menu } from '@/features/article/components'
+import {
+  ArticleWrapper,
+  Content,
+  ArticleMenu
+} from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
 import {
   getArticleById,
@@ -18,7 +22,7 @@ const ArticleIndexPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <ArticleWrapper justifyContent={'center'} container>
-      <Menu item lg={3} md={4} menuCategories={menuCategories} />
+      <ArticleMenu item lg={3} md={4} menuCategories={menuCategories} />
       <Content item lg={7} md={8} xs={12} article={articleData} />
       <TocHolder item lg={2} />
     </ArticleWrapper>

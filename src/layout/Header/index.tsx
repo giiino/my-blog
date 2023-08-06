@@ -27,6 +27,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
           aria-label='menu'
           sx={{ mr: 2 }}
           onClick={() => setIsSidebarOpen(true)}
+          className='device-opener'
         >
           <MenuIcon />
         </IconButton>
@@ -44,13 +45,23 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
               style={{ display: 'block' }}
             />
           </Link>
-          <RouteButton href='/' style={{ marginRight: '20px' }}>
+          <RouteButton
+            className='route-btn'
+            href='/'
+            style={{ marginRight: '20px' }}
+          >
             首頁
           </RouteButton>
-          <RouteButton href='/article' style={{ marginRight: '20px' }}>
+          <RouteButton
+            className='route-btn'
+            href='/article'
+            style={{ marginRight: '20px' }}
+          >
             文章
           </RouteButton>
-          <RouteButton href='/edit'>新增文章</RouteButton>
+          <RouteButton className='route-btn' href='/edit'>
+            新增文章
+          </RouteButton>
         </Typography>
         <DarkModeIcon />
       </Toolbar>
@@ -62,6 +73,20 @@ const Container = styled(AppBar)`
   z-index: 5;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+
+  .sidebar-opener {
+    display: none;
+    @media screen and (max-width: 960px) {
+      display: flex;
+    }
+  }
+
+  .route-btn {
+    display: flex;
+    @media screen and (max-width: 960px) {
+      display: none;
+    }
+  }
 `
 
 const RouteButton = styled(Link)`

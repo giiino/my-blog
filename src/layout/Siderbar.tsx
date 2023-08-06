@@ -1,9 +1,20 @@
 import React from 'react'
 
-import { Box, Drawer, ListItem, ListItemIcon } from '@mui/material'
-import List from '@mui/material/List'
-import ListItemButton from '@mui/material/ListItemButton'
-import ListItemText from '@mui/material/ListItemText'
+import styled from '@emotion/styled'
+import {
+  Box,
+  Divider,
+  Drawer,
+  Link,
+  List,
+  ListItemButton,
+  ListItemText,
+  Stack
+} from '@mui/material'
+
+import { Menu } from '@/shared/components/Menu'
+import { useMenuCategory } from '@/shared/hooks/use-queries'
+import { scrollBarStyle } from '@/styles/globals'
 
 interface SiderbarProps {
   isOpen: boolean
@@ -11,6 +22,8 @@ interface SiderbarProps {
 }
 
 const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
+  const { data: categories } = useMenuCategory()
+
   const toggleDrawer =
     (_: unknown, open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -25,54 +38,56 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
       setIsOpen(open)
     }
 
-  const list = (anchor = 'left') => (
-    <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role='presentation'
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  )
   return (
     <Drawer
       anchor='left'
       open={isOpen}
       onClose={toggleDrawer(undefined, false)}
     >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              {list('left')}
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <Container>
+        <RouteWrapper direction={'row'}>
+          <RouteButton href='/' style={{ marginRight: '20px' }}>
+            首頁
+          </RouteButton>
+          <RouteButton href='/article' style={{ marginRight: '20px' }}>
+            文章
+          </RouteButton>
+          <RouteButton href='/edit'>新增文章</RouteButton>
+        </RouteWrapper>
+        <Divider sx={{ margin: '20px 0' }} />
+        <MenuWrapper>
+          <Menu menuCategories={categories || []} />
+        </MenuWrapper>
+      </Container>
     </Drawer>
   )
 }
 
 export default Siderbar
+
+const Container = styled(Stack)`
+  padding: 50px;
+`
+
+const RouteWrapper = styled(Stack)`
+  align-items: center;
+  height: 5vh;
+  /* margin: 10px 50px; */
+`
+
+const RouteButton = styled(Link)`
+  font-size: 16px;
+  color: #000;
+  line-height: 16px;
+  &:hover {
+    color: var(--primary-blue-4);
+  }
+`
+
+const MenuWrapper = styled(Box)`
+  width: 70vw;
+  height: 70vh;
+  /* margin: 10px 50px 50px 50px; */
+  overflow: auto;
+  ${scrollBarStyle}
+`
