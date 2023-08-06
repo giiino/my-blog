@@ -27,7 +27,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
           aria-label='menu'
           sx={{ mr: 2 }}
           onClick={() => setIsSidebarOpen(true)}
-          className='device-opener'
+          className='sidebar-opener'
         >
           <MenuIcon />
         </IconButton>
