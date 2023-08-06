@@ -2,12 +2,12 @@ import ReactMarkdown from 'react-markdown'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
-//coy
+//coy oneDark
 import styled from '@emotion/styled'
 import remarkGfm from 'remark-gfm'
 
 // https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/prism.html
-
+// csharp
 export const Markdown = ({ children }: { children: string }) => {
   return (
     <MarkDownStyle>
