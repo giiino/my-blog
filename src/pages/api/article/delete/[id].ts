@@ -40,6 +40,6 @@ export default async function handler(
     return res.status(404).json({ message: '刪除失敗' })
   } catch (error) {
     console.error('資料庫出錯' + error)
-    res.status(500).json({ message: '資料庫發生錯誤' })
+    return res.status(500).json({ message: '資料庫發生錯誤' })
   }
 }

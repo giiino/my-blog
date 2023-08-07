@@ -20,14 +20,14 @@ export default async function handler(
   res: ApiResponse<string[]>
 ) {
   if (req.method !== 'GET') {
-    return res.status(405).end()   
+    return res.status(405).end()
   }
 
   try {
     const data = await getCategories()
-    res.status(200).json(data)
+    return res.status(200).json(data)
   } catch (error) {
     console.error('資料庫出錯' + error)
-    res.status(500).json({ message: '資料庫發生錯誤' })
+    return res.status(500).json({ message: '資料庫發生錯誤' })
   }
 }

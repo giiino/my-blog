@@ -62,7 +62,7 @@ export default async function handler(
   res: ApiResponse<ArticleResponse>
 ) {
   if (req.method !== 'GET') {
-    return res.status(405).end()   
+    return res.status(405).end()
   }
 
   const { id = '' } = req.query
@@ -74,9 +74,9 @@ export default async function handler(
       return res.status(404).json({ message: '未找到資料' })
     }
 
-    res.status(200).json(data)
+    return res.status(200).json(data)
   } catch (error) {
     console.error('資料庫出錯' + error)
-    res.status(500).json({ message: '資料庫發生錯誤' })
+    return res.status(500).json({ message: '資料庫發生錯誤' })
   }
 }
