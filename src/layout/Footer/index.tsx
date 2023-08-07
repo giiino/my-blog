@@ -49,7 +49,7 @@ const BoxWrapper = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  height: 45vh;
   background-color: var(--primary-gray-100);
   margin-top: 20vh;
 `
