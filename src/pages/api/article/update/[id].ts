@@ -9,7 +9,7 @@ export default async function handler(
   req: NextApiRequest,
   res: ApiResponse<Article>
 ) {
-  if (req.method !== 'PUT') {
+  if (req.method !== 'POST') {
     return res.status(405).end()   
   }
 
