@@ -35,7 +35,7 @@ export default async function handler(
     const resArticle = await articleRepo.save(targetArticle)
 
     if (resArticle) {
-      res.status(201).json({ message: '刪除成功' })
+      res.status(204).json({ message: '刪除成功' })
     }
     return res.status(404).json({ message: '刪除失敗' })
   } catch (error) {
