@@ -9,6 +9,6 @@ export const ArticleWrapper = styled(Grid)`
   max-width: 1240px;
   margin: 0 auto;
   @media screen and (max-width: 960px) {
-    width: 85%;
+    width: 92%;
   }
 `
