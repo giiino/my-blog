@@ -39,9 +39,9 @@ export default async function handler(
     targetArticle.updateTime = Date.now()
 
     const resArticle = await articleRepo.save(targetArticle)
-    console.log(resArticle)
+
     if (resArticle) {
-      res.status(204).json({ message: '變更成功', result: resArticle })
+      return res.status(200).json({ message: '變更成功', result: resArticle })
     }
     return res.status(404).json({ message: '變更失敗' })
   } catch (error) {
