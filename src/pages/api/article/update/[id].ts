@@ -9,10 +9,8 @@ export default async function handler(
   req: NextApiRequest,
   res: ApiResponse<Article>
 ) {
-  if (req.method !== 'PUT' && req.method !== 'POST') {
-    return res
-      .status(405)
-      .json({ message: '您的請求格式是' + req.method + '請重新發送' })
+  if (req.method !== 'PUT') {
+    return res.status(405).end()   
   }
 
   const { id = '' } = req.query as { id: string }
@@ -48,6 +46,6 @@ export default async function handler(
     return res.status(404).json({ message: '變更失敗' })
   } catch (error) {
     console.error('資料庫出錯' + error)
-    return res.status(500).json({ message: '資料庫發生錯誤' })
+    res.status(500).json({ message: '資料庫發生錯誤' })
   }
 }
