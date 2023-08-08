@@ -3,13 +3,17 @@ import { Button } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export const MainImage = () => {
+export const Banner = () => {
   return (
     <Container>
+      <TitleSection>
+        <h2>GN的程式學習紀錄</h2>
+        <h3>歡迎蒞臨</h3>
+      </TitleSection>
       <Image
         src='https://i.ibb.co/4gXTppP/christmas-lights-3834926-1280.jpg'
         width='500'
-        height='300'
+        height='400'
         alt='首頁大圖'
         objectFit='center'
       />
@@ -23,6 +27,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  user-select: none;
   img {
     width: 100%;
   }
@@ -32,16 +37,49 @@ const Container = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 300px;
+    height: 400px;
     background-color: rgba(0, 0, 0, 0.5);
     pointer-events: none;
+  }
+`
+
+const TitleSection = styled.div`
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  color: var(--primary-gray-100);
+  text-align: center;
+  h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  @media screen and (max-width: 960px) {
+    h2 {
+      font-size: 35px;
+    }
+    h3 {
+      font-size: 21px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    h2 {
+      font-size: 29px;
+    }
+    h3 {
+      font-size: 19px;
+    }
   }
 `
 
 const EnterButton = styled(Link)`
   position: absolute;
   left: 50%;
-  bottom: 35%;
+  bottom: 27%;
   transform: translateX(-50%);
   align-items: center;
   appearance: none;
@@ -84,11 +122,13 @@ const EnterButton = styled(Link)`
   &:hover {
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
       rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #ad2138 0 -3px 0 inset;
-    /* transform: translateY(-2px); */
   }
 
   &:active {
     box-shadow: #ad2138 0 3px 7px inset;
-    /* transform: translateY(2px); */
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 15px;
   }
 `

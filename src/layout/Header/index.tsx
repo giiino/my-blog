@@ -66,6 +66,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
 }
 
 const Container = styled(AppBar)`
+  user-select: none;
   z-index: 5;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;

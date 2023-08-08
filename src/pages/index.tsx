@@ -1,14 +1,14 @@
 import { Button } from '@mui/material'
 import { useRouter } from 'next/router'
 
-import { MainImage } from '@/features/home/components/MainImage'
+import { Banner } from '@/features/home/components/Banner'
 import { serializeData } from '@/shared/utils/format'
 
 const Home = ({ data }: any) => {
   const { push } = useRouter()
   return (
     <>
-      <MainImage />
+      <Banner />
     </>
   )
 }
