@@ -14,7 +14,7 @@ interface ArticleContentProps extends GridProps {
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
   const { _id, title, content, updateTime } = article
 
-  const formattedUpdateTime = dayjs(updateTime).format('YYYY-MM-DD hh:mm:ss')
+  const formattedUpdateTime = dayjs(updateTime).format('YYYY-MM-DD')
 
   return (
     <ContentWrapper {...restProps}>
@@ -23,7 +23,7 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
         <Setting className='setting-btn' editId={_id} />
       </Title>
       <Time>
-        上次修改時間
+        修改時間
         <span>{formattedUpdateTime}</span>
       </Time>
       <Markdown>{content}</Markdown>
@@ -55,11 +55,11 @@ const Title = styled.h1`
 `
 
 const Time = styled.div`
-  font-size: 15px;
+  font-size: 13.5px;
   color: var(--primary-gray-200);
   margin-top: 5px;
   margin-bottom: 30px;
   span {
-    margin-left: 15px;
+    margin-left: 5px;
   }
 `

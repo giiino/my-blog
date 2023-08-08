@@ -1,14 +1,12 @@
-import * as React from 'react'
+import { useState } from 'react'
 
 import styled from '@emotion/styled'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { Grid, GridProps } from '@mui/material'
 import Collapse from '@mui/material/Collapse'
 import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
-import ListSubheader from '@mui/material/ListSubheader'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -19,6 +17,17 @@ interface MenuProps {
 }
 
 export function Menu({ menuCategories }: MenuProps) {
+  const [currentCategory, setCurrentCategory] = useState('')
+
+  const handleClick = (category: string) => {
+    setCurrentCategory((prev) => {
+      if (category === prev) {
+        return ''
+      }
+      return category
+    })
+  }
+
   return (
     <ListContainer>
       <List
@@ -27,24 +36,39 @@ export function Menu({ menuCategories }: MenuProps) {
         component='nav'
       >
         {menuCategories.map((menuCategory) => (
-          <GroupListItem key={menuCategory.category} {...menuCategory} />
+          <GroupListItem
+            key={menuCategory.category}
+            {...menuCategory}
+            open={currentCategory === menuCategory.category}
+            handleClick={handleClick}
+          />
         ))}
       </List>
     </ListContainer>
   )
 }
 
-const GroupListItem = ({ category, titles }: MenuCategoriesResponse) => {
-  const [open, setOpen] = React.useState(false)
+interface GroupListItemProps extends MenuCategoriesResponse {
+  open: boolean
+  handleClick: (category: string) => void
+}
+
+const GroupListItem = ({
+  category,
+  titles,
+  open,
+  handleClick
+}: GroupListItemProps) => {
   const { query } = useRouter()
   const currentArticleId = query.id as string
   const isCategorySelected = titles.some(({ _id }) => _id === currentArticleId)
 
-  const handleClick = () => setOpen(!open)
-
   return (
     <>
-      <ListItemButton onClick={handleClick} selected={isCategorySelected}>
+      <ListItemButton
+        onClick={() => handleClick(category)}
+        selected={isCategorySelected}
+      >
         <ListItemText primary={category} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
