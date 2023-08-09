@@ -7,7 +7,7 @@ export const Banner = () => {
   return (
     <Container>
       <TitleSection>
-        <h2>GN的程式小站</h2>
+        <h2>GN.DEV</h2>
       </TitleSection>
       <Image
         src='https://i.ibb.co/4gXTppP/christmas-lights-3834926-1280.jpg'
@@ -52,6 +52,7 @@ const TitleSection = styled.div`
   text-align: center;
   h2 {
     font-size: 48px;
+    font-family: 'Alegreya', serif;
   }
   @media screen and (max-width: 760px) {
     h2 {

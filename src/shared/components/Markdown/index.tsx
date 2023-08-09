@@ -57,7 +57,7 @@ export const Markdown = ({ children }: { children: string }) => {
 const MarkDownStyle = styled.div`
   .reacr-mark-down {
     > * {
-      line-height: 1.5;
+      line-height: 2;
       margin-bottom: 25px;
     }
 
