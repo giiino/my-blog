@@ -36,7 +36,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
             <Image
               src={'/logo.svg'}
               alt='logo'
-              width={120}
+              width={100}
               height={20}
               style={{ display: 'block' }}
             />

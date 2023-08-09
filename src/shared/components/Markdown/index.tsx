@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { materialOceanic } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 //coy oneDark
 import styled from '@emotion/styled'
@@ -36,7 +36,7 @@ export const Markdown = ({ children }: { children: string }) => {
               <SyntaxHighlighter
                 language={match?.[1]}
                 showLineNumbers={true}
-                style={dracula as any}
+                style={materialOceanic as any}
                 customStyle={{ borderRadius: 0 }}
                 PreTag='div'
                 className='syntax-hight-wrapper'

@@ -7,8 +7,7 @@ export const Banner = () => {
   return (
     <Container>
       <TitleSection>
-        <h2>GN的程式學習紀錄</h2>
-        <h3>歡迎蒞臨</h3>
+        <h2>GN的程式小站</h2>
       </TitleSection>
       <Image
         src='https://i.ibb.co/4gXTppP/christmas-lights-3834926-1280.jpg'
@@ -45,7 +44,7 @@ const Container = styled.div`
 
 const TitleSection = styled.div`
   position: absolute;
-  top: 18%;
+  top: 25%;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
@@ -53,33 +52,25 @@ const TitleSection = styled.div`
   text-align: center;
   h2 {
     font-size: 48px;
-    margin-bottom: 20px;
   }
-  h3 {
-    font-size: 25px;
+  @media screen and (max-width: 760px) {
+    h2 {
+      font-size: 40px;
+    }
   }
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 400px) {
     h2 {
       font-size: 35px;
     }
-    h3 {
-      font-size: 21px;
-    }
   }
-  @media screen and (max-width: 480px) {
-    h2 {
-      font-size: 29px;
-    }
-    h3 {
-      font-size: 19px;
-    }
-  }
+  /* 
+   */
 `
 
 const EnterButton = styled(Link)`
   position: absolute;
   left: 50%;
-  bottom: 27%;
+  bottom: 25%;
   transform: translateX(-50%);
   align-items: center;
   appearance: none;
