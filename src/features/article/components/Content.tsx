@@ -57,8 +57,8 @@ const Title = styled.h1`
 const Time = styled.div`
   font-size: 13.5px;
   color: var(--primary-gray-200);
-  margin-top: 5px;
-  margin-bottom: 30px;
+  margin: 20px 0;
+
   span {
     margin-left: 5px;
   }

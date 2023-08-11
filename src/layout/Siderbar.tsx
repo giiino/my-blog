@@ -99,6 +99,7 @@ const RouteButton = styled(Link)`
   font-size: 16px;
   color: #000;
   line-height: 16px;
+  text-decoration: none;
   &:hover {
     color: var(--primary-blue-4);
   }

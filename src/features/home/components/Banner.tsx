@@ -7,7 +7,7 @@ export const Banner = () => {
   return (
     <Container>
       <TitleSection>
-        <h2>GN.DEV</h2>
+        <h2>GN&ensp;DEV</h2>
       </TitleSection>
       <Image
         src='https://i.ibb.co/4gXTppP/christmas-lights-3834926-1280.jpg'
