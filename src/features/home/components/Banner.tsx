@@ -44,7 +44,7 @@ const Container = styled.div`
 
 const TitleSection = styled.div`
   position: absolute;
-  top: 25%;
+  top: 32%;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
@@ -53,6 +53,8 @@ const TitleSection = styled.div`
   h2 {
     font-size: 48px;
     font-family: 'Alegreya', serif;
+    text-shadow: 3px 0px 7px rgba(182, 143, 15, 0.8),
+      -3px 0px 7px rgba(182, 143, 15, 0.8), 0px 4px 7px rgba(182, 143, 15, 0.8);
   }
   @media screen and (max-width: 760px) {
     h2 {
@@ -71,7 +73,7 @@ const TitleSection = styled.div`
 const EnterButton = styled(Link)`
   position: absolute;
   left: 50%;
-  bottom: 25%;
+  bottom: 32%;
   transform: translateX(-50%);
   align-items: center;
   appearance: none;
