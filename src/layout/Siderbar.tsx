@@ -10,6 +10,7 @@ import {
   Stack
 } from '@mui/material'
 
+import { AdminOnly } from '@/shared/components/AdminOnly'
 import { Menu } from '@/shared/components/Menu'
 import { useMenuCategory } from '@/shared/hooks/use-queries'
 import { useRouteChange } from '@/shared/hooks/useRouteChange'
@@ -59,7 +60,9 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
           <RouteButton href='/article' style={{ marginRight: '20px' }}>
             文章
           </RouteButton>
-          <RouteButton href='/edit'>新增文章</RouteButton>
+          <AdminOnly>
+            <RouteButton href='/edit'>新增文章</RouteButton>
+          </AdminOnly>
         </RouteWrapper>
         <Divider sx={{ margin: '20px 16px' }} />
         <MenuWrapper>

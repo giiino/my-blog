@@ -7,7 +7,7 @@ import {
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
 import { getArticleById } from '@/pages/api/article/get/article'
-import { removeAttrsFromObject, serializeData } from '@/shared/utils/format'
+import { exclude, serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
 import { ArticleResponse, MenuCategoriesResponse } from '../api/article'
@@ -53,12 +53,7 @@ export const getServerSideProps: GetServerSideProps<{
 
     return {
       props: {
-        articleData: serializeData(
-          removeAttrsFromObject({
-            target: articleData,
-            removeAttrs: ['isReadme']
-          })
-        ),
+        articleData: serializeData(exclude(articleData, ['isReadme'])),
         menuCategories: serializeData(menuCategories)
       }
     }

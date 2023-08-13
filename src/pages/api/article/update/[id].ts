@@ -4,13 +4,14 @@ import type { NextApiRequest } from 'next'
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 import { ApiResponse } from '@/pages/api'
+import { checkIsAdmin } from '@/shared/utils/jwt.util'
 
 export default async function handler(
   req: NextApiRequest,
   res: ApiResponse<Article>
 ) {
   if (req.method !== 'PUT') {
-    return res.status(405).end()
+    res.status(405).end()
   }
 
   const { id = '' } = req.query as { id: string }
@@ -18,6 +19,10 @@ export default async function handler(
   const { category = '', title = '', content = '', isReadme = false } = req.body
 
   try {
+    if (!checkIsAdmin({ req, res })) {
+      return res.status(403).json({ message: '權限不足，更新失敗' })
+    }
+
     const AppDataSource = await getDataSource()
     const articleRepo = AppDataSource.getRepository(Article)
     const objectId = new ObjectId(id)

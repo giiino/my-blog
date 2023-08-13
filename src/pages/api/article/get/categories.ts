@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 import { ApiResponse } from '@/pages/api'
+import { checkIsAdmin } from '@/shared/utils/jwt.util'
 
 export async function getCategories() {
   const AppDataSource = await getDataSource()
@@ -20,10 +21,14 @@ export default async function handler(
   res: ApiResponse<string[]>
 ) {
   if (req.method !== 'GET') {
-    return res.status(405).end()
+    res.status(405).end()
   }
 
   try {
+    if (!checkIsAdmin({ req, res })) {
+      return res.status(403).json({ message: '權限不足，獲取失敗' })
+    }
+
     const data = await getCategories()
     return res.status(200).json(data)
   } catch (error) {

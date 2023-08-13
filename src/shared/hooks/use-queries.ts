@@ -3,6 +3,7 @@ import { toast } from 'react-hot-toast'
 import { useQuery } from '@tanstack/react-query'
 
 import { MenuCategoriesResponse } from '@/pages/api/article'
+import { UserInfo } from '@/pages/api/login'
 
 import { axiosInstance } from '../utils/axiosInstance'
 
@@ -19,6 +20,19 @@ export const useMenuCategory = () => {
       onError: (error) => {
         toast.error(error as string)
       }
+    }
+  )
+}
+
+export const useUser = () => {
+  return useQuery<UserInfo>(
+    ['me'],
+    async () => {
+      const response = await axiosInstance.get('/api/login/me')
+      return response.data
+    },
+    {
+      staleTime: Infinity
     }
   )
 }

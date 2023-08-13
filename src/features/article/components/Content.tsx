@@ -3,6 +3,7 @@ import { Grid, GridProps } from '@mui/material'
 import dayjs from 'dayjs'
 
 import { ArticleResponse } from '@/pages/api/article'
+import { AdminOnly } from '@/shared/components/AdminOnly'
 import { Markdown } from '@/shared/components/Markdown'
 
 import { Setting } from './Setting'
@@ -20,7 +21,9 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
     <ContentWrapper {...restProps}>
       <Title>
         {title}
-        <Setting className='setting-btn' editId={_id} />
+        <AdminOnly>
+          <Setting className='setting-btn' editId={_id} />
+        </AdminOnly>
       </Title>
       <Time>
         修改時間

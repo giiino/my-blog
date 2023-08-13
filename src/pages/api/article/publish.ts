@@ -2,6 +2,7 @@ import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
+import { checkIsAdmin } from '@/shared/utils/jwt.util'
 
 import { ApiResponse } from '..'
 
@@ -10,12 +11,16 @@ export default async function handler(
   res: ApiResponse<string>
 ) {
   if (req.method !== 'POST') {
-    return res.status(405).end()
+    res.status(405).end()
   }
 
   const { category = '', title = '', content = '', isReadme = false } = req.body
 
   try {
+    if (!checkIsAdmin({ req, res })) {
+      return res.status(403).json({ message: '權限不足，發布失敗' })
+    }
+
     const AppDataSource = await getDataSource()
     const articleRepo = AppDataSource.getRepository(Article)
 
@@ -35,6 +40,6 @@ export default async function handler(
       .json({ result: String(resArticle._id), message: '發布成功' })
   } catch (error) {
     console.error('資料庫出錯' + error)
-    return res.status(500).json({ message: '資料庫發生錯誤' })
+    res.status(500).json({ message: '資料庫發生錯誤' })
   }
 }

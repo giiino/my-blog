@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { AdminOnly } from '@/shared/components/AdminOnly'
+
 interface HeaderProps {
   setIsSidebarOpen: (isOpen: boolean) => void
 }
@@ -55,9 +57,11 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
           >
             文章
           </RouteButton>
-          <RouteButton className='route-btn' href='/edit'>
-            新增文章
-          </RouteButton>
+          <AdminOnly>
+            <RouteButton className='route-btn' href='/edit'>
+              新增文章
+            </RouteButton>
+          </AdminOnly>
         </Typography>
         <DarkModeIcon />
       </Toolbar>

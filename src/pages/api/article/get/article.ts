@@ -5,7 +5,7 @@ import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 import { ApiResponse } from '@/pages/api'
 import { ArticleResponse } from '@/pages/api/article'
-import { removeAttrsFromObject } from '@/shared/utils/format'
+import { exclude } from '@/shared/utils/format'
 
 export async function getArticleById(id: string, shouldPlusViews = false) {
   const AppDataSource = await getDataSource()
@@ -27,10 +27,11 @@ export async function getArticleById(id: string, shouldPlusViews = false) {
     await articleRepo.save(resultArticle)
   }
 
-  return removeAttrsFromObject({
-    target: resultArticle,
-    removeAttrs: ['isDelete', 'views', 'createTime']
-  }) as ArticleResponse
+  return exclude(resultArticle, [
+    'isDelete',
+    'views',
+    'createTime'
+  ]) as ArticleResponse
 }
 
 export async function getReadmeArticle() {
@@ -51,10 +52,12 @@ export async function getReadmeArticle() {
   resultArticle.views = resultArticle.views + 1
   await articleRepo.save(resultArticle)
 
-  return removeAttrsFromObject({
-    target: resultArticle,
-    removeAttrs: ['isDelete', 'views', 'createTime', 'isReadme']
-  }) as ArticleResponse
+  return exclude(resultArticle, [
+    'isDelete',
+    'views',
+    'createTime',
+    'isReadme'
+  ]) as ArticleResponse
 }
 
 export default async function handler(
@@ -62,7 +65,7 @@ export default async function handler(
   res: ApiResponse<ArticleResponse>
 ) {
   if (req.method !== 'GET') {
-    return res.status(405).end()
+    res.status(405).end()
   }
 
   const { id = '' } = req.query

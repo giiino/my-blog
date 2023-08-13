@@ -1,7 +1,9 @@
-import React from 'react'
+import Link from 'next/link'
+
+import { LOGIN_GITHUB_URL } from '@/shared/constants'
 
 const Login = () => {
-  return <div>index</div>
+  return <a href={LOGIN_GITHUB_URL}>Login</a>
 }
 
 export default Login

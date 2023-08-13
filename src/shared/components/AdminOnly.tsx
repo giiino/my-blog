@@ -1,10 +1,15 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
+
+import { useUser } from '../hooks/use-queries'
 
 export const AdminOnly = ({ children }: { children: ReactNode }) => {
-  const isAdmin = true
+  const { data: userInfo } = useUser()
+  const isRender = userInfo?.isAdmin === 1
+  // const isRender =
+  //   userInfo?.isAdmin === 1 || process.env.NODE_ENV === 'development'
 
-  if (!isAdmin) {
-    return null
+  if (isRender) {
+    return <>{children}</>
   }
-  return <>{children}</>
+  return null
 }

@@ -49,7 +49,7 @@ export default async function handler(
   res: ApiResponse<MenuCategoriesResponse[]>
 ) {
   if (req.method !== 'GET') {
-    return res.status(405).end()
+    res.status(405).end()
   }
   try {
     const data = await getMenuCategories()

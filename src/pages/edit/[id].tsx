@@ -6,8 +6,9 @@ import { TitleEditor } from '@/features/editor/components/TitleEditor'
 import { useUpdateArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
 import { formatArticleResponse } from '@/features/editor/utils/formatter'
-import { removeAttrsFromObject, serializeData } from '@/shared/utils/format'
+import { exclude, serializeData } from '@/shared/utils/format'
 import { isValidObjectId } from '@/shared/utils/isValidObjectId'
+import { checkIsAdmin } from '@/shared/utils/jwt.util'
 
 import { ArticleEditResponse } from '../api/article'
 import { getArticleById } from '../api/article/get/article'
@@ -63,10 +64,10 @@ export default Editor
 
 export const getServerSideProps: GetServerSideProps<{
   articleData: ArticleEditResponse
-}> = async (context) => {
-  const id = context?.params?.id as string
+}> = async ({ req, res, params }) => {
+  const id = params?.id as string
 
-  if (!isValidObjectId(id)) {
+  if (!isValidObjectId(id) || !checkIsAdmin({ req, res })) {
     return {
       notFound: true
     }
@@ -81,12 +82,7 @@ export const getServerSideProps: GetServerSideProps<{
       }
     }
 
-    const articleData = serializeData(
-      removeAttrsFromObject({
-        target: result,
-        removeAttrs: ['updateTime']
-      })
-    )
+    const articleData = serializeData(exclude(result, ['updateTime']))
 
     return {
       props: {
