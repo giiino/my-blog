@@ -14,7 +14,6 @@ export const Banner = () => {
         width='500'
         height='400'
         alt='首頁大圖'
-        objectFit='center'
       />
       <EnterButton href={'/article'}>進入文章</EnterButton>
     </Container>

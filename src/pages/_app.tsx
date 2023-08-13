@@ -3,44 +3,19 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import type { AppProps } from 'next/app'
 
+import { reactQueryConf } from '@/config/react-query.conf'
+import { themeConf } from '@/config/theme.conf'
 import Layout from '@/layout'
 import SEO from '@/shared/components/SEO'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const theme = createTheme({
-    components: {
-      MuiListItemButton: {
-        defaultProps: {
-          disableTouchRipple: true
-        }
-      }
-    },
-    breakpoints: {
-      values: {
-        xs: 0,
-        sm: 600,
-        md: 960,
-        lg: 1100,
-        xl: 1536
-      }
-    }
-    // palette: {
-    //   mode: 'dark'
-    // }
-  })
+  const theme = createTheme(themeConf)
+  const queryClient = new QueryClient(reactQueryConf)
 
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        retry: 0
-      }
-    }
-  })
   return (
     <>
-      <SEO title='GN的程式開發筆記' description={''}>
+      <SEO title='GN的程式開發小站' description={''}>
         <meta name='viewport' content='width=device-width, user-scalable=no' />
         <meta property='og:image' content='' />
       </SEO>
@@ -55,7 +30,3 @@ export default function App({ Component, pageProps }: AppProps) {
     </>
   )
 }
-// App.getInitialProps = async ({ ctx }: { ctx: any }) => {
-
-//   return {}
-// }
