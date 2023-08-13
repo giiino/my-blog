@@ -63,7 +63,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
             </RouteButton>
           </AdminOnly>
         </Typography>
-        <DarkModeIcon />
+        {/* <DarkModeIcon /> */}
       </Toolbar>
     </Container>
   )
