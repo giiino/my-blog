@@ -51,7 +51,6 @@ const BoxWrapper = styled(Box)`
   align-items: center;
   height: 45vh;
   background-color: var(--primary-gray-100);
-  margin-top: 20vh;
   user-select: none;
 `
 
