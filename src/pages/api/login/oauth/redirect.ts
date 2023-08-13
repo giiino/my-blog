@@ -7,7 +7,7 @@ import {
   GITHUB_ACCESS_TOKEN_URL,
   GITHUB_CLIENT_ID,
   GITHUB_USER_INFO_URL
-} from '@/shared/constants'
+} from '@/shared/constants/oauth'
 import { setCookie } from '@/shared/utils/cookie.util'
 import { serializeData } from '@/shared/utils/format'
 import { generateJWT } from '@/shared/utils/jwt.util'

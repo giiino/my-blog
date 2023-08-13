@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-import { NextApiRequest, NextApiResponse } from 'next'
 
 import type { UserInfo } from '@/pages/api/login'
 

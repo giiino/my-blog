@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'

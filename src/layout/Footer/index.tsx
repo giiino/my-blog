@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import * as constants from '@/shared/constants'
+import * as constants from '@/shared/constants/ui'
 
 const Footer = () => {
   const { pathname } = useRouter()
