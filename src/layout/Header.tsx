@@ -36,10 +36,10 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
         >
           <Link href={'/'} style={{ marginRight: '20px' }}>
             <Image
-              src={'/logo.svg'}
+              src={'/logo-light-mode.svg'}
               alt='logo'
               width={100}
-              height={20}
+              height={40}
               style={{ display: 'block' }}
             />
           </Link>
