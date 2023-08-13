@@ -1,7 +1,6 @@
 import 'react-markdown-editor-lite/lib/index.css'
 
 import styled from '@emotion/styled'
-import MarkdownIt from 'markdown-it'
 import dynamic from 'next/dynamic'
 
 import { Markdown } from '@/shared/components/Markdown'
@@ -16,8 +15,6 @@ interface ContentEditorProps {
 }
 
 export function ContentEditor({ value, onChange }: ContentEditorProps) {
-  const mdParser = new MarkdownIt()
-
   return (
     <StyledMdEditor
       value={value}

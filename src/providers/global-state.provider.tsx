@@ -1,7 +1,7 @@
 import React, { ReactNode, createContext, useContext } from 'react'
 
-import { UserInfo } from '@/pages/api/login'
 import { useUser } from '@/shared/hooks/use-queries'
+import { UserInfo } from '@/shared/types/api/login'
 
 interface ContextProps {
   userInfo: UserInfo | undefined

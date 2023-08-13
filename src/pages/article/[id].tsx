@@ -7,10 +7,13 @@ import {
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
 import { getArticleById } from '@/pages/api/article/get/article'
+import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, serializeData } from '@/shared/utils/format'
-import { isValidObjectId } from '@/shared/utils/isValidObjectId'
 
-import { ArticleResponse, MenuCategoriesResponse } from '../api/article'
+import {
+  ArticleResponse,
+  MenuCategoriesResponse
+} from '../../shared/types/api/article'
 import { getMenuCategories } from '../api/article/get/menu-categories'
 
 const ArticlePage = ({

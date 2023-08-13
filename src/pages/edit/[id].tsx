@@ -5,12 +5,12 @@ import { ContentEditor } from '@/features/editor/components/ContentEditor'
 import { TitleEditor } from '@/features/editor/components/TitleEditor'
 import { useUpdateArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
-import { formatArticleResponse } from '@/features/editor/utils/formatter'
+import { formatArticleResponse } from '@/features/editor/utils/format'
+import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, serializeData } from '@/shared/utils/format'
-import { isValidObjectId } from '@/shared/utils/isValidObjectId'
-import { checkIsAdmin } from '@/shared/utils/jwt.util'
+import { checkIsAdmin } from '@/shared/utils/jwt'
 
-import { ArticleEditResponse } from '../api/article'
+import { ArticleEditResponse } from '../../shared/types/api/article'
 import { getArticleById } from '../api/article/get/article'
 
 const Editor = ({

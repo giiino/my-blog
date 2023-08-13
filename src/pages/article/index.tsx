@@ -9,7 +9,10 @@ import TocHolder from '@/features/article/components/TocHolder'
 import { getReadmeArticle } from '@/pages/api/article/get/article'
 import { exclude, serializeData } from '@/shared/utils/format'
 
-import { ArticleResponse, MenuCategoriesResponse } from '../api/article'
+import {
+  ArticleResponse,
+  MenuCategoriesResponse
+} from '../../shared/types/api/article'
 import { getMenuCategories } from '../api/article/get/menu-categories'
 
 const ArticleIndexPage = ({

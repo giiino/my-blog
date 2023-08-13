@@ -1,7 +1,7 @@
 import { setCookie as set } from 'cookies-next'
 import { NextApiRequest } from 'next'
 
-import { ApiResponse } from '@/pages/api'
+import { ApiResponse } from '@/shared/types/api'
 
 interface SetCookeProps {
   key: string

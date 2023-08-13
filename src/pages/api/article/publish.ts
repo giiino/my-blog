@@ -2,9 +2,9 @@ import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
-import { checkIsAdmin } from '@/shared/utils/jwt.util'
+import { checkIsAdmin } from '@/shared/utils/jwt'
 
-import { ApiResponse } from '..'
+import { ApiResponse } from '../../../shared/types/api'
 
 export default async function handler(
   req: NextApiRequest,

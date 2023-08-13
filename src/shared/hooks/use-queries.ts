@@ -2,8 +2,8 @@ import { toast } from 'react-hot-toast'
 
 import { useQuery } from '@tanstack/react-query'
 
-import { MenuCategoriesResponse } from '@/pages/api/article'
-import { UserInfo } from '@/pages/api/login'
+import { MenuCategoriesResponse } from '@/shared/types/api/article'
+import { UserInfo } from '@/shared/types/api/login'
 
 import { axiosInstance } from '../utils/axiosInstance'
 

@@ -5,7 +5,7 @@ import { ContentEditor } from '@/features/editor/components/ContentEditor'
 import { TitleEditor } from '@/features/editor/components/TitleEditor'
 import { usePublishArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
-import { checkIsAdmin } from '@/shared/utils/jwt.util'
+import { checkIsAdmin } from '@/shared/utils/jwt'
 
 const Editor = () => {
   const { mutate: publish, isLoading } = usePublishArticle()

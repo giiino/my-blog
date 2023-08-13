@@ -2,8 +2,8 @@ import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
-import { ApiResponse } from '@/pages/api'
-import { MenuCategoriesResponse } from '@/pages/api/article'
+import { ApiResponse } from '@/shared/types/api'
+import { MenuCategoriesResponse } from '@/shared/types/api/article'
 
 export async function getMenuCategories() {
   const AppDataSource = await getDataSource()

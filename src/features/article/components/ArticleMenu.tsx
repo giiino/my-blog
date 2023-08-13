@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
 
-import { MenuCategoriesResponse } from '@/pages/api/article'
 import { Menu } from '@/shared/components/Menu'
+import { MenuCategoriesResponse } from '@/shared/types/api/article'
 import { scrollBarHoverStyle } from '@/styles/globals'
 
 interface MenuProps extends GridProps {

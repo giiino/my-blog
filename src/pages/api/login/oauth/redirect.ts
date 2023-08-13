@@ -8,9 +8,9 @@ import {
   GITHUB_CLIENT_ID,
   GITHUB_USER_INFO_URL
 } from '@/shared/constants/oauth'
-import { setCookie } from '@/shared/utils/cookie.util'
+import { setCookie } from '@/shared/utils/cookie'
 import { serializeData } from '@/shared/utils/format'
-import { generateJWT } from '@/shared/utils/jwt.util'
+import { generateJWT } from '@/shared/utils/jwt'
 
 const clientID = GITHUB_CLIENT_ID
 const clientSecret = process.env.GITHUB_CLIENT_SECRET

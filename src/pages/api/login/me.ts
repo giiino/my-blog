@@ -2,11 +2,11 @@ import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { User } from '@/db/entity/User'
-import { ApiResponse } from '@/pages/api'
+import { ApiResponse } from '@/shared/types/api'
 import { pick } from '@/shared/utils/format'
-import { getJwtUser } from '@/shared/utils/jwt.util'
+import { getJwtUser } from '@/shared/utils/jwt'
 
-import type { UserInfo } from '.'
+import type { UserInfo } from '../../../shared/types/api/login'
 
 export default async function handler(
   req: NextApiRequest,

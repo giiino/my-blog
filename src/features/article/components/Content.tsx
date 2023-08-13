@@ -2,9 +2,9 @@ import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
 import dayjs from 'dayjs'
 
-import { ArticleResponse } from '@/pages/api/article'
 import { AdminOnly } from '@/shared/components/AdminOnly'
 import { Markdown } from '@/shared/components/Markdown'
+import { ArticleResponse } from '@/shared/types/api/article'
 
 import { Setting } from './Setting'
 

@@ -3,8 +3,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
-import { ApiResponse } from '@/pages/api'
-import { ArticleResponse } from '@/pages/api/article'
+import { ApiResponse } from '@/shared/types/api'
+import { ArticleResponse } from '@/shared/types/api/article'
 import { exclude } from '@/shared/utils/format'
 
 export async function getArticleById(id: string, shouldPlusViews = false) {

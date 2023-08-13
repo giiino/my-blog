@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
 
-import type { UserInfo } from '@/pages/api/login'
+import type { UserInfo } from '@/shared/types/api/login'
 
-import { getCookie } from './cookie.util'
+import { getCookie } from './cookie'
 
 const privateKey = process.env.JWT_PRIVATE_KEY!
 const expiresIn = process.env.JWT_EXPIRES_IN!

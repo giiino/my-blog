@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import { ObjectId } from 'typeorm'
 
-import { useDeleteArticle } from '@/features/editor/hooks/use-mutations'
+import { useDeleteArticle } from '@/features/article/hooks/use-mutation'
 
 interface ConfirmDeleteModalProps extends DialogProps {
   deleteId: ObjectId
