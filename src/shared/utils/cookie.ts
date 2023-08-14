@@ -15,7 +15,7 @@ export function setCookie({ key, value, req, res }: SetCookeProps) {
   set(key, value, {
     req,
     res,
-    maxAge: 60 * 60 * 24,
+    maxAge: 7 * 24 * 60 * 60,
     httpOnly: true,
     path: '/'
   })

@@ -1,14 +1,10 @@
-import React from 'react'
-
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogProps,
-  Backdrop,
-  CircularProgress
+  DialogProps
 } from '@mui/material'
 import { ObjectId } from 'typeorm'
 
@@ -33,16 +29,6 @@ export const ConfirmDeleteModal = ({
 
   return (
     <>
-      <Backdrop
-        sx={{
-          color: '#fff',
-          zIndex: (theme) =>
-            Math.max.apply(Math, Object.values(theme.zIndex)) + 1
-        }}
-        open={isLoading}
-      >
-        <CircularProgress color='inherit' />
-      </Backdrop>
       <Dialog
         open={open}
         onClose={handleClose}

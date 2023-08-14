@@ -14,7 +14,6 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <Siderbar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <main>{children}</main>
       <Footer />
-      <Toaster position='bottom-center' />
     </>
   )
 }

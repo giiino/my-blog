@@ -1,4 +1,4 @@
-import { Backdrop, Button, CircularProgress, Stack } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 import { GetServerSideProps } from 'next'
 
 import { ContentEditor } from '@/features/editor/components/ContentEditor'
@@ -20,12 +20,6 @@ const Editor = () => {
 
   return (
     <>
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={isLoading}
-      >
-        <CircularProgress color='inherit' />
-      </Backdrop>
       <Stack>
         <TitleEditor
           title={title}

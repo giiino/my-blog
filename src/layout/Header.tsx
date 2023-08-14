@@ -23,7 +23,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
           edge='start'
           color='inherit'
           aria-label='menu'
-          sx={{ mr: 2 }}
+          sx={{ mr: 1 }}
           onClick={() => setIsSidebarOpen(true)}
           className='sidebar-opener'
         >
