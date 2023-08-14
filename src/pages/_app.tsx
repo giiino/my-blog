@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <SEO title='GN的程式小站' description={''}>
         <meta name='viewport' content='width=device-width, user-scalable=no' />
-        <meta property='og:image' content='' />
+        <meta property='og:image' content='/web-cover.png' />
       </SEO>
       <AppProvider>
         <Layout>

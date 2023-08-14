@@ -5,7 +5,7 @@ import { ContentEditor } from '@/features/editor/components/ContentEditor'
 import { TitleEditor } from '@/features/editor/components/TitleEditor'
 import { usePublishArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
-import { checkIsAdmin } from '@/shared/utils/jwt'
+import { isAdmin } from '@/shared/utils/jwt'
 
 const Editor = () => {
   const { mutate: publish, isLoading } = usePublishArticle()
@@ -50,7 +50,7 @@ export const getServerSideProps: GetServerSideProps<{}> = async ({
   req,
   res
 }) => {
-  if (!checkIsAdmin({ req, res })) {
+  if (!isAdmin({ req, res })) {
     return {
       notFound: true
     }

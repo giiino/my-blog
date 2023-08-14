@@ -1,5 +1,4 @@
 import { ReactNode, useState } from 'react'
-import { Toaster } from 'react-hot-toast'
 
 import Footer from './Footer'
 import Header from './Header'

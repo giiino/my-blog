@@ -3,7 +3,7 @@ import type { NextApiRequest } from 'next'
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 import { ApiResponse } from '@/shared/types/api'
-import { checkIsAdmin } from '@/shared/utils/jwt'
+import { isAdmin } from '@/shared/utils/jwt'
 
 export async function getCategories() {
   const AppDataSource = await getDataSource()
@@ -25,7 +25,7 @@ export default async function handler(
   }
 
   try {
-    if (!checkIsAdmin({ req, res })) {
+    if (!isAdmin({ req, res })) {
       return res.status(403).json({ message: '權限不足，獲取失敗' })
     }
 

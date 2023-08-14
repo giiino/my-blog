@@ -2,7 +2,7 @@ import type { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
-import { checkIsAdmin } from '@/shared/utils/jwt'
+import { isAdmin } from '@/shared/utils/jwt'
 
 import { ApiResponse } from '../../../shared/types/api'
 
@@ -17,7 +17,7 @@ export default async function handler(
   const { category = '', title = '', content = '', isReadme = false } = req.body
 
   try {
-    if (!checkIsAdmin({ req, res })) {
+    if (!isAdmin({ req, res })) {
       return res.status(403).json({ message: '權限不足，發布失敗' })
     }
 

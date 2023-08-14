@@ -8,7 +8,7 @@ import { useEdit } from '@/features/editor/hooks/useEdit'
 import { formatArticleResponse } from '@/features/editor/utils/format'
 import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, serializeData } from '@/shared/utils/format'
-import { checkIsAdmin } from '@/shared/utils/jwt'
+import { isAdmin } from '@/shared/utils/jwt'
 
 import { ArticleEditResponse } from '../../shared/types/api/article'
 import { getArticleById } from '../api/article/get/article'
@@ -61,7 +61,7 @@ export const getServerSideProps: GetServerSideProps<{
 }> = async ({ req, res, params }) => {
   const id = params?.id as string
 
-  if (!isValidObjectId(id) || !checkIsAdmin({ req, res })) {
+  if (!isValidObjectId(id) || !isAdmin({ req, res })) {
     return {
       notFound: true
     }

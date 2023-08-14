@@ -29,7 +29,7 @@ export const getJwtUser = ({ req, res }: any) => {
   return decodeAndVerifyJWT(token) as UserInfo | null
 }
 
-export const checkIsAdmin = ({ req, res }: any) => {
+export const isAdmin = ({ req, res }: any) => {
   const userInfo = getJwtUser({ req, res })
   return userInfo?.isAdmin === 1 || process.env.NODE_ENV === 'development'
 }
