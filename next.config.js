@@ -8,6 +8,12 @@ const nextConfig = {
         hostname: 'i.ibb.co',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'drive.google.com',
+        port: '',
+        pathname: '/**'
       }
     ]
   }

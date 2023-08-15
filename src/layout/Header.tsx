@@ -58,8 +58,15 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
             文章
           </RouteButton>
           <AdminOnly>
-            <RouteButton className='route-btn' href='/edit'>
+            <RouteButton
+              className='route-btn'
+              href='/edit'
+              style={{ marginRight: '20px' }}
+            >
               新增文章
+            </RouteButton>
+            <RouteButton className='route-btn' href='/tools'>
+              工具
             </RouteButton>
           </AdminOnly>
         </Typography>
