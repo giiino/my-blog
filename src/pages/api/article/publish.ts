@@ -14,7 +14,13 @@ export default async function handler(
     res.status(405).end()
   }
 
-  const { category = '', title = '', content = '', isReadme = false } = req.body
+  const {
+    category = '',
+    title = '',
+    content = '',
+    coverImage = '',
+    isReadme = false
+  } = req.body
 
   try {
     if (!isAdmin({ req, res })) {
@@ -30,6 +36,7 @@ export default async function handler(
     article.title = title
     article.content = content
     article.isReadme = isReadme ? 1 : 0
+    article.coverImage = coverImage
     article.createTime = Date.now()
     article.updateTime = Date.now()
 

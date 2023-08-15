@@ -16,7 +16,13 @@ export default async function handler(
 
   const { id = '' } = req.query as { id: string }
 
-  const { category = '', title = '', content = '', isReadme = false } = req.body
+  const {
+    category = '',
+    title = '',
+    content = '',
+    coverImage = '',
+    isReadme = false
+  } = req.body
 
   try {
     if (!isAdmin({ req, res })) {
@@ -40,6 +46,7 @@ export default async function handler(
     targetArticle.category = category
     targetArticle.title = title
     targetArticle.content = content
+    targetArticle.coverImage = coverImage
     targetArticle.isReadme = isReadme ? 1 : 0
     targetArticle.updateTime = Date.now()
 
