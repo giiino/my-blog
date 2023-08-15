@@ -15,7 +15,7 @@ export class User {
   password: string = '';
 
   @Column()
-  avatarUrl: string = '';
+  avatarImage: string = '';
 
   @Column()
   isAdmin: number = 0;

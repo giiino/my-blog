@@ -2,17 +2,18 @@ import { ChangeEvent, useState } from 'react'
 
 import { Article } from '@/db/entity/Article'
 
-export type EditedItems = Omit<
+export type EditedItems = Pick<
   Article,
-  '_id' | 'createTime' | 'updateTime' | 'views' | 'isDelete' | 'isReadme'
+  'category' | 'content' | 'title' | 'coverImage'
 > & {
   isReadme: boolean
 }
 
-const defaultEditedItems = {
+const defaultEditedItems: EditedItems = {
   category: '',
   title: '',
   content: '',
+  coverImage: '',
   isReadme: false
 }
 

@@ -19,14 +19,14 @@ const Editor = ({
   const { _id, ...restArticleData } = articleData
   const { mutate: update, isLoading } = useUpdateArticle()
   const {
-    article: { content, title, category, isReadme },
+    article: { content, title, category, isReadme, coverImage },
     onCategoryChange,
     onTitleChange,
     onContentChange,
     onIsReadmeCheckChange
   } = useEdit({ ...formatArticleResponse(restArticleData) })
   const handleSubmit = () =>
-    update({ content, title, category, _id: String(_id), isReadme })
+    update({ content, title, category, coverImage, _id: String(_id), isReadme })
 
   return (
     <>

@@ -10,13 +10,14 @@ import { isAdmin } from '@/shared/utils/jwt'
 const Editor = () => {
   const { mutate: publish, isLoading } = usePublishArticle()
   const {
-    article: { content, title, category, isReadme },
+    article: { content, title, category, coverImage, isReadme },
     onCategoryChange,
     onTitleChange,
     onContentChange,
     onIsReadmeCheckChange
   } = useEdit()
-  const handleSubmit = () => publish({ content, title, category, isReadme })
+  const handleSubmit = () =>
+    publish({ content, title, category, coverImage, isReadme })
 
   return (
     <>

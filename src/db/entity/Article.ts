@@ -16,6 +16,9 @@ export class Article {
   content: string = '';
 
   @Column()
+  coverImage: string = '';
+
+  @Column()
   createTime: number = 0;
 
   @Column()
