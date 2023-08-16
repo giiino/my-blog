@@ -1,10 +1,12 @@
 import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
 import dayjs from 'dayjs'
+import Image from 'next/image'
 
 import { AdminOnly } from '@/shared/components/AdminOnly'
 import { Markdown } from '@/shared/components/Markdown'
 import { ArticleResponse } from '@/shared/types/api/article'
+import { isVoid } from '@/shared/utils/check'
 
 import { Setting } from './Setting'
 
@@ -13,7 +15,7 @@ interface ArticleContentProps extends GridProps {
 }
 
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
-  const { _id, title, content, updateTime } = article
+  const { _id, title, content, updateTime, coverImage } = article
 
   const formattedUpdateTime = dayjs(updateTime).format('YYYY-MM-DD')
 
@@ -29,6 +31,9 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
         修改時間
         <span>{formattedUpdateTime}</span>
       </Time>
+      {!isVoid(coverImage) && (
+        <CoverImage src={coverImage} alt='封面圖' width='500' height='500' />
+      )}
       <Markdown>{content}</Markdown>
     </ContentWrapper>
   )
@@ -61,8 +66,13 @@ const Time = styled.div`
   font-size: 13.5px;
   color: var(--primary-gray-200);
   margin: 20px 0;
-
   span {
     margin-left: 5px;
   }
+`
+
+const CoverImage = styled(Image)`
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
 `
