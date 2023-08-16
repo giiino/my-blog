@@ -37,8 +37,8 @@ export const PreviewImageInput = ({
           <PreviewImage
             src={imageUrl}
             alt='文章編輯預覽圖'
-            width='300'
-            height='300'
+            width='100'
+            height='100'
           />
         </ErrorBoundary>
       )}
