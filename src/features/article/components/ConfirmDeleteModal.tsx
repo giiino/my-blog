@@ -34,6 +34,8 @@ export const ConfirmDeleteModal = ({
         onClose={handleClose}
         aria-labelledby='alert-dialog-title'
         aria-describedby='delete-article-dialog-description'
+        fullWidth
+        maxWidth='xs'
       >
         <DialogContent>
           <DialogContentText

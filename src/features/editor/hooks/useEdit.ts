@@ -43,6 +43,13 @@ export const useEdit = (initialEditedItems?: Partial<EditedItems>) => {
     }))
   }
 
+  const onCoverImageChange = (image: string) => {
+    setArticle((prev) => ({
+      ...prev,
+      coverImage: image
+    }))
+  }
+
   const onIsReadmeCheckChange = () => {
     setArticle((prev) => ({
       ...prev,
@@ -50,11 +57,20 @@ export const useEdit = (initialEditedItems?: Partial<EditedItems>) => {
     }))
   }
 
+  const reset = () => {
+    setArticle({
+      ...defaultEditedItems,
+      ...initialEditedItems
+    })
+  }
+
   return {
     article,
+    reset,
     onCategoryChange,
     onTitleChange,
     onContentChange,
+    onCoverImageChange,
     onIsReadmeCheckChange
   }
 }

@@ -1,46 +1,56 @@
-import { Button, Stack } from '@mui/material'
+import { useState } from 'react'
+
 import { GetServerSideProps } from 'next'
 
+import { ArticleInfoModal } from '@/features/editor/components/ArticleInfoModal'
 import { ContentEditor } from '@/features/editor/components/ContentEditor'
-import { TitleEditor } from '@/features/editor/components/TitleEditor'
 import { usePublishArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
 import { isAdmin } from '@/shared/utils/jwt'
 
 const Editor = () => {
-  const { mutate: publish, isLoading } = usePublishArticle()
+  const { mutate: publish } = usePublishArticle()
   const {
     article: { content, title, category, coverImage, isReadme },
+    reset,
     onCategoryChange,
     onTitleChange,
     onContentChange,
+    onCoverImageChange,
     onIsReadmeCheckChange
   } = useEdit()
-  const handleSubmit = () =>
+  const handleSubmit = () => {
     publish({ content, title, category, coverImage, isReadme })
+  }
+
+  const [articleInfoModalOpen, setIsArticleInfoModalOpen] = useState(false)
+
+  const onArticleInfoModalOpen = () => setIsArticleInfoModalOpen(true)
+  const handleClose = () => {
+    reset()
+    setIsArticleInfoModalOpen(false)
+  }
 
   return (
     <>
-      <Stack>
-        <TitleEditor
-          title={title}
-          category={category}
-          isReadme={isReadme}
-          submitButton={
-            <Button
-              variant='contained'
-              onClick={handleSubmit}
-              disabled={isLoading}
-            >
-              發布
-            </Button>
-          }
-          onTitleChange={onTitleChange}
-          onCategoryChange={onCategoryChange}
-          onIsReadmeCheckChange={onIsReadmeCheckChange}
-        />
-        <ContentEditor value={content} onChange={onContentChange} />
-      </Stack>
+      <ArticleInfoModal
+        open={articleInfoModalOpen}
+        title={title}
+        category={category}
+        isReadme={isReadme}
+        coverImage={coverImage}
+        onTitleChange={onTitleChange}
+        onCategoryChange={onCategoryChange}
+        onCoverImageChange={onCoverImageChange}
+        onIsReadmeCheckChange={onIsReadmeCheckChange}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+      />
+      <ContentEditor
+        value={content}
+        onChange={onContentChange}
+        onArticleInfoModalOpen={onArticleInfoModalOpen}
+      />
     </>
   )
 }

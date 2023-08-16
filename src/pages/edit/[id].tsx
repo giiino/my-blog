@@ -1,8 +1,10 @@
-import { Button, Stack } from '@mui/material'
+import { useState } from 'react'
+
+import { Stack } from '@mui/material'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
+import { ArticleInfoModal } from '@/features/editor/components/ArticleInfoModal'
 import { ContentEditor } from '@/features/editor/components/ContentEditor'
-import { TitleEditor } from '@/features/editor/components/TitleEditor'
 import { useUpdateArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
 import { formatArticleResponse } from '@/features/editor/utils/format'
@@ -17,38 +19,49 @@ const Editor = ({
   articleData
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { _id, ...restArticleData } = articleData
-  const { mutate: update, isLoading } = useUpdateArticle()
+  const { mutate: update } = useUpdateArticle()
   const {
     article: { content, title, category, isReadme, coverImage },
+    reset,
     onCategoryChange,
     onTitleChange,
     onContentChange,
+    onCoverImageChange,
     onIsReadmeCheckChange
   } = useEdit({ ...formatArticleResponse(restArticleData) })
-  const handleSubmit = () =>
+  const handleSubmit = () => {
     update({ content, title, category, coverImage, _id: String(_id), isReadme })
+  }
+
+  const [articleInfoModalOpen, setIsArticleInfoModalOpen] = useState(false)
+
+  const onArticleInfoModalOpen = () => setIsArticleInfoModalOpen(true)
+  const handleClose = () => {
+    reset()
+    setIsArticleInfoModalOpen(false)
+  }
 
   return (
     <>
       <Stack>
-        <TitleEditor
+        <ArticleInfoModal
+          open={articleInfoModalOpen}
           title={title}
           category={category}
+          coverImage={coverImage}
           isReadme={isReadme}
-          submitButton={
-            <Button
-              variant='contained'
-              onClick={handleSubmit}
-              disabled={isLoading}
-            >
-              儲存
-            </Button>
-          }
           onTitleChange={onTitleChange}
           onCategoryChange={onCategoryChange}
           onIsReadmeCheckChange={onIsReadmeCheckChange}
+          onCoverImageChange={onCoverImageChange}
+          handleClose={handleClose}
+          handleSubmit={handleSubmit}
         />
-        <ContentEditor value={content} onChange={onContentChange} />
+        <ContentEditor
+          value={content}
+          onChange={onContentChange}
+          onArticleInfoModalOpen={onArticleInfoModalOpen}
+        />
       </Stack>
     </>
   )
