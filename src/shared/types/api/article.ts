@@ -10,3 +10,8 @@ export type ArticleEditResponse = Omit<
   Article,
   'updateTime' | 'createTime' | 'views' | 'isDelete'
 >
+
+export type ArticleLatestResponse = Pick<
+  Article,
+  '_id' | 'title' | 'content' | 'coverImage' | 'createTime'
+>

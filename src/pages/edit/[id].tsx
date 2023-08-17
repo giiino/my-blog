@@ -13,7 +13,7 @@ import { exclude, serializeData } from '@/shared/utils/format'
 import { isAdmin } from '@/shared/utils/jwt'
 
 import { ArticleEditResponse } from '../../shared/types/api/article'
-import { getArticleById } from '../api/article/get/article'
+import { getArticleById } from '../api/article/get'
 
 const Editor = ({
   articleData

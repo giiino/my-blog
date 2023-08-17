@@ -6,7 +6,7 @@ import {
   Content
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
-import { getReadmeArticle } from '@/pages/api/article/get/article'
+import { getReadmeArticle } from '@/pages/api/article/get'
 import { exclude, serializeData } from '@/shared/utils/format'
 
 import {

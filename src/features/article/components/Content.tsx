@@ -7,6 +7,7 @@ import { AdminOnly } from '@/shared/components/AdminOnly'
 import { Markdown } from '@/shared/components/Markdown'
 import { ArticleResponse } from '@/shared/types/api/article'
 import { isVoid } from '@/shared/utils/check'
+import { formatDate } from '@/shared/utils/format'
 
 import { Setting } from './Setting'
 
@@ -17,7 +18,7 @@ interface ArticleContentProps extends GridProps {
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
   const { _id, title, content, updateTime, coverImage } = article
 
-  const formattedUpdateTime = dayjs(updateTime).format('YYYY-MM-DD')
+  const formattedUpdateTime = formatDate(updateTime)
 
   return (
     <ContentWrapper {...restProps}>

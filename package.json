@@ -27,6 +27,7 @@
     "eslint-config-next": "13.4.10",
     "jsonwebtoken": "^9.0.1",
     "markdown-it": "^13.0.1",
+    "markdown-to-txt": "^2.0.1",
     "mongodb": "^5.7.0",
     "mysql2": "^3.5.2",
     "next": "13.4.10",

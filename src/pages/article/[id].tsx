@@ -6,7 +6,7 @@ import {
   ArticleMenu
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
-import { getArticleById } from '@/pages/api/article/get/article'
+import { getArticleById } from '@/pages/api/article/get'
 import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, serializeData } from '@/shared/utils/format'
 
