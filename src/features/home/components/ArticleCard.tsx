@@ -22,7 +22,6 @@ export const ArticleCard = ({
   coverImage,
   ...restProps
 }: ArticleCardProps) => (
-  //   <Container {...restProps}>
   <LinkWrapper href={'/article/' + id}>
     <CoverImage
       src={coverImage}
@@ -35,10 +34,7 @@ export const ArticleCard = ({
     <div className='content'>{markdownToTxt(content.substring(0, 100))}</div>
     <div className='time'>{formatDate(createTime)}</div>
   </LinkWrapper>
-  //   </Container>
 )
-
-const Container = styled.div``
 
 const LinkWrapper = styled(Link)`
   display: grid;
@@ -54,7 +50,9 @@ const LinkWrapper = styled(Link)`
     color: var(--primary-gray-200);
   }
   .time {
+    color: var(--primary-blue-4);
     margin-top: auto;
+    margin-bottom: 30px;
   }
   &:hover {
     .content {

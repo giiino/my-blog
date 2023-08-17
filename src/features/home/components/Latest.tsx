@@ -32,6 +32,5 @@ const CardWrapper = styled(Stack)`
   }
   @media screen and (max-width: 700px) {
     max-width: 400px;
-    width: 95%;
   }
 `
