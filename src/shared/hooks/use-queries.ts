@@ -8,20 +8,10 @@ import { UserInfo } from '@/shared/types/api/login'
 import { axiosInstance } from '../utils/axiosInstance'
 
 export const useMenuCategory = () => {
-  return useQuery<MenuCategoriesResponse[]>(
-    ['menu-category'],
-    async () => {
-      const response = await axiosInstance.get(
-        '/api/article/get/menu-categories'
-      )
-      return response.data
-    },
-    {
-      onError: (error) => {
-        toast.error(error as string)
-      }
-    }
-  )
+  return useQuery<MenuCategoriesResponse[]>(['menu-category'], async () => {
+    const response = await axiosInstance.get('/api/article/get/menu-categories')
+    return response.data
+  })
 }
 
 export const useUser = () => {

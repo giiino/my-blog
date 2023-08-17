@@ -28,7 +28,7 @@ const CardWrapper = styled(Stack)`
   width: 95%;
   padding: 5vh 0;
   @media screen and (max-width: 960px) {
-    width: 80%;
+    width: 85%;
   }
   @media screen and (max-width: 700px) {
     max-width: 400px;

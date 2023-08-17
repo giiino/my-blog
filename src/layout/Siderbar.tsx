@@ -1,6 +1,7 @@
 import React from 'react'
 
 import styled from '@emotion/styled'
+import WarningIcon from '@mui/icons-material/Warning'
 import {
   Box,
   CircularProgress,
@@ -22,7 +23,7 @@ interface SiderbarProps {
 }
 
 const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
-  const { data: categories, isLoading } = useMenuCategory()
+  const { data: categories, isLoading, isError } = useMenuCategory()
 
   useRouteChange({
     callback: () => setIsOpen(false)
@@ -68,14 +69,26 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
         <MenuWrapper>
           {isLoading ? (
             <Stack
+              justifyContent={'center'}
+              alignItems={'center'}
               sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
                 height: '100%'
               }}
             >
               <CircularProgress style={{ color: 'var(--primary-gray-200)' }} />
+            </Stack>
+          ) : isError ? (
+            <Stack
+              justifyContent={'center'}
+              alignItems={'center'}
+              sx={{
+                height: '100%'
+              }}
+            >
+              <WarningIcon fontSize='large' color='error' />
+              <p style={{ color: 'var(--primary-gray-200)' }}>
+                資料獲取過程發生錯誤
+              </p>
             </Stack>
           ) : (
             <Menu menuCategories={categories || []} />
