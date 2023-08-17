@@ -32,7 +32,8 @@ export const getStaticProps: GetStaticProps<{
     return {
       props: {
         latestArticles: serializeData(data)
-      }
+      },
+      revalidate: 60
     }
   } catch (error) {
     console.error('產生靜態頁面發生錯誤，最新文章獲取失敗', error)
