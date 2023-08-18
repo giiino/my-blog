@@ -2,7 +2,8 @@ import dayjs from 'dayjs'
 
 import { isKey } from './check'
 
-export const formatDate = (time: number) => dayjs(time).format('YYYY-MM-DD')
+export const formatDate = (time: number) =>
+  dayjs(time).tz().format('YYYY-MM-DD')
 
 export const serializeData = <T>(target: T) => {
   try {
