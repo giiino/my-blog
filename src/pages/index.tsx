@@ -1,6 +1,4 @@
-import { Button } from '@mui/material'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { useRouter } from 'next/router'
 
 import { Banner } from '@/features/home/components/Banner'
 import { Latest } from '@/features/home/components/Latest'

@@ -62,6 +62,13 @@ export default async function handler(req: NextApiRequest, res: any) {
     if (userInfo) {
       const token = generateJWT(serializeData(userInfo))
       setCookie({ key: 'token', value: token, req, res })
+      setCookie({
+        key: 'enabledFetchUserInfo',
+        value: 'true',
+        req,
+        res,
+        disabledHttpOnly: true
+      })
       return res.redirect(307, '/')
     } else {
       const user = new User()

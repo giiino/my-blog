@@ -1,6 +1,7 @@
 import { toast } from 'react-hot-toast'
 
 import { useQuery } from '@tanstack/react-query'
+import { getCookie, hasCookie } from 'cookies-next'
 
 import { MenuCategoriesResponse } from '@/shared/types/api/article'
 import { UserInfo } from '@/shared/types/api/login'
@@ -15,6 +16,7 @@ export const useMenuCategory = () => {
 }
 
 export const useUser = () => {
+  const enabledFetchUserInfo = hasCookie('enabledFetchUserInfo')
   return useQuery<UserInfo>(
     ['me'],
     async () => {
@@ -22,6 +24,7 @@ export const useUser = () => {
       return response.data
     },
     {
+      enabled: enabledFetchUserInfo,
       staleTime: Infinity
     }
   )

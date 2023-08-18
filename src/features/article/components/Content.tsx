@@ -34,7 +34,7 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
         <span>{formattedUpdateTime}</span>
       </Time>
       {!isVoid(coverImage) && (
-        <CoverImage src={coverImage} alt='封面圖' width='500' height='500' />
+        <CoverImage src={coverImage} alt='封面圖' width='1000' height='750' />
       )}
       <Markdown>{content}</Markdown>
     </ContentWrapper>

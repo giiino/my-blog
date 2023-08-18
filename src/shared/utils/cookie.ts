@@ -8,15 +8,22 @@ interface SetCookeProps {
   value: string
   req: NextApiRequest
   res: ApiResponse<string>
+  disabledHttpOnly?: boolean
 }
 
 export * from 'cookies-next'
-export function setCookie({ key, value, req, res }: SetCookeProps) {
+export function setCookie({
+  key,
+  value,
+  req,
+  res,
+  disabledHttpOnly
+}: SetCookeProps) {
   set(key, value, {
     req,
     res,
     maxAge: 7 * 24 * 60 * 60,
-    httpOnly: true,
+    httpOnly: disabledHttpOnly ? false : true,
     path: '/'
   })
 }
