@@ -27,11 +27,7 @@ export async function getArticleById(id: string, shouldPlusViews = false) {
     await articleRepo.save(resultArticle)
   }
 
-  return exclude(resultArticle, [
-    'isDelete',
-    'views',
-    'createTime'
-  ]) as ArticleResponse
+  return exclude(resultArticle, ['isDelete', 'views']) as ArticleResponse
 }
 
 export async function getReadmeArticle() {

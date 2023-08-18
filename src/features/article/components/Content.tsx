@@ -16,8 +16,9 @@ interface ArticleContentProps extends GridProps {
 }
 
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
-  const { _id, title, content, updateTime, coverImage } = article
+  const { _id, title, content, updateTime, createTime, coverImage } = article
 
+  const formattedCreateTime = formatDate(createTime)
   const formattedUpdateTime = formatDate(updateTime)
 
   return (
@@ -29,7 +30,8 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
         </AdminOnly>
       </Title>
       <Time>
-        修改時間
+        建立時間
+        <span>{formattedCreateTime}</span>&ensp;/&ensp;修改時間
         <span>{formattedUpdateTime}</span>
       </Time>
       {!isVoid(coverImage) && (
