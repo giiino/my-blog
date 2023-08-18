@@ -51,7 +51,6 @@ export async function getReadmeArticle() {
   return exclude(resultArticle, [
     'isDelete',
     'views',
-    'createTime',
     'isReadme'
   ]) as ArticleResponse
 }

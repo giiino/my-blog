@@ -17,7 +17,6 @@ interface ArticleContentProps extends GridProps {
 
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
   const { _id, title, content, updateTime, createTime, coverImage } = article
-
   const formattedCreateTime = formatDate(createTime)
   const formattedUpdateTime = formatDate(updateTime)
 
