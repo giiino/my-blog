@@ -17,8 +17,7 @@ interface ArticleContentProps extends GridProps {
 
 export const Content = ({ article, ...restProps }: ArticleContentProps) => {
   const { _id, title, content, updateTime, coverImage } = article
-  const formatDate = (time: number) => dayjs(time).format('YYYY-MM-DD')
-  const formattedUpdateTime = formatDate(updateTime)
+  const formattedUpdateTime = dayjs(updateTime).format('YYYY-MM-DD')
 
   return (
     <ContentWrapper {...restProps}>

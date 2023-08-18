@@ -24,7 +24,6 @@ export const ArticleCard = ({
   coverImage,
   ...restProps
 }: ArticleCardProps) => {
-  const formatDate = (time: number) => dayjs(time).format('YYYY-MM-DD')
   return (
     <LinkWrapper href={'/article/' + id}>
       <CoverImage
@@ -38,7 +37,7 @@ export const ArticleCard = ({
       <div className='content'>
         {markdownToTxt(content.substring(0, 100))}...
       </div>
-      <div className='time'>{formatDate(createTime)}</div>
+      <div className='time'>{dayjs(createTime).format('YYYY-MM-DD')}</div>
     </LinkWrapper>
   )
 }
