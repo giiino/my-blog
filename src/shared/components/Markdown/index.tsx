@@ -45,7 +45,8 @@ export const Markdown = ({ children }: { children: string }) => {
                 {children as string[]}
               </SyntaxHighlighter>
             )
-          }
+          },
+          a: (props) => <a {...props} target='_blank' />
         }}
       >
         {children}
@@ -58,7 +59,7 @@ const MarkDownStyle = styled.div`
   .reacr-mark-down {
     > * {
       line-height: 2;
-      margin-bottom: 25px;
+      margin-bottom: 23px;
     }
 
     h1 {
@@ -99,13 +100,19 @@ const MarkDownStyle = styled.div`
     blockquote {
       width: 100%;
       margin: 25px auto;
-      color: #373223;
       padding: 1.2em 30px 1.2em 30px;
       border-left: 6px solid #f7da85;
       line-height: 1.6;
       position: relative;
       background: #fffbee;
       border-radius: 8px;
+    }
+    a {
+      color: #0050b3;
+      margin: 0 5px;
+      &:hover {
+        text-decoration: underline;
+      }
     }
     em {
       font-style: normal;

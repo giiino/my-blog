@@ -1,7 +1,5 @@
-import { toast } from 'react-hot-toast'
-
 import { useQuery } from '@tanstack/react-query'
-import { getCookie, hasCookie } from 'cookies-next'
+import { hasCookie } from 'cookies-next'
 
 import { MenuCategoriesResponse } from '@/shared/types/api/article'
 import { UserInfo } from '@/shared/types/api/login'
