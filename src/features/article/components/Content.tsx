@@ -29,8 +29,8 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
         </AdminOnly>
       </Title>
       <Time>
-        建立時間
-        <span>{formattedCreateTime}</span>&ensp;/&ensp;修改時間
+        建立於
+        <span>{formattedCreateTime}</span>&ensp;/&ensp;修改於
         <span>{formattedUpdateTime}</span>
       </Time>
       {!isVoid(coverImage) && (

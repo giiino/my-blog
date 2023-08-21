@@ -7,8 +7,9 @@ import {
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
 import { getArticleById } from '@/pages/api/article/get'
+import SEO from '@/shared/components/SEO'
 import { isValidObjectId } from '@/shared/utils/check'
-import { exclude, serializeData } from '@/shared/utils/format'
+import { exclude, markdownToTxt, serializeData } from '@/shared/utils/format'
 
 import {
   ArticleResponse,
@@ -20,12 +21,21 @@ const ArticlePage = ({
   articleData,
   menuCategories
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { title, content, coverImage } = articleData
+
   return (
-    <ArticleWrapper justifyContent={'center'} container>
-      <ArticleMenu item lg={3} md={4} menuCategories={menuCategories} />
-      <Content item lg={7} md={8} xs={12} article={articleData} />
-      <TocHolder item lg={2} />
-    </ArticleWrapper>
+    <>
+      <SEO
+        title={title}
+        description={markdownToTxt(content, 150)}
+        thumbnail={coverImage}
+      />
+      <ArticleWrapper justifyContent={'center'} container>
+        <ArticleMenu item lg={3} md={4} menuCategories={menuCategories} />
+        <Content item lg={7} md={8} xs={12} article={articleData} />
+        <TocHolder item lg={2} />
+      </ArticleWrapper>
+    </>
   )
 }
 

@@ -1,9 +1,18 @@
 import dayjs from 'dayjs'
+import { markdownToTxt as toTxt } from 'markdown-to-txt'
 
 import { isKey } from './check'
 
-export const formatDate = (time: number) =>
-  dayjs(time).tz().format('YYYY-MM-DD')
+export const markdownToTxt = (
+  target: string,
+  number: number | undefined = 100
+) => {
+  return toTxt(target.substring(0, number))
+}
+
+export const formatDate = (time: number) => {
+  return dayjs(time).tz().format('YYYY-MM-DD')
+}
 
 export const serializeData = <T>(target: T) => {
   try {
