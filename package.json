@@ -27,7 +27,6 @@
     "eslint-config-next": "13.4.10",
     "jsonwebtoken": "^9.0.1",
     "markdown-it": "^13.0.1",
-    "markdown-to-txt": "^2.0.1",
     "mongodb": "^5.7.0",
     "mysql2": "^3.5.2",
     "next": "13.4.10",
@@ -39,6 +38,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "reflect-metadata": "^0.1.13",
     "remark-gfm": "^3.0.1",
+    "remove-markdown": "^0.5.0",
     "typeorm": "^0.3.17",
     "typescript": "5.1.6"
   },
@@ -47,6 +47,7 @@
     "@types/jsonwebtoken": "^9.0.2",
     "@types/markdown-it": "^12.2.3",
     "@types/react-syntax-highlighter": "^15.5.7",
+    "@types/remove-markdown": "^0.3.1",
     "prettier": "^2.8.8"
   }
 }

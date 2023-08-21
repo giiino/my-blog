@@ -1,10 +1,9 @@
 import styled from '@emotion/styled'
-import { Stack, Grid, StackProps } from '@mui/material'
-import { markdownToTxt } from 'markdown-to-txt'
-import Link, { LinkProps } from 'next/link'
+import { StackProps } from '@mui/material'
+import Link from 'next/link'
 
 import { ErrorHandledImage } from '@/shared/components/ErrorHandledImage'
-import { formatDate } from '@/shared/utils/format'
+import { formatDate, markdownToTxt } from '@/shared/utils/format'
 
 interface ArticleCardProps extends StackProps {
   id: string
@@ -31,7 +30,7 @@ export const ArticleCard = ({
       ratio={0.6}
     />
     <h3 className='title'>{title}</h3>
-    <div className='content'>{markdownToTxt(content.substring(0, 100))}...</div>
+    <div className='content'>{markdownToTxt(content)}...</div>
     <div className='time'>{formatDate(createTime)}</div>
   </LinkWrapper>
 )

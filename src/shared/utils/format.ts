@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { markdownToTxt as toTxt } from 'markdown-to-txt'
+import removeMd from 'remove-markdown'
 
 import { isKey } from './check'
 
@@ -7,7 +7,7 @@ export const markdownToTxt = (
   target: string,
   number: number | undefined = 100
 ) => {
-  return toTxt(target.substring(0, number))
+  return removeMd(target.substring(0, number)).replace(/\n/g, '')
 }
 
 export const formatDate = (time: number) => {
