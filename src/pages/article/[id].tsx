@@ -1,9 +1,9 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
 import {
+  ArticleMenu,
   ArticleWrapper,
-  Content,
-  ArticleMenu
+  Content
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
 import { getArticleById } from '@/pages/api/article/get'
