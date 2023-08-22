@@ -3,11 +3,8 @@ import removeMd from 'remove-markdown'
 
 import { isKey } from './check'
 
-export const markdownToTxt = (
-  target: string,
-  number: number | undefined = 100
-) => {
-  return removeMd(target.substring(0, number)).replace(/\n/g, '')
+export const markdownToTxt = (target: string, textNumber: number) => {
+  return removeMd(target.substring(0, textNumber)).replace(/\n/g, '')
 }
 
 export const formatDate = (time: number) => {
