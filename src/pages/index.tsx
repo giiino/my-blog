@@ -3,7 +3,6 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { Banner } from '@/features/home/components/Banner'
 import { Latest } from '@/features/home/components/Latest'
 import { Title } from '@/features/home/components/Title'
-import SEO from '@/shared/components/SEO'
 import { ArticleLatestResponse } from '@/shared/types/api/article'
 import { serializeData } from '@/shared/utils/format'
 

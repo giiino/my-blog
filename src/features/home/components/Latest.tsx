@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Box, Grid, Stack } from '@mui/material'
+import { Grid, Stack } from '@mui/material'
 
 import { ArticleLatestResponse } from '@/shared/types/api/article'
 

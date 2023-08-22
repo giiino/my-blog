@@ -1,16 +1,15 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
-// TODO: 待刪除
 export const useRouteChange = ({ callback }: { callback: () => void }) => {
-  const { asPath } = useRouter()
-  const prevRoute = useRef(asPath)
+  const { events } = useRouter()
 
   useEffect(() => {
-    if (asPath !== prevRoute.current) {
-      callback()
+    events.on('routeChangeComplete', () => callback())
+    return () => {
+      events.off('routeChangeComplete', () => callback())
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [asPath])
+  }, [events])
 }
