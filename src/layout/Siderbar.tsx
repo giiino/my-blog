@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import WarningIcon from '@mui/icons-material/Warning'
 import {
   Box,
+  Button,
   CircularProgress,
   Divider,
   Drawer,
@@ -23,7 +24,7 @@ interface SiderbarProps {
 }
 
 const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
-  const { data: categories, isLoading, isError } = useMenuCategory()
+  const { data: categories, isLoading, isError, refetch } = useMenuCategory()
 
   useRouteChange({
     callback: () => setIsOpen(false)
@@ -79,6 +80,7 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
             </Stack>
           ) : isError ? (
             <Stack
+              rowGap={3}
               justifyContent={'center'}
               alignItems={'center'}
               sx={{
@@ -89,6 +91,9 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
               <p style={{ color: 'var(--primary-gray-200)' }}>
                 資料獲取過程發生錯誤
               </p>
+              <Button variant='outlined' size='small' onClick={() => refetch()}>
+                重試
+              </Button>
             </Stack>
           ) : (
             <Menu menuCategories={categories || []} />
