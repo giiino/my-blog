@@ -14,14 +14,18 @@ export default function SEO({
 }: SEOProps) {
   return (
     <Head>
-      <title>{title}</title>
+      <title key='title'>{title}</title>
       <meta name='viewport' content='width=device-width, user-scalable=no' />
-      <meta property='og:image' content={thumbnail} />
-      <meta name='description' content={description} />
-      <meta property='og:type' content='website' />
-      <meta property='og:title' content={title} />
-      <meta property='og:description' content={description} />
-      <meta property='og:site_name' content={title} />
+      <meta property='og:image' content={thumbnail} key='thumbnail' />
+      <meta name='description' content={description} key='description' />
+      <meta property='og:type' content='website' key='og:type' />
+      <meta property='og:title' content={title} key='og:title' />
+      <meta
+        property='og:description'
+        content={description}
+        key='og:description'
+      />
+      <meta property='og:site_name' content={title} key='og:site_name' />
       {children}
     </Head>
   )

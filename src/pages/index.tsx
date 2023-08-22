@@ -14,7 +14,6 @@ const Home = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <SEO />
       <Banner />
       <Title>最新文章</Title>
       <Latest articles={latestArticles} />

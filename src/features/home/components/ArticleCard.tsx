@@ -30,7 +30,7 @@ export const ArticleCard = ({
       ratio={0.6}
     />
     <h3 className='title'>{title}</h3>
-    <div className='content'>{markdownToTxt(content, 70)}...</div>
+    <div className='content'>{markdownToTxt(content, 300)}...</div>
     <div className='time'>{formatDate(createTime)}</div>
   </LinkWrapper>
 )
