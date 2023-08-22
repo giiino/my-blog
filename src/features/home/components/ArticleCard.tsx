@@ -36,7 +36,8 @@ export const ArticleCard = ({
 )
 
 const LinkWrapper = styled(Link)`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   width: 30%;
   margin-bottom: 30px;
   > * {
@@ -79,7 +80,4 @@ const LinkWrapper = styled(Link)`
   }
 `
 
-const CoverImage = styled(ErrorHandledImage)`
-  width: 100%;
-  object-fit: fill;
-`
+const CoverImage = styled(ErrorHandledImage)``
