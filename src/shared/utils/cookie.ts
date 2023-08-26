@@ -22,7 +22,7 @@ export function setCookie({
   set(key, value, {
     req,
     res,
-    maxAge: 7 * 24 * 60 * 60,
+    maxAge: 30 * 24 * 60 * 60,
     httpOnly: disabledHttpOnly ? false : true,
     path: '/'
   })
