@@ -1,4 +1,5 @@
 import { setCookie as set } from 'cookies-next'
+import { OptionsType } from 'cookies-next/lib/types'
 import { NextApiRequest } from 'next'
 
 import { ApiResponse } from '@/shared/types/api'
@@ -8,22 +9,16 @@ interface SetCookeProps {
   value: string
   req: NextApiRequest
   res: ApiResponse<string>
-  disabledHttpOnly?: boolean
+  options?: OptionsType
 }
 
 export * from 'cookies-next'
-export function setCookie({
-  key,
-  value,
-  req,
-  res,
-  disabledHttpOnly
-}: SetCookeProps) {
+export function setCookie({ key, value, req, res, options }: SetCookeProps) {
   set(key, value, {
     req,
     res,
     maxAge: 30 * 24 * 60 * 60,
-    httpOnly: disabledHttpOnly ? false : true,
-    path: '/'
+    path: '/',
+    ...options
   })
 }

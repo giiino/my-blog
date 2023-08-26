@@ -52,11 +52,7 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
     >
       <Container>
         <RouteWrapper direction={'row'}>
-          <RouteButton
-            href='/'
-            style={{ marginRight: '20px' }}
-            onClick={() => {}}
-          >
+          <RouteButton href='/' style={{ marginRight: '20px' }}>
             首頁
           </RouteButton>
           <RouteButton href='/article' style={{ marginRight: '20px' }}>

@@ -67,7 +67,9 @@ export default async function handler(req: NextApiRequest, res: any) {
         value: 'true',
         req,
         res,
-        disabledHttpOnly: true
+        options: {
+          httpOnly: false
+        }
       })
       return res.redirect(307, '/')
     } else {
