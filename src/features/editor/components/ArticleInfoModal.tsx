@@ -65,6 +65,7 @@ export const ArticleInfoModal = ({
               options={categories || []}
               size='small'
               onInputChange={onCategoryChange}
+              ListboxProps={{ style: { maxHeight: '200px' } }}
               renderInput={(params) => (
                 <TextField
                   {...params}

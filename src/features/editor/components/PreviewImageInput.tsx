@@ -1,11 +1,13 @@
 import { useState } from 'react'
 
 import styled from '@emotion/styled'
-import { Stack, TextField } from '@mui/material'
+import { Autocomplete, Box, Stack, TextField } from '@mui/material'
 import Image from 'next/image'
 
 import { ErrorBoundary } from '@/shared/components/ErrorBoundary'
 import { isVoid } from '@/shared/utils/check'
+
+import { useConverImages } from '../hooks/use-queries'
 
 interface PreviewImageInputProps {
   imageUrl: string
@@ -16,21 +18,39 @@ export const PreviewImageInput = ({
   imageUrl,
   onImageUrlChange
 }: PreviewImageInputProps) => {
-  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onImageUrlChange(e.target.value)
+  const { data: converImagesList } = useConverImages()
+
+  const handleUrlChange = (_: unknown, value: string) => {
+    onImageUrlChange(value)
   }
 
   return (
     <Stack>
-      <TextField
-        label='圖片連結'
-        variant='standard'
+      <Autocomplete
+        disablePortal
+        disableClearable
+        freeSolo
         value={imageUrl}
-        onChange={handleUrlChange}
+        options={converImagesList || []}
         size='small'
-        InputLabelProps={{
-          shrink: true
-        }}
+        onInputChange={handleUrlChange}
+        ListboxProps={{ style: { maxHeight: '200px' } }}
+        renderOption={(props, option) => (
+          <Box component='li' {...props}>
+            <OptionImage width='50' height='50' src={option} alt='封面圖' />
+            {option}
+          </Box>
+        )}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label='分類'
+            variant='standard'
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+        )}
       />
       {!isVoid(imageUrl) && (
         <ErrorBoundary fallback={ImageErrorFallback}>
@@ -45,6 +65,13 @@ export const PreviewImageInput = ({
     </Stack>
   )
 }
+
+const OptionImage = styled(Image)`
+  object-fit: contain;
+  border: 1px solid #ccc;
+  background: #fff;
+  margin-right: 20px;
+`
 
 const PreviewImage = styled(Image)`
   width: 100px;

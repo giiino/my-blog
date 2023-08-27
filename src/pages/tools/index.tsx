@@ -8,7 +8,7 @@ const Tools = () => {
   const covertImageUrl = (target: string) => {
     const pattern = /d\/([^/]+)\/view/
 
-    const matches = text.match(pattern)
+    const matches = target.match(pattern)
 
     if (matches) {
       return `https://drive.google.com/uc?export=view&id=${matches[1]}`
