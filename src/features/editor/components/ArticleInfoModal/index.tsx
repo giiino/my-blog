@@ -14,7 +14,7 @@ import {
   TextField
 } from '@mui/material'
 
-import { useCategories } from '../hooks/use-queries'
+import { useCategories } from '../../hooks/use-queries'
 import { PreviewImageInput } from './PreviewImageInput'
 
 interface ArticleInfoModalProps extends DialogProps {

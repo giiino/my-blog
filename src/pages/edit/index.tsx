@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { GetServerSideProps } from 'next'
 
 import { ArticleInfoModal } from '@/features/editor/components/ArticleInfoModal'
-import { ContentEditor } from '@/features/editor/components/ContentEditor'
+import { ContentEditor } from '@/features/editor/components/Editor'
 import { usePublishArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
 import { isAdmin } from '@/shared/utils/jwt'

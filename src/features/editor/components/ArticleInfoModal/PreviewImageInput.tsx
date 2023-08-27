@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { ErrorBoundary } from '@/shared/components/ErrorBoundary'
 import { isVoid } from '@/shared/utils/check'
 
-import { useConverImages } from '../hooks/use-queries'
+import { useConverImages } from '../../hooks/use-queries'
 
 interface PreviewImageInputProps {
   imageUrl: string

@@ -4,7 +4,7 @@ import { Stack } from '@mui/material'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
 import { ArticleInfoModal } from '@/features/editor/components/ArticleInfoModal'
-import { ContentEditor } from '@/features/editor/components/ContentEditor'
+import { ContentEditor } from '@/features/editor/components/Editor'
 import { useUpdateArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
 import { formatArticleResponse } from '@/features/editor/utils/format'
