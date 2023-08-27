@@ -6,9 +6,9 @@ import utc from 'dayjs/plugin/utc'
 import type { AppProps } from 'next/app'
 
 import Layout from '@/layout'
-import AppProvider from '@/providers'
 import { AppLoading } from '@/shared/components/AppLoading'
 import SEO from '@/shared/components/SEO'
+import AppProvider from '@/shared/providers'
 import '@/styles/globals.css'
 
 dayjs.extend(utc)
