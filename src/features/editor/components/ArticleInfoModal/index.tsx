@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import styled from '@emotion/styled'
 import {
   Autocomplete,
@@ -11,11 +13,17 @@ import {
   FormControlLabel,
   InputBase,
   Stack,
+  Switch,
   TextField
 } from '@mui/material'
 
+import { ErrorBoundary } from '@/shared/components/ErrorBoundary'
+import { ErrorHandledImage } from '@/shared/components/ErrorHandledImage'
+import { isVoid } from '@/shared/utils/check'
+
 import { useCategories } from '../../hooks/use-queries'
-import { PreviewImageInput } from './PreviewImageInput'
+import { UploadImageButton } from './UploadImageButton'
+import { UrlImageInput } from './UrlImageInput'
 
 interface ArticleInfoModalProps extends DialogProps {
   title: string
@@ -43,7 +51,11 @@ export const ArticleInfoModal = ({
   handleSubmit,
   handleClose
 }: ArticleInfoModalProps) => {
+  const [isUrlCoverImage, setIsUrlCoverImage] = useState(true)
   const { data: categories } = useCategories()
+
+  const handleCheckChange = () => setIsUrlCoverImage((prev) => !prev)
+
   return (
     <>
       <Dialog
@@ -87,10 +99,43 @@ export const ArticleInfoModal = ({
                 shrink: true
               }}
             />
-            <PreviewImageInput
-              imageUrl={coverImage}
-              onImageUrlChange={onCoverImageChange}
-            />
+            <Stack direction='row'>
+              {isUrlCoverImage ? (
+                <UrlImageInput
+                  imageUrl={coverImage}
+                  onImageUrlChange={onCoverImageChange}
+                  sx={{ flex: 1 }}
+                />
+              ) : (
+                <UploadImageButton
+                  imageUrl={coverImage}
+                  onImageUrlChange={onCoverImageChange}
+                  sx={{ flex: 1 }}
+                />
+              )}
+              <FormControlLabel
+                sx={{ mr: 0 }}
+                control={
+                  <Switch
+                    checked={isUrlCoverImage}
+                    onChange={handleCheckChange}
+                  />
+                }
+                label='外部連結'
+              />
+            </Stack>
+            {!isVoid(coverImage) && (
+              <ErrorBoundary fallback={ImageErrorFallback} key={coverImage}>
+                <PreviewImage
+                  src={coverImage}
+                  alt='文章編輯預覽圖'
+                  width='100'
+                  height='100'
+                  realWidth={'100px'}
+                  ratio={1}
+                />
+              </ErrorBoundary>
+            )}
             <FormControlLabel
               sx={{ width: 'fit-content' }}
               control={
@@ -128,3 +173,19 @@ export const ArticleInfoModal = ({
     </>
   )
 }
+
+const PreviewImage = styled(ErrorHandledImage)`
+  object-fit: contain;
+  border: 1px solid #ccc;
+`
+
+const ImageErrorFallback = ({ error }: { error: Error | null }) => (
+  <PreviewImage
+    src={'/image-not-found.jpg'}
+    alt='圖片顯示錯誤'
+    width='100'
+    height='100'
+    realWidth={'100px'}
+    ratio={1}
+  />
+)

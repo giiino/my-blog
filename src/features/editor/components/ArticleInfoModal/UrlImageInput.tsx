@@ -1,23 +1,19 @@
-import { useState } from 'react'
-
 import styled from '@emotion/styled'
-import { Autocomplete, Box, Stack, TextField } from '@mui/material'
+import { Autocomplete, Box, Stack, StackProps, TextField } from '@mui/material'
 import Image from 'next/image'
-
-import { ErrorBoundary } from '@/shared/components/ErrorBoundary'
-import { isVoid } from '@/shared/utils/check'
 
 import { useConverImages } from '../../hooks/use-queries'
 
-interface PreviewImageInputProps {
+interface UrlImageInputProps extends StackProps {
   imageUrl: string
   onImageUrlChange: (image: string) => void
 }
 
-export const PreviewImageInput = ({
+export const UrlImageInput = ({
   imageUrl,
-  onImageUrlChange
-}: PreviewImageInputProps) => {
+  onImageUrlChange,
+  ...restProps
+}: UrlImageInputProps) => {
   const { data: converImagesList } = useConverImages()
 
   const handleUrlChange = (_: unknown, value: string) => {
@@ -25,7 +21,7 @@ export const PreviewImageInput = ({
   }
 
   return (
-    <Stack>
+    <Stack {...restProps}>
       <Autocomplete
         disablePortal
         disableClearable
@@ -38,13 +34,13 @@ export const PreviewImageInput = ({
         renderOption={(props, option) => (
           <Box component='li' {...props}>
             <OptionImage width='50' height='50' src={option} alt='封面圖' />
-            {option}
+            <span style={{ wordBreak: 'break-word' }}>{option}</span>
           </Box>
         )}
         renderInput={(params) => (
           <TextField
             {...params}
-            label='分類'
+            label='封面圖(外部連結)'
             variant='standard'
             InputLabelProps={{
               shrink: true
@@ -52,16 +48,6 @@ export const PreviewImageInput = ({
           />
         )}
       />
-      {!isVoid(imageUrl) && (
-        <ErrorBoundary fallback={ImageErrorFallback}>
-          <PreviewImage
-            src={imageUrl}
-            alt='文章編輯預覽圖'
-            width='100'
-            height='100'
-          />
-        </ErrorBoundary>
-      )}
     </Stack>
   )
 }
@@ -72,13 +58,3 @@ const OptionImage = styled(Image)`
   background: #fff;
   margin-right: 20px;
 `
-
-const PreviewImage = styled(Image)`
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  border: 1px solid #ccc;
-  margin-top: 20px;
-`
-
-export const ImageErrorFallback = ({ error }: { error: Error | null }) => <></>

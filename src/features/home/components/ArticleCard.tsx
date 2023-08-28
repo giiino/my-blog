@@ -27,6 +27,7 @@ export const ArticleCard = ({
       alt='封面圖片'
       width={'400'}
       height={'400'}
+      realWidth='100%'
       ratio={0.6}
     />
     <h3 className='title'>{title}</h3>

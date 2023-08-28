@@ -44,3 +44,25 @@ export const useUpdateArticle = () => {
     }
   )
 }
+//
+export const useUploadImage = () => {
+  return useMutation(
+    (formData: FormData) =>
+      axiosInstance.post('https://api.imgbb.com/1/upload', formData, {
+        params: {
+          key: process.env.NEXT_PUBLIC_IMGBB_KEY
+        },
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }),
+    {
+      onSuccess: () => {
+        toast.success('上傳成功')
+      },
+      onError: (error) => {
+        toast.error(error as string)
+      }
+    }
+  )
+}

@@ -7,11 +7,13 @@ import { isVoid } from '../utils/check'
 
 interface ErrorHandledImageProps extends ImageProps {
   alt: string
+  realWidth: string
   ratio: number
 }
 
 export const ErrorHandledImage = ({
   alt,
+  realWidth,
   ratio,
   ...props
 }: ErrorHandledImageProps) => {
@@ -19,11 +21,11 @@ export const ErrorHandledImage = ({
   const imageUrl = props.src
 
   if (isError || isVoid(imageUrl)) {
-    return null
+    return <Image {...props} src='/image-not-found.jpg' alt={'圖片找不到'} />
   }
 
   return (
-    <ImageContainer ratio={ratio}>
+    <ImageContainer ratio={ratio} realWidth={realWidth}>
       <Image {...props} alt={alt} onError={() => setIsError(true)} />
     </ImageContainer>
   )
@@ -31,10 +33,11 @@ export const ErrorHandledImage = ({
 
 const ImageContainer = styled.div<{
   ratio: number
+  realWidth: string
 }>`
   position: relative;
-  width: 100%;
-  padding-bottom: ${({ ratio }) => `calc(100% * ${ratio})`};
+  width: ${({ realWidth }) => realWidth};
+  padding-bottom: ${({ ratio, realWidth }) => `calc(${realWidth} * ${ratio})`};
   img {
     position: absolute;
     width: 100%;
