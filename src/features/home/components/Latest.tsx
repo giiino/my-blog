@@ -11,8 +11,14 @@ interface LatestProps {
 
 export const Latest = ({ articles }: LatestProps) => {
   const cardStyle = css`
-    width: 30%;
+    width: 32%;
+
+    &:not(:nth-child(3n)) {
+      margin-right: 2%;
+    }
+
     @media screen and (max-width: 960px) {
+      margin-right: 0 !important;
       width: 48%;
     }
     @media screen and (max-width: 700px) {
@@ -22,7 +28,7 @@ export const Latest = ({ articles }: LatestProps) => {
 
   return (
     <Grid container alignItems='center' justifyContent='center'>
-      <CardWrapper direction={'row'} justifyContent={'space-between'}>
+      <CardWrapper direction={'row'}>
         {articles?.map(({ _id, ...article }) => {
           const id = String(_id)
           return (
@@ -40,6 +46,7 @@ const CardWrapper = styled(Stack)`
   width: 95%;
   padding: 35px 0;
   @media screen and (max-width: 960px) {
+    justify-content: space-between;
     width: 85%;
   }
   @media screen and (max-width: 700px) {

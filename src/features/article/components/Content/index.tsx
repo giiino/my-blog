@@ -16,7 +16,7 @@ import { Setting } from './Setting'
 
 interface ArticleContentProps extends GridProps {
   article: Omit<ArticleResponse, 'isReadme'>
-  relatedArticle: ArticleCardResponse[] | undefined
+  relatedArticle?: ArticleCardResponse[]
 }
 
 export const Content = ({
