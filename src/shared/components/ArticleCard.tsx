@@ -1,16 +1,17 @@
+import { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
-import { StackProps } from '@mui/material'
 import Link from 'next/link'
 
 import { ErrorHandledImage } from '@/shared/components/ErrorHandledImage'
 import { formatDate, markdownToTxt } from '@/shared/utils/format'
 
-interface ArticleCardProps extends StackProps {
+interface ArticleCardProps {
   id: string
   title: string
   content: string
   coverImage: string
   createTime: number
+  cssStyle: SerializedStyles
 }
 
 export const ArticleCard = ({
@@ -19,9 +20,9 @@ export const ArticleCard = ({
   content,
   createTime,
   coverImage,
-  ...restProps
+  cssStyle
 }: ArticleCardProps) => (
-  <LinkWrapper href={'/article/' + id}>
+  <LinkWrapper href={'/article/' + id} css={cssStyle}>
     <CoverImage
       src={coverImage}
       alt='封面圖片'
@@ -39,7 +40,6 @@ export const ArticleCard = ({
 const LinkWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
-  width: 30%;
   margin-bottom: 30px;
   > * {
     margin-bottom: 10px;
@@ -71,13 +71,6 @@ const LinkWrapper = styled(Link)`
     .content {
       color: var(--primary-blue-4);
     }
-  }
-
-  @media screen and (max-width: 960px) {
-    width: 48%;
-  }
-  @media screen and (max-width: 700px) {
-    width: 100%;
   }
 `
 

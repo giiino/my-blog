@@ -11,7 +11,7 @@ export const useCategories = () => {
 
 export const useConverImages = () => {
   return useQuery<string[]>(['coverImages'], async () => {
-    const response = await axiosInstance.get('/api/article/get/coverImages')
+    const response = await axiosInstance.get('/api/article/get/cover-images')
     return response.data
   })
 }

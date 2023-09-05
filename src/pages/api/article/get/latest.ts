@@ -3,7 +3,7 @@ import type { NextApiRequest } from 'next'
 import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 import { ApiResponse } from '@/shared/types/api'
-import { ArticleLatestResponse } from '@/shared/types/api/article'
+import { ArticleCardResponse } from '@/shared/types/api/article'
 import { isVoid } from '@/shared/utils/check'
 import { pick } from '@/shared/utils/format'
 
@@ -27,12 +27,12 @@ export async function getLatestArticle() {
 
   return resultArticle.map((item: Article) =>
     pick(item, ['_id', 'title', 'content', 'coverImage', 'createTime'])
-  ) as ArticleLatestResponse[]
+  ) as ArticleCardResponse[]
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: ApiResponse<ArticleLatestResponse[]>
+  res: ApiResponse<ArticleCardResponse[]>
 ) {
   if (req.method !== 'GET') {
     res.status(405).end()

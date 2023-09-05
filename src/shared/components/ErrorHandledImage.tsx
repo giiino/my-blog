@@ -21,7 +21,11 @@ export const ErrorHandledImage = ({
   const imageUrl = props.src
 
   if (isError || isVoid(imageUrl)) {
-    return <Image {...props} src='/image-not-found.jpg' alt={'圖片找不到'} />
+    return (
+      <ImageContainer ratio={ratio} realWidth={realWidth}>
+        <Image {...props} src='/image-not-found.jpg' alt={'圖片找不到'} />
+      </ImageContainer>
+    )
   }
 
   return (

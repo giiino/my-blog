@@ -1,21 +1,29 @@
 import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
-import dayjs from 'dayjs'
 import Image from 'next/image'
 
 import { AdminOnly } from '@/shared/components/AdminOnly'
 import { Markdown } from '@/shared/components/Markdown'
-import { ArticleResponse } from '@/shared/types/api/article'
+import {
+  ArticleCardResponse,
+  ArticleResponse
+} from '@/shared/types/api/article'
 import { isVoid } from '@/shared/utils/check'
 import { formatDate } from '@/shared/utils/format'
 
+import { RelatedArticleCards } from './RelatedArticleCards'
 import { Setting } from './Setting'
 
 interface ArticleContentProps extends GridProps {
   article: Omit<ArticleResponse, 'isReadme'>
+  relatedArticle: ArticleCardResponse[] | undefined
 }
 
-export const Content = ({ article, ...restProps }: ArticleContentProps) => {
+export const Content = ({
+  article,
+  relatedArticle,
+  ...restProps
+}: ArticleContentProps) => {
   const { _id, title, content, updateTime, createTime, coverImage } = article
   const formattedCreateTime = formatDate(createTime)
   const formattedUpdateTime = formatDate(updateTime)
@@ -36,7 +44,8 @@ export const Content = ({ article, ...restProps }: ArticleContentProps) => {
       {!isVoid(coverImage) && (
         <CoverImage src={coverImage} alt='封面圖' width='1000' height='750' />
       )}
-      <Markdown>{content}</Markdown>
+      <Markdown style={{ marginBottom: '50px' }}>{content}</Markdown>
+      <RelatedArticleCards articleCardsData={relatedArticle} />
     </ContentWrapper>
   )
 }

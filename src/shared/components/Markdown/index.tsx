@@ -5,9 +5,12 @@ import remarkGfm from 'remark-gfm'
 import { StyleWrapper } from './StyleWrapper'
 import { components } from './components'
 
-export const Markdown = ({ children }: { children: string }) => {
+interface MarkdownProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: string
+}
+export const Markdown = ({ children, ...restProps }: MarkdownProps) => {
   return (
-    <StyleWrapper>
+    <StyleWrapper {...restProps}>
       <ReactMarkdown
         className='reacr-mark-down'
         remarkPlugins={[remarkGfm]}

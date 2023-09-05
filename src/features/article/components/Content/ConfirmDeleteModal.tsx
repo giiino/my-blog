@@ -20,10 +20,10 @@ export const ConfirmDeleteModal = ({
   deleteId,
   handleClose
 }: ConfirmDeleteModalProps) => {
-  const { mutateAsync: deleteIt, isLoading } = useDeleteArticle()
+  const { mutateAsync: remove, isLoading } = useDeleteArticle()
 
   const handleConfirm = async () => {
-    await deleteIt(String(deleteId))
+    await remove(String(deleteId))
     handleClose()
   }
 

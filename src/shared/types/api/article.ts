@@ -11,7 +11,7 @@ export type ArticleEditResponse = Omit<
   'updateTime' | 'createTime' | 'views' | 'isDelete'
 >
 
-export type ArticleLatestResponse = Pick<
+export type ArticleCardResponse = Pick<
   Article,
   '_id' | 'title' | 'content' | 'coverImage' | 'createTime'
 >

@@ -1,9 +1,7 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
-import { Banner } from '@/features/home/components/Banner'
-import { Latest } from '@/features/home/components/Latest'
-import { Title } from '@/features/home/components/Title'
-import { ArticleLatestResponse } from '@/shared/types/api/article'
+import { Banner, Latest, SectionTitle } from '@/features/home/components'
+import { ArticleCardResponse } from '@/shared/types/api/article'
 import { serializeData } from '@/shared/utils/format'
 
 import { getLatestArticle } from './api/article/get/latest'
@@ -14,7 +12,7 @@ const Home = ({
   return (
     <>
       <Banner />
-      <Title>最新文章</Title>
+      <SectionTitle>最新文章</SectionTitle>
       <Latest articles={latestArticles} />
     </>
   )
@@ -23,7 +21,7 @@ const Home = ({
 export default Home
 
 export const getStaticProps: GetStaticProps<{
-  latestArticles?: ArticleLatestResponse[]
+  latestArticles?: ArticleCardResponse[]
 }> = async () => {
   try {
     const data = await getLatestArticle()
