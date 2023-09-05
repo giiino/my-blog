@@ -18,7 +18,7 @@ import {
 } from '@mui/material'
 
 import { ErrorBoundary } from '@/shared/components/ErrorBoundary'
-import { ErrorHandledImage } from '@/shared/components/ErrorHandledImage'
+import { HandledImage } from '@/shared/components/HandledImage'
 import { isVoid } from '@/shared/utils/check'
 
 import { useCategories } from '../../hooks/use-queries'
@@ -174,7 +174,7 @@ export const ArticleInfoModal = ({
   )
 }
 
-const PreviewImage = styled(ErrorHandledImage)`
+const PreviewImage = styled(HandledImage)`
   object-fit: contain;
   border: 1px solid #ccc;
 `

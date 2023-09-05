@@ -2,7 +2,7 @@ import { SerializedStyles } from '@emotion/react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 
-import { ErrorHandledImage } from '@/shared/components/ErrorHandledImage'
+import { HandledImage } from '@/shared/components/HandledImage'
 import { formatDate, markdownToTxt } from '@/shared/utils/format'
 
 interface ArticleCardProps {
@@ -74,4 +74,4 @@ const LinkWrapper = styled(Link)`
   }
 `
 
-const CoverImage = styled(ErrorHandledImage)``
+const CoverImage = styled(HandledImage)``

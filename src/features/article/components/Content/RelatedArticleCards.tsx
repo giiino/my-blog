@@ -5,6 +5,7 @@ import { Stack } from '@mui/material'
 import { ArticleCard } from '@/shared/components/ArticleCard'
 import { Title } from '@/shared/components/Title'
 import { ArticleCardResponse } from '@/shared/types/api/article'
+import { isVoid } from '@/shared/utils/check'
 
 interface RelatedArticleCardsProps {
   articleCardsData: ArticleCardResponse[] | undefined
@@ -21,11 +22,15 @@ export const RelatedArticleCards = ({
     }
   `
 
+  if (isVoid(articleCardsData)) {
+    return null
+  }
+
   return (
     <Container>
       <Title style={{ marginBottom: '35px' }}>相關文章</Title>
       <CardWrapper direction={'row'} justifyContent={'space-between'}>
-        {articleCardsData?.map(({ _id, ...article }) => {
+        {articleCardsData!.map(({ _id, ...article }) => {
           const id = String(_id)
           return (
             <ArticleCard

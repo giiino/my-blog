@@ -5,18 +5,18 @@ import Image, { ImageProps } from 'next/image'
 
 import { isVoid } from '../utils/check'
 
-interface ErrorHandledImageProps extends ImageProps {
+interface HandledImageProps extends ImageProps {
   alt: string
   realWidth: string
   ratio: number
 }
 
-export const ErrorHandledImage = ({
+export const HandledImage = ({
   alt,
   realWidth,
   ratio,
   ...props
-}: ErrorHandledImageProps) => {
+}: HandledImageProps) => {
   const [isError, setIsError] = useState(false)
   const imageUrl = props.src
 

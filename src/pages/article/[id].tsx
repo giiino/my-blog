@@ -6,7 +6,6 @@ import {
   Content
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
-import { useRelatedArticle } from '@/features/article/hooks/use-queries'
 import { getArticleById } from '@/pages/api/article/get'
 import SEO from '@/shared/components/SEO'
 import {
