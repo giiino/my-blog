@@ -4,6 +4,7 @@ import { Grid, Stack } from '@mui/material'
 
 import { ArticleCard } from '@/shared/components/ArticleCard'
 import { ArticleCardResponse } from '@/shared/types/api/article'
+import { isVoid } from '@/shared/utils/check'
 
 interface LatestProps {
   articles: ArticleCardResponse[] | undefined
@@ -26,10 +27,14 @@ export const Latest = ({ articles }: LatestProps) => {
     }
   `
 
+  if (isVoid(articles)) {
+    return null
+  }
+
   return (
     <Grid container alignItems='center' justifyContent='center'>
       <CardWrapper direction={'row'}>
-        {articles?.map(({ _id, ...article }) => {
+        {articles!.map(({ _id, ...article }) => {
           const id = String(_id)
           return (
             <ArticleCard key={id} id={id} cssStyle={cardStyle} {...article} />

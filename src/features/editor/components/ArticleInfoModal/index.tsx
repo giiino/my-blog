@@ -181,7 +181,7 @@ const PreviewImage = styled(HandledImage)`
 
 const ImageErrorFallback = ({ error }: { error: Error | null }) => (
   <PreviewImage
-    src={'/image-not-found.jpg'}
+    src={'/image-not-found.png'}
     alt='圖片顯示錯誤'
     width='100'
     height='100'
