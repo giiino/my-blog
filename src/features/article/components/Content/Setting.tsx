@@ -1,5 +1,6 @@
 import { SyntheticEvent, useEffect, useRef, useState } from 'react'
 
+import styled from '@emotion/styled'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { IconButton, IconButtonProps } from '@mui/material'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
@@ -84,7 +85,7 @@ export function Setting({ editId, ...props }: SettingProps) {
         onClick={handleToggle}
         {...props}
       >
-        <MoreVertIcon />
+        <MoreIcon />
       </IconButton>
       <Popper
         open={open}
@@ -121,3 +122,7 @@ export function Setting({ editId, ...props }: SettingProps) {
     </>
   )
 }
+
+const MoreIcon = styled(MoreVertIcon)`
+  color: ${({ theme }) => theme.color};
+`

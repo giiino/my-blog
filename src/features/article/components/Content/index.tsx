@@ -53,7 +53,6 @@ export const Content = ({
 const ContentWrapper = styled(Grid)`
   margin-top: 50px;
   padding: 0 18px;
-
   @media screen and (max-width: 1100px) {
     padding-right: 0;
   }

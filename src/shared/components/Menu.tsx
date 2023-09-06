@@ -93,22 +93,23 @@ const GroupListItem = ({
 const ListContainer = styled.div`
   .MuiList-root {
     padding: 0;
+    background-color: ${({ theme }) => theme.bgColor};
   }
 
   .MuiButtonBase-root {
-    color: var(--primary-gray-300);
+    color: ${({ theme }) => theme.menu.color};
     &:hover {
-      background-color: transparent;
-      color: var(--primary-gray-400);
+      background-color: ${({ theme }) => theme.bgColor};
+      color: ${({ theme }) => theme.menu.hoverColor};
     }
   }
   .Mui-selected {
-    background-color: transparent !important;
-    color: var(--primary-blue-4);
+    background-color: ${({ theme }) => theme.bgColor} !important;
+    color: ${({ theme }) => theme.menu.selectedColor} !important;
     border-radius: 5px;
-    &:hover {
+    /* &:hover {
       color: var(--primary-blue-4);
-    }
+    } */
     .MuiTypography-root {
       font-weight: bold;
     }

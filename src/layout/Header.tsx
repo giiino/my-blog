@@ -9,12 +9,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { AdminOnly } from '@/shared/components/AdminOnly'
+import { LOCALSOTRAGE_THEME_KEY } from '@/shared/constants/ui'
+import useLocalStorage from '@/shared/hooks/useLocalStorage'
+import type { ThemeMode } from '@/shared/types/ui'
 
 interface HeaderProps {
   setIsSidebarOpen: (isOpen: boolean) => void
 }
 
 export default function Header({ setIsSidebarOpen }: HeaderProps) {
+  const [mode, setMode] = useLocalStorage<ThemeMode>(
+    LOCALSOTRAGE_THEME_KEY,
+    'light'
+  )
+
+  const toggleMode = () => setMode(mode === 'light' ? 'dark' : 'light')
+
   return (
     <Container position='sticky' color='inherit'>
       <Toolbar>
@@ -36,7 +46,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
         >
           <Link href={'/'} style={{ marginRight: '20px' }}>
             <Image
-              src={'/logo-light-mode.svg'}
+              src={'/logo-dark-mode.svg'}
               alt='logo'
               width={100}
               height={40}
@@ -70,13 +80,15 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
             </RouteButton>
           </AdminOnly>
         </Typography>
-        {/* <DarkModeIcon /> */}
+        <DarkModeIcon sx={{ cursor: 'pointer' }} onClick={toggleMode} />
       </Toolbar>
     </Container>
   )
 }
 
 const Container = styled(AppBar)`
+  background-color: ${({ theme }) => theme.bgColor};
+  color: ${({ theme }) => theme.color};
   user-select: none;
   z-index: 5;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px 0px,
@@ -91,6 +103,7 @@ const Container = styled(AppBar)`
 
   .route-btn {
     display: flex;
+    color: ${({ theme }) => theme.color};
     @media screen and (max-width: 960px) {
       display: none;
     }
@@ -99,8 +112,7 @@ const Container = styled(AppBar)`
 
 const RouteButton = styled(Link)`
   font-size: 16px;
-  color: #000;
   &:hover {
-    color: var(--primary-blue-4);
+    color: ${({ theme }) => theme.header.tabHoverColor};
   }
 `

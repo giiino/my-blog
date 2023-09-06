@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react'
 
+import styled from '@emotion/styled'
 import { Stack } from '@mui/material'
 
 import Footer from './Footer'
@@ -13,10 +14,16 @@ const Layout = ({ children }: { children: ReactNode }) => {
     <Stack sx={{ minHeight: 'inherit' }}>
       <Header setIsSidebarOpen={setIsSidebarOpen} />
       <Siderbar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-      <main style={{ flex: 1 }}>{children}</main>
+      <PageWrapper>{children}</PageWrapper>
       <Footer />
     </Stack>
   )
 }
+
+const PageWrapper = styled.main`
+  flex: 1;
+  color: ${({ theme }) => theme.color};
+  background-color: ${({ theme }) => theme.bgColor};
+`
 
 export default Layout

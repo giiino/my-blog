@@ -14,7 +14,7 @@ export const Latest = ({ articles }: LatestProps) => {
   const cardStyle = css`
     width: 32%;
 
-    &:not(:nth-child(3n)) {
+    &:not(:nth-of-type(3n)) {
       margin-right: 2%;
     }
 
@@ -32,7 +32,7 @@ export const Latest = ({ articles }: LatestProps) => {
   }
 
   return (
-    <Grid container alignItems='center' justifyContent='center'>
+    <Grid container alignItems='center' justifyContent='center' color='primary'>
       <CardWrapper direction={'row'}>
         {articles!.map(({ _id, ...article }) => {
           const id = String(_id)

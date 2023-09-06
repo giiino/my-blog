@@ -46,11 +46,12 @@ export const StyleWrapper = styled.div`
       width: 100%;
       margin: 25px auto;
       padding: 1.2em 30px 1.2em 30px;
-      border-left: 6px solid #f7da85;
+      border-left: 6px solid #fec930;
       line-height: 1.6;
       position: relative;
-      background: #fffbee;
+      background: #fff0be;
       border-radius: 8px;
+      color: #000;
     }
     a {
       color: #0050b3;

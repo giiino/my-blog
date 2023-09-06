@@ -1,6 +1,6 @@
 import { ThemeOptions } from '@mui/material'
 
-export const themeConf: ThemeOptions = {
+export const muiThemeConf: ThemeOptions = {
   components: {
     MuiListItemButton: {
       defaultProps: {
@@ -17,7 +17,4 @@ export const themeConf: ThemeOptions = {
       xl: 1536
     }
   }
-  // palette: {
-  //   mode: 'dark'
-  // }
 }

@@ -50,7 +50,7 @@ const LinkWrapper = styled(Link)`
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--primary-dark-blue);
+    color: ${({ theme }) => theme.card.titleColor};
   }
   .content {
     display: -webkit-box;
@@ -60,16 +60,16 @@ const LinkWrapper = styled(Link)`
     text-overflow: ellipsis;
     font-size: 14px;
     line-height: 1.7;
-    color: var(--primary-gray-200);
+    color: ${({ theme }) => theme.card.summaryColor};
   }
   .time {
     font-size: 14px;
-    color: var(--primary-gray-400);
+    color: ${({ theme }) => theme.card.timeColor};
     margin-top: auto;
   }
   &:hover {
     .content {
-      color: var(--primary-blue-4);
+      color: ${({ theme }) => theme.card.summaryHoverColor};
     }
   }
 `
