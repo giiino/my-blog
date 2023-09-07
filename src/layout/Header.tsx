@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
+import LightModeIcon from '@mui/icons-material/LightMode'
 import MenuIcon from '@mui/icons-material/Menu'
 import AppBar from '@mui/material/AppBar'
 import IconButton from '@mui/material/IconButton'
@@ -9,21 +10,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { AdminOnly } from '@/shared/components/AdminOnly'
-import { LOCALSOTRAGE_THEME_KEY } from '@/shared/constants/ui'
-import useLocalStorage from '@/shared/hooks/useLocalStorage'
-import type { ThemeMode } from '@/shared/types/ui'
+import { useGlobalState } from '@/shared/providers/global-state.provider'
 
 interface HeaderProps {
   setIsSidebarOpen: (isOpen: boolean) => void
 }
 
 export default function Header({ setIsSidebarOpen }: HeaderProps) {
-  const [mode, setMode] = useLocalStorage<ThemeMode>(
-    LOCALSOTRAGE_THEME_KEY,
-    'light'
-  )
+  const { themeMode, setThemeMode } = useGlobalState()
 
-  const toggleMode = () => setMode(mode === 'light' ? 'dark' : 'light')
+  const ThemeModeIcon = themeMode === 'light' ? DarkModeIcon : LightModeIcon
+
+  const toggleMode = () => {
+    const newThemeMode = themeMode === 'light' ? 'dark' : 'light'
+    localStorage.setItem('theme-mode', newThemeMode)
+    setThemeMode(newThemeMode)
+  }
 
   return (
     <Container position='sticky' color='inherit'>
@@ -46,7 +48,11 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
         >
           <Link href={'/'} style={{ marginRight: '20px' }}>
             <Image
-              src={'/logo-dark-mode.svg'}
+              src={
+                themeMode === 'dark'
+                  ? '/logo-dark-mode.svg'
+                  : '/logo-light-mode.svg'
+              }
               alt='logo'
               width={100}
               height={40}
@@ -80,7 +86,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
             </RouteButton>
           </AdminOnly>
         </Typography>
-        <DarkModeIcon sx={{ cursor: 'pointer' }} onClick={toggleMode} />
+        <ThemeModeIcon sx={{ cursor: 'pointer' }} onClick={toggleMode} />
       </Toolbar>
     </Container>
   )

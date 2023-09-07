@@ -45,7 +45,7 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
     }
 
   return (
-    <Drawer
+    <StyledDrawer
       anchor='left'
       open={isOpen}
       onClose={toggleDrawer(undefined, false)}
@@ -62,7 +62,7 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
             <RouteButton href='/edit'>新增文章</RouteButton>
           </AdminOnly>
         </RouteWrapper>
-        <Divider sx={{ margin: '20px 16px' }} />
+        <Divider className='divider' sx={{ margin: '20px 16px' }} />
         <MenuWrapper>
           {isLoading ? (
             <Stack
@@ -96,14 +96,24 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
           )}
         </MenuWrapper>
       </Container>
-    </Drawer>
+    </StyledDrawer>
   )
 }
 
 export default Siderbar
 
+const StyledDrawer = styled(Drawer)`
+  .MuiPaper-root {
+    background: ${({ theme }) => theme.bgColor};
+  }
+  .divider {
+    border-color: ${({ theme }) => theme.sidebar.dividerColor};
+  }
+`
+
 const Container = styled(Stack)`
   padding: 50px 25px;
+  color: ${({ theme }) => theme.color};
 `
 
 const RouteWrapper = styled(Stack)`
@@ -114,11 +124,11 @@ const RouteWrapper = styled(Stack)`
 
 const RouteButton = styled(Link)`
   font-size: 16px;
-  color: #000;
+  color: ${({ theme }) => theme.color};
   line-height: 16px;
   text-decoration: none;
   &:hover {
-    color: var(--primary-blue-4);
+    color: ${({ theme }) => theme.header.tabHoverColor};
   }
 `
 

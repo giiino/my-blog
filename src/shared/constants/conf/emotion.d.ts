@@ -26,5 +26,8 @@ declare module '@emotion/react' {
       summaryHoverColor: string
       timeColor: string
     }
+    sidebar: {
+      dividerColor: string
+    }
   }
 }

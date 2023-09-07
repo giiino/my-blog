@@ -28,6 +28,9 @@ export const styledThemeConf = (mode: ThemeMode): Theme => {
         summaryColor: 'var(--primary-gray-200)',
         summaryHoverColor: 'var(--primary-blue-4)',
         timeColor: 'var(--primary-gray-400)'
+      },
+      sidebar: {
+        dividerColor: 'rgba(0, 0, 0, 0.12)'
       }
     }
   }
@@ -55,6 +58,9 @@ export const styledThemeConf = (mode: ThemeMode): Theme => {
       summaryColor: 'var(--primary-gray-100)',
       summaryHoverColor: 'var(--primary-blue-2)',
       timeColor: 'var(--primary-gray-200)'
+    },
+    sidebar: {
+      dividerColor: 'var(--primary-gray-400)'
     }
   }
 }

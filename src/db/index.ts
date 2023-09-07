@@ -6,7 +6,7 @@ import { User } from './entity/User'
 
 const AppDataSource = new DataSource({
   type: 'mongodb',
-  url: '5555555555555' + process.env.MONGODB_URL,
+  url: process.env.MONGODB_URL,
   useNewUrlParser: true,
   synchronize: true,
   logging: true,
