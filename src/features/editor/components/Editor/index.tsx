@@ -38,7 +38,9 @@ export function ContentEditor({
   return (
     <StyledMdEditor
       value={value}
-      renderHTML={(text) => <Markdown>{text}</Markdown>}
+      renderHTML={(text) => (
+        <Markdown style={{ color: '#000' }}>{text}</Markdown>
+      )}
       onChange={onChange}
       config={{ onArticleInfoModalOpen }}
       htmlClass='editor'

@@ -54,7 +54,7 @@ export const StyleWrapper = styled.div`
       color: #000;
     }
     a {
-      color: #0050b3;
+      color: var(--primary-light-blue);
       margin: 0 5px;
       word-break: break-all;
       &:hover {
@@ -67,6 +67,7 @@ export const StyleWrapper = styled.div`
       padding: 3px 5px;
       margin: 0 3px;
       border-radius: 5px;
+      color: #000;
     }
   }
 `
