@@ -10,7 +10,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { AdminOnly } from '@/shared/components/AdminOnly'
-import { useGlobalState } from '@/shared/providers/global-state.provider'
+import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
 
 interface HeaderProps {
   setIsSidebarOpen: (isOpen: boolean) => void

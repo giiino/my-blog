@@ -11,7 +11,7 @@ import { muiThemeConf } from '@/shared/constants/conf/muiTheme'
 import { reactQueryConf } from '@/shared/constants/conf/react-query'
 
 import EmotionThemeProvider from './EmotionThemeProvider'
-import GlobalStateProvider from './global-state.provider'
+import GlobalStateProvider from './GlobalStateProvider'
 
 const AppProvider = ({ children }: { children: ReactNode }) => {
   const muiTheme = createTheme(muiThemeConf)

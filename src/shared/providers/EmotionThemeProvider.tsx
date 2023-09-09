@@ -4,7 +4,7 @@ import { ThemeProvider } from '@emotion/react'
 
 import { styledThemeConf } from '../constants/conf/emotionTheme'
 import { ThemeMode } from '../types/ui'
-import { useGlobalState } from './global-state.provider'
+import { useGlobalState } from './GlobalStateProvider'
 
 const EmotionThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { themeMode, setThemeMode } = useGlobalState()
