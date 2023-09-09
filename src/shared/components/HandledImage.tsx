@@ -23,7 +23,7 @@ export const HandledImage = ({
   if (isError || isVoid(imageUrl)) {
     return (
       <ImageContainer ratio={ratio} realWidth={realWidth}>
-        <Image {...props} src='/image-not-found.png' alt={'圖片找不到'} />
+        <Image {...props} src='/img-not-found.png' alt={'圖片找不到'} />
       </ImageContainer>
     )
   }

@@ -10,6 +10,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { AdminOnly } from '@/shared/components/AdminOnly'
+import { RouteButton } from '@/shared/components/buttons/RouteButton'
 import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
 
 interface HeaderProps {
@@ -113,12 +114,5 @@ const Container = styled(AppBar)`
     @media screen and (max-width: 960px) {
       display: none;
     }
-  }
-`
-
-const RouteButton = styled(Link)`
-  font-size: 16px;
-  &:hover {
-    color: ${({ theme }) => theme.header.tabHoverColor};
   }
 `

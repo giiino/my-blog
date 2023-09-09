@@ -42,7 +42,7 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
       bgColor: '#121212',
       color: '#fff',
       header: {
-        tabHoverColor: 'var(--primary-blue-2)'
+        tabHoverColor: 'var(--primary-light-blue)'
       },
       section: {
         titleColor: 'var(--primary-gray-100)'

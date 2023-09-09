@@ -14,6 +14,7 @@ import {
 
 import { AdminOnly } from '@/shared/components/AdminOnly'
 import { Menu } from '@/shared/components/Menu'
+import { RouteButton } from '@/shared/components/buttons/RouteButton'
 import { useMenuCategory } from '@/shared/hooks/use-queries'
 import { useRouteChange } from '@/shared/hooks/useRouteChange'
 import { scrollBarStyle } from '@/styles/globals'
@@ -120,16 +121,6 @@ const RouteWrapper = styled(Stack)`
   align-items: center;
   height: 5vh;
   padding: 0 16px;
-`
-
-const RouteButton = styled(Link)`
-  font-size: 16px;
-  color: ${({ theme }) => theme.color};
-  line-height: 16px;
-  text-decoration: none;
-  &:hover {
-    color: ${({ theme }) => theme.header.tabHoverColor};
-  }
 `
 
 const MenuWrapper = styled(Box)`
