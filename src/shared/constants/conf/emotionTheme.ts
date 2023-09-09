@@ -31,6 +31,9 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
       },
       sidebar: {
         dividerColor: 'rgba(0, 0, 0, 0.12)'
+      },
+      markdown: {
+        highlightBgColor: 'var(--primary-blue-1)'
       }
     }
   }
@@ -62,6 +65,9 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
       },
       sidebar: {
         dividerColor: 'var(--primary-gray-400)'
+      },
+      markdown: {
+        highlightBgColor: 'var(--primary-gray-400)'
       }
     }
   }

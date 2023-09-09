@@ -29,5 +29,8 @@ declare module '@emotion/react' {
     sidebar: {
       dividerColor: string
     }
+    markdown: {
+      highlightBgColor: string
+    }
   }
 }

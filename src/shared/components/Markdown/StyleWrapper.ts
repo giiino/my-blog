@@ -63,11 +63,11 @@ export const StyleWrapper = styled.div`
     }
     em {
       font-style: normal;
-      background-color: var(--primary-blue-1);
+      background-color: ${({ theme }) => theme.markdown.highlightBgColor};
+      color: ${({ theme }) => theme.color};
       padding: 3px 5px;
       margin: 0 3px;
       border-radius: 5px;
-      color: #000;
     }
   }
 `

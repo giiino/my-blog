@@ -104,12 +104,9 @@ const ListContainer = styled.div`
     }
   }
   .Mui-selected {
-    background-color: ${({ theme }) => theme.bgColor} !important;
+    background-color: transparent !important;
     color: ${({ theme }) => theme.menu.selectedColor} !important;
     border-radius: 5px;
-    /* &:hover {
-      color: var(--primary-blue-4);
-    } */
     .MuiTypography-root {
       font-weight: bold;
     }
