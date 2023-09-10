@@ -54,7 +54,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
                   ? '/logo-dark-mode.svg'
                   : '/logo-light-mode.svg'
               }
-              alt='logo'
+              alt='gn-dev-logo'
               width={100}
               height={40}
               style={{ display: 'block' }}

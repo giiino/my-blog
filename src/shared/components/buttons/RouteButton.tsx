@@ -7,6 +7,7 @@ export const RouteButton = styled(Link)`
   line-height: 16px;
   text-decoration: none;
   transition: 0.15s;
+  user-select: none;
   &:hover {
     color: ${({ theme }) => theme.header.tabHoverColor};
   }
