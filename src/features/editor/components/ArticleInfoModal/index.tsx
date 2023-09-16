@@ -11,7 +11,6 @@ import {
   DialogProps,
   DialogTitle,
   FormControlLabel,
-  InputBase,
   Stack,
   Switch,
   TextField

@@ -27,7 +27,7 @@ const Editor = () => {
 
   const onArticleInfoModalOpen = () => setIsArticleInfoModalOpen(true)
   const handleClose = () => {
-    reset()
+    reset({ exclude: ['content'] })
     setIsArticleInfoModalOpen(false)
   }
 
