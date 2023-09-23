@@ -8,11 +8,11 @@ import { ContentEditor } from '@/features/editor/components/Editor'
 import { useUpdateArticle } from '@/features/editor/hooks/use-mutations'
 import { useEdit } from '@/features/editor/hooks/useEdit'
 import { formatArticleResponse } from '@/features/editor/utils/format'
+import { ArticleEditResponse } from '@/shared/types/api/article'
 import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, serializeData } from '@/shared/utils/format'
 import { isAdmin } from '@/shared/utils/jwt'
 
-import { ArticleEditResponse } from '../../shared/types/api/article'
 import { getArticleById } from '../api/article/get'
 
 const Editor = ({

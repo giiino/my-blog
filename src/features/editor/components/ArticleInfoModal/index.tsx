@@ -53,7 +53,8 @@ export const ArticleInfoModal = ({
   const [isUrlCoverImage, setIsUrlCoverImage] = useState(true)
   const { data: categories } = useCategories()
 
-  const handleCheckChange = () => setIsUrlCoverImage((prev) => !prev)
+  const handleCoverImgCheckChange = () =>
+    setIsUrlCoverImage((checked) => !checked)
 
   return (
     <>
@@ -117,7 +118,7 @@ export const ArticleInfoModal = ({
                 control={
                   <Switch
                     checked={isUrlCoverImage}
-                    onChange={handleCheckChange}
+                    onChange={handleCoverImgCheckChange}
                   />
                 }
                 label='外部連結'

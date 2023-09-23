@@ -55,7 +55,6 @@ export const StyleWrapper = styled.div`
     }
     a {
       color: var(--primary-light-blue);
-      margin: 0 5px;
       word-break: break-all;
       &:hover {
         text-decoration: underline;
