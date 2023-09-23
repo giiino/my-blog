@@ -11,6 +11,7 @@ import {
 import { setCookie } from '@/shared/utils/cookie'
 import { serializeData } from '@/shared/utils/format'
 import { generateJWT } from '@/shared/utils/jwt'
+import { formatValidatorError, validate } from '@/shared/utils/validator'
 
 const clientID = GITHUB_CLIENT_ID
 const clientSecret = process.env.GITHUB_CLIENT_SECRET
@@ -80,7 +81,12 @@ export default async function handler(req: NextApiRequest, res: any) {
       user.identityType = 'GitHub'
       user.createAt = Date.now()
 
-      await articleRepo.save(user)
+      const errors = await validate(user)
+      if (errors.length > 0) {
+        return res.status(400).json({ message: formatValidatorError(errors) })
+      } else {
+        await articleRepo.save(user)
+      }
 
       const token = generateJWT(serializeData(userInfo))
       setCookie({ key: 'token', value: token, req, res })

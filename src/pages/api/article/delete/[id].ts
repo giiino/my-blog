@@ -5,6 +5,7 @@ import { getDataSource } from '@/db'
 import { Article } from '@/db/entity/Article'
 import { ApiResponse } from '@/shared/types/api'
 import { isAdmin } from '@/shared/utils/jwt'
+import { formatValidatorError, validate } from '@/shared/utils/validator'
 
 export default async function handler(
   req: NextApiRequest,
@@ -37,12 +38,17 @@ export default async function handler(
 
     targetArticle.isDelete = 1
 
-    const resArticle = await articleRepo.save(targetArticle)
+    const errors = await validate(targetArticle)
+    if (errors.length > 0) {
+      return res.status(400).json({ message: formatValidatorError(errors) })
+    } else {
+      const resArticle = await articleRepo.save(targetArticle)
 
-    if (resArticle) {
-      return res.status(200).json({ message: '變更成功' })
+      if (resArticle) {
+        return res.status(200).json({ message: '變更成功' })
+      }
+      return res.status(404).json({ message: '刪除失敗' })
     }
-    return res.status(404).json({ message: '刪除失敗' })
   } catch (error) {
     console.error('資料庫出錯' + error)
     return res.status(500).json({ message: '資料庫發生錯誤' })
