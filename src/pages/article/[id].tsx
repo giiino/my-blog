@@ -14,7 +14,7 @@ import {
   MenuCategoriesResponse
 } from '@/shared/types/api/article'
 import { isValidObjectId } from '@/shared/utils/check'
-import { exclude, markdownToTxt, serializeData } from '@/shared/utils/format'
+import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 
 import { getMenuCategories } from '../api/article/get/menu-categories'
 import { getRelatedArticles } from '../api/article/get/related'
@@ -78,9 +78,9 @@ export const getServerSideProps: GetServerSideProps<{
 
     return {
       props: {
-        articleData: serializeData(exclude(articleData, ['isReadme'])),
-        menuCategories: serializeData(menuCategories),
-        relatedArticle: serializeData(relatedArticle)
+        articleData: serialize(exclude(articleData, ['isReadme'])),
+        menuCategories: serialize(menuCategories),
+        relatedArticle: serialize(relatedArticle)
       }
     }
   } catch (error) {

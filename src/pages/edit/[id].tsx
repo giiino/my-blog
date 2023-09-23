@@ -10,7 +10,7 @@ import { useEdit } from '@/features/editor/hooks/useEdit'
 import { formatArticleResponse } from '@/features/editor/utils/format'
 import { ArticleEditResponse } from '@/shared/types/api/article'
 import { isValidObjectId } from '@/shared/utils/check'
-import { exclude, serializeData } from '@/shared/utils/format'
+import { exclude, serialize } from '@/shared/utils/format'
 import { isAdmin } from '@/shared/utils/jwt'
 
 import { getArticleById } from '../api/article/get'
@@ -89,7 +89,7 @@ export const getServerSideProps: GetServerSideProps<{
       }
     }
 
-    const articleData = serializeData(exclude(result, ['updateTime']))
+    const articleData = serialize(exclude(result, ['updateTime']))
 
     return {
       props: {

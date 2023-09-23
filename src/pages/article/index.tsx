@@ -8,7 +8,7 @@ import {
 import TocHolder from '@/features/article/components/TocHolder'
 import { getReadmeArticle } from '@/pages/api/article/get'
 import SEO from '@/shared/components/SEO'
-import { exclude, markdownToTxt, serializeData } from '@/shared/utils/format'
+import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 
 import {
   ArticleResponse,
@@ -57,8 +57,8 @@ export const getServerSideProps: GetServerSideProps<{
 
     return {
       props: {
-        articleData: serializeData(exclude(articleData, ['isReadme'])),
-        menuCategories: serializeData(menuCategories)
+        articleData: serialize(exclude(articleData, ['isReadme'])),
+        menuCategories: serialize(menuCategories)
       }
     }
   } catch (error) {

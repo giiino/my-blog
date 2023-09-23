@@ -11,7 +11,7 @@ export const formatDate = (time: number) => {
   return dayjs(time).tz().format('YYYY-MM-DD')
 }
 
-export const serializeData = <T>(target: T) => {
+export const serialize = <T>(target: T) => {
   try {
     return JSON.parse(JSON.stringify(target))
   } catch (error: any) {

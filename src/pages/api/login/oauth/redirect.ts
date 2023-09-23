@@ -9,7 +9,7 @@ import {
   GITHUB_USER_INFO_URL
 } from '@/shared/constants/oauth'
 import { setCookie } from '@/shared/utils/cookie'
-import { serializeData } from '@/shared/utils/format'
+import { serialize } from '@/shared/utils/format'
 import { generateJWT } from '@/shared/utils/jwt'
 import { formatValidatorError, validate } from '@/shared/utils/validator'
 
@@ -61,7 +61,7 @@ export default async function handler(req: NextApiRequest, res: any) {
     })
 
     if (userInfo) {
-      const token = generateJWT(serializeData(userInfo))
+      const token = generateJWT(serialize(userInfo))
       setCookie({ key: 'token', value: token, req, res })
       setCookie({
         key: 'enabledFetchUserInfo',
@@ -88,7 +88,7 @@ export default async function handler(req: NextApiRequest, res: any) {
         await articleRepo.save(user)
       }
 
-      const token = generateJWT(serializeData(userInfo))
+      const token = generateJWT(serialize(userInfo))
       setCookie({ key: 'token', value: token, req, res })
 
       res.redirect(307, '/')
