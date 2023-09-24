@@ -1,5 +1,5 @@
 import { IsOneOrZero } from "@/shared/utils/validator";
-import { IsInt, IsNotEmpty, IsString, Length } from "class-validator";
+import { IsInt, IsNotEmpty, IsString } from "class-validator";
 import { Column, Entity, ObjectId, ObjectIdColumn } from "typeorm";
 
 @Entity({ name: "article" })

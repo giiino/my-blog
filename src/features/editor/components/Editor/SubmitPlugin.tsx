@@ -1,4 +1,3 @@
-import React from 'react'
 import { PluginProps } from 'react-markdown-editor-lite'
 
 import SaveAltIcon from '@mui/icons-material/SaveAlt'

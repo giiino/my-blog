@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { toast } from 'react-hot-toast'
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
@@ -16,15 +15,15 @@ export function UploadImageButton({
   onImageUrlChange,
   ...restProps
 }: FilesButtonProps) {
-  const inputRef = useRef<HTMLInputElement | null>(null)
   const { mutateAsync: upload } = useUploadImage()
 
   const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length !== 1) {
+      toast.error('限制上傳一張圖片')
       return
     }
 
-    if (Array.from(e.target.files).some((f) => !f.type.startsWith('image/'))) {
+    if (!e.target.files[0].type.startsWith('image/')) {
       toast.error('限制上傳圖片')
       return
     }
@@ -43,12 +42,12 @@ export function UploadImageButton({
 
     onImageUrlChange(url)
   }
+
   return (
     <Box {...restProps}>
       <label htmlFor='upload-input'>
         <input
           id='upload-input'
-          ref={inputRef}
           type='file'
           onChange={onSelectFile}
           accept='image/*'
