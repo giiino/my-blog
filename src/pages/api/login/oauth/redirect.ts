@@ -62,7 +62,15 @@ export default async function handler(req: NextApiRequest, res: any) {
 
     if (userInfo) {
       const token = generateJWT(serialize(userInfo))
-      setCookie({ key: 'token', value: token, req, res })
+      setCookie({
+        key: 'token',
+        value: token,
+        req,
+        res,
+        options: {
+          httpOnly: true
+        }
+      })
       setCookie({
         key: 'enabledFetchUserInfo',
         value: 'true',
