@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@1,700;1,800&family=Noto+Sans+TC:wght@400;600;700&display=swap');
 
 :root {
-  --primary-dark-blue: #132743;
-  --primary-light-blue: #2583db;
+  --primary-dark: #132743;
+  --primary-link: #2583db;
   --primary-blue-4: #2B4F71;
   --primary-blue-3: #657A97;
   --primary-blue-2: #C9CFDF;
   --primary-blue-1: #E9EDF8;
   --primary-yellow: #F9E3A2;
+  --primary-orange: #F7921F;
   --primary-gray-100: #F8F9FA;
   --primary-gray-200: #A6A6A6;
   --primary-gray-300: #737373;
