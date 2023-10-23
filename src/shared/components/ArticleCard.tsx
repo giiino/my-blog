@@ -11,7 +11,6 @@ interface ArticleCardProps {
   content: string
   coverImage: string
   createTime: number
-  cssStyle: SerializedStyles
 }
 
 export const ArticleCard = ({
@@ -19,10 +18,9 @@ export const ArticleCard = ({
   title,
   content,
   createTime,
-  coverImage,
-  cssStyle
+  coverImage
 }: ArticleCardProps) => (
-  <LinkWrapper href={'/article/' + id} css={cssStyle}>
+  <LinkWrapper href={'/article/' + id}>
     <CoverImage
       src={coverImage}
       alt='封面圖片'
@@ -40,10 +38,11 @@ export const ArticleCard = ({
 const LinkWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
   > * {
     margin-bottom: 10px;
   }
+  /* margin-bottom: 30px;
+   */
   .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;

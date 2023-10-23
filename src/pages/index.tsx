@@ -1,8 +1,7 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
-import { Banner, Latest, SectionTitle } from '@/features/home/components'
+import { Banner, Section } from '@/features/home/components'
 import { ArticleCardResponse } from '@/shared/types/api/article'
-import { isVoid } from '@/shared/utils/check'
 import { serialize } from '@/shared/utils/format'
 
 import { getLatestArticle } from './api/article/get/latest'
@@ -13,8 +12,7 @@ const Home = ({
   return (
     <>
       <Banner />
-      <SectionTitle show={!isVoid(latestArticles)}>最新文章</SectionTitle>
-      <Latest articles={latestArticles} />
+      <Section articles={latestArticles} title={'最新消息'} />
     </>
   )
 }
