@@ -46,12 +46,13 @@ export const StyleWrapper = styled.div`
       width: 100%;
       margin: 25px auto;
       padding: 1.2em 30px 1.2em 30px;
-      border-left: 6px solid #fec930;
       line-height: 1.6;
       position: relative;
-      background: #fff0be;
+      border: ${({ theme }) => theme.markdown.border};
+      border-left: ${({ theme }) => theme.markdown.borderLeft};
+      background-color: ${({ theme }) => theme.markdown.blockquoteBgColor};
+      color: ${({ theme }) => theme.color};
       border-radius: 8px;
-      color: #000;
     }
     a {
       color: var(--primary-link);

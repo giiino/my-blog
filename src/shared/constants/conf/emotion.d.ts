@@ -31,6 +31,9 @@ declare module '@emotion/react' {
     }
     markdown: {
       highlightBgColor: string
+      blockquoteBgColor: string
+      borderLeft: string
+      border: string
     }
   }
 }

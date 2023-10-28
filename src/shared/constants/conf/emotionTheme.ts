@@ -33,7 +33,10 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
         dividerColor: 'rgba(0, 0, 0, 0.12)'
       },
       markdown: {
-        highlightBgColor: 'var(--primary-blue-1)'
+        highlightBgColor: 'var(--primary-blue-1)',
+        blockquoteBgColor: '#fff0be',
+        borderLeft: '6px solid #fec930',
+        border: '2px solid transparent'
       }
     }
   }
@@ -67,7 +70,10 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
         dividerColor: 'var(--primary-gray-400)'
       },
       markdown: {
-        highlightBgColor: 'var(--primary-gray-400)'
+        highlightBgColor: 'var(--primary-gray-400)',
+        blockquoteBgColor: 'transparent',
+        borderLeft: '2px solid var(--primary-gray-400)',
+        border: '2px solid var(--primary-gray-400)'
       }
     }
   }
