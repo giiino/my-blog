@@ -28,7 +28,7 @@ const Editor = ({
     onContentChange,
     onCoverImageChange,
     onIsReadmeCheckChange
-  } = useEdit({ ...formatArticleResponse(restArticleData) })
+  } = useEdit(formatArticleResponse(restArticleData))
   const handleSubmit = () => {
     update({ content, title, category, coverImage, _id: String(_id), isReadme })
   }
