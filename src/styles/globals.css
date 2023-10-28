@@ -35,3 +35,7 @@ body,
 a {
   text-decoration:none;
 }
+
+::selection {
+  background-color: #f5840450; 
+}
