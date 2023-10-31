@@ -12,7 +12,7 @@ const Home = ({
   return (
     <>
       <Banner />
-      <Section articles={latestArticles} title={'最新消息'} />
+      <Section articles={latestArticles} title={'最新文章'} />
     </>
   )
 }

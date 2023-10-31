@@ -48,7 +48,6 @@ export const StyleWrapper = styled.div`
       padding: 1.2em 30px 1.2em 30px;
       line-height: 1.6;
       position: relative;
-      border: ${({ theme }) => theme.markdown.border};
       border-left: ${({ theme }) => theme.markdown.borderLeft};
       background-color: ${({ theme }) => theme.markdown.blockquoteBgColor};
       color: ${({ theme }) => theme.color};
@@ -68,6 +67,9 @@ export const StyleWrapper = styled.div`
       padding: 3px 5px;
       margin: 0 3px;
       border-radius: 5px;
+    }
+    code .linenumber:nth-child(2) {
+      display: none !important;
     }
   }
 `

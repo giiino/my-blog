@@ -48,6 +48,7 @@ const LinkWrapper = styled(Link)`
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: lighter;
     color: ${({ theme }) => theme.card.titleColor};
   }
   .content {
@@ -56,7 +57,7 @@ const LinkWrapper = styled(Link)`
     -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.7;
     color: ${({ theme }) => theme.card.summaryColor};
   }

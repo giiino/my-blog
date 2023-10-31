@@ -31,7 +31,7 @@ export const Section = ({ articles, title }: SectionProps) => {
 }
 
 const Container = styled.div`
-  width: 75vw;
+  width: 65vw;
   margin: auto;
   padding: 40px 0;
 `

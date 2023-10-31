@@ -35,9 +35,18 @@ export const components:
         className='syntax-hight-wrapper'
         {...props}
       >
-        {children as string[]}
+        {replaceLast(children as string[])}
       </SyntaxHighlighter>
     )
   },
   a: (props) => <a {...props} target='_blank' />
+}
+
+const replaceLast = (target: string[]) => {
+  return target.map((item, index) => {
+    if (index === 0) {
+      return item.replace('\n', '')
+    }
+    return item
+  })
 }

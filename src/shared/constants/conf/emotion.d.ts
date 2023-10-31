@@ -33,7 +33,6 @@ declare module '@emotion/react' {
       highlightBgColor: string
       blockquoteBgColor: string
       borderLeft: string
-      border: string
     }
   }
 }

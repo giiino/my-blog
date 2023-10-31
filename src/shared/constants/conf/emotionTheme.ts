@@ -35,8 +35,7 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
       markdown: {
         highlightBgColor: 'var(--primary-blue-1)',
         blockquoteBgColor: '#fff0be',
-        borderLeft: '6px solid #fec930',
-        border: '2px solid transparent'
+        borderLeft: '6px solid #fec930'
       }
     }
   }
@@ -71,9 +70,8 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
       },
       markdown: {
         highlightBgColor: 'var(--primary-gray-400)',
-        blockquoteBgColor: 'transparent',
-        borderLeft: '2px solid var(--primary-gray-400)',
-        border: '2px solid var(--primary-gray-400)'
+        blockquoteBgColor: 'var(--primary-gray-500)',
+        borderLeft: '2px solid transparent'
       }
     }
   }
