@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
 import {
@@ -8,6 +10,7 @@ import {
 import TocHolder from '@/features/article/components/TocHolder'
 import { getArticleById } from '@/pages/api/article/get'
 import SEO from '@/shared/components/SEO'
+import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
 import {
   ArticleCardResponse,
   ArticleResponse,
@@ -24,7 +27,12 @@ const ArticlePage = ({
   menuCategories,
   relatedArticle
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { title, content, coverImage } = articleData
+  const { setArticleCategory } = useGlobalState()
+  const { title, content, coverImage, category } = articleData
+
+  useEffect(() => {
+    setArticleCategory(category)
+  }, [category, setArticleCategory])
 
   return (
     <>

@@ -25,6 +25,7 @@ export const components:
   },
   code: ({ children = [], className, ...props }) => {
     const match = /language-(\w+)/.exec(className || '')
+
     return (
       <SyntaxHighlighter
         language={match?.[1]}
@@ -42,10 +43,11 @@ export const components:
   a: (props) => <a {...props} target='_blank' />
 }
 
+/* 刪除最後一個字元 \n */
 const replaceLast = (target: string[]) => {
   return target.map((item, index) => {
     if (index === 0) {
-      return item.replace('\n', '')
+      return item.slice(0, -1)
     }
     return item
   })

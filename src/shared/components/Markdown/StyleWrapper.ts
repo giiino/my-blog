@@ -68,8 +68,5 @@ export const StyleWrapper = styled.div`
       margin: 0 3px;
       border-radius: 5px;
     }
-    code .linenumber:nth-child(2) {
-      display: none !important;
-    }
   }
 `

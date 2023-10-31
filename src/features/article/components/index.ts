@@ -8,7 +8,7 @@ export const ArticleWrapper = styled(Grid)`
   width: 95%;
   max-width: 1240px;
   margin: 0 auto;
-  margin-bottom: 20vh;
+  margin-bottom: 5vh;
   @media screen and (max-width: 960px) {
     width: 92%;
   }

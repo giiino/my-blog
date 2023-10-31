@@ -9,6 +9,8 @@ import { getInitialColorMode } from '../utils/getInitialColorMode'
 interface ContextProps {
   userInfo: UserInfo | undefined
   themeMode: ThemeMode | undefined
+  articleCategory: string
+  setArticleCategory: React.Dispatch<React.SetStateAction<string>>
   setThemeMode: React.Dispatch<React.SetStateAction<ThemeMode | undefined>>
 }
 
@@ -20,10 +22,20 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [themeMode, setThemeMode] = useState<ThemeMode | undefined>(
     getInitialColorMode()
   )
+  const [articleCategory, setArticleCategory] = useState('')
+
   const { data: userInfo } = useUser()
 
   return (
-    <GlobalStateContext.Provider value={{ userInfo, themeMode, setThemeMode }}>
+    <GlobalStateContext.Provider
+      value={{
+        userInfo,
+        themeMode,
+        articleCategory,
+        setArticleCategory,
+        setThemeMode
+      }}
+    >
       {children}
     </GlobalStateContext.Provider>
   )

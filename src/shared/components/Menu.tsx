@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import styled from '@emotion/styled'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
@@ -12,15 +10,17 @@ import { useRouter } from 'next/router'
 
 import { MenuCategoriesResponse } from '@/shared/types/api/article'
 
+import { useGlobalState } from '../providers/GlobalStateProvider'
+
 interface MenuProps {
   menuCategories: MenuCategoriesResponse[]
 }
 
 export function Menu({ menuCategories }: MenuProps) {
-  const [currentCategory, setCurrentCategory] = useState('')
+  const { articleCategory, setArticleCategory } = useGlobalState()
 
   const handleClick = (category: string) => {
-    setCurrentCategory((prev) => {
+    setArticleCategory((prev) => {
       if (category === prev) {
         return ''
       }
@@ -39,7 +39,7 @@ export function Menu({ menuCategories }: MenuProps) {
           <GroupListItem
             key={menuCategory.category}
             {...menuCategory}
-            open={currentCategory === menuCategory.category}
+            open={articleCategory === menuCategory.category}
             handleClick={handleClick}
           />
         ))}
