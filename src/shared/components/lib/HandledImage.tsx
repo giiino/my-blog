@@ -7,13 +7,13 @@ import { isVoid } from '../../utils/check'
 
 interface HandledImageProps extends ImageProps {
   alt: string
-  realWidth: string
+  imageWidth: string
   ratio: number
 }
 
 export const HandledImage = ({
   alt,
-  realWidth,
+  imageWidth,
   ratio,
   ...props
 }: HandledImageProps) => {
@@ -22,14 +22,14 @@ export const HandledImage = ({
 
   if (isError || isVoid(imageUrl)) {
     return (
-      <ImageContainer ratio={ratio} realWidth={realWidth}>
+      <ImageContainer ratio={ratio} imageWidth={imageWidth}>
         <Image {...props} src='/img-not-found.png' alt={'圖片找不到'} />
       </ImageContainer>
     )
   }
 
   return (
-    <ImageContainer ratio={ratio} realWidth={realWidth}>
+    <ImageContainer ratio={ratio} imageWidth={imageWidth}>
       <Image {...props} alt={alt} onError={() => setIsError(true)} />
     </ImageContainer>
   )
@@ -37,11 +37,12 @@ export const HandledImage = ({
 
 const ImageContainer = styled.div<{
   ratio: number
-  realWidth: string
+  imageWidth: string
 }>`
   position: relative;
-  width: ${({ realWidth }) => realWidth};
-  padding-bottom: ${({ ratio, realWidth }) => `calc(${realWidth} * ${ratio})`};
+  width: ${({ imageWidth }) => imageWidth};
+  padding-bottom: ${({ ratio, imageWidth }) =>
+    `calc(${imageWidth} * ${ratio})`};
   img {
     position: absolute;
     width: 100%;

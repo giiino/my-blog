@@ -21,6 +21,8 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
   const { themeMode, setThemeMode } = useGlobalState()
 
   const ThemeModeIcon = themeMode === 'light' ? DarkModeIcon : LightModeIcon
+  const logoImage =
+    themeMode === 'dark' ? '/logo-dark-mode.svg' : '/logo-light-mode.svg'
 
   const toggleMode = () => {
     const newThemeMode = themeMode === 'light' ? 'dark' : 'light'
@@ -49,11 +51,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
         >
           <Link href={'/'} style={{ marginRight: '20px' }}>
             <Image
-              src={
-                themeMode === 'dark'
-                  ? '/logo-dark-mode.svg'
-                  : '/logo-light-mode.svg'
-              }
+              src={logoImage}
               alt='gn-dev-logo'
               width={100}
               height={40}
