@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
-import { ArticleCard } from '@/shared/components/article/ArticleCard'
-import { Title } from '@/shared/components/article/Title'
+import { ArticleCard } from '@/features/article/components/ArticleCard'
+import { Title } from '@/features/article/components/Title'
 import { ArticleCardResponse } from '@/shared/types/api/article'
 import { isVoid } from '@/shared/utils/check'
 

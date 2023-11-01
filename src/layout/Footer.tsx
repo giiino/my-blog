@@ -1,5 +1,3 @@
-import React from 'react'
-
 import styled from '@emotion/styled'
 import EmailIcon from '@mui/icons-material/Email'
 import GitHubIcon from '@mui/icons-material/GitHub'

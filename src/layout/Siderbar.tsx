@@ -12,7 +12,7 @@ import {
   Stack
 } from '@mui/material'
 
-import { Menu } from '@/shared/components/article/Menu'
+import { Menu } from '@/features/article/components/Menu'
 import { RouteButton } from '@/shared/components/buttons/RouteButton'
 import { AdminOnly } from '@/shared/components/lib/AdminOnly'
 import { useMenuCategory } from '@/shared/hooks/use-queries'

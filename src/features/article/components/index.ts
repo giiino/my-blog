@@ -3,6 +3,7 @@ import { Grid } from '@mui/material'
 
 export * from './Content'
 export * from './ArticleMenu'
+export * from './Menu'
 
 export const ArticleWrapper = styled(Grid)`
   width: 95%;
