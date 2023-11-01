@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
-import { ArticleCard } from '@/shared/components/ArticleCard'
-import { Title } from '@/shared/components/Title'
+import { ArticleCard } from '@/shared/components/article/ArticleCard'
+import { Title } from '@/shared/components/article/Title'
 import { ArticleCardResponse } from '@/shared/types/api/article'
 import { isVoid } from '@/shared/utils/check'
 
@@ -22,7 +22,7 @@ export const RelatedArticleCards = ({
       <CardWrapper>
         {articleCardsData!.map(({ _id, ...article }) => {
           const id = String(_id)
-          return <ArticleCard key={String(id)} id={id} {...article} />
+          return <ArticleCard key={id} id={id} {...article} />
         })}
       </CardWrapper>
     </Container>

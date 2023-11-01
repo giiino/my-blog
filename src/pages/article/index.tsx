@@ -7,7 +7,7 @@ import {
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
 import { getReadmeArticle } from '@/pages/api/article/get'
-import SEO from '@/shared/components/SEO'
+import SEO from '@/shared/components/lib/SEO'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 
 import {

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled from '@emotion/styled'
 import Image, { ImageProps } from 'next/image'
 
-import { isVoid } from '../utils/check'
+import { isVoid } from '../../utils/check'
 
 interface HandledImageProps extends ImageProps {
   alt: string

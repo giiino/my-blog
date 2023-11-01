@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 
 import { MenuCategoriesResponse } from '@/shared/types/api/article'
 
-import { useGlobalState } from '../providers/GlobalStateProvider'
+import { useGlobalState } from '../../providers/GlobalStateProvider'
 
 interface MenuProps {
   menuCategories: MenuCategoriesResponse[]

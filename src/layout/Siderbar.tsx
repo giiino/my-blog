@@ -12,9 +12,9 @@ import {
   Stack
 } from '@mui/material'
 
-import { AdminOnly } from '@/shared/components/AdminOnly'
-import { Menu } from '@/shared/components/Menu'
+import { Menu } from '@/shared/components/article/Menu'
 import { RouteButton } from '@/shared/components/buttons/RouteButton'
+import { AdminOnly } from '@/shared/components/lib/AdminOnly'
 import { useMenuCategory } from '@/shared/hooks/use-queries'
 import { useRouteChange } from '@/shared/hooks/useRouteChange'
 import { scrollBarStyle } from '@/styles/globals'

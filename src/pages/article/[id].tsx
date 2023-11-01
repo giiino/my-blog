@@ -9,7 +9,7 @@ import {
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
 import { getArticleById } from '@/pages/api/article/get'
-import SEO from '@/shared/components/SEO'
+import SEO from '@/shared/components/lib/SEO'
 import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
 import {
   ArticleCardResponse,

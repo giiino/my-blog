@@ -16,8 +16,8 @@ import {
   TextField
 } from '@mui/material'
 
-import { ErrorBoundary } from '@/shared/components/ErrorBoundary'
-import { HandledImage } from '@/shared/components/HandledImage'
+import { ErrorBoundary } from '@/shared/components/lib/ErrorBoundary'
+import { HandledImage } from '@/shared/components/lib/HandledImage'
 import { isVoid } from '@/shared/utils/check'
 
 import { useCategories } from '../../hooks/use-queries'

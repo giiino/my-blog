@@ -9,8 +9,8 @@ import Typography from '@mui/material/Typography'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { AdminOnly } from '@/shared/components/AdminOnly'
 import { RouteButton } from '@/shared/components/buttons/RouteButton'
+import { AdminOnly } from '@/shared/components/lib/AdminOnly'
 import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
 
 interface HeaderProps {

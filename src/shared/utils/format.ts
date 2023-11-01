@@ -1,8 +1,6 @@
 import dayjs from 'dayjs'
 import removeMd from 'remove-markdown'
 
-import { isKey } from './check'
-
 export const markdownToTxt = (target: string, textNumber: number) => {
   return removeMd(target.substring(0, textNumber)).replace(/\n/g, '')
 }
@@ -19,32 +17,26 @@ export const serialize = <T>(target: T) => {
   }
 }
 
-export const exclude = <T extends Object>(
-  target: T,
-  removeAttrs: Array<keyof T>
-): Partial<T> => {
-  return Object.keys(target).reduce((acc, key) => {
-    if (!isKey(target, key)) {
-      return acc
-    }
-    if (!removeAttrs.includes(key)) {
-      acc[key] = target[key]
-    }
-    return acc
-  }, {} as T)
+export const exclude = <
+  O extends { [key in string]: unknown },
+  K extends keyof O
+>(
+  target: O,
+  keys: K[]
+) => {
+  return Object.fromEntries(
+    Object.entries(target).filter(([key]) => !keys.includes(key as K))
+  ) as Pick<O, K>
 }
 
-export const pick = <T extends Object>(
-  target: T,
-  pickedAttrs: Array<keyof T>
-): Partial<T> => {
-  return Object.keys(target).reduce((acc, key) => {
-    if (!isKey(target, key)) {
-      return acc
-    }
-    if (pickedAttrs.includes(key)) {
-      acc[key] = target[key]
-    }
-    return acc
-  }, {} as T)
+export const pick = <O extends { [key in string]: unknown }, K extends keyof O>(
+  target: O,
+  keys: K[]
+) => {
+  return Object.fromEntries(
+    Object.entries(target).filter(([key]) => {
+      console.log(keys, key)
+      return keys.includes(key as K)
+    })
+  ) as Pick<O, K>
 }

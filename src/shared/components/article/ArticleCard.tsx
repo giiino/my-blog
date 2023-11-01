@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import Link from 'next/link'
 
-import { HandledImage } from '@/shared/components/HandledImage'
+import { HandledImage } from '@/shared/components/lib/HandledImage'
 import { formatDate, markdownToTxt } from '@/shared/utils/format'
 
 interface ArticleCardProps {
@@ -40,8 +40,6 @@ const LinkWrapper = styled(Link)`
   > * {
     margin-bottom: 10px;
   }
-  /* margin-bottom: 30px;
-   */
   .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
 
-import { Menu } from '@/shared/components/Menu'
+import { Menu } from '@/shared/components/article/Menu'
 import { MenuCategoriesResponse } from '@/shared/types/api/article'
 import { scrollBarHoverStyle } from '@/styles/globals'
 
