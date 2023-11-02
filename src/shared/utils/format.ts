@@ -17,19 +17,16 @@ export const serialize = <T>(target: T) => {
   }
 }
 
-export const exclude = <
-  O extends { [key in string]: unknown },
-  K extends keyof O
->(
+export const exclude = <O extends Object, K extends keyof O>(
   target: O,
   keys: K[]
 ) => {
   return Object.fromEntries(
     Object.entries(target).filter(([key]) => !keys.includes(key as K))
-  ) as Pick<O, K>
+  ) as Omit<O, K>
 }
 
-export const pick = <O extends { [key in string]: unknown }, K extends keyof O>(
+export const pick = <O extends Object, K extends keyof O>(
   target: O,
   keys: K[]
 ) => {

@@ -8,18 +8,19 @@ import {
 import TocHolder from '@/features/article/components/TocHolder'
 import { getReadmeArticle } from '@/pages/api/article/get'
 import SEO from '@/shared/components/lib/SEO'
-import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
-
 import {
   ArticleResponse,
   MenuCategoriesResponse
-} from '../../shared/types/api/article'
+} from '@/shared/types/api/article'
+import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
+
 import { getMenuCategories } from '../api/article/get/menu-categories'
 
 const ArticleIndexPage = ({
   articleData,
   menuCategories
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log(articleData)
   const { title, content, coverImage } = articleData
   return (
     <>
