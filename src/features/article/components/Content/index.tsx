@@ -2,8 +2,8 @@ import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
 import Image from 'next/image'
 
+import { Markdown } from '@/shared/components/Markdown'
 import { AdminOnly } from '@/shared/components/lib/AdminOnly'
-import { Markdown } from '@/shared/components/markdown'
 import {
   ArticleCardResponse,
   ArticleResponse

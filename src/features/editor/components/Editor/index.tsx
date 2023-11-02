@@ -4,7 +4,7 @@ import 'react-markdown-editor-lite/lib/index.css'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
 
-import { Markdown } from '@/shared/components/markdown'
+import { Markdown } from '@/shared/components/Markdown'
 
 import { SubmitPlugin } from './SubmitPlugin'
 
