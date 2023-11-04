@@ -20,7 +20,6 @@ const ArticleIndexPage = ({
   articleData,
   menuCategories
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(articleData)
   const { title, content, coverImage } = articleData
   return (
     <>
