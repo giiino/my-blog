@@ -6,7 +6,6 @@ import utc from 'dayjs/plugin/utc'
 import type { AppProps } from 'next/app'
 
 import Layout from '@/layout'
-import SEO from '@/shared/components/lib/SEO'
 import { AppLoading } from '@/shared/components/loading/AppLoading'
 import AppProvider from '@/shared/providers'
 import '@/styles/globals.css'
@@ -18,7 +17,6 @@ dayjs.tz.setDefault('Asia/Taipei')
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <SEO />
       <AppProvider>
         <Layout>
           <AppLoading />
