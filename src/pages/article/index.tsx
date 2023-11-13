@@ -1,4 +1,9 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
+import {
+  GetServerSideProps,
+  GetStaticProps,
+  InferGetServerSidePropsType,
+  InferGetStaticPropsType
+} from 'next/types'
 
 import {
   ArticleMenu,
@@ -19,7 +24,7 @@ import { getMenuCategories } from '../api/article/get/menu-categories'
 const ArticleIndexPage = ({
   articleData,
   menuCategories
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { title, content, coverImage } = articleData
   return (
     <>
@@ -39,7 +44,7 @@ const ArticleIndexPage = ({
 
 export default ArticleIndexPage
 
-export const getServerSideProps: GetServerSideProps<{
+export const getStaticProps: GetStaticProps<{
   articleData: Omit<ArticleResponse, 'isReadme'>
   menuCategories: MenuCategoriesResponse[]
 }> = async () => {

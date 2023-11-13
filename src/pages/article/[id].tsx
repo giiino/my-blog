@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
+import { GetStaticProps, InferGetStaticPropsType } from 'next/types'
 
 import {
   ArticleMenu,
@@ -19,6 +19,7 @@ import {
 import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 
+import { getAllArticles } from '../api/article/get/get-all'
 import { getMenuCategories } from '../api/article/get/menu-categories'
 import { getRelatedArticles } from '../api/article/get/related'
 
@@ -26,7 +27,7 @@ const ArticlePage = ({
   articleData,
   menuCategories,
   relatedArticle
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { setArticleCategory } = useGlobalState()
   const { title, content, coverImage, category } = articleData
 
@@ -59,12 +60,22 @@ const ArticlePage = ({
 
 export default ArticlePage
 
-export const getServerSideProps: GetServerSideProps<{
+export async function getStaticPaths() {
+  const articles = await getAllArticles()
+
+  const paths = articles?.map(({ _id }) => ({
+    params: { id: _id }
+  }))
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps: GetStaticProps<{
   articleData: Omit<ArticleResponse, 'isReadme'>
   menuCategories: MenuCategoriesResponse[]
   relatedArticle: ArticleCardResponse[]
-}> = async (context) => {
-  const id = context?.params?.id as string
+}> = async ({ params }) => {
+  const id = params?.id as string
   if (!isValidObjectId(id)) {
     return {
       notFound: true
