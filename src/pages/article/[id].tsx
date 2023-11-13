@@ -64,7 +64,7 @@ export async function getStaticPaths() {
   const articles = await getAllArticles()
 
   const paths = articles?.map(({ _id }) => ({
-    params: { id: _id }
+    params: { id: String(_id) }
   }))
 
   return { paths, fallback: false }
@@ -76,6 +76,7 @@ export const getStaticProps: GetStaticProps<{
   relatedArticle: ArticleCardResponse[]
 }> = async ({ params }) => {
   const id = params?.id as string
+
   if (!isValidObjectId(id)) {
     return {
       notFound: true
