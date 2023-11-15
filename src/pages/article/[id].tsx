@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+import Head from 'next/head'
 import { GetStaticProps, InferGetStaticPropsType } from 'next/types'
 
 import {
@@ -9,7 +10,6 @@ import {
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
 import { getArticleById } from '@/pages/api/article/get'
-import SEO from '@/shared/components/lib/SEO'
 import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
 import {
   ArticleCardResponse,
@@ -31,17 +31,26 @@ const ArticlePage = ({
   const { setArticleCategory } = useGlobalState()
   const { title, content, coverImage, category } = articleData
 
+  const description = markdownToTxt(content, 150)
+
   useEffect(() => {
     setArticleCategory(category)
   }, [category, setArticleCategory])
 
   return (
     <>
-      <SEO
-        title={title}
-        description={markdownToTxt(content, 150)}
-        thumbnail={coverImage}
-      />
+      <Head>
+        <title key='title'>{title}</title>
+        <meta property='og:image' content={coverImage} key='thumbnail' />
+        <meta name='description' content={description} key='description' />
+        <meta property='og:title' content={title} key='og:title' />
+        <meta
+          property='og:description'
+          content={description}
+          key='og:description'
+        />
+        <meta property='og:site_name' content={title} key='og:site_name' />
+      </Head>
       <ArticleWrapper justifyContent={'center'} container>
         <ArticleMenu item lg={3} md={4} menuCategories={menuCategories} />
         <Content
