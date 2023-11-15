@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import {
   GetServerSideProps,
   GetStaticProps,
@@ -13,6 +12,7 @@ import {
 } from '@/features/article/components'
 import TocHolder from '@/features/article/components/TocHolder'
 import { getReadmeArticle } from '@/pages/api/article/get'
+import SEO from '@/shared/components/lib/SEO'
 import {
   ArticleResponse,
   MenuCategoriesResponse
@@ -26,23 +26,13 @@ const ArticleIndexPage = ({
   menuCategories
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { title, content, coverImage } = articleData
-
-  const description = markdownToTxt(content, 150)
-
   return (
     <>
-      <Head>
-        <title key='title'>{title}</title>
-        <meta property='og:image' content={coverImage} key='thumbnail' />
-        <meta name='description' content={description} key='description' />
-        <meta property='og:title' content={title} key='og:title' />
-        <meta
-          property='og:description'
-          content={description}
-          key='og:description'
-        />
-        <meta property='og:site_name' content={title} key='og:site_name' />
-      </Head>
+      <SEO
+        title={title}
+        description={markdownToTxt(content, 150)}
+        thumbnail={coverImage}
+      />
       <ArticleWrapper justifyContent={'center'} container>
         <ArticleMenu item lg={3} md={4} menuCategories={menuCategories} />
         <Content item lg={7} md={8} xs={12} article={articleData} />

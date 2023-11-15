@@ -8,9 +8,8 @@ import ListItemText from '@mui/material/ListItemText'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
 import { MenuCategoriesResponse } from '@/shared/types/api/article'
-
-import { useGlobalState } from '../../../shared/providers/GlobalStateProvider'
 
 interface MenuProps {
   menuCategories: MenuCategoriesResponse[]

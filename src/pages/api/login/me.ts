@@ -3,10 +3,9 @@ import type { NextApiRequest } from 'next'
 import { getDataSource } from '@/db'
 import { User } from '@/db/entity/User'
 import { ApiResponse } from '@/shared/types/api'
+import type { UserInfo } from '@/shared/types/api/login'
 import { pick } from '@/shared/utils/format'
 import { getJwtUser } from '@/shared/utils/jwt'
-
-import type { UserInfo } from '../../../shared/types/api/login'
 
 export default async function handler(
   req: NextApiRequest,
