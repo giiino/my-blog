@@ -16,14 +16,12 @@ dayjs.tz.setDefault('Asia/Taipei')
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <AppProvider>
-        <Layout>
-          <AppLoading />
-          <Component {...pageProps} />
-          <Toaster position='bottom-center' />
-        </Layout>
-      </AppProvider>
-    </>
+    <AppProvider>
+      <Layout>
+        <AppLoading />
+        <Component {...pageProps} />
+        <Toaster position='bottom-center' />
+      </Layout>
+    </AppProvider>
   )
 }

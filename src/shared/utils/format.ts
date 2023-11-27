@@ -32,7 +32,6 @@ export const pick = <O extends Object, K extends keyof O>(
 ) => {
   return Object.fromEntries(
     Object.entries(target).filter(([key]) => {
-      console.log(keys, key)
       return keys.includes(key as K)
     })
   ) as Pick<O, K>

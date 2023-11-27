@@ -19,9 +19,7 @@ const GlobalStateContext = createContext<ContextProps | undefined>(undefined)
 GlobalStateContext.displayName = 'GlobalStateContext'
 
 const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
-  const [themeMode, setThemeMode] = useState<ThemeMode | undefined>(
-    getInitialColorMode()
-  )
+  const [themeMode, setThemeMode] = useState<ThemeMode | undefined>(undefined)
   const [articleCategory, setArticleCategory] = useState('')
 
   const { data: userInfo } = useUser()

@@ -106,8 +106,5 @@ const ListContainer = styled.div`
     background-color: transparent !important;
     color: ${({ theme }) => theme.menu.selectedColor} !important;
     border-radius: 5px;
-    .MuiTypography-root {
-      font-weight: bold;
-    }
   }
 `
