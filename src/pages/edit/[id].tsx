@@ -9,7 +9,6 @@ import { ContentEditor } from '@/features/editor/components/Editor'
 import { useUpdateArticle } from '@/features/editor/hooks/use-mutations'
 import { useEditorData } from '@/features/editor/hooks/use-queries'
 import { useEdit } from '@/features/editor/hooks/useEdit'
-import { formatArticleResponse } from '@/features/editor/utils/format'
 import { PageLoading } from '@/shared/components/loading/PageLoading'
 import { ArticleEditResponse } from '@/shared/types/api/article'
 import { isValidObjectId } from '@/shared/utils/check'
@@ -22,6 +21,7 @@ const Editor = () => {
   const { query } = useRouter()
   const { data: editorData, isLoading } = useEditorData(query.id as string)
   const { mutate: update } = useUpdateArticle()
+
   const {
     article: { content, title, category, isReadme, coverImage },
     reset,
@@ -30,7 +30,7 @@ const Editor = () => {
     onContentChange,
     onCoverImageChange,
     onIsReadmeCheckChange
-  } = useEdit(formatArticleResponse(editorData!))
+  } = useEdit(editorData)
 
   const handleSubmit = () => {
     update({
@@ -51,11 +51,11 @@ const Editor = () => {
     setIsArticleInfoModalOpen(false)
   }
 
-  if (!editorData) return null
+  if (isLoading) return <PageLoading open={isLoading} />
 
+  if (!editorData) return null
   return (
     <>
-      <PageLoading open={isLoading} />
       <Stack>
         <ArticleInfoModal
           open={articleInfoModalOpen}

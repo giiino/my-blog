@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { ArticleEditResponse } from '@/shared/types/api/article'
 import { axiosInstance } from '@/shared/utils/axiosInstance'
 
+import { formatArticleResponse } from '../utils/format'
+import { EditedItems } from './useEdit'
+
 export const useEditorData = (id: string) => {
-  return useQuery<ArticleEditResponse>(['editor-data'], async () => {
+  return useQuery<Partial<EditedItems>>(['editor-data'], async () => {
     const response = await axiosInstance.get('/api/article/get/' + id)
-    return response.data
+    return formatArticleResponse(response.data)
   })
 }
 
