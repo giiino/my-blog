@@ -1,5 +1,6 @@
 import { Toaster } from 'react-hot-toast'
 
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import dayjs from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
         <Toaster position='bottom-center' />
       </Layout>
+      <SpeedInsights />
     </AppProvider>
   )
 }
