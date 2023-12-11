@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 import { Article } from '@/db/entity/Article'
 import { exclude as excludeUtil } from '@/shared/utils/format'
@@ -78,6 +78,15 @@ export const useEdit = (initialEditedItems?: Partial<EditedItems>) => {
 
     setArticle(resetResult)
   }
+
+  useEffect(() => {
+    if (initialEditedItems) {
+      setArticle({
+        ...defaultEditedItems,
+        ...initialEditedItems
+      })
+    }
+  }, [initialEditedItems])
 
   return {
     article,

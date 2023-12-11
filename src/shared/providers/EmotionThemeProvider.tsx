@@ -10,7 +10,6 @@ import { useGlobalState } from './GlobalStateProvider'
 const EmotionThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { themeMode, setThemeMode } = useGlobalState()
   const emotionTheme = useMemo(() => {
-    console.log(themeMode)
     if (!themeMode) {
       return styledThemeConf('light')
     }

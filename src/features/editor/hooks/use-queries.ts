@@ -1,6 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 
+import { ArticleEditResponse } from '@/shared/types/api/article'
 import { axiosInstance } from '@/shared/utils/axiosInstance'
+
+export const useEditorData = (id: string) => {
+  return useQuery<ArticleEditResponse>(['editor-data'], async () => {
+    const response = await axiosInstance.get('/api/article/get/' + id)
+    return response.data
+  })
+}
 
 export const useCategories = () => {
   return useQuery<string[]>(['categories'], async () => {

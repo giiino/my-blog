@@ -1,9 +1,4 @@
-import {
-  GetServerSideProps,
-  GetStaticProps,
-  InferGetServerSidePropsType,
-  InferGetStaticPropsType
-} from 'next/types'
+import { GetStaticProps, InferGetStaticPropsType } from 'next/types'
 
 import {
   ArticleMenu,
@@ -64,7 +59,8 @@ export const getStaticProps: GetStaticProps<{
       props: {
         articleData: serialize(exclude(articleData, ['isReadme'])),
         menuCategories: serialize(menuCategories)
-      }
+      },
+      revalidate: 60
     }
   } catch (error) {
     return {

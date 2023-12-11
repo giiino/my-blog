@@ -101,7 +101,8 @@ export const getStaticProps: GetStaticProps<{
         articleData: serialize(exclude(articleData, ['isReadme'])),
         menuCategories: serialize(menuCategories),
         relatedArticle: serialize(relatedArticle)
-      }
+      },
+      revalidate: 60
     }
   } catch (error) {
     return {

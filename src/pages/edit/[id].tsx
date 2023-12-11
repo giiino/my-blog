@@ -1,13 +1,16 @@
 import { useState } from 'react'
 
 import { Stack } from '@mui/material'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
+import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next/types'
 
 import { ArticleInfoModal } from '@/features/editor/components/ArticleInfoModal'
 import { ContentEditor } from '@/features/editor/components/Editor'
 import { useUpdateArticle } from '@/features/editor/hooks/use-mutations'
+import { useEditorData } from '@/features/editor/hooks/use-queries'
 import { useEdit } from '@/features/editor/hooks/useEdit'
 import { formatArticleResponse } from '@/features/editor/utils/format'
+import { PageLoading } from '@/shared/components/loading/PageLoading'
 import { ArticleEditResponse } from '@/shared/types/api/article'
 import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, serialize } from '@/shared/utils/format'
@@ -15,10 +18,9 @@ import { isAdmin } from '@/shared/utils/jwt'
 
 import { getArticleById } from '../api/article/get'
 
-const Editor = ({
-  articleData
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { _id, ...restArticleData } = articleData
+const Editor = () => {
+  const { query } = useRouter()
+  const { data: editorData, isLoading } = useEditorData(query.id as string)
   const { mutate: update } = useUpdateArticle()
   const {
     article: { content, title, category, isReadme, coverImage },
@@ -28,9 +30,17 @@ const Editor = ({
     onContentChange,
     onCoverImageChange,
     onIsReadmeCheckChange
-  } = useEdit(formatArticleResponse(restArticleData))
+  } = useEdit(formatArticleResponse(editorData!))
+
   const handleSubmit = () => {
-    update({ content, title, category, coverImage, _id: String(_id), isReadme })
+    update({
+      content,
+      title,
+      category,
+      coverImage,
+      _id: String(query.id),
+      isReadme
+    })
   }
 
   const [articleInfoModalOpen, setIsArticleInfoModalOpen] = useState(false)
@@ -41,8 +51,11 @@ const Editor = ({
     setIsArticleInfoModalOpen(false)
   }
 
+  if (!editorData) return null
+
   return (
     <>
+      <PageLoading open={isLoading} />
       <Stack>
         <ArticleInfoModal
           open={articleInfoModalOpen}
@@ -79,7 +92,6 @@ export const getServerSideProps: GetServerSideProps<{
       notFound: true
     }
   }
-
   try {
     const result = await getArticleById(id)
 

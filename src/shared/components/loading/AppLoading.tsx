@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { Backdrop, CircularProgress } from '@mui/material'
 import { useIsMutating } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
+
+import { PageLoading } from './PageLoading'
 
 export const AppLoading = () => {
   const [isPageChangeLoading, setIsPageChangeLoading] = useState(false)
@@ -22,15 +23,5 @@ export const AppLoading = () => {
     }
   }, [events])
 
-  return (
-    <Backdrop
-      sx={{
-        color: '#fff',
-        zIndex: (theme) => Math.max.apply(Math, Object.values(theme.zIndex)) + 1
-      }}
-      open={isLoading}
-    >
-      <CircularProgress color='inherit' />
-    </Backdrop>
-  )
+  return <PageLoading open={isLoading} />
 }
