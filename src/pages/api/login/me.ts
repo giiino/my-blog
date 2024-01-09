@@ -33,7 +33,7 @@ export default async function handler(
       return res.status(401).json({ message: '用戶已不存在' })
     }
 
-    res.status(200).json(pick(userInfo, ['avatarImage', 'isAdmin', 'userName']))
+    res.status(200).json(pick(userInfo, ['avatar', 'isAdmin', 'userName']))
   } catch (error) {
     console.error('請求發生錯誤' + error)
     res.status(500).json({ message: '請求發生錯誤' })

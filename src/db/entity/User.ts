@@ -24,7 +24,7 @@ export class User {
   @IsNotEmpty()
   @IsString()
   @Column()
-  avatarImage: string = '';
+  avatar: string = '';
 
   @IsInt()
   @Length(1)

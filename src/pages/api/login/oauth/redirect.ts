@@ -85,7 +85,7 @@ export default async function handler(req: NextApiRequest, res: any) {
       const user = new User()
 
       user.userName = login
-      user.avatarImage = avatar_url
+      user.avatar = avatar_url
       user.identityType = 'GitHub'
       user.createAt = Date.now()
 
