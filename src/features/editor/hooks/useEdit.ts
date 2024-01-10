@@ -69,10 +69,10 @@ export const useEdit = (initialEditedItems?: Partial<EditedItems>) => {
     }
 
     if (exclude) {
-      setArticle({
-        ...defaultEditedItems,
+      setArticle((prev) => ({
+        ...prev,
         ...excludeUtil(resetResult, exclude)
-      })
+      }))
       return
     }
 
