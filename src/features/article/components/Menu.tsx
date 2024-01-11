@@ -104,7 +104,7 @@ const ListContainer = styled.div`
   }
   .Mui-selected {
     background-color: transparent !important;
-    color: ${({ theme }) => theme.menu.selectedColor} !important;
+    color: var(--primary-orange) !important;
     border-radius: 5px;
   }
 `

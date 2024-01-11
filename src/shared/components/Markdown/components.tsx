@@ -3,7 +3,7 @@ import { NormalComponents } from 'react-markdown/lib/complex-types'
 // https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/prism.html
 // style: coy oneDark
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 export const components:
   | Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents>
@@ -30,7 +30,7 @@ export const components:
       <SyntaxHighlighter
         language={match?.[1]}
         showLineNumbers={true}
-        style={coldarkDark as any}
+        style={a11yDark as any}
         customStyle={{ borderRadius: 0 }}
         PreTag='div'
         className='syntax-hight-wrapper'

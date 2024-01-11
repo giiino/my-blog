@@ -18,7 +18,6 @@ declare module '@emotion/react' {
     menu: {
       color: string
       hoverColor: string
-      selectedColor: string
     }
     card: {
       titleColor: string

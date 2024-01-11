@@ -11,7 +11,7 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
         tabHoverColor: 'var(--primary-blue-4)'
       },
       section: {
-        titleColor: 'var(--primary-blue-4)'
+        titleColor: 'var(--primary-gray-400)'
       },
       footer: {
         bgColor: 'var(--primary-gray-100)',
@@ -20,11 +20,10 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
       },
       menu: {
         color: 'var(--primary-gray-300)',
-        hoverColor: 'var(--primary-gray-400)',
-        selectedColor: 'var(--primary-blue-4)'
+        hoverColor: 'var(--primary-gray-400)'
       },
       card: {
-        titleColor: 'var(--primary-dark)',
+        titleColor: 'var(--primary-gray-400)',
         summaryColor: 'var(--primary-gray-200)',
         summaryHoverColor: 'var(--primary-blue-4)',
         timeColor: 'var(--primary-gray-400)'
@@ -56,8 +55,7 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
       },
       menu: {
         color: 'var(--primary-gray-100)',
-        hoverColor: 'var(--primary-gray-200)',
-        selectedColor: 'var(--primary-orange)'
+        hoverColor: 'var(--primary-gray-200)'
       },
       card: {
         titleColor: 'var(--primary-gray-100)',
