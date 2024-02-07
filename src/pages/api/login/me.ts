@@ -23,13 +23,13 @@ export default async function handler(
     }
 
     const AppDataSource = await getDataSource()
-    const articleRepo = await AppDataSource.getRepository(User).findOne({
+    const postRepo = await AppDataSource.getRepository(User).findOne({
       where: {
         userName: userInfo.userName
       }
     })
 
-    if (!articleRepo) {
+    if (!postRepo) {
       return res.status(401).json({ message: '用戶已不存在' })
     }
 

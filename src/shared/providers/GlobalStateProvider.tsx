@@ -4,13 +4,13 @@ import { useUser } from '@/shared/hooks/use-queries'
 import { UserInfo } from '@/shared/types/api/login'
 
 import { ThemeMode } from '../types/ui'
-import { getInitialColorMode } from '../utils/getInitialColorMode'
+import { getInitialColorMode } from '../utils/get-initial-color-mode'
 
 interface ContextProps {
   userInfo: UserInfo | undefined
   themeMode: ThemeMode | undefined
-  articleCategory: string
-  setArticleCategory: React.Dispatch<React.SetStateAction<string>>
+  postCategory: string
+  setPostCategory: React.Dispatch<React.SetStateAction<string>>
   setThemeMode: React.Dispatch<React.SetStateAction<ThemeMode | undefined>>
 }
 
@@ -20,7 +20,7 @@ GlobalStateContext.displayName = 'GlobalStateContext'
 
 const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [themeMode, setThemeMode] = useState<ThemeMode | undefined>(undefined)
-  const [articleCategory, setArticleCategory] = useState('')
+  const [postCategory, setPostCategory] = useState('')
 
   const { data: userInfo } = useUser()
 
@@ -29,8 +29,8 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
       value={{
         userInfo,
         themeMode,
-        articleCategory,
-        setArticleCategory,
+        postCategory,
+        setPostCategory,
         setThemeMode
       }}
     >

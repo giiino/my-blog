@@ -1,0 +1,38 @@
+import type { NextApiRequest } from 'next'
+
+import { getDataSource } from '@/db'
+import { Post } from '@/db/entity/Post'
+import { ApiResponse } from '@/shared/types/api'
+import { isAdmin } from '@/shared/utils/jwt'
+
+export async function getCategories() {
+  const AppDataSource = await getDataSource()
+  const postRepo = AppDataSource.getMongoRepository(Post)
+  const result: string[] = await postRepo.distinct(
+    'category',
+    { isDelete: 0 },
+    {}
+  )
+  return result
+}
+
+export default async function handler(
+  req: NextApiRequest,
+  res: ApiResponse<string[]>
+) {
+  if (req.method !== 'GET') {
+    res.status(405).end()
+  }
+
+  try {
+    if (!isAdmin({ req, res })) {
+      return res.status(403).json({ message: '權限不足，獲取失敗' })
+    }
+
+    const data = await getCategories()
+    return res.status(200).json(data)
+  } catch (error) {
+    console.error('資料庫出錯' + error)
+    return res.status(500).json({ message: '資料庫發生錯誤' })
+  }
+}

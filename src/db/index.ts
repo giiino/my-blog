@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
 
-import { Article } from './entity/Article'
+import { Post } from './entity/Post'
 import { User } from './entity/User'
 
 const AppDataSource = new DataSource({
@@ -10,7 +10,7 @@ const AppDataSource = new DataSource({
   useNewUrlParser: true,
   synchronize: true,
   logging: true,
-  entities: [User, Article]
+  entities: [User, Post]
 })
 
 AppDataSource.initialize()

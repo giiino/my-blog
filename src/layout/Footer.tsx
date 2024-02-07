@@ -20,7 +20,7 @@ const Footer = () => {
       <InfoWrapper>
         <RoutesWrapper>
           <Link href={'/'}>首頁</Link>
-          <Link href={'/article'}>文章</Link>
+          <Link href={'/post'}>文章</Link>
         </RoutesWrapper>
         <Icons>
           <Link href={constants.MY_GITHUB_URL}>

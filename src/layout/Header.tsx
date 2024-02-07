@@ -67,7 +67,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
           </RouteButton>
           <RouteButton
             className='route-btn'
-            href='/article'
+            href='/post'
             style={{ marginRight: '20px' }}
           >
             文章

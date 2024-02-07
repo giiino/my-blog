@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query'
 import { hasCookie } from 'cookies-next'
 
-import { MenuCategoriesResponse } from '@/shared/types/api/article'
 import { UserInfo } from '@/shared/types/api/login'
+import { MenuCategoriesResponse } from '@/shared/types/api/post'
 
-import { axiosInstance } from '../utils/axiosInstance'
+import { axiosInstance } from '../utils/axios-instance'
 
 export const useMenuCategory = () => {
   return useQuery<MenuCategoriesResponse[]>(['menu-category'], async () => {
-    const response = await axiosInstance.get('/api/article/get/menu-categories')
+    const response = await axiosInstance.get('/api/post/get/menu-categories')
     return response.data
   })
 }

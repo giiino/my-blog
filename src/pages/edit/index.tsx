@@ -2,16 +2,16 @@ import { useState } from 'react'
 
 import { GetServerSideProps } from 'next'
 
-import { ArticleInfoModal } from '@/features/editor/components/ArticleInfoModal'
 import { ContentEditor } from '@/features/editor/components/Editor'
-import { usePublishArticle } from '@/features/editor/hooks/use-mutations'
-import { useEdit } from '@/features/editor/hooks/useEdit'
+import { PostInfoModal } from '@/features/editor/components/post-info-modal'
+import { useEdit } from '@/features/editor/hooks/use-edit'
+import { usePublishPost } from '@/features/editor/hooks/use-mutations'
 import { isAdmin } from '@/shared/utils/jwt'
 
 const Editor = () => {
-  const { mutate: publish } = usePublishArticle()
+  const { mutate: publish } = usePublishPost()
   const {
-    article: { content, title, category, coverImage, isReadme },
+    post: { content, title, category, coverImage, isReadme },
     reset,
     onCategoryChange,
     onTitleChange,
@@ -23,18 +23,18 @@ const Editor = () => {
     publish({ content, title, category, coverImage, isReadme })
   }
 
-  const [articleInfoModalOpen, setIsArticleInfoModalOpen] = useState(false)
+  const [postInfoModalOpen, setIsPostInfoModalOpen] = useState(false)
 
-  const onArticleInfoModalOpen = () => setIsArticleInfoModalOpen(true)
+  const onPostInfoModalOpen = () => setIsPostInfoModalOpen(true)
   const handleClose = () => {
     reset({ exclude: ['content'] })
-    setIsArticleInfoModalOpen(false)
+    setIsPostInfoModalOpen(false)
   }
 
   return (
     <>
-      <ArticleInfoModal
-        open={articleInfoModalOpen}
+      <PostInfoModal
+        open={postInfoModalOpen}
         title={title}
         category={category}
         isReadme={isReadme}
@@ -49,7 +49,7 @@ const Editor = () => {
       <ContentEditor
         value={content}
         onChange={onContentChange}
-        onArticleInfoModalOpen={onArticleInfoModalOpen}
+        onPostInfoModalOpen={onPostInfoModalOpen}
       />
     </>
   )

@@ -4,7 +4,7 @@ import { ThemeProvider } from '@emotion/react'
 import styled from '@emotion/styled'
 
 import { styledThemeConf } from '../constants/conf/emotionTheme'
-import { getInitialColorMode } from '../utils/getInitialColorMode'
+import { getInitialColorMode } from '../utils/get-initial-color-mode'
 import { useGlobalState } from './GlobalStateProvider'
 
 const EmotionThemeProvider = ({ children }: { children: React.ReactNode }) => {

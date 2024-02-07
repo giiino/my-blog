@@ -11,11 +11,11 @@ import {
   Stack
 } from '@mui/material'
 
-import { Menu } from '@/features/article/components/Menu'
+import { Menu } from '@/features/post/components/Menu'
 import { RouteButton } from '@/shared/components/buttons/RouteButton'
 import { AdminOnly } from '@/shared/components/lib/AdminOnly'
 import { useMenuCategory } from '@/shared/hooks/use-queries'
-import { useRouteChange } from '@/shared/hooks/useRouteChange'
+import { useRouteChange } from '@/shared/hooks/use-route-change'
 import { scrollBarStyle } from '@/styles/globals'
 
 interface SiderbarProps {
@@ -55,7 +55,7 @@ const Siderbar = ({ isOpen, setIsOpen }: SiderbarProps) => {
           <RouteButton href='/' style={{ marginRight: '20px' }}>
             首頁
           </RouteButton>
-          <RouteButton href='/article' style={{ marginRight: '20px' }}>
+          <RouteButton href='/post' style={{ marginRight: '20px' }}>
             文章
           </RouteButton>
           <AdminOnly>

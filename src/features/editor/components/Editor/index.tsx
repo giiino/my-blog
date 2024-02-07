@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 
 import { Markdown } from '@/shared/components/Markdown'
 
-import { SubmitPlugin } from './SubmitPlugin'
+import { SubmitPlugin } from './submit-plugin'
 
 const MdEditor = dynamic(
   () => {
@@ -27,13 +27,13 @@ const MdEditor = dynamic(
 interface ContentEditorProps {
   value: string
   onChange: ({ text }: { text: string }) => void
-  onArticleInfoModalOpen: () => void
+  onPostInfoModalOpen: () => void
 }
 
 export function ContentEditor({
   value,
   onChange,
-  onArticleInfoModalOpen
+  onPostInfoModalOpen
 }: ContentEditorProps) {
   return (
     <StyledMdEditor
@@ -42,7 +42,7 @@ export function ContentEditor({
         <Markdown style={{ color: '#000' }}>{text}</Markdown>
       )}
       onChange={onChange}
-      config={{ onArticleInfoModalOpen }}
+      config={{ onPostInfoModalOpen }}
       htmlClass='editor'
     />
   )

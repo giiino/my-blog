@@ -9,7 +9,7 @@ export const Banner = () => {
         <h2>GN&ensp;DEV</h2>
       </TitleSection>
       <Image src='/banner.jpg' width='1200' height='400' alt='首頁大圖' />
-      <EnterButton href={'/article'}>進入文章</EnterButton>
+      <EnterButton href={'/post'}>進入文章</EnterButton>
     </Container>
   )
 }

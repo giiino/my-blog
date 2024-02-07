@@ -52,8 +52,8 @@ export default async function handler(req: NextApiRequest, res: any) {
     const { login, avatar_url } = githubUserInfo.data
 
     const AppDataSource = await getDataSource()
-    const articleRepo = AppDataSource.getRepository(User)
-    const userInfo = await articleRepo.findOne({
+    const postRepo = AppDataSource.getRepository(User)
+    const userInfo = await postRepo.findOne({
       where: {
         identityType: 'GitHub',
         userName: login
@@ -93,7 +93,7 @@ export default async function handler(req: NextApiRequest, res: any) {
       if (errors.length > 0) {
         return res.status(400).json({ message: formatValidatorError(errors) })
       } else {
-        await articleRepo.save(user)
+        await postRepo.save(user)
       }
 
       const token = generateJWT(serialize(userInfo))

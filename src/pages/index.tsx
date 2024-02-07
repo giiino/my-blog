@@ -2,19 +2,19 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
 import { Banner, Section } from '@/features/home/components'
 import SEO from '@/shared/components/lib/SEO'
-import { ArticleCardResponse } from '@/shared/types/api/article'
+import { PostCardResponse } from '@/shared/types/api/post'
 import { serialize } from '@/shared/utils/format'
 
-import { getLatestArticle } from './api/article/get/latest'
+import { getLatestPost } from './api/post/get/latest'
 
 const Home = ({
-  latestArticles
+  latestPosts
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
       <SEO />
       <Banner />
-      <Section articles={latestArticles} title={'最新文章'} />
+      <Section posts={latestPosts} title={'最新文章'} />
     </>
   )
 }
@@ -22,13 +22,13 @@ const Home = ({
 export default Home
 
 export const getStaticProps: GetStaticProps<{
-  latestArticles?: ArticleCardResponse[]
+  latestPosts?: PostCardResponse[]
 }> = async () => {
   try {
-    const data = await getLatestArticle()
+    const data = await getLatestPost()
     return {
       props: {
-        latestArticles: serialize(data)
+        latestPosts: serialize(data)
       },
       revalidate: 60
     }

@@ -4,26 +4,26 @@ import { Stack } from '@mui/material'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next/types'
 
-import { ArticleInfoModal } from '@/features/editor/components/ArticleInfoModal'
 import { ContentEditor } from '@/features/editor/components/Editor'
-import { useUpdateArticle } from '@/features/editor/hooks/use-mutations'
+import { PostInfoModal } from '@/features/editor/components/post-info-modal'
+import { useEdit } from '@/features/editor/hooks/use-edit'
+import { useUpdatePost } from '@/features/editor/hooks/use-mutations'
 import { useEditorData } from '@/features/editor/hooks/use-queries'
-import { useEdit } from '@/features/editor/hooks/useEdit'
-import { PageLoading } from '@/shared/components/loading/PageLoading'
-import { ArticleEditResponse } from '@/shared/types/api/article'
+import { PageLoading } from '@/shared/components/loading/page-loading'
+import { PostEditResponse } from '@/shared/types/api/post'
 import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, serialize } from '@/shared/utils/format'
 import { isAdmin } from '@/shared/utils/jwt'
 
-import { getArticleById } from '../api/article/get'
+import { getPostById } from '../api/post/get'
 
 const Editor = () => {
   const { query } = useRouter()
   const { data: editorData, isLoading } = useEditorData(query.id as string)
-  const { mutate: update } = useUpdateArticle()
+  const { mutate: update } = useUpdatePost()
 
   const {
-    article: { content, title, category, isReadme, coverImage },
+    post: { content, title, category, isReadme, coverImage },
     reset,
     onCategoryChange,
     onTitleChange,
@@ -43,12 +43,12 @@ const Editor = () => {
     })
   }
 
-  const [articleInfoModalOpen, setIsArticleInfoModalOpen] = useState(false)
+  const [postInfoModalOpen, setIsPostInfoModalOpen] = useState(false)
 
-  const onArticleInfoModalOpen = () => setIsArticleInfoModalOpen(true)
+  const onPostInfoModalOpen = () => setIsPostInfoModalOpen(true)
   const handleClose = () => {
     reset({ exclude: ['content'] })
-    setIsArticleInfoModalOpen(false)
+    setIsPostInfoModalOpen(false)
   }
 
   if (isLoading) return <PageLoading open={isLoading} />
@@ -57,8 +57,8 @@ const Editor = () => {
   return (
     <>
       <Stack>
-        <ArticleInfoModal
-          open={articleInfoModalOpen}
+        <PostInfoModal
+          open={postInfoModalOpen}
           title={title}
           category={category}
           coverImage={coverImage}
@@ -73,7 +73,7 @@ const Editor = () => {
         <ContentEditor
           value={content}
           onChange={onContentChange}
-          onArticleInfoModalOpen={onArticleInfoModalOpen}
+          onPostInfoModalOpen={onPostInfoModalOpen}
         />
       </Stack>
     </>
@@ -83,7 +83,7 @@ const Editor = () => {
 export default Editor
 
 export const getServerSideProps: GetServerSideProps<{
-  articleData: ArticleEditResponse
+  postData: PostEditResponse
 }> = async ({ req, res, params }) => {
   const id = params?.id as string
 
@@ -93,7 +93,7 @@ export const getServerSideProps: GetServerSideProps<{
     }
   }
   try {
-    const result = await getArticleById(id)
+    const result = await getPostById(id)
 
     if (!result) {
       return {
@@ -101,11 +101,11 @@ export const getServerSideProps: GetServerSideProps<{
       }
     }
 
-    const articleData = serialize(exclude(result, ['updateTime']))
+    const postData = serialize(exclude(result, ['updateTime']))
 
     return {
       props: {
-        articleData
+        postData: postData
       }
     }
   } catch (error) {

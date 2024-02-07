@@ -1,6 +1,6 @@
-import { Article } from '@/db/entity/Article'
+import { Post } from '@/db/entity/Post'
 
-export const formatArticleResponse = (target: Partial<Article>) => {
+export const formatPostResponse = (target: Partial<Post>) => {
   return {
     ...target,
     isReadme: target?.isReadme === 1

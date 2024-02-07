@@ -7,7 +7,7 @@ import utc from 'dayjs/plugin/utc'
 import type { AppProps } from 'next/app'
 
 import Layout from '@/layout'
-import { AppLoading } from '@/shared/components/loading/AppLoading'
+import { AppLoading } from '@/shared/components/loading/app-loading'
 import AppProvider from '@/shared/providers'
 import '@/styles/globals.css'
 

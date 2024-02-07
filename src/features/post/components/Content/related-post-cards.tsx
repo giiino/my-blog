@@ -1,27 +1,24 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Grid, Stack } from '@mui/material'
 
 import { Title } from '@/features/post/components/Title'
 import { PostCard } from '@/features/post/components/post-card'
 import { PostCardResponse } from '@/shared/types/api/post'
 import { isVoid } from '@/shared/utils/check'
 
-interface SectionProps {
-  posts: PostCardResponse[] | undefined
-  title: string
+interface RelatedPostCardsProps {
+  postCardsData: PostCardResponse[] | undefined
 }
 
-export const Section = ({ posts, title }: SectionProps) => {
-  if (isVoid(posts)) {
+export const RelatedPostCards = ({ postCardsData }: RelatedPostCardsProps) => {
+  if (isVoid(postCardsData)) {
     return null
   }
 
   return (
     <Container>
-      <SectionTitle>{title}</SectionTitle>
+      <Title style={{ marginBottom: '35px' }}>相關文章</Title>
       <CardWrapper>
-        {posts!.map(({ _id, ...restItem }) => {
+        {postCardsData!.map(({ _id, ...restItem }) => {
           const id = String(_id)
           return <PostCard key={id} id={id} {...restItem} />
         })}
@@ -31,18 +28,12 @@ export const Section = ({ posts, title }: SectionProps) => {
 }
 
 const Container = styled.div`
-  max-width: 990px;
-  width: 85vw;
-  margin: auto;
-  padding: 40px 0;
+  padding: 35px 0;
+  border-top: 1px solid #e4e4e4;
 `
 
 const CardWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  gap: 30px;
-`
-
-export const SectionTitle = styled(Title)`
-  margin-bottom: 30px;
+  gap: 20px;
 `
