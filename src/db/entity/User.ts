@@ -26,7 +26,6 @@ export class User {
   avatar: string = '';
 
   @IsInt()
-  @Length(1)
   @Column()
   isAdmin: number = 0;
 
