@@ -16,7 +16,6 @@ export class User {
   @Column()
   userName: string = '';
 
-  @IsNotEmpty()
   @IsString()
   @Column()
   password: string = '';
