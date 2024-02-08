@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { NextApiRequest } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 import { getDataSource } from '@/db'
 import { User } from '@/db/entity/User'
@@ -17,7 +17,7 @@ import { formatValidatorError, validate } from '@/shared/utils/validator'
 const clientID = GITHUB_CLIENT_ID
 const clientSecret = process.env.GITHUB_CLIENT_SECRET
 
-export default async function handler(req: NextApiRequest, res: any) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { code, error } = req.query
 

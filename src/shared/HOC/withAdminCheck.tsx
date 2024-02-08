@@ -2,13 +2,13 @@ import { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { useUser } from '../hooks/use-queries'
+import { useGlobalState } from '../providers/GlobalStateProvider'
 
 export const withAdminCheck = <T extends {}>(
   WrappedComponent: React.ComponentType<T>
 ) => {
   return (props: T) => {
-    const { data: userInfo } = useUser()
+    const { userInfo } = useGlobalState()
     const { replace } = useRouter()
     const isAdmin =
       userInfo?.isAdmin === 1 || process.env.NODE_ENV === 'development'
