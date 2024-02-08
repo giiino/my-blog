@@ -2,24 +2,21 @@ import { useState } from 'react'
 
 import { Stack } from '@mui/material'
 import { useRouter } from 'next/router'
-import { GetServerSideProps } from 'next/types'
 
 import { ContentEditor } from '@/features/editor/components/Editor'
 import { PostInfoModal } from '@/features/editor/components/post-info-modal'
 import { useEdit } from '@/features/editor/hooks/use-edit'
 import { useUpdatePost } from '@/features/editor/hooks/use-mutations'
 import { useEditorData } from '@/features/editor/hooks/use-queries'
+import { withAdminCheck } from '@/shared/HOC/withAdminCheck'
 import { PageLoading } from '@/shared/components/loading/page-loading'
-import { PostEditResponse } from '@/shared/types/api/post'
-import { isValidObjectId } from '@/shared/utils/check'
-import { exclude, serialize } from '@/shared/utils/format'
-import { isAdmin } from '@/shared/utils/jwt'
-
-import { getPostById } from '../api/post/get'
 
 const Editor = () => {
   const { query } = useRouter()
-  const { data: editorData, isLoading } = useEditorData(query.id as string)
+
+  const { data: editorData, isLoading } = useEditorData(
+    query.id as string | undefined
+  )
   const { mutate: update } = useUpdatePost()
 
   const {
@@ -53,7 +50,6 @@ const Editor = () => {
 
   if (isLoading) return <PageLoading open={isLoading} />
 
-  if (!editorData) return null
   return (
     <>
       <Stack>
@@ -80,37 +76,4 @@ const Editor = () => {
   )
 }
 
-export default Editor
-
-export const getServerSideProps: GetServerSideProps<{
-  postData: PostEditResponse
-}> = async ({ req, res, params }) => {
-  const id = params?.id as string
-
-  if (!isValidObjectId(id) || !isAdmin({ req, res })) {
-    return {
-      notFound: true
-    }
-  }
-  try {
-    const result = await getPostById(id)
-
-    if (!result) {
-      return {
-        notFound: true
-      }
-    }
-
-    const postData = serialize(exclude(result, ['updateTime']))
-
-    return {
-      props: {
-        postData: postData
-      }
-    }
-  } catch (error) {
-    return {
-      notFound: true
-    }
-  }
-}
+export default withAdminCheck(Editor)

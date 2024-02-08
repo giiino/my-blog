@@ -1,12 +1,10 @@
 import { useState } from 'react'
 
-import { GetServerSideProps } from 'next'
-
 import { ContentEditor } from '@/features/editor/components/Editor'
 import { PostInfoModal } from '@/features/editor/components/post-info-modal'
 import { useEdit } from '@/features/editor/hooks/use-edit'
 import { usePublishPost } from '@/features/editor/hooks/use-mutations'
-import { isAdmin } from '@/shared/utils/jwt'
+import { withAdminCheck } from '@/shared/HOC/withAdminCheck'
 
 const Editor = () => {
   const { mutate: publish } = usePublishPost()
@@ -55,19 +53,4 @@ const Editor = () => {
   )
 }
 
-export default Editor
-
-export const getServerSideProps: GetServerSideProps<{}> = async ({
-  req,
-  res
-}) => {
-  if (!isAdmin({ req, res })) {
-    return {
-      notFound: true
-    }
-  }
-
-  return {
-    props: {}
-  }
-}
+export default withAdminCheck(Editor)

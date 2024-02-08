@@ -25,7 +25,7 @@ export default async function handler(
 
     return res.status(200).json(exclude(data, ['updateTime', 'createTime']))
   } catch (error) {
-    console.error('資料庫出錯' + error)
+    console.error('get post by id error: ' + error)
     return res.status(500).json({ message: '資料庫發生錯誤' })
   }
 }

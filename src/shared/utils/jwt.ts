@@ -1,35 +1,42 @@
 import jwt from 'jsonwebtoken'
 
+import * as constants from '@/shared/constants/auth'
 import type { UserInfo } from '@/shared/types/api/login'
 
 import { getCookie } from './cookie'
 
 const privateKey = process.env.JWT_PRIVATE_KEY!
-const expiresIn = process.env.JWT_EXPIRES_IN!
 
-export const generateJWT = (payload: string | object | Buffer) => {
+export const generateJWT = (
+  payload: string | object | Buffer,
+  expiresIn?: string | number | undefined
+) => {
   return jwt.sign(payload, privateKey, { expiresIn })
 }
 
-export const decodeAndVerifyJWT = (token: string) => {
-  try {
-    const decoded = jwt.verify(token, privateKey)
-    return decoded
-  } catch (error) {
-    return null
-  }
-}
+export const getVerifiedJwtUser = (
+  { req, res }: any,
+  { isRefreshToken }: { isRefreshToken?: boolean } = {}
+) => {
+  const cookie = isRefreshToken
+    ? constants.REFRESH_TOKEN_COOKIE
+    : constants.ACCESS_TOKEN_COOKIE
 
-export const getJwtUser = ({ req, res }: any) => {
-  const token = getCookie('token', {
+  const token = getCookie(cookie, {
     req,
     res
   }) as string
 
-  return decodeAndVerifyJWT(token) as UserInfo | null
+  if (!token) return null
+
+  try {
+    return jwt.verify(token, privateKey) as UserInfo
+  } catch {
+    return null
+  }
 }
 
 export const isAdmin = ({ req, res }: any) => {
-  const userInfo = getJwtUser({ req, res })
+  const userInfo = getVerifiedJwtUser({ req, res })
   return userInfo?.isAdmin === 1 || process.env.NODE_ENV === 'development'
 }

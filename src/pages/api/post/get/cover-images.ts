@@ -3,7 +3,7 @@ import { NextApiRequest } from 'next'
 import { getDataSource } from '@/db'
 import { Post } from '@/db/entity/Post'
 import { ApiResponse } from '@/shared/types/api'
-import { isAdmin } from '@/shared/utils/jwt'
+import { getVerifiedJwtUser, isAdmin } from '@/shared/utils/jwt'
 
 export async function getConverImages() {
   const AppDataSource = await getDataSource()
@@ -26,6 +26,10 @@ export default async function handler(
   }
 
   try {
+    if (!getVerifiedJwtUser({ req, res })) {
+      return res.status(401).json({ message: '認證過期' })
+    }
+
     if (!isAdmin({ req, res })) {
       return res.status(403).json({ message: '權限不足，獲取失敗' })
     }

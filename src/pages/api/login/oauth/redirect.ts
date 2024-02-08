@@ -3,13 +3,14 @@ import { NextApiRequest } from 'next'
 
 import { getDataSource } from '@/db'
 import { User } from '@/db/entity/User'
+import * as constants from '@/shared/constants/auth'
 import {
   GITHUB_ACCESS_TOKEN_URL,
   GITHUB_CLIENT_ID,
   GITHUB_USER_INFO_URL
-} from '@/shared/constants/oauth'
+} from '@/shared/constants/auth'
 import { setCookie } from '@/shared/utils/cookie'
-import { serialize } from '@/shared/utils/format'
+import { pick, serialize } from '@/shared/utils/format'
 import { generateJWT } from '@/shared/utils/jwt'
 import { formatValidatorError, validate } from '@/shared/utils/validator'
 
@@ -25,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: any) {
     }
 
     if (!code) {
-      return res.status(401).json({
+      return res.status(403).json({
         message: '認證code未提供，發生錯誤'
       })
     }
@@ -61,25 +62,34 @@ export default async function handler(req: NextApiRequest, res: any) {
     })
 
     if (userInfo) {
-      const token = generateJWT(serialize(userInfo))
+      const jwtPayload = serialize(
+        pick(userInfo, ['userName', 'isAdmin', 'avatar'])
+      )
+      const accessToken = generateJWT(
+        jwtPayload,
+        constants.ACCESS_TOKEN_EXPIRES_IN
+      )
       setCookie({
-        key: 'token',
-        value: token,
+        key: constants.ACCESS_TOKEN_COOKIE,
+        value: accessToken,
+        req,
+        res
+      })
+      const refreshToken = generateJWT(
+        jwtPayload,
+        constants.REFRESH_TOKEN_EXPIRES_IN
+      )
+      setCookie({
+        key: constants.REFRESH_TOKEN_COOKIE,
+        value: refreshToken,
         req,
         res,
         options: {
-          httpOnly: true
+          httpOnly: true,
+          sameSite: 'strict'
         }
       })
-      setCookie({
-        key: 'enabledFetchUserInfo',
-        value: 'true',
-        req,
-        res,
-        options: {
-          httpOnly: false
-        }
-      })
+
       return res.redirect(307, '/')
     } else {
       const user = new User()
@@ -95,9 +105,33 @@ export default async function handler(req: NextApiRequest, res: any) {
       } else {
         await postRepo.save(user)
       }
-
-      const token = generateJWT(serialize(userInfo))
-      setCookie({ key: 'token', value: token, req, res })
+      const jwtPayload = serialize(
+        pick(user, ['userName', 'isAdmin', 'avatar'])
+      )
+      const accessToken = generateJWT(
+        jwtPayload,
+        constants.ACCESS_TOKEN_EXPIRES_IN
+      )
+      setCookie({
+        key: constants.ACCESS_TOKEN_COOKIE,
+        value: accessToken,
+        req,
+        res
+      })
+      const refreshToken = generateJWT(
+        jwtPayload,
+        constants.REFRESH_TOKEN_EXPIRES_IN
+      )
+      setCookie({
+        key: constants.REFRESH_TOKEN_COOKIE,
+        value: refreshToken,
+        req,
+        res,
+        options: {
+          httpOnly: true,
+          sameSite: 'strict'
+        }
+      })
 
       res.redirect(307, '/')
     }

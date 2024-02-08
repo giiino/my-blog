@@ -4,7 +4,7 @@ import type { NextApiRequest } from 'next'
 import { getDataSource } from '@/db'
 import { Post } from '@/db/entity/Post'
 import { ApiResponse } from '@/shared/types/api'
-import { isAdmin } from '@/shared/utils/jwt'
+import { getVerifiedJwtUser, isAdmin } from '@/shared/utils/jwt'
 import { formatValidatorError, validate } from '@/shared/utils/validator'
 
 export default async function handler(
@@ -26,6 +26,10 @@ export default async function handler(
   } = req.body
 
   try {
+    if (!getVerifiedJwtUser({ req, res })) {
+      return res.status(401).json({ message: '認證過期' })
+    }
+
     if (!isAdmin({ req, res })) {
       return res.status(403).json({ message: '權限不足，更新失敗' })
     }
@@ -63,7 +67,7 @@ export default async function handler(
       return res.status(404).json({ message: '變更失敗' })
     }
   } catch (error) {
-    console.error('資料庫出錯' + error)
+    console.error('update error' + error)
     return res.status(500).json({ message: '資料庫發生錯誤' })
   }
 }

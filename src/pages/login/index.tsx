@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { Stack } from '@mui/material'
 
-import { LOGIN_GITHUB_URL } from '@/shared/constants/oauth'
+import { LOGIN_GITHUB_URL } from '@/shared/constants/auth'
 
 const Login = () => {
   return (

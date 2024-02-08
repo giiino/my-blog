@@ -1,5 +1,5 @@
-import { Entity, ObjectId, ObjectIdColumn, Column } from "typeorm";
-import { IsInt, IsNotEmpty, IsString, Length } from "class-validator";
+import { IsInt, IsNotEmpty, IsString } from "class-validator";
+import { Column, Entity, ObjectId, ObjectIdColumn } from "typeorm";
 
 @Entity({ name: "user" })
 export class User {

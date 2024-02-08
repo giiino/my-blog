@@ -60,7 +60,7 @@ export default async function handler(
     const data = await getRelatedPosts(id)
     return res.status(200).json(data)
   } catch (error) {
-    console.error('資料庫出錯' + error)
+    console.error('get related error' + error)
     return res.status(500).json({ message: '資料庫發生錯誤' })
   }
 }

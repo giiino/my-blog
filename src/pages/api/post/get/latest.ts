@@ -47,7 +47,7 @@ export default async function handler(
 
     return res.status(200).json({ result: data })
   } catch (error) {
-    console.error('資料庫出錯' + error)
+    console.error('get latest error' + error)
     return res.status(500).json({ message: '資料庫發生錯誤' })
   }
 }
