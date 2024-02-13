@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { RouteButton } from '@/shared/components/buttons/RouteButton'
+import { RouteButton } from '@/shared/components/buttons/route-button'
 import { AdminOnly } from '@/shared/components/lib/AdminOnly'
 import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
 

@@ -1,9 +1,7 @@
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react'
 import { NormalComponents } from 'react-markdown/lib/complex-types'
-// https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/prism.html
-// style: coy oneDark
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+
+import { Code } from './code'
 
 export const components:
   | Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents>
@@ -25,30 +23,11 @@ export const components:
   },
   code: ({ children = [], className, ...props }) => {
     const match = /language-(\w+)/.exec(className || '')
-
     return (
-      <SyntaxHighlighter
-        language={match?.[1]}
-        showLineNumbers={true}
-        style={a11yDark as any}
-        customStyle={{ borderRadius: 0 }}
-        PreTag='div'
-        className='syntax-hight-wrapper'
-        {...props}
-      >
-        {replaceLast(children as string[])}
-      </SyntaxHighlighter>
+      <Code language={match?.[1]} {...props}>
+        {children as string[]}
+      </Code>
     )
   },
   a: (props) => <a {...props} target='_blank' />
-}
-
-/* 刪除最後一個字元 \n */
-const replaceLast = (target: string[]) => {
-  return target.map((item, index) => {
-    if (index === 0) {
-      return item.slice(0, -1)
-    }
-    return item
-  })
 }

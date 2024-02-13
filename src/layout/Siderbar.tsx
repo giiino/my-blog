@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 
 import { Menu } from '@/features/post/components/Menu'
-import { RouteButton } from '@/shared/components/buttons/RouteButton'
+import { RouteButton } from '@/shared/components/buttons/route-button'
 import { AdminOnly } from '@/shared/components/lib/AdminOnly'
 import { useMenuCategory } from '@/shared/hooks/use-queries'
 import { useRouteChange } from '@/shared/hooks/use-route-change'

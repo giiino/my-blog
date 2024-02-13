@@ -64,6 +64,7 @@ export const StyleWrapper = styled.div`
       font-style: normal;
       background-color: ${({ theme }) => theme.markdown.highlightBgColor};
       color: ${({ theme }) => theme.color};
+      word-break: break-all;
       padding: 3px 5px;
       margin: 0 3px;
       border-radius: 5px;

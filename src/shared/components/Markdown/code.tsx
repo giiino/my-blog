@@ -1,0 +1,55 @@
+// https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/prism.html
+// style: coy oneDark
+import { useMemo } from 'react'
+import {
+  Prism as SyntaxHighlighter,
+  SyntaxHighlighterProps
+} from 'react-syntax-highlighter'
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+
+import styled from '@emotion/styled'
+import { css } from '@mui/material'
+
+import { CopyButton } from '../buttons/copy-button'
+
+interface CodeProps extends Omit<SyntaxHighlighterProps, 'children'> {
+  children: string[]
+}
+
+export const Code = ({ children, ...props }: CodeProps) => {
+  const replacedLastWordCode = useMemo(() => {
+    return children.map((item, index) => {
+      if (index === 0) {
+        return item.slice(0, -1)
+      }
+      return item
+    })
+  }, [children])
+
+  return (
+    <Container>
+      <SyntaxHighlighter
+        showLineNumbers={true}
+        style={a11yDark}
+        customStyle={{ borderRadius: 0 }}
+        PreTag='div'
+        className='syntax-hight-wrapper'
+        {...props}
+      >
+        {replacedLastWordCode}
+      </SyntaxHighlighter>
+      <CopyButton
+        copyContent={replacedLastWordCode[0]}
+        css={css`
+          position: absolute;
+          top: 10px;
+          right: 10px;
+        `}
+      />
+    </Container>
+  )
+}
+
+const Container = styled.section`
+  position: relative;
+`
