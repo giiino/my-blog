@@ -1,6 +1,6 @@
 // https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/prism.html
 // style: coy oneDark
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import {
   Prism as SyntaxHighlighter,
   SyntaxHighlighterProps
@@ -17,6 +17,7 @@ interface CodeProps extends Omit<SyntaxHighlighterProps, 'children'> {
 }
 
 export const Code = ({ children, ...props }: CodeProps) => {
+  const [isHover, setIsHover] = useState(false)
   const replacedLastWordCode = useMemo(() => {
     return children.map((item, index) => {
       if (index === 0) {
@@ -26,8 +27,11 @@ export const Code = ({ children, ...props }: CodeProps) => {
     })
   }, [children])
 
+  const handleMouseEnter = () => setIsHover(true)
+  const handleMouseLeave = () => setIsHover(false)
+
   return (
-    <Container>
+    <Container onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <SyntaxHighlighter
         showLineNumbers={true}
         style={a11yDark}
@@ -41,6 +45,7 @@ export const Code = ({ children, ...props }: CodeProps) => {
       <CopyButton
         copyContent={replacedLastWordCode[0]}
         css={css`
+          display: ${isHover ? 'default' : 'none'};
           position: absolute;
           top: 10px;
           right: 10px;

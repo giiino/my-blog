@@ -1,21 +1,20 @@
 import { useEffect } from 'react'
 
-import { GetStaticProps, InferGetStaticPropsType } from 'next/types'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
-import { PostMenu, PostWrapper, Content } from '@/features/post/components'
+import { Content, PostMenu, PostWrapper } from '@/features/post/components'
 import TocHolder from '@/features/post/components/TocHolder'
 import { getPostById } from '@/pages/api/post/get'
 import SEO from '@/shared/components/lib/SEO'
 import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
 import {
+  MenuCategoriesResponse,
   PostCardResponse,
-  PostResponse,
-  MenuCategoriesResponse
+  PostResponse
 } from '@/shared/types/api/post'
 import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 
-import { getAllPosts } from '../api/post/get/all'
 import { getMenuCategories } from '../api/post/get/menu-categories'
 import { getRelatedPosts } from '../api/post/get/related'
 
@@ -23,7 +22,7 @@ const PostPage = ({
   postData,
   menuCategories,
   relatedPost
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { setPostCategory } = useGlobalState()
   const { title, content, coverImage, category } = postData
 
@@ -56,17 +55,7 @@ const PostPage = ({
 
 export default PostPage
 
-export async function getStaticPaths() {
-  const posts = await getAllPosts()
-
-  const paths = posts?.map(({ _id }) => ({
-    params: { id: String(_id) }
-  }))
-
-  return { paths, fallback: false }
-}
-
-export const getStaticProps: GetStaticProps<{
+export const getServerSideProps: GetServerSideProps<{
   postData: Omit<PostResponse, 'isReadme'>
   menuCategories: MenuCategoriesResponse[]
   relatedPost: PostCardResponse[]
@@ -97,8 +86,7 @@ export const getStaticProps: GetStaticProps<{
         postData: serialize(exclude(postData, ['isReadme'])),
         menuCategories: serialize(menuCategories),
         relatedPost: serialize(relatedPost)
-      },
-      revalidate: 60
+      }
     }
   } catch (error) {
     return {

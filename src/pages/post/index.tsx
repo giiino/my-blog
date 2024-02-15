@@ -1,10 +1,10 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next/types'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
-import { PostMenu, PostWrapper, Content } from '@/features/post/components'
+import { Content, PostMenu, PostWrapper } from '@/features/post/components'
 import TocHolder from '@/features/post/components/TocHolder'
 import { getReadmePost } from '@/pages/api/post/get'
 import SEO from '@/shared/components/lib/SEO'
-import { PostResponse, MenuCategoriesResponse } from '@/shared/types/api/post'
+import { MenuCategoriesResponse, PostResponse } from '@/shared/types/api/post'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 
 import { getMenuCategories } from '../api/post/get/menu-categories'
@@ -12,7 +12,7 @@ import { getMenuCategories } from '../api/post/get/menu-categories'
 const PostIndexPage = ({
   postData,
   menuCategories
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { title, content, coverImage } = postData
   return (
     <>
@@ -32,7 +32,7 @@ const PostIndexPage = ({
 
 export default PostIndexPage
 
-export const getStaticProps: GetStaticProps<{
+export const getServerSideProps: GetServerSideProps<{
   postData: Omit<PostResponse, 'isReadme'>
   menuCategories: MenuCategoriesResponse[]
 }> = async () => {
@@ -52,8 +52,7 @@ export const getStaticProps: GetStaticProps<{
       props: {
         postData: serialize(exclude(postData, ['isReadme'])),
         menuCategories: serialize(menuCategories)
-      },
-      revalidate: 60
+      }
     }
   } catch (error) {
     return {
