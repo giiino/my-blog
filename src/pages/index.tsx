@@ -1,4 +1,4 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 
 import { Banner, Section } from '@/features/home/components'
 import SEO from '@/shared/components/lib/SEO'
@@ -9,7 +9,7 @@ import { getLatestPost } from './api/post/get/latest'
 
 const Home = ({
   latestPosts
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
       <SEO />
@@ -21,7 +21,7 @@ const Home = ({
 
 export default Home
 
-export const getStaticProps: GetStaticProps<{
+export const getServerSideProps: GetServerSideProps<{
   latestPosts?: PostCardResponse[]
 }> = async () => {
   try {
@@ -29,8 +29,7 @@ export const getStaticProps: GetStaticProps<{
     return {
       props: {
         latestPosts: serialize(data)
-      },
-      revalidate: 60
+      }
     }
   } catch (error) {
     console.error('產生靜態頁面發生錯誤，最新文章獲取失敗', error)
