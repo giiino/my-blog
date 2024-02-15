@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { ContentEditor } from '@/features/editor/components/Editor'
-import { PostInfoModal } from '@/features/editor/components/post-info-modal'
-import { useEdit } from '@/features/editor/hooks/use-edit'
-import { usePublishPost } from '@/features/editor/hooks/use-mutations'
+import { ContentEditor } from '@/features/edit/components/Editor'
+import { PostInfoModal } from '@/features/edit/components/post-info-modal'
+import { useEdit } from '@/features/edit/hooks/use-edit'
+import { usePublishPost } from '@/features/edit/hooks/use-mutations'
 import { withAdminCheck } from '@/shared/HOC/withAdminCheck'
 
 const Editor = () => {
