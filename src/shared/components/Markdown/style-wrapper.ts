@@ -14,6 +14,11 @@ export const StyleWrapper = styled.div`
     p {
       white-space: pre-line;
     }
+    img {
+      width: 100%;
+      object-fit: contain;
+      margin-bottom: 20px;
+    }
     ol,
     ul {
       list-style-type: none;

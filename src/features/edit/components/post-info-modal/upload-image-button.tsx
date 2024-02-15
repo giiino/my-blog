@@ -31,14 +31,13 @@ export function UploadImageButton({
     const preview = URL.createObjectURL(e.target.files[0])
 
     onImageUrlChange(preview)
+    const imageFile = e.target.files[0]
 
-    const formData = new FormData()
-    formData.append('image', e.target.files[0])
     const {
       data: {
         data: { url }
       }
-    } = await upload(formData)
+    } = await upload(imageFile)
 
     onImageUrlChange(url)
   }

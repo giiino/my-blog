@@ -6,6 +6,8 @@ import dynamic from 'next/dynamic'
 
 import { Markdown } from '@/shared/components/Markdown'
 
+import { useUploadImage } from '../../hooks/use-mutations'
+import { HighlightPlugin } from './highlight-plugin'
 import { SubmitPlugin } from './submit-plugin'
 
 const MdEditor = dynamic(
@@ -14,6 +16,7 @@ const MdEditor = dynamic(
       import('react-markdown-editor-lite').then((res) => {
         const Editor = res.default
         Editor.use(SubmitPlugin)
+        Editor.use(HighlightPlugin)
 
         resolve(Editor)
       })
@@ -35,6 +38,17 @@ export function ContentEditor({
   onChange,
   onPostInfoModalOpen
 }: ContentEditorProps) {
+  const { mutateAsync: upload } = useUploadImage()
+
+  const handleImageUpload = async (file: File) => {
+    const {
+      data: {
+        data: { url }
+      }
+    } = await upload(file)
+    return Promise.resolve(url)
+  }
+
   return (
     <StyledMdEditor
       value={value}
@@ -43,6 +57,8 @@ export function ContentEditor({
       )}
       onChange={onChange}
       config={{ onPostInfoModalOpen }}
+      onImageUpload={handleImageUpload}
+      allowPasteImage
       htmlClass='editor'
     />
   )

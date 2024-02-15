@@ -47,15 +47,18 @@ export const useUpdatePost = () => {
 //
 export const useUploadImage = () => {
   return useMutation(
-    (formData: FormData) =>
-      axiosInstance.post('https://api.imgbb.com/1/upload', formData, {
+    (file: File) => {
+      const formData = new FormData()
+      formData.append('image', file)
+      return axiosInstance.post('https://api.imgbb.com/1/upload', formData, {
         params: {
           key: process.env.NEXT_PUBLIC_IMGBB_KEY
         },
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      }),
+      })
+    },
     {
       onSuccess: () => {
         toast.success('上傳成功')
