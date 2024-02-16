@@ -8,8 +8,8 @@ import { PostCardResponse, PostResponse } from '@/shared/types/api/post'
 import { isVoid } from '@/shared/utils/check'
 import { formatDate } from '@/shared/utils/format'
 
-import { Setting } from './Setting'
 import { RelatedPostCards } from './related-post-cards'
+import { Setting } from './setting'
 
 interface PostContentProps extends GridProps {
   post: Omit<PostResponse, 'isReadme'>
