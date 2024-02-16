@@ -3,6 +3,7 @@ import { toast } from 'react-hot-toast'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 
+import { uploadCompressImage, uploadImage } from '@/shared/services/upload'
 import { axiosInstance } from '@/shared/utils/axios-instance'
 
 import { PublishParams, UpdateParams } from '../types'
@@ -44,20 +45,16 @@ export const useUpdatePost = () => {
     }
   )
 }
-//
+
 export const useUploadImage = () => {
   return useMutation(
-    (file: File) => {
-      const formData = new FormData()
-      formData.append('image', file)
-      return axiosInstance.post('https://api.imgbb.com/1/upload', formData, {
-        params: {
-          key: process.env.NEXT_PUBLIC_IMGBB_KEY
-        },
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+    async (file: File) => {
+      const [originalImage, compressedImage] = await Promise.all([
+        uploadImage(file),
+        uploadCompressImage(file)
+      ])
+
+      return Promise.resolve(originalImage + ',' + compressedImage)
     },
     {
       onSuccess: () => {

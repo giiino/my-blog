@@ -25,8 +25,7 @@ export const PostCard = ({
       alt='封面圖片'
       width={'400'}
       height={'400'}
-      imageWidth='100%'
-      ratio={0.6}
+      flexibleSize={{ imageWidth: '100%', ratio: 0.6 }}
     />
     <h3 className='title'>{title}</h3>
     <div className='content'>{markdownToTxt(content, 300)}...</div>

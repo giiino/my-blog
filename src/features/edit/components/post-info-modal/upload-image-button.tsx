@@ -33,11 +33,7 @@ export function UploadImageButton({
     onImageUrlChange(preview)
     const imageFile = e.target.files[0]
 
-    const {
-      data: {
-        data: { url }
-      }
-    } = await upload(imageFile)
+    const url = await upload(imageFile)
 
     onImageUrlChange(url)
   }

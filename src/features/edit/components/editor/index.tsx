@@ -41,11 +41,7 @@ export function ContentEditor({
   const { mutateAsync: upload } = useUploadImage()
 
   const handleImageUpload = async (file: File) => {
-    const {
-      data: {
-        data: { url }
-      }
-    } = await upload(file)
+    const url = await upload(file)
     return Promise.resolve(url)
   }
 

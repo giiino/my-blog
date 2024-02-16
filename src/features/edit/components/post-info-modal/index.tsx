@@ -131,8 +131,7 @@ export const PostInfoModal = ({
                   alt='文章編輯預覽圖'
                   width='100'
                   height='100'
-                  imageWidth={'100px'}
-                  ratio={1}
+                  flexibleSize={{ imageWidth: '100px', ratio: 1 }}
                 />
               </ErrorBoundary>
             )}
@@ -185,7 +184,6 @@ const ImageErrorFallback = ({ error }: { error: Error | null }) => (
     alt='圖片顯示錯誤'
     width='100'
     height='100'
-    imageWidth={'100px'}
-    ratio={1}
+    flexibleSize={{ imageWidth: '100px', ratio: 1 }}
   />
 )

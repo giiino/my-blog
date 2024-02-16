@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { Fragment, PropsWithChildren, useState } from 'react'
 
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Image, { ImageProps } from 'next/image'
 
@@ -7,42 +8,85 @@ import { isVoid } from '../../utils/check'
 
 interface EnhancedImageProps extends ImageProps {
   alt: string
-  imageWidth: string
-  ratio: number
+  compressedImageLoader?: string
+  flexibleSize?: { imageWidth: string; ratio: number }
 }
 
 export const EnhancedImage = ({
   alt,
-  imageWidth,
-  ratio,
+  compressedImageLoader,
+  flexibleSize,
   ...props
 }: EnhancedImageProps) => {
+  const [isLoaded, setIsLoaded] = useState(false)
   const [isError, setIsError] = useState(false)
   const imageUrl = props.src
 
   if (isError || isVoid(imageUrl)) {
     return (
-      <ImageContainer ratio={ratio} imageWidth={imageWidth}>
+      <Wrapper flexibleSize={flexibleSize}>
         <Image {...props} src='/img-not-found.png' alt={'圖片找不到'} />
-      </ImageContainer>
+      </Wrapper>
     )
   }
 
   return (
-    <ImageContainer ratio={ratio} imageWidth={imageWidth}>
-      <Image {...props} alt={alt} onError={() => setIsError(true)} />
-    </ImageContainer>
+    <Wrapper flexibleSize={flexibleSize}>
+      <>
+        {!isLoaded && compressedImageLoader && (
+          <Image
+            {...props}
+            width={10}
+            height={10}
+            src={compressedImageLoader}
+            alt={alt}
+            onError={() => setIsError(true)}
+            css={css`
+              backdrop-filter: blur(3px);
+            `}
+          />
+        )}
+        <Image
+          {...props}
+          alt={alt}
+          onLoad={() => setIsLoaded(true)}
+          onError={() => setIsError(true)}
+        />
+      </>
+    </Wrapper>
   )
 }
 
+interface WrapperProps {
+  flexibleSize: { imageWidth: string; ratio: number } | undefined
+}
+
+const Wrapper = ({
+  flexibleSize,
+  children
+}: PropsWithChildren<WrapperProps>) => {
+  if (flexibleSize) {
+    return (
+      <ImageContainer
+        ratio={flexibleSize.ratio}
+        imageWidth={flexibleSize.imageWidth}
+      >
+        {children}
+      </ImageContainer>
+    )
+  }
+
+  return <Fragment>{children}</Fragment>
+}
+
 const ImageContainer = styled.div<{
-  ratio: number
+  ratio: number | undefined
   imageWidth: string
 }>`
   position: relative;
   width: ${({ imageWidth }) => imageWidth};
   padding-bottom: ${({ ratio, imageWidth }) =>
-    `calc(${imageWidth} * ${ratio})`};
+    ratio ? `calc(${imageWidth} * ${ratio})` : 'initial'};
   img {
     position: absolute;
     width: 100%;
