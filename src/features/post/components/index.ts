@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import { Grid } from '@mui/material'
 
-export * from './Content'
+export * from './content'
 export * from './post-menu'
-export * from './Menu'
+export * from './menu'
 
 export const PostWrapper = styled(Grid)`
   width: 95%;

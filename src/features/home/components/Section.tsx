@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Grid, Stack } from '@mui/material'
 
-import { Title } from '@/features/post/components/Title'
 import { PostCard } from '@/features/post/components/post-card'
+import { Title } from '@/features/post/components/title'
 import { PostCardResponse } from '@/shared/types/api/post'
 import { isVoid } from '@/shared/utils/check'
 

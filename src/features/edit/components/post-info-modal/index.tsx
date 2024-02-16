@@ -16,8 +16,8 @@ import {
   TextField
 } from '@mui/material'
 
-import { ErrorBoundary } from '@/shared/components/lib/ErrorBoundary'
-import { HandledImage } from '@/shared/components/lib/HandledImage'
+import { EnhancedImage } from '@/shared/components/lib/enhanced-image'
+import { ErrorBoundary } from '@/shared/components/lib/error-boundary'
 import { isVoid } from '@/shared/utils/check'
 
 import { useCategories } from '../../hooks/use-queries'
@@ -174,7 +174,7 @@ export const PostInfoModal = ({
   )
 }
 
-const PreviewImage = styled(HandledImage)`
+const PreviewImage = styled(EnhancedImage)`
   object-fit: contain;
   border: 1px solid #ccc;
 `

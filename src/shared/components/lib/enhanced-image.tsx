@@ -5,18 +5,18 @@ import Image, { ImageProps } from 'next/image'
 
 import { isVoid } from '../../utils/check'
 
-interface HandledImageProps extends ImageProps {
+interface EnhancedImageProps extends ImageProps {
   alt: string
   imageWidth: string
   ratio: number
 }
 
-export const HandledImage = ({
+export const EnhancedImage = ({
   alt,
   imageWidth,
   ratio,
   ...props
-}: HandledImageProps) => {
+}: EnhancedImageProps) => {
   const [isError, setIsError] = useState(false)
   const imageUrl = props.src
 

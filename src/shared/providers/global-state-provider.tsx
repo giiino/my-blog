@@ -1,10 +1,9 @@
-import React, { ReactNode, createContext, useContext, useState } from 'react'
+import React, { createContext, ReactNode, useContext, useState } from 'react'
 
 import { useUser } from '@/shared/hooks/use-queries'
 import { UserInfo } from '@/shared/types/api/login'
 
 import { ThemeMode } from '../types/ui'
-import { getInitialColorMode } from '../utils/get-initial-color-mode'
 
 interface ContextProps {
   userInfo: UserInfo | undefined

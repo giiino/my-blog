@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import Link from 'next/link'
 
-import { HandledImage } from '@/shared/components/lib/HandledImage'
+import { EnhancedImage } from '@/shared/components/lib/enhanced-image'
 import { formatDate, markdownToTxt } from '@/shared/utils/format'
 
 interface PostCardProps {
@@ -71,4 +71,4 @@ const LinkWrapper = styled(Link)`
   }
 `
 
-const CoverImage = styled(HandledImage)``
+const CoverImage = styled(EnhancedImage)``

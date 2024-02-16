@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
-import { Title } from '@/features/post/components/Title'
 import { PostCard } from '@/features/post/components/post-card'
+import { Title } from '@/features/post/components/title'
 import { PostCardResponse } from '@/shared/types/api/post'
 import { isVoid } from '@/shared/utils/check'
 

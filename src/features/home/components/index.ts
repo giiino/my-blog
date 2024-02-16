@@ -1,2 +1,2 @@
-export * from './Banner'
-export * from './Section'
+export * from './banner'
+export * from './section'

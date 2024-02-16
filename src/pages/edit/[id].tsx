@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Stack } from '@mui/material'
 import { useRouter } from 'next/router'
 
-import { ContentEditor } from '@/features/edit/components/Editor'
+import { ContentEditor } from '@/features/edit/components/editor'
 import { PostInfoModal } from '@/features/edit/components/post-info-modal'
 import { useEdit } from '@/features/edit/hooks/use-edit'
 import { useUpdatePost } from '@/features/edit/hooks/use-mutations'

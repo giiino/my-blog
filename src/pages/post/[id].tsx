@@ -3,10 +3,10 @@ import { useEffect } from 'react'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
 import { Content, PostMenu, PostWrapper } from '@/features/post/components'
-import TocHolder from '@/features/post/components/TocHolder'
+import TocHolder from '@/features/post/components/toc-holder'
 import { getPostById } from '@/pages/api/post/get'
 import SEO from '@/shared/components/lib/SEO'
-import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
+import { useGlobalState } from '@/shared/providers/global-state-provider'
 import {
   MenuCategoriesResponse,
   PostCardResponse,

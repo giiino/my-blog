@@ -1,18 +1,17 @@
 import { ReactNode } from 'react'
 
 import {
-  ThemeProvider as MuiThemeProvider,
-  createTheme
+  createTheme,
+  ThemeProvider as MuiThemeProvider
 } from '@mui/material/styles'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import dynamic from 'next/dynamic'
 
-import { muiThemeConf } from '@/shared/constants/conf/muiTheme'
+import { muiThemeConf } from '@/shared/constants/conf/mui-theme'
 import { reactQueryConf } from '@/shared/constants/conf/react-query'
 
-import EmotionThemeProvider from './EmotionThemeProvider'
-import GlobalStateProvider from './GlobalStateProvider'
+import EmotionThemeProvider from './emotion-theme-provider'
+import GlobalStateProvider from './global-state-provider'
 
 const AppProvider = ({ children }: { children: ReactNode }) => {
   const muiTheme = createTheme(muiThemeConf)

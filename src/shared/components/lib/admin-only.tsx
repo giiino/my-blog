@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { useGlobalState } from '@/shared/providers/GlobalStateProvider'
+import { useGlobalState } from '@/shared/providers/global-state-provider'
 
 export const AdminOnly = ({ children }: { children: ReactNode }) => {
   const { userInfo } = useGlobalState()

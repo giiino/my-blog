@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { ContentEditor } from '@/features/edit/components/Editor'
+import { ContentEditor } from '@/features/edit/components/editor'
 import { PostInfoModal } from '@/features/edit/components/post-info-modal'
 import { useEdit } from '@/features/edit/hooks/use-edit'
 import { usePublishPost } from '@/features/edit/hooks/use-mutations'

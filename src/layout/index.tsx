@@ -3,9 +3,9 @@ import { ReactNode, useState } from 'react'
 import styled from '@emotion/styled'
 import { Stack } from '@mui/material'
 
-import Footer from './Footer'
-import Header from './Header'
-import Siderbar from './Siderbar'
+import Footer from './footer'
+import Header from './header'
+import Siderbar from './siderbar'
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)

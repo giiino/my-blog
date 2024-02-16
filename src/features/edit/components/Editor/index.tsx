@@ -4,7 +4,7 @@ import 'react-markdown-editor-lite/lib/index.css'
 import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
 
-import { Markdown } from '@/shared/components/Markdown'
+import { Markdown } from '@/shared/components/markdown'
 
 import { useUploadImage } from '../../hooks/use-mutations'
 import { HighlightPlugin } from './highlight-plugin'

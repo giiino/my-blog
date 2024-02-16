@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { useGlobalState } from '../providers/GlobalStateProvider'
+import { useGlobalState } from '../providers/global-state-provider'
 
 export const withAdminCheck = <T extends {}>(
   WrappedComponent: React.ComponentType<T>
