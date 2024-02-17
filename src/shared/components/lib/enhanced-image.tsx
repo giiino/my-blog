@@ -1,6 +1,5 @@
 import { Fragment, PropsWithChildren, useState } from 'react'
 
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Image, { ImageProps } from 'next/image'
 
@@ -9,7 +8,7 @@ import { isVoid } from '../../utils/check'
 interface EnhancedImageProps extends ImageProps {
   alt: string
   compressedImageLoader?: string
-  flexibleSize?: { imageWidth: string; ratio: number }
+  flexibleSize?: { imageWidth: string; ratio: number; maxHeight?: string }
 }
 
 export const EnhancedImage = ({
@@ -55,7 +54,9 @@ export const EnhancedImage = ({
 }
 
 interface WrapperProps {
-  flexibleSize: { imageWidth: string; ratio: number } | undefined
+  flexibleSize:
+    | { imageWidth: string; ratio: number; maxHeight?: string }
+    | undefined
 }
 
 const Wrapper = ({
@@ -63,32 +64,29 @@ const Wrapper = ({
   children
 }: PropsWithChildren<WrapperProps>) => {
   if (flexibleSize) {
-    return (
-      <ImageContainer
-        ratio={flexibleSize.ratio}
-        imageWidth={flexibleSize.imageWidth}
-      >
-        {children}
-      </ImageContainer>
-    )
+    return <ImageContainer {...flexibleSize}>{children}</ImageContainer>
   }
 
   return <Fragment>{children}</Fragment>
 }
 
 const ImageContainer = styled.span<{
-  ratio: number | undefined
+  ratio: number
   imageWidth: string
+  maxHeight?: string
 }>`
   display: inline-block;
   position: relative;
   width: ${({ imageWidth }) => imageWidth};
-  padding-bottom: ${({ ratio, imageWidth }) =>
-    ratio ? `min(calc(${imageWidth} * ${ratio}), 350px)` : 'initial'};
+  padding-bottom: ${({ ratio, imageWidth, maxHeight }) =>
+    ratio
+      ? `min(calc(${imageWidth} * ${ratio}), ${
+          maxHeight ? maxHeight : '100vh'
+        })`
+      : 'initial'};
   img {
     position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: contain;
   }
 `

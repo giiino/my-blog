@@ -19,7 +19,8 @@ export const components:
         compressedImageLoader={compressedImage}
         flexibleSize={{
           imageWidth: '100%',
-          ratio: height / width
+          ratio: height / width,
+          maxHeight: '350px'
         }}
         alt={alt}
         width={500}
