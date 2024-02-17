@@ -2,14 +2,13 @@ import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
 
 import { Menu } from '@/features/post/components'
-import { MenuCategoriesResponse } from '@/shared/types/api/post'
+import { useMenuCategory } from '@/shared/hooks/use-queries'
 import { scrollBarHoverStyle } from '@/styles/globals'
 
-interface MenuProps extends GridProps {
-  menuCategories: MenuCategoriesResponse[]
-}
+interface MenuProps extends GridProps {}
 
-export function PostMenu({ menuCategories, ...props }: MenuProps) {
+export function PostMenu({ ...props }: MenuProps) {
+  const { data: menuCategories } = useMenuCategory()
   return (
     <MenuWrapper {...props}>
       <Menu menuCategories={menuCategories || []} />

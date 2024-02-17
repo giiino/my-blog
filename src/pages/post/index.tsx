@@ -4,14 +4,11 @@ import { Content, PostMenu, PostWrapper } from '@/features/post/components'
 import TocHolder from '@/features/post/components/toc-holder'
 import { getReadmePost } from '@/pages/api/post/get'
 import SEO from '@/shared/components/lib/SEO'
-import { MenuCategoriesResponse, PostResponse } from '@/shared/types/api/post'
+import { PostResponse } from '@/shared/types/api/post'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 
-import { getMenuCategories } from '../api/post/get/menu-categories'
-
 const PostIndexPage = ({
-  postData,
-  menuCategories
+  postData
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { title, content, coverImage } = postData
   return (
@@ -22,7 +19,7 @@ const PostIndexPage = ({
         thumbnail={coverImage}
       />
       <PostWrapper justifyContent={'center'} container>
-        <PostMenu item lg={3} md={4} menuCategories={menuCategories} />
+        <PostMenu item lg={3} md={4} />
         <Content item lg={7} md={8} xs={12} post={postData} />
         <TocHolder item lg={2} />
       </PostWrapper>
@@ -34,13 +31,9 @@ export default PostIndexPage
 
 export const getServerSideProps: GetServerSideProps<{
   postData: Omit<PostResponse, 'isReadme'>
-  menuCategories: MenuCategoriesResponse[]
 }> = async () => {
   try {
-    const [postData, menuCategories] = await Promise.all([
-      getReadmePost(),
-      getMenuCategories()
-    ])
+    const postData = await getReadmePost()
 
     if (!postData) {
       return {
@@ -50,8 +43,7 @@ export const getServerSideProps: GetServerSideProps<{
 
     return {
       props: {
-        postData: serialize(exclude(postData, ['isReadme'])),
-        menuCategories: serialize(menuCategories)
+        postData: serialize(exclude(postData, ['isReadme']))
       }
     }
   } catch (error) {
