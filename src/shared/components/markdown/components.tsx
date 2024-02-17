@@ -1,8 +1,6 @@
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react'
 import { NormalComponents } from 'react-markdown/lib/complex-types'
 
-import { css } from '@emotion/react'
-
 import { EnhancedImage } from '../lib/enhanced-image'
 import { Code } from './code'
 
@@ -12,16 +10,18 @@ export const components:
   img: ({ src, alt }) => {
     if (!src || !alt) return null
     const [originalImage, compressedImage] = src.split(',')
+    const searchParams = new URL(originalImage).searchParams
+    const width = +searchParams.get('width')!
+    const height = +searchParams.get('height')!
     return (
       <EnhancedImage
         src={originalImage}
         compressedImageLoader={compressedImage}
+        flexibleSize={{
+          imageWidth: '100%',
+          ratio: height / width
+        }}
         alt={alt}
-        css={css`
-          width: 100%;
-          height: auto;
-          object-fit: contain;
-        `}
         width={500}
         height={500}
       />

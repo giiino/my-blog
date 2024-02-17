@@ -38,12 +38,9 @@ export const EnhancedImage = ({
             {...props}
             width={10}
             height={10}
-            src={compressedImageLoader}
+            src={compressedImageLoader!}
             alt={alt}
-            onError={() => setIsError(true)}
-            css={css`
-              backdrop-filter: blur(3px);
-            `}
+            style={{ zIndex: 1 }}
           />
         )}
         <Image
@@ -79,17 +76,19 @@ const Wrapper = ({
   return <Fragment>{children}</Fragment>
 }
 
-const ImageContainer = styled.div<{
+const ImageContainer = styled.span<{
   ratio: number | undefined
   imageWidth: string
 }>`
+  display: inline-block;
   position: relative;
   width: ${({ imageWidth }) => imageWidth};
   padding-bottom: ${({ ratio, imageWidth }) =>
-    ratio ? `calc(${imageWidth} * ${ratio})` : 'initial'};
+    ratio ? `min(calc(${imageWidth} * ${ratio}), 350px)` : 'initial'};
   img {
     position: absolute;
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
 `

@@ -53,8 +53,11 @@ export const useUploadImage = () => {
         uploadImage(file),
         uploadCompressImage(file)
       ])
-
-      return Promise.resolve(originalImage + ',' + compressedImage)
+      const result =
+        originalImage.url +
+        `?width=${originalImage.width}&height=${originalImage.height},` +
+        compressedImage.url
+      return Promise.resolve(result)
     },
     {
       onSuccess: () => {
