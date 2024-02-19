@@ -20,7 +20,7 @@ import { EnhancedImage } from '@/shared/components/lib/enhanced-image'
 import { ErrorBoundary } from '@/shared/components/lib/error-boundary'
 import { isVoid } from '@/shared/utils/check'
 
-import { useCategories } from '../../hooks/use-queries'
+import { useCategories } from '../../hooks/use-edit'
 import { UploadImageButton } from './upload-image-button'
 import { UrlImageInput } from './url-image-input'
 
@@ -51,7 +51,7 @@ export const PostInfoModal = ({
   handleClose
 }: PostInfoModalProps) => {
   const [isUrlCoverImage, setIsUrlCoverImage] = useState(true)
-  const { data: categories } = useCategories()
+  const categories = useCategories()
 
   const handleCoverImgCheckChange = () =>
     setIsUrlCoverImage((checked) => !checked)

@@ -18,13 +18,6 @@ export const useEditorData = (id: string | undefined) => {
   )
 }
 
-export const useCategories = () => {
-  return useQuery<string[]>(['categories'], async () => {
-    const response = await axiosInstance.get('/api/post/get/categories')
-    return response.data
-  })
-}
-
 export const useConverImages = () => {
   return useQuery<string[]>(['coverImages'], async () => {
     const response = await axiosInstance.get('/api/post/get/cover-images')

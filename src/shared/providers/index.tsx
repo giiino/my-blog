@@ -13,9 +13,10 @@ import { reactQueryConf } from '@/shared/constants/conf/react-query'
 import EmotionThemeProvider from './emotion-theme-provider'
 import GlobalStateProvider from './global-state-provider'
 
+const queryClient = new QueryClient(reactQueryConf)
+
 const AppProvider = ({ children }: { children: ReactNode }) => {
   const muiTheme = createTheme(muiThemeConf)
-  const queryClient = new QueryClient(reactQueryConf)
 
   return (
     <QueryClientProvider client={queryClient}>

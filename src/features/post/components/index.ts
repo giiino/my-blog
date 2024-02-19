@@ -3,7 +3,7 @@ import { Grid } from '@mui/material'
 
 export * from './content'
 export * from './post-menu'
-export * from './menu'
+export * from '../../../shared/components/lib/menu'
 
 export const PostWrapper = styled(Grid)`
   width: 95%;

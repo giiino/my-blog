@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 
-import { useGlobalState } from '@/shared/providers/global-state-provider'
+import { useUser } from '@/shared/hooks/use-queries'
 
 export const AdminOnly = ({ children }: { children: ReactNode }) => {
-  const { userInfo } = useGlobalState()
+  const { data: userInfo } = useUser()
 
   const isRender =
     userInfo?.isAdmin === 1 || process.env.NODE_ENV === 'development'

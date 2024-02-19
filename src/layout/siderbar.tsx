@@ -11,9 +11,9 @@ import {
   Stack
 } from '@mui/material'
 
-import { Menu } from '@/features/post/components/menu'
 import { RouteButton } from '@/shared/components/buttons/route-button'
 import { AdminOnly } from '@/shared/components/lib/admin-only'
+import { Menu } from '@/shared/components/lib/menu'
 import { useMenuCategory } from '@/shared/hooks/use-queries'
 import { useRouteChange } from '@/shared/hooks/use-route-change'
 import { scrollBarStyle } from '@/styles/globals'

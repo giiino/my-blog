@@ -1,6 +1,7 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 
 import { Post } from '@/db/entity/Post'
+import { useMenuCategory } from '@/shared/hooks/use-queries'
 import { exclude as excludeUtil } from '@/shared/utils/format'
 
 export type EditedItems = Pick<
@@ -97,4 +98,11 @@ export const useEdit = (initialEditedItems?: Partial<EditedItems>) => {
     onCoverImageChange,
     onIsReadmeCheckChange
   }
+}
+
+export const useCategories = () => {
+  const { data } = useMenuCategory()
+  return useMemo(() => {
+    return data?.map(({ category }) => category)
+  }, [data])
 }

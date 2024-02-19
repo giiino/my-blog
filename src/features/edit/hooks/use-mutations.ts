@@ -1,6 +1,6 @@
 import { toast } from 'react-hot-toast'
 
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 
 import { uploadCompressImage, uploadImage } from '@/shared/services/upload'
@@ -10,6 +10,7 @@ import { PublishParams, UpdateParams } from '../types'
 
 export const usePublishPost = () => {
   const { push } = useRouter()
+  const queryClient = useQueryClient()
   return useMutation(
     (params: PublishParams) =>
       axiosInstance.post('/api/post/publish', { ...params }),
@@ -17,6 +18,7 @@ export const usePublishPost = () => {
       onSuccess: (res) => {
         const id = res.data.result as string
         toast.success('發布成功')
+        queryClient.invalidateQueries(['menu-category'])
         push('/post/' + id)
       },
       onError: (error) => {
@@ -28,6 +30,7 @@ export const usePublishPost = () => {
 
 export const useUpdatePost = () => {
   const { push } = useRouter()
+  const queryClient = useQueryClient()
   return useMutation(
     ({ _id, ...params }: UpdateParams) =>
       axiosInstance.put('/api/post/update/' + _id, {
@@ -37,6 +40,7 @@ export const useUpdatePost = () => {
       onSuccess: (res) => {
         const { _id } = res.data.result as UpdateParams
         toast.success('修改成功')
+        queryClient.invalidateQueries(['menu-category'])
         push('/post/' + _id)
       },
       onError: (error) => {

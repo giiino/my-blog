@@ -1,12 +1,8 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react'
 
-import { useUser } from '@/shared/hooks/use-queries'
-import { UserInfo } from '@/shared/types/api/login'
-
 import { ThemeMode } from '../types/ui'
 
 interface ContextProps {
-  userInfo: UserInfo | undefined
   themeMode: ThemeMode | undefined
   postCategory: string
   setPostCategory: React.Dispatch<React.SetStateAction<string>>
@@ -21,12 +17,9 @@ const GlobalStateProvider = ({ children }: { children: ReactNode }) => {
   const [themeMode, setThemeMode] = useState<ThemeMode | undefined>(undefined)
   const [postCategory, setPostCategory] = useState('')
 
-  const { data: userInfo } = useUser()
-
   return (
     <GlobalStateContext.Provider
       value={{
-        userInfo,
         themeMode,
         postCategory,
         setPostCategory,
