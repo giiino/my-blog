@@ -7,6 +7,7 @@ import utc from 'dayjs/plugin/utc'
 import type { AppProps } from 'next/app'
 
 import Layout from '@/layout'
+import { ToTopButton } from '@/shared/components/buttons/to-top-button'
 import { AppLoading } from '@/shared/components/loading/app-loading'
 import AppProvider from '@/shared/providers'
 import '@/styles/globals.css'
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <AppLoading />
         <Component {...pageProps} />
         <Toaster position='bottom-center' />
+        <ToTopButton />
       </Layout>
       <SpeedInsights />
     </AppProvider>

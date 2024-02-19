@@ -15,7 +15,6 @@ interface PostCardProps {
 export const PostCard = ({
   id,
   title,
-  content,
   createTime,
   coverImage
 }: PostCardProps) => (
@@ -28,7 +27,6 @@ export const PostCard = ({
       flexibleSize={{ imageWidth: '100%', ratio: 0.6 }}
     />
     <h3 className='title'>{title}</h3>
-    <div className='content'>{markdownToTxt(content, 300)}...</div>
     <div className='time'>{formatDate(createTime)}</div>
   </LinkWrapper>
 )
@@ -36,8 +34,9 @@ export const PostCard = ({
 const LinkWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
+  word-break: break-all;
   > * {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
   .title {
     display: -webkit-box;
@@ -70,4 +69,6 @@ const LinkWrapper = styled(Link)`
   }
 `
 
-const CoverImage = styled(EnhancedImage)``
+const CoverImage = styled(EnhancedImage)`
+  border-radius: 10px;
+`
