@@ -53,6 +53,12 @@ export const StyleWrapper = styled.div`
       color: ${({ theme }) => theme.color};
       border-radius: 8px;
     }
+    figcaption {
+      text-align: center;
+      font-size: 0.5em;
+      color: var(--primary-gray-200);
+      margin-top: -10px;
+    }
     a {
       color: var(--primary-link);
       word-break: break-all;

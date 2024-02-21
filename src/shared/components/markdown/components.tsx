@@ -14,18 +14,21 @@ export const components:
     const width = +searchParams.get('width')!
     const height = +searchParams.get('height')!
     return (
-      <EnhancedImage
-        src={originalImage}
-        compressedImageLoader={compressedImage}
-        flexibleSize={{
-          imageWidth: '100%',
-          ratio: height / width,
-          maxHeight: '350px'
-        }}
-        alt={alt}
-        width={500}
-        height={500}
-      />
+      <figure>
+        <EnhancedImage
+          src={originalImage}
+          compressedImageLoader={compressedImage}
+          flexibleSize={{
+            imageWidth: '100%',
+            ratio: height / width,
+            maxHeight: '350px'
+          }}
+          alt={alt}
+          width={500}
+          height={500}
+        />
+        <figcaption>{alt}</figcaption>
+      </figure>
     )
   },
   li: ({ ordered, children, index, ...props }) => {
