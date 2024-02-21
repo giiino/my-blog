@@ -7,7 +7,7 @@ import TocHolder from '@/features/post/components/toc-holder'
 import { useRelatedPosts } from '@/features/post/hooks/use-queries'
 import { getPostById } from '@/pages/api/post/get'
 import SEO from '@/shared/components/lib/SEO'
-import { useGlobalState } from '@/shared/providers/global-state-provider'
+import { useCatrgory } from '@/shared/store'
 import { PostResponse } from '@/shared/types/api/post'
 import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
@@ -15,7 +15,7 @@ import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 const PostPage = ({
   postData
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { setPostCategory } = useGlobalState()
+  const { setPostCategory } = useCatrgory()
   const { title, content, coverImage, category } = postData
   const { data: relatedPost } = useRelatedPosts()
   useEffect(() => {

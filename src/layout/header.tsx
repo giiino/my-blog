@@ -11,14 +11,14 @@ import Link from 'next/link'
 
 import { RouteButton } from '@/shared/components/buttons/route-button'
 import { AdminOnly } from '@/shared/components/lib/admin-only'
-import { useGlobalState } from '@/shared/providers/global-state-provider'
+import { useThemeMode } from '@/shared/store'
 
 interface HeaderProps {
   setIsSidebarOpen: (isOpen: boolean) => void
 }
 
 export default function Header({ setIsSidebarOpen }: HeaderProps) {
-  const { themeMode, setThemeMode } = useGlobalState()
+  const { themeMode, setThemeMode } = useThemeMode()
 
   const ThemeModeIcon = themeMode === 'light' ? DarkModeIcon : LightModeIcon
   const logoImage =

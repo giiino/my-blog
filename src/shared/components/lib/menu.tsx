@@ -8,7 +8,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { useGlobalState } from '@/shared/providers/global-state-provider'
+import { useCatrgory } from '@/shared/store'
 import { MenuCategoriesResponse } from '@/shared/types/api/post'
 
 interface MenuProps {
@@ -16,15 +16,11 @@ interface MenuProps {
 }
 
 export function Menu({ menuCategories }: MenuProps) {
-  const { postCategory, setPostCategory } = useGlobalState()
+  const { postCategory, setPostCategory } = useCatrgory()
 
   const handleClick = (category: string) => {
-    setPostCategory((prev) => {
-      if (category === prev) {
-        return ''
-      }
-      return category
-    })
+    const newCategory = category === postCategory ? '' : category
+    setPostCategory(newCategory)
   }
 
   return (

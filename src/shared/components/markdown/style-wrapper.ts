@@ -6,7 +6,14 @@ export const StyleWrapper = styled.div`
       line-height: 2;
       margin-bottom: 23px;
     }
-
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-bottom: 10px;
+    }
     h1 {
       font-size: 30px;
     }

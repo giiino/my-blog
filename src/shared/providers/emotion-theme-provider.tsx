@@ -4,11 +4,11 @@ import { ThemeProvider } from '@emotion/react'
 import styled from '@emotion/styled'
 
 import { styledThemeConf } from '../constants/conf/emotion-theme'
+import { useThemeMode } from '../store'
 import { getInitialColorMode } from '../utils/get-initial-color-mode'
-import { useGlobalState } from './global-state-provider'
 
 const EmotionThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const { themeMode, setThemeMode } = useGlobalState()
+  const { themeMode, setThemeMode } = useThemeMode()
   const emotionTheme = useMemo(() => {
     if (!themeMode) {
       return styledThemeConf('light')
