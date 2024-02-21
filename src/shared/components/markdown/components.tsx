@@ -1,5 +1,9 @@
+import React, { Fragment } from 'react'
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react'
 import { NormalComponents } from 'react-markdown/lib/complex-types'
+
+import { isVoid } from '@/shared/utils/check'
+import { getCustomSyntax } from '@/shared/utils/markdown'
 
 import { EnhancedImage } from '../lib/enhanced-image'
 import { Code } from './code'
@@ -7,12 +11,21 @@ import { Code } from './code'
 export const components:
   | Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents>
   | undefined = {
+  p: ({ children }) => {
+    if (typeof children[0] !== 'string') {
+      return <>{children}</>
+    }
+    return <p>{children}</p>
+  },
   img: ({ src, alt }) => {
     if (!src || !alt) return null
     const [originalImage, compressedImage] = src.split(',')
     const searchParams = new URL(originalImage).searchParams
-    const width = +searchParams.get('width')!
-    const height = +searchParams.get('height')!
+    const width = Number(searchParams.get('width'))
+    const height = Number(searchParams.get('height'))
+    if (isNaN(width) || isNaN(height)) return null
+
+    const figcaptionValue = getCustomSyntax(alt, '!')
     return (
       <figure>
         <EnhancedImage
@@ -23,11 +36,13 @@ export const components:
             ratio: height / width,
             maxHeight: '350px'
           }}
-          alt={alt}
+          alt={figcaptionValue || alt}
           width={500}
           height={500}
         />
-        <figcaption>{alt}</figcaption>
+        {!isVoid(figcaptionValue?.trim()) && (
+          <figcaption>{figcaptionValue}</figcaption>
+        )}
       </figure>
     )
   },

@@ -45,4 +45,7 @@ const Container = styled(IconButton)`
   right: 30px;
   bottom: 7vh;
   background: #e2e2e2b1;
+  &:hover {
+    background: #b8b8b8b0;
+  }
 `

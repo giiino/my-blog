@@ -2,8 +2,8 @@ import ReactMarkdown from 'react-markdown'
 
 import remarkGfm from 'remark-gfm'
 
-import { StyleWrapper } from './style-wrapper'
 import { components } from './components'
+import { StyleWrapper } from './style-wrapper'
 
 interface MarkdownProps extends React.HTMLAttributes<HTMLDivElement> {
   children: string
