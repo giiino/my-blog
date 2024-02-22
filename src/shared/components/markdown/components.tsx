@@ -11,10 +11,11 @@ export const components:
   | Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents>
   | undefined = {
   p: ({ children }) => {
-    if (typeof children[0] !== 'string') {
-      return <span>{children}</span>
-    }
-    return <>{children}</>
+    console.log(children)
+    // if (typeof children[0] !== 'string') {
+    //   return <span className='paragraph'>{children}</span>
+    // }
+    return <p>{children}</p>
   },
   img: ({ src, alt }) => {
     if (!src || !alt) return null

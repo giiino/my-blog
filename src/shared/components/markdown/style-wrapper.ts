@@ -21,7 +21,7 @@ export const StyleWrapper = styled.div`
     p {
       white-space: pre-line;
     }
-    span {
+    span.paragraph {
       display: block;
     }
     ol,
