@@ -12,9 +12,9 @@ export const components:
   | undefined = {
   p: ({ children }) => {
     if (typeof children[0] !== 'string') {
-      return <>{children}</>
+      return <span>{children}</span>
     }
-    return <p>{children}</p>
+    return <>{children}</>
   },
   img: ({ src, alt }) => {
     if (!src || !alt) return null

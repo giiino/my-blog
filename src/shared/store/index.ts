@@ -1,13 +1,14 @@
 import { create } from 'zustand'
 
 import { ThemeMode } from '../types/ui'
+import { getInitialColorMode } from '../utils/get-initial-color-mode'
 
 interface ThemeModeState {
   themeMode: ThemeMode | undefined
   setThemeMode: (themeMode: ThemeModeState['themeMode']) => void
 }
 
-export const useThemeMode = create<ThemeModeState>((set) => ({
+export const useThemeMode = create<ThemeModeState>()((set) => ({
   themeMode: undefined,
   setThemeMode: (themeMode) => set(() => ({ themeMode }))
 }))
@@ -17,7 +18,7 @@ interface PostCategoryState {
   setPostCategory: (category: PostCategoryState['postCategory']) => void
 }
 
-export const useCatrgory = create<PostCategoryState>((set) => ({
+export const useCatrgory = create<PostCategoryState>()((set) => ({
   postCategory: '',
   setPostCategory: (category) => set(() => ({ postCategory: category }))
 }))

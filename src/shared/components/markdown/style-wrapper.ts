@@ -21,6 +21,9 @@ export const StyleWrapper = styled.div`
     p {
       white-space: pre-line;
     }
+    span {
+      display: block;
+    }
     ol,
     ul {
       list-style-type: none;
