@@ -7,7 +7,7 @@ interface ThemeModeState {
   setThemeMode: (themeMode: ThemeModeState['themeMode']) => void
 }
 
-export const useThemeMode = create<ThemeModeState>()((set) => ({
+export const useThemeMode = create<ThemeModeState>((set) => ({
   themeMode: undefined,
   setThemeMode: (themeMode) => set(() => ({ themeMode }))
 }))
@@ -17,7 +17,7 @@ interface PostCategoryState {
   setPostCategory: (category: PostCategoryState['postCategory']) => void
 }
 
-export const useCatrgory = create<PostCategoryState>()((set) => ({
+export const useCatrgory = create<PostCategoryState>((set) => ({
   postCategory: '',
   setPostCategory: (category) => set(() => ({ postCategory: category }))
 }))
