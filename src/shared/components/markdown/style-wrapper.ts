@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 
 export const StyleWrapper = styled.div`
+  line-height: 2;
   .reacr-mark-down {
     > * {
-      line-height: 2;
       margin-bottom: 23px;
     }
     h1,
