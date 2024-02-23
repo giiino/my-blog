@@ -21,13 +21,14 @@ AppDataSource.initialize()
     console.error(`Data Source initialization error`, err)
   })
 
-export const getDataSource = (delay = 3000): Promise<DataSource> => {
-  if (AppDataSource.isInitialized) return Promise.resolve(AppDataSource)
+export const getDataSource = async (): Promise<DataSource> => {
+  if (process.env.NODE_ENV !== 'development') {
+    return Promise.resolve(AppDataSource)
+  }
 
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (AppDataSource.isInitialized) resolve(AppDataSource)
-      else reject('Failed to create connection with database')
-    }, delay)
-  })
+  if (AppDataSource.isInitialized) {
+    await AppDataSource.destroy()
+    return AppDataSource.initialize()
+  }
+  return AppDataSource.initialize()
 }

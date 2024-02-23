@@ -1,6 +1,4 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Grid, Stack } from '@mui/material'
 
 import { PostCard } from '@/features/post/components/post-card'
 import { Title } from '@/features/post/components/title'

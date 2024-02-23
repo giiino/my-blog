@@ -6,6 +6,11 @@ export const StyleWrapper = styled.div`
     > * {
       margin-bottom: 23px;
     }
+    .paragraph {
+      figure {
+        margin: 23px 0;
+      }
+    }
     h1,
     h2,
     h3,
@@ -20,9 +25,6 @@ export const StyleWrapper = styled.div`
 
     p {
       white-space: pre-line;
-    }
-    span.paragraph {
-      display: block;
     }
     ol,
     ul {

@@ -10,13 +10,7 @@ import { Code } from './code'
 export const components:
   | Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents>
   | undefined = {
-  p: ({ children }) => {
-    console.log(children)
-    // if (typeof children[0] !== 'string') {
-    //   return <span className='paragraph'>{children}</span>
-    // }
-    return <p>{children}</p>
-  },
+  p: ({ children }) => <div className='paragraph'>{children}</div>,
   img: ({ src, alt }) => {
     if (!src || !alt) return null
     const [originalImage, compressedImage] = src.split(',')

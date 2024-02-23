@@ -9,7 +9,6 @@ import { useThemeMode } from '../store'
 
 const EmotionThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { themeMode, setThemeMode } = useThemeMode()
-  const { isReady } = useRouter()
   const emotionTheme = useMemo(() => {
     if (!themeMode) {
       return styledThemeConf('light')
@@ -18,14 +17,12 @@ const EmotionThemeProvider = ({ children }: { children: React.ReactNode }) => {
   }, [themeMode])
 
   useEffect(() => {
-    if (isReady) {
-      import('../utils/get-initial-color-mode').then(
-        ({ getInitialColorMode }) => {
-          setThemeMode(getInitialColorMode())
-        }
-      )
-    }
-  }, [isReady, setThemeMode])
+    import('../utils/get-initial-color-mode').then(
+      ({ getInitialColorMode }) => {
+        setThemeMode(getInitialColorMode())
+      }
+    )
+  }, [setThemeMode])
 
   return (
     <ThemeProvider theme={emotionTheme}>
