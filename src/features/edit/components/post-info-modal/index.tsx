@@ -135,6 +135,18 @@ export const PostInfoModal = ({
                 />
               </ErrorBoundary>
             )}
+            {/* <FormControlLabel
+              sx={{ width: 'fit-content' }}
+              control={
+                <Checkbox
+                  disableRipple
+                  checked={isReadme}
+                  onChange={onIsReadmeCheckChange}
+                  sx={{ pl: 0 }}
+                />
+              }
+              label='草稿'
+            /> */}
             <FormControlLabel
               sx={{ width: 'fit-content' }}
               control={

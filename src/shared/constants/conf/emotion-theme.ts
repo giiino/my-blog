@@ -32,7 +32,8 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
         dividerColor: 'rgba(0, 0, 0, 0.12)'
       },
       markdown: {
-        highlightBgColor: 'var(--primary-blue-1)',
+        highlightBgColor: 'var(--primary-gray-100)',
+        highlightBorder: '#656a7633',
         blockquoteBgColor: '#fff0be',
         borderLeft: '6px solid #fec930'
       }
@@ -68,6 +69,7 @@ export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
       },
       markdown: {
         highlightBgColor: 'var(--primary-gray-400)',
+        highlightBorder: 'var(--primary-gray-400)',
         blockquoteBgColor: 'var(--primary-gray-500)',
         borderLeft: '2px solid transparent'
       }

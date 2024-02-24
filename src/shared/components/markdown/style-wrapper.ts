@@ -82,9 +82,9 @@ export const StyleWrapper = styled.div`
       font-style: normal;
       background-color: ${({ theme }) => theme.markdown.highlightBgColor};
       color: ${({ theme }) => theme.color};
+      border: ${({ theme }) => `1px solid ${theme.markdown.highlightBorder}`};
       word-break: break-all;
-      padding: 3px 5px;
-      margin: 0 3px;
+      padding: 2px 4px 3px;
       border-radius: 5px;
     }
   }

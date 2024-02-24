@@ -34,7 +34,6 @@ export const PostCard = ({
 const LinkWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
-  word-break: break-all;
   > * {
     margin-bottom: 15px;
   }
@@ -55,6 +54,7 @@ const LinkWrapper = styled(Link)`
     text-overflow: ellipsis;
     font-size: 15px;
     line-height: 1.7;
+    word-break: break-all;
     color: ${({ theme }) => theme.card.summaryColor};
   }
   .time {

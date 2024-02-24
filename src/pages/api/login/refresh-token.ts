@@ -19,7 +19,7 @@ export default async function handler(
     const userInfo = getVerifiedJwtUser({ req, res }, { isRefreshToken: true })
     if (!userInfo) {
       return res
-        .status(401)
+        .status(403)
         .json({ message: 'refresh token is expired, please relogin' })
     }
 
