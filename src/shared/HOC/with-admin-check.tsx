@@ -4,7 +4,8 @@ import { useRouter } from 'next/router'
 
 import { useUser } from '../hooks/use-queries'
 
-export const withAdminCheck = <T extends {}>(
+/**用於page展示與否 */
+export const withAdminPage = <T extends {}>(
   WrappedComponent: React.ComponentType<T>
 ) => {
   return (props: T) => {
