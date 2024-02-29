@@ -35,7 +35,7 @@ export const Code = ({ children, ...props }: CodeProps) => {
       <SyntaxHighlighter
         showLineNumbers={true}
         style={a11yDark}
-        customStyle={{ borderRadius: 0 }}
+        // customStyle={{ borderRadius: 0 }}
         PreTag='div'
         className='syntax-hight-wrapper'
         {...props}
@@ -56,5 +56,6 @@ export const Code = ({ children, ...props }: CodeProps) => {
 }
 
 const Container = styled.section`
+  border-radius: 10px;
   position: relative;
 `

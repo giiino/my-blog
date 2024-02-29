@@ -30,21 +30,6 @@ export const StyleWrapper = styled.div`
     ul {
       list-style-type: none;
     }
-    li {
-      &.count {
-        .serial-number {
-          margin-left: 15px;
-          margin-right: 10px;
-        }
-      }
-      &.no-count::before {
-        content: '•';
-        margin-left: 15px;
-        margin-right: 15px;
-        font-weight: bold;
-        color: var(--primary-blue-4);
-      }
-    }
     hr {
       height: 1px;
       background-color: #ccc;

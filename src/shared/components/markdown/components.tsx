@@ -5,6 +5,7 @@ import { isVoid } from '@/shared/utils/check'
 import { getCustomSyntax } from '@/shared/utils/markdown'
 
 import { EnhancedImage } from '../lib/enhanced-image'
+import { Li } from './Li'
 import { Code } from './code'
 
 export const components:
@@ -40,20 +41,11 @@ export const components:
       </figure>
     )
   },
-  li: ({ ordered, children, index, ...props }) => {
+  li: ({ ordered, children, index }) => {
     if (ordered) {
-      return (
-        <li className='count' {...props}>
-          <span className='serial-number'>{index + 1}.</span>
-          {children}
-        </li>
-      )
+      return <Li serialNumber={index}>{children}</Li>
     }
-    return (
-      <li className='no-count' {...props}>
-        {children}
-      </li>
-    )
+    return <Li>{children}</Li>
   },
   code: ({ children = [], className, ...props }) => {
     const match = /language-(\w+)/.exec(className || '')
