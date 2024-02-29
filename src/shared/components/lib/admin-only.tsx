@@ -8,8 +8,7 @@ export const AdminOnly = ({ children }: { children: ReactNode }) => {
   const isRender =
     userInfo?.isAdmin === 1 || process.env.NODE_ENV === 'development'
 
-  if (isRender) {
-    return <>{children}</>
-  }
+  if (isRender) return <>{children}</>
+
   return null
 }

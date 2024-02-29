@@ -5,7 +5,7 @@ import {
   Prism as SyntaxHighlighter,
   SyntaxHighlighterProps
 } from 'react-syntax-highlighter'
-import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { coldarkDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 import styled from '@emotion/styled'
 import { css } from '@mui/material'
@@ -34,8 +34,7 @@ export const Code = ({ children, ...props }: CodeProps) => {
     <Container onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <SyntaxHighlighter
         showLineNumbers={true}
-        style={a11yDark}
-        // customStyle={{ borderRadius: 0 }}
+        style={coldarkDark}
         PreTag='div'
         className='syntax-hight-wrapper'
         {...props}

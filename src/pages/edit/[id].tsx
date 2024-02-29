@@ -8,7 +8,7 @@ import { PostInfoModal } from '@/features/edit/components/post-info-modal'
 import { useEdit } from '@/features/edit/hooks/use-edit'
 import { useUpdatePost } from '@/features/edit/hooks/use-mutations'
 import { useEditorData } from '@/features/edit/hooks/use-queries'
-import { withAdminCheck } from '@/shared/HOC/with-admin-check'
+import { withAdminPage } from '@/shared/HOC/with-admin-check'
 import { PageLoading } from '@/shared/components/loading/page-loading'
 
 const Editor = () => {
@@ -76,4 +76,4 @@ const Editor = () => {
   )
 }
 
-export default withAdminCheck(Editor)
+export default withAdminPage(Editor)
