@@ -56,7 +56,7 @@ const GroupListItem = ({
 }: GroupListItemProps) => {
   const { query } = useRouter()
   const currentPostId = query.id as string
-  const isCategorySelected = titles.some(({ _id }) => _id === currentPostId)
+  const isCategorySelected = titles.some(({ id }) => id === currentPostId)
 
   return (
     <>
@@ -68,11 +68,11 @@ const GroupListItem = ({
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout='auto' unmountOnExit>
-        {titles.map(({ title, _id }) => {
-          const isSelected = _id === currentPostId
+        {titles.map(({ title, id }) => {
+          const isSelected = id === currentPostId
           return (
-            <List key={_id} component='div' disablePadding>
-              <Link href={`/post/${_id}`}>
+            <List key={id} component='div' disablePadding>
+              <Link href={`/post/${id}`}>
                 <ListItemButton selected={isSelected} sx={{ pl: 4 }}>
                   <ListItemText primary={title} />
                 </ListItemButton>

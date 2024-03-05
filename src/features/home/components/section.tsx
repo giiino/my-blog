@@ -19,8 +19,7 @@ export const Section = ({ posts, title }: SectionProps) => {
     <Container>
       <SectionTitle>{title}</SectionTitle>
       <CardWrapper>
-        {posts!.map(({ _id, ...restItem }) => {
-          const id = String(_id)
+        {posts!.map(({ id, ...restItem }) => {
           return <PostCard key={id} id={id} {...restItem} />
         })}
       </CardWrapper>

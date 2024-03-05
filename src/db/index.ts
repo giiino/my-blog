@@ -1,37 +1,20 @@
-import 'reflect-metadata'
-import { DataSource } from 'typeorm'
+import { initializeApp } from 'firebase/app'
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore } from 'firebase/firestore'
 
-import { Post } from './entity/Post'
-import { User } from './entity/User'
-
-const AppDataSource = new DataSource({
-  type: 'mongodb',
-  url: process.env.MONGODB_URL,
-  useNewUrlParser: true,
-  synchronize: true,
-  logging: true,
-  entities: [User, Post]
-})
-
-AppDataSource.initialize()
-  .then(() => {
-    console.log(`Data Source has been initialized`)
-  })
-  .catch((err) => {
-    console.error(`Data Source initialization error`, err)
-  })
-
-export const getDataSource = (delay = 3000): Promise<DataSource> => {
-  if (AppDataSource.isInitialized) return Promise.resolve(AppDataSource)
-
-  return new Promise((resolve, reject) => {
-    if (process.env.NODE_ENV !== 'development' && AppDataSource.isInitialized) {
-      resolve(AppDataSource)
-      return
-    }
-    setTimeout(() => {
-      if (AppDataSource.isInitialized) resolve(AppDataSource)
-      else reject('Failed to create connection with database')
-    }, delay)
-  })
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID
 }
+
+// Initialize Firebase
+const firebase = initializeApp(firebaseConfig)
+export const db = getFirestore(firebase)

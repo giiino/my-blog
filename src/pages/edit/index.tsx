@@ -9,16 +9,17 @@ import { withAdminPage } from '@/shared/HOC/with-admin-check'
 const Editor = () => {
   const { mutate: publish } = usePublishPost()
   const {
-    post: { content, title, category, coverImage, isReadme },
+    post: { id, content, title, category, coverImage, isReadme },
     reset,
     onCategoryChange,
+    onIdChange,
     onTitleChange,
     onContentChange,
     onCoverImageChange,
     onIsReadmeCheckChange
   } = useEdit()
   const handleSubmit = () => {
-    publish({ content, title, category, coverImage, isReadme })
+    publish({ id, content, title, category, coverImage, isReadme })
   }
 
   const [postInfoModalOpen, setIsPostInfoModalOpen] = useState(false)
@@ -32,6 +33,7 @@ const Editor = () => {
   return (
     <>
       <PostInfoModal
+        editId={id}
         open={postInfoModalOpen}
         title={title}
         category={category}
@@ -39,6 +41,7 @@ const Editor = () => {
         coverImage={coverImage}
         onTitleChange={onTitleChange}
         onCategoryChange={onCategoryChange}
+        onIdChange={onIdChange}
         onCoverImageChange={onCoverImageChange}
         onIsReadmeCheckChange={onIsReadmeCheckChange}
         handleClose={handleClose}

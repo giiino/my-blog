@@ -1,8 +1,19 @@
-import { Post } from '@/db/entity/Post'
+export interface Post {
+  id: string
+  category: string
+  content: string
+  coverImage: string
+  createTime: number
+  isDelete: boolean
+  isReadme: boolean
+  title: string
+  updateTime: number
+  views: number
+}
 
 export type MenuCategoriesResponse = {
   category: string
-  titles: Array<Record<'title' | '_id', string>>
+  titles: Array<Record<'title' | 'id', string>>
 }
 
 export type PostResponse = Omit<Post, 'views' | 'isDelete'>
@@ -13,5 +24,5 @@ export type PostEditResponse = Omit<
 
 export type PostCardResponse = Pick<
   Post,
-  '_id' | 'title' | 'content' | 'coverImage' | 'createTime'
+  'id' | 'title' | 'content' | 'coverImage' | 'createTime'
 >

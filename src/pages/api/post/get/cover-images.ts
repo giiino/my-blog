@@ -1,17 +1,17 @@
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import { NextApiRequest } from 'next'
 
-import { getDataSource } from '@/db'
-import { Post } from '@/db/entity/Post'
+import { db } from '@/db'
 import { ApiResponse } from '@/shared/types/api'
 import { getVerifiedJwtUser, isAdmin } from '@/shared/utils/jwt'
 
 export async function getConverImages() {
-  const AppDataSource = await getDataSource()
-  const postRepo = AppDataSource.getMongoRepository(Post)
-  const result: string[] = await postRepo.distinct(
-    'coverImage',
-    { isDelete: 0 },
-    {}
+  const postRef = collection(db, 'post')
+  const q = query(postRef, where('isDelete', '==', false))
+  const querySnapshot = await getDocs(q)
+
+  const result = Array.from(
+    new Set(querySnapshot.docs.map((doc) => doc.data().coverImage))
   )
 
   return result

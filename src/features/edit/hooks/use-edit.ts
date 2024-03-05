@@ -1,17 +1,18 @@
 import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 
-import { Post } from '@/db/entity/Post'
 import { useMenuCategory } from '@/shared/hooks/use-queries'
+import { Post } from '@/shared/types/api/post'
 import { exclude as excludeUtil } from '@/shared/utils/format'
 
 export type EditedItems = Pick<
   Post,
-  'category' | 'content' | 'title' | 'coverImage'
+  'category' | 'content' | 'title' | 'coverImage' | 'id'
 > & {
   isReadme: boolean
 }
 
 const defaultEditedItems: EditedItems = {
+  id: '',
   category: '',
   title: '',
   content: '',
@@ -28,6 +29,13 @@ export const useEdit = (initialEditedItems?: Partial<EditedItems>) => {
     setPost((prev) => ({
       ...prev,
       category: value || ''
+    }))
+  }
+
+  const onIdChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPost((prev) => ({
+      ...prev,
+      id: e.target.value
     }))
   }
 
@@ -93,6 +101,7 @@ export const useEdit = (initialEditedItems?: Partial<EditedItems>) => {
     post,
     reset,
     onCategoryChange,
+    onIdChange,
     onTitleChange,
     onContentChange,
     onCoverImageChange,

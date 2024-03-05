@@ -1,48 +1,45 @@
-import { ObjectId } from 'mongodb'
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  limit,
+  getDoc,
+  doc
+} from 'firebase/firestore'
 import { NextApiRequest } from 'next'
 
-import { getDataSource } from '@/db'
-import { Post } from '@/db/entity/Post'
+import { db } from '@/db'
 import { ApiResponse } from '@/shared/types/api'
 import { PostCardResponse } from '@/shared/types/api/post'
-import { isVoid } from '@/shared/utils/check'
 import { pick } from '@/shared/utils/format'
 
 export async function getRelatedPosts(id: string) {
-  const AppDataSource = await getDataSource()
-  const postRepo = AppDataSource.getMongoRepository(Post)
-  const objectId = new ObjectId(id)
-  const currentPost = await postRepo.findOne({
-    where: {
-      _id: objectId,
-      isDelete: 0
-    }
-  })
+  const docRef = doc(db, 'post', id)
+  const docSnap = await getDoc(docRef)
 
-  if (isVoid(currentPost)) {
-    throw Error('尋找關聯文章失敗，目標文章可能被刪出')
+  if (!docSnap.exists() || docSnap.data()?.isDelete === true) {
+    throw new Error('未找到文章')
   }
 
-  const { _id, category } = currentPost!
+  const q = query(
+    collection(db, 'post'),
+    where('category', '==', docSnap.data()?.category),
+    where('isDelete', '==', false),
+    where('__name__', '!=', id)
+  )
+  const relatedPostsSnapshot = await getDocs(q)
 
-  const pipeline = [
-    {
-      $match: {
-        category,
-        _id: { $ne: _id },
-        isDelete: 0
+  return relatedPostsSnapshot.docs
+    .map((doc) => {
+      const data = doc.data()
+      return {
+        id: doc.id,
+        ...pick(data, ['title', 'content', 'coverImage', 'createTime'])
       }
-    },
-    {
-      $sample: { size: 2 }
-    }
-  ]
-
-  const result = await postRepo.aggregate(pipeline).toArray()
-
-  return result.map((item: Post) =>
-    pick(item, ['_id', 'title', 'content', 'coverImage', 'createTime'])
-  ) as PostCardResponse[]
+    })
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 2)
 }
 
 export default async function handler(

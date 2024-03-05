@@ -1,4 +1,4 @@
 import { EditedItems } from '../hooks/use-edit'
 
 export type PublishParams = EditedItems
-export type UpdateParams = EditedItems & { _id: string }
+export type UpdateParams = EditedItems & { id: string }

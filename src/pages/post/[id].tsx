@@ -9,7 +9,6 @@ import { getPostById } from '@/pages/api/post/get'
 import SEO from '@/shared/components/lib/SEO'
 import { useCatrgory } from '@/shared/store'
 import { PostResponse } from '@/shared/types/api/post'
-import { isValidObjectId } from '@/shared/utils/check'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 
 const PostPage = ({
@@ -50,9 +49,9 @@ export default PostPage
 export const getServerSideProps: GetServerSideProps<{
   postData: Omit<PostResponse, 'isReadme'>
 }> = async ({ params }) => {
-  const id = params?.id as string
+  const id = params?.id as string | undefined
 
-  if (!isValidObjectId(id)) {
+  if (!id) {
     return {
       notFound: true
     }
@@ -65,7 +64,6 @@ export const getServerSideProps: GetServerSideProps<{
         notFound: true
       }
     }
-
     return {
       props: {
         postData: serialize(exclude(postData, ['isReadme']))

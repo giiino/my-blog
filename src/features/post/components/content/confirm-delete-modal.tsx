@@ -6,12 +6,11 @@ import {
   DialogContentText,
   DialogProps
 } from '@mui/material'
-import { ObjectId } from 'typeorm'
 
 import { useDeletePost } from '@/features/post/hooks/use-mutation'
 
 interface ConfirmDeleteModalProps extends DialogProps {
-  deleteId: ObjectId
+  deleteId: string
   handleClose: () => void
 }
 

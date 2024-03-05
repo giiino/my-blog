@@ -38,5 +38,5 @@ export const getVerifiedJwtUser = (
 
 export const isAdmin = ({ req, res }: any) => {
   const userInfo = getVerifiedJwtUser({ req, res })
-  return userInfo?.isAdmin === 1 || process.env.NODE_ENV === 'development'
+  return userInfo?.isAdmin || process.env.NODE_ENV === 'development'
 }

@@ -18,8 +18,7 @@ export const RelatedPostCards = ({ postCardsData }: RelatedPostCardsProps) => {
     <Container>
       <Title style={{ marginBottom: '35px' }}>相關文章</Title>
       <CardWrapper>
-        {postCardsData!.map(({ _id, ...restItem }) => {
-          const id = String(_id)
+        {postCardsData!.map(({ id, ...restItem }) => {
           return <PostCard key={id} id={id} {...restItem} />
         })}
       </CardWrapper>
