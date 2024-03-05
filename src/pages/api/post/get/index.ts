@@ -23,7 +23,7 @@ export async function getPostById(id: string, shouldPlusViews = false) {
   const data = { id: docSnap.id, ...docSnap.data() } as Post
 
   if (shouldPlusViews) {
-    await updateDoc(doc(db, 'post', id), {
+    updateDoc(doc(db, 'post', id), {
       views: data.views + 1
     })
   }
@@ -48,7 +48,7 @@ export async function getReadmePost() {
     return undefined
   }
 
-  await updateDoc(doc(db, 'post', data.id), {
+  updateDoc(doc(db, 'post', data.id), {
     views: data.views + 1
   })
 
