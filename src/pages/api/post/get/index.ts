@@ -1,51 +1,56 @@
-import { ObjectId } from 'mongodb'
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  query,
+  updateDoc,
+  where
+} from 'firebase/firestore'
 
-import { getDataSource } from '@/db'
-import { Post } from '@/db/entity/Post'
-import { PostResponse } from '@/shared/types/api/post'
+import { db } from '@/db'
+import { Post, PostResponse } from '@/shared/types/api/post'
 import { exclude } from '@/shared/utils/format'
 
 export async function getPostById(id: string, shouldPlusViews = false) {
-  const AppDataSource = await getDataSource()
-  const postRepo = AppDataSource.getRepository(Post)
-  const objectId = new ObjectId(id)
+  const docSnap = await getDoc(doc(db, 'post', id))
 
-  const postResult = await postRepo.findOne({
-    where: {
-      _id: objectId,
-      isDelete: 0
-    }
-  })
-
-  if (!postResult) {
+  if (!docSnap.exists()) {
     return undefined
   }
 
+  const data = { id: docSnap.id, ...docSnap.data() } as Post
+
   if (shouldPlusViews) {
-    postResult.views = postResult.views + 1
-    await postRepo.save(postResult)
+    updateDoc(doc(db, 'post', id), {
+      views: data.views + 1
+    })
   }
 
-  return exclude(postResult, ['isDelete', 'views']) as PostResponse
+  return exclude(data, ['isDelete', 'views']) as PostResponse
 }
 
 export async function getReadmePost() {
-  const AppDataSource = await getDataSource()
-  const postRepo = AppDataSource.getRepository(Post)
+  const q = query(
+    collection(db, 'post'),
+    where('isReadme', '==', true),
+    where('isDelete', '==', false),
+    limit(1)
+  )
+  const querySnapshot = await getDocs(q)
+  const data = querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data()
+  }))[0] as Post
 
-  const resultPost = await postRepo.findOne({
-    where: {
-      isReadme: 1,
-      isDelete: 0
-    }
-  })
-
-  if (!resultPost) {
+  if (querySnapshot.empty) {
     return undefined
   }
 
-  resultPost.views = resultPost.views + 1
-  await postRepo.save(resultPost)
+  updateDoc(doc(db, 'post', data.id), {
+    views: data.views + 1
+  })
 
-  return exclude(resultPost, ['isDelete', 'views', 'isReadme']) as PostResponse
+  return exclude(data, ['isDelete', 'views', 'isReadme']) as PostResponse
 }

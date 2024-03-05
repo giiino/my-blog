@@ -18,7 +18,6 @@ export default async function handler(
 
   try {
     const data = await getPostById(Array.isArray(id) ? id[0] : id)
-
     if (!data) {
       return res.status(404).json({ message: '未找到資料' })
     }

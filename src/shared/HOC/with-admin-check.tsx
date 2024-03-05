@@ -11,8 +11,7 @@ export const withAdminPage = <T extends {}>(
   return (props: T) => {
     const { data: userInfo } = useUser()
     const { replace } = useRouter()
-    const isAdmin =
-      userInfo?.isAdmin === 1 || process.env.NODE_ENV === 'development'
+    const isAdmin = userInfo?.isAdmin || process.env.NODE_ENV === 'development'
 
     useEffect(() => {
       if (!isAdmin) replace('/')

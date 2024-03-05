@@ -15,8 +15,7 @@ export const usePublishPost = () => {
     (params: PublishParams) =>
       axiosInstance.post('/api/post/publish', { ...params }),
     {
-      onSuccess: (res) => {
-        const id = res.data.result as string
+      onSuccess: (_, { id }) => {
         toast.success('發布成功')
         queryClient.invalidateQueries(['menu-category'])
         push('/post/' + id)
@@ -32,16 +31,15 @@ export const useUpdatePost = () => {
   const { push } = useRouter()
   const queryClient = useQueryClient()
   return useMutation(
-    ({ _id, ...params }: UpdateParams) =>
-      axiosInstance.put('/api/post/update/' + _id, {
+    ({ id, ...params }: UpdateParams) =>
+      axiosInstance.put('/api/post/update/' + id, {
         ...params
       }),
     {
-      onSuccess: (res) => {
-        const { _id } = res.data.result as UpdateParams
+      onSuccess: (_, { id }) => {
         toast.success('修改成功')
         queryClient.invalidateQueries(['menu-category'])
-        push('/post/' + _id)
+        push('/post/' + id)
       },
       onError: (error) => {
         toast.error(error as string)

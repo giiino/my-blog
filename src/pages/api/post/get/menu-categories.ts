@@ -1,51 +1,53 @@
-import type { NextApiRequest } from 'next'
+import {
+  collectionGroup,
+  getDocs,
+  orderBy,
+  query,
+  where
+} from 'firebase/firestore'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { getDataSource } from '@/db'
-import { Post } from '@/db/entity/Post'
-import { ApiResponse } from '@/shared/types/api'
-import { MenuCategoriesResponse } from '@/shared/types/api/post'
+import { db } from '@/db'
 
 export async function getMenuCategories() {
-  const AppDataSource = await getDataSource()
-  const postRepo = AppDataSource.getMongoRepository(Post)
-  const pipeline = [
-    {
-      $match: {
-        isReadme: 0,
-        isDelete: 0
-      }
-    },
-    {
-      $group: {
-        _id: '$category',
-        titles: {
-          $push: {
-            title: '$title',
-            _id: '$_id'
-          }
-        }
-      }
-    },
-    {
-      $sort: {
-        _id: 1
-      }
-    },
-    {
-      $project: {
-        _id: 0,
-        category: '$_id',
-        titles: 1
-      }
+  const q = query(
+    collectionGroup(db, 'post'),
+    where('isReadme', '==', false),
+    where('isDelete', '==', false),
+    orderBy('category')
+  )
+  const querySnapshot = await getDocs(q)
+
+  type ResultType = {
+    [key: string]: {
+      category: string
+      titles: { title: string; id: string }[]
     }
-  ]
-  const result = await postRepo.aggregate(pipeline).toArray()
-  return result as unknown as MenuCategoriesResponse[]
+  }
+
+  const result = {} as ResultType
+  querySnapshot.forEach((doc) => {
+    const data = doc.data()
+    const category = data.category
+    const title = { title: data.title, id: doc.id }
+
+    if (!result[category]) {
+      result[category] = { category, titles: [] }
+    }
+
+    result[category].titles.push(title)
+  })
+
+  const resultArray = Object.values(result).sort((a, b) =>
+    a.category > b.category ? 1 : -1
+  )
+
+  return resultArray
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: ApiResponse<MenuCategoriesResponse[]>
+  res: NextApiResponse
 ) {
   if (req.method !== 'GET') {
     res.status(405).end()

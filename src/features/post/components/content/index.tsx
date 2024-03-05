@@ -21,7 +21,7 @@ export const Content = ({
   relatedPost,
   ...restProps
 }: PostContentProps) => {
-  const { _id, title, content, updateTime, createTime, coverImage } = post
+  const { id, title, content, updateTime, createTime, coverImage } = post
   const formattedCreateTime = formatDate(createTime)
   const formattedUpdateTime = formatDate(updateTime)
 
@@ -30,7 +30,7 @@ export const Content = ({
       <Title>
         {title}
         <AdminOnly>
-          <Setting className='setting-btn' editId={_id} />
+          <Setting className='setting-btn' editId={id} />
         </AdminOnly>
       </Title>
       <Time>

@@ -10,12 +10,11 @@ import MenuList from '@mui/material/MenuList'
 import Paper from '@mui/material/Paper'
 import Popper from '@mui/material/Popper'
 import { useRouter } from 'next/router'
-import { ObjectId } from 'typeorm'
 
 import { ConfirmDeleteModal } from './confirm-delete-modal'
 
 interface SettingProps extends IconButtonProps {
-  editId: ObjectId
+  editId: string
 }
 
 export function Setting({ editId, ...props }: SettingProps) {

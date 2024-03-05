@@ -1,38 +1,41 @@
-import type { NextApiRequest } from 'next'
+import {
+  DocumentData,
+  collection,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  where
+} from 'firebase/firestore'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { getDataSource } from '@/db'
-import { Post } from '@/db/entity/Post'
-import { ApiResponse } from '@/shared/types/api'
-import { PostCardResponse } from '@/shared/types/api/post'
+import { db } from '@/db'
 import { isVoid } from '@/shared/utils/check'
 import { pick } from '@/shared/utils/format'
 
 export async function getLatestPost() {
-  const AppDataSource = await getDataSource()
-  const postRepo = AppDataSource.getRepository(Post)
-  const resultPost = await postRepo.find({
-    where: {
-      isReadme: 0,
-      isDelete: 0
-    },
-    order: {
-      createTime: 'DESC'
-    },
-    take: 6
+  const postRef = collection(db, 'post')
+  const q = query(
+    postRef,
+    where('isDelete', '==', false),
+    where('isReadme', '==', false),
+    orderBy('createTime', 'desc'),
+    limit(6)
+  )
+  const querySnapshot = await getDocs(q)
+
+  return querySnapshot.docs.map((doc) => {
+    const data = doc.data()
+    return {
+      id: doc.id,
+      ...pick(data, ['title', 'content', 'coverImage', 'createTime'])
+    }
   })
-
-  if (isVoid(resultPost)) {
-    return undefined
-  }
-
-  return resultPost.map((item: Post) =>
-    pick(item, ['_id', 'title', 'content', 'coverImage', 'createTime'])
-  ) as PostCardResponse[]
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: ApiResponse<PostCardResponse[]>
+  res: NextApiResponse
 ) {
   if (req.method !== 'GET') {
     res.status(405).end()

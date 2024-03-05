@@ -1,23 +1,35 @@
 import axios from 'axios'
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  query,
+  where
+} from 'firebase/firestore'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { getDataSource } from '@/db'
-import { User } from '@/db/entity/User'
+import { db } from '@/db'
 import * as constants from '@/shared/constants/auth'
 import {
   GITHUB_ACCESS_TOKEN_URL,
-  GITHUB_CLIENT_ID,
+  GITHUB_CLIENTid,
   GITHUB_USER_INFO_URL
 } from '@/shared/constants/auth'
+import { User } from '@/shared/types/api/login'
 import { setCookie } from '@/shared/utils/cookie'
 import { pick, serialize } from '@/shared/utils/format'
 import { generateJWT } from '@/shared/utils/jwt'
-import { formatValidatorError, validate } from '@/shared/utils/validator'
 
-const clientID = GITHUB_CLIENT_ID
+const clientID = GITHUB_CLIENTid
 const clientSecret = process.env.GITHUB_CLIENT_SECRET
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const { code, error } = req.query
 
@@ -52,18 +64,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { login, avatar_url } = githubUserInfo.data
 
-    const AppDataSource = await getDataSource()
-    const postRepo = AppDataSource.getRepository(User)
-    const userInfo = await postRepo.findOne({
-      where: {
-        identityType: 'GitHub',
-        userName: login
-      }
-    })
+    const usersRef = collection(db, 'user')
 
-    if (userInfo) {
+    const q = query(
+      usersRef,
+      where('identityType', '==', 'GitHub'),
+      where('userName', '==', login),
+      limit(1)
+    )
+    const querySnapshot = await getDocs(q)
+    const data = querySnapshot.docs.map((doc) => doc.data())[0]
+
+    if (!querySnapshot.empty) {
       const jwtPayload = serialize(
-        pick(userInfo, ['userName', 'isAdmin', 'avatar'])
+        pick(data, ['userName', 'isAdmin', 'avatar'])
       )
       const accessToken = generateJWT(
         jwtPayload,
@@ -92,21 +106,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       return res.redirect(307, '/')
     } else {
-      const user = new User()
+      const docRef = await addDoc(usersRef, {
+        userName: login,
+        avatar: avatar_url,
+        identityType: 'GitHub',
+        password: '',
+        isAdmin: false,
+        createAt: Date.now()
+      })
 
-      user.userName = login
-      user.avatar = avatar_url
-      user.identityType = 'GitHub'
-      user.createAt = Date.now()
+      const newDocSnapshot = await getDoc(doc(db, 'user', docRef.id))
 
-      const errors = await validate(user)
-      if (errors.length > 0) {
-        return res.status(400).json({ message: formatValidatorError(errors) })
-      } else {
-        await postRepo.save(user)
-      }
       const jwtPayload = serialize(
-        pick(user, ['userName', 'isAdmin', 'avatar'])
+        pick(newDocSnapshot.data() as User, ['userName', 'isAdmin', 'avatar'])
       )
       const accessToken = generateJWT(
         jwtPayload,

@@ -25,11 +25,14 @@ import { UploadImageButton } from './upload-image-button'
 import { UrlImageInput } from './url-image-input'
 
 interface PostInfoModalProps extends DialogProps {
+  editId: string
   title: string
   category: string
   coverImage: string
   isReadme: boolean
+  isForUpdate?: boolean
   onTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onCategoryChange: (_: unknown, value: string | null) => void
   onCoverImageChange: (image: string) => void
   onIsReadmeCheckChange: () => void
@@ -39,11 +42,14 @@ interface PostInfoModalProps extends DialogProps {
 
 export const PostInfoModal = ({
   open,
+  editId,
   title,
   category,
   coverImage,
   isReadme,
+  isForUpdate,
   onTitleChange,
+  onIdChange,
   onCategoryChange,
   onCoverImageChange,
   onIsReadmeCheckChange,
@@ -55,7 +61,6 @@ export const PostInfoModal = ({
 
   const handleCoverImgCheckChange = () =>
     setIsUrlCoverImage((checked) => !checked)
-
   return (
     <>
       <Dialog
@@ -88,6 +93,17 @@ export const PostInfoModal = ({
                   }}
                 />
               )}
+            />
+            <TextField
+              label='Id'
+              variant='standard'
+              value={editId}
+              onChange={onIdChange}
+              size='small'
+              disabled={isForUpdate}
+              InputLabelProps={{
+                shrink: true
+              }}
             />
             <TextField
               label='文章標題'

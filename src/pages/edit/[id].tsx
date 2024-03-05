@@ -13,7 +13,7 @@ import { PageLoading } from '@/shared/components/loading/page-loading'
 
 const Editor = () => {
   const { query } = useRouter()
-
+  const editId = String(query.id)
   const { data: editorData, isLoading } = useEditorData(
     query.id as string | undefined
   )
@@ -23,6 +23,7 @@ const Editor = () => {
     post: { content, title, category, isReadme, coverImage },
     reset,
     onCategoryChange,
+    onIdChange,
     onTitleChange,
     onContentChange,
     onCoverImageChange,
@@ -35,7 +36,7 @@ const Editor = () => {
       title,
       category,
       coverImage,
-      _id: String(query.id),
+      id: editId,
       isReadme
     })
   }
@@ -54,6 +55,8 @@ const Editor = () => {
     <>
       <Stack>
         <PostInfoModal
+          isForUpdate
+          editId={editId}
           open={postInfoModalOpen}
           title={title}
           category={category}
@@ -61,6 +64,7 @@ const Editor = () => {
           isReadme={isReadme}
           onTitleChange={onTitleChange}
           onCategoryChange={onCategoryChange}
+          onIdChange={onIdChange}
           onIsReadmeCheckChange={onIsReadmeCheckChange}
           onCoverImageChange={onCoverImageChange}
           handleClose={handleClose}
