@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "analyze": "cross-env ANALYZE=true next build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -43,11 +44,13 @@
     "zustand": "^4.5.1"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.1.2",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/markdown-it": "^12.2.3",
     "@types/react-syntax-highlighter": "^15.5.7",
     "@types/remove-markdown": "^0.3.1",
+    "cross-env": "^7.0.3",
     "prettier": "^2.8.8"
   }
 }
