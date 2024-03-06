@@ -1,12 +1,18 @@
+import { PropsWithChildren, Suspense } from 'react'
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react'
 import { NormalComponents } from 'react-markdown/lib/complex-types'
+
+import styled from '@emotion/styled'
+import dynamic from 'next/dynamic'
 
 import { isVoid } from '@/shared/utils/check'
 import { getCustomSyntax } from '@/shared/utils/markdown'
 
 import { EnhancedImage } from '../lib/enhanced-image'
-import { Li } from './Li'
-import { Code } from './code'
+
+const Code = dynamic(() => import('./code').then(({ Code }) => Code), {
+  ssr: false
+})
 
 export const components:
   | Partial<Omit<NormalComponents, keyof SpecialComponents> & SpecialComponents>
@@ -57,3 +63,30 @@ export const components:
   },
   a: (props) => <a {...props} target='_blank' />
 }
+
+type LiProps = PropsWithChildren<{
+  serialNumber?: number
+}>
+
+export const Li = ({ children, serialNumber }: LiProps) => {
+  if (serialNumber) {
+    return <Container serialnumber={serialNumber}>{children}</Container>
+  }
+  return <Container>{children}</Container>
+}
+
+const Container = styled.li<{
+  serialnumber?: number
+}>`
+  position: relative;
+  padding-left: 30px;
+  &::before {
+    position: absolute;
+    left: ${({ serialnumber }) => (serialnumber ? '5px' : 0)};
+    font-weight: ${({ serialnumber }) => (serialnumber ? 'initial' : 'bold')};
+    color: ${({ serialnumber }) =>
+      serialnumber ? 'initial' : 'var(--primary-blue-4)'};
+    content: '${({ serialnumber }) =>
+      serialnumber ? `${serialnumber}` : '•'}';
+  }
+`
