@@ -13,14 +13,9 @@ import { Setting } from './setting'
 
 interface PostContentProps extends GridProps {
   post: Omit<PostResponse, 'isReadme'>
-  relatedPost?: PostCardResponse[]
 }
 
-export const Content = ({
-  post,
-  relatedPost,
-  ...restProps
-}: PostContentProps) => {
+export const Content = ({ post, ...restProps }: PostContentProps) => {
   const { id, title, content, updateTime, createTime, coverImage } = post
   const formattedCreateTime = formatDate(createTime)
   const formattedUpdateTime = formatDate(updateTime)
@@ -42,7 +37,7 @@ export const Content = ({
         <CoverImage src={coverImage} alt='封面圖' width='1000' height='750' />
       )}
       <Markdown style={{ marginBottom: '50px' }}>{content}</Markdown>
-      <RelatedPostCards postCardsData={relatedPost} />
+      <RelatedPostCards />
     </ContentWrapper>
   )
 }

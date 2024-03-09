@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 
 import styled from '@emotion/styled'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import { Button } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
 
 export const ToTopButton = () => {

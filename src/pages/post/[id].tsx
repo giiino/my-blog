@@ -4,7 +4,6 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
 import { Content, PostMenu, PostWrapper } from '@/features/post/components'
 import TocHolder from '@/features/post/components/toc-holder'
-import { useRelatedPosts } from '@/features/post/hooks/use-queries'
 import { getPostById } from '@/pages/api/post/get'
 import SEO from '@/shared/components/lib/SEO'
 import { useCatrgory } from '@/shared/store'
@@ -16,7 +15,7 @@ const PostPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { setPostCategory } = useCatrgory()
   const { title, content, coverImage, category } = postData
-  const { data: relatedPost } = useRelatedPosts()
+
   useEffect(() => {
     setPostCategory(category)
   }, [category, setPostCategory])
@@ -30,14 +29,7 @@ const PostPage = ({
       />
       <PostWrapper justifyContent={'center'} container>
         <PostMenu item lg={3} md={4} />
-        <Content
-          item
-          lg={7}
-          md={8}
-          xs={12}
-          post={postData}
-          relatedPost={relatedPost}
-        />
+        <Content item lg={7} md={8} xs={12} post={postData} />
         <TocHolder item lg={2} />
       </PostWrapper>
     </>

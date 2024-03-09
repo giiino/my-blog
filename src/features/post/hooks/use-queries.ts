@@ -8,6 +8,10 @@ export const useRelatedPosts = () => {
   const { query } = useRouter()
 
   return useQuery<PostCardResponse[]>(['related-posts'], async () => {
+    if (!query.id) {
+      return []
+    }
+
     const response = await axiosInstance.get(
       '/api/post/get/related?id=' + query.id
     )

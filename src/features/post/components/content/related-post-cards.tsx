@@ -2,15 +2,13 @@ import styled from '@emotion/styled'
 
 import { PostCard } from '@/features/post/components/post-card'
 import { Title } from '@/features/post/components/title'
-import { PostCardResponse } from '@/shared/types/api/post'
 import { isVoid } from '@/shared/utils/check'
 
-interface RelatedPostCardsProps {
-  postCardsData: PostCardResponse[] | undefined
-}
+import { useRelatedPosts } from '../../hooks/use-queries'
 
-export const RelatedPostCards = ({ postCardsData }: RelatedPostCardsProps) => {
-  if (isVoid(postCardsData)) {
+export const RelatedPostCards = () => {
+  const { data: relatedPost } = useRelatedPosts()
+  if (isVoid(relatedPost)) {
     return null
   }
 
@@ -18,7 +16,7 @@ export const RelatedPostCards = ({ postCardsData }: RelatedPostCardsProps) => {
     <Container>
       <Title style={{ marginBottom: '35px' }}>相關文章</Title>
       <CardWrapper>
-        {postCardsData!.map(({ id, ...restItem }) => {
+        {relatedPost!.map(({ id, ...restItem }) => {
           return <PostCard key={id} id={id} {...restItem} />
         })}
       </CardWrapper>
