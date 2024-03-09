@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 import { RouteButton } from '@/shared/components/buttons/route-button'
 import { AdminOnly } from '@/shared/components/lib/admin-only'
-import { useThemeMode } from '@/shared/store'
+import { useThemeMode } from '@/shared/store/use-theme-mode'
 
 interface HeaderProps {
   setIsSidebarOpen: (isOpen: boolean) => void

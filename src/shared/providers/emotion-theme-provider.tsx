@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo } from 'react'
 
 import { ThemeProvider } from '@emotion/react'
-import styled from '@emotion/styled'
-import { useRouter } from 'next/router'
 
 import { styledThemeConf } from '../constants/conf/emotion-theme'
-import { useThemeMode } from '../store'
+import { useThemeMode } from '../store/use-theme-mode'
+import { ThemeMode } from '../types/ui'
 
 const EmotionThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { themeMode, setThemeMode } = useThemeMode()
@@ -17,32 +16,14 @@ const EmotionThemeProvider = ({ children }: { children: React.ReactNode }) => {
   }, [themeMode])
 
   useEffect(() => {
-    import('../utils/get-initial-color-mode').then(
-      ({ getInitialColorMode }) => {
-        setThemeMode(getInitialColorMode())
-      }
-    )
+    const root = document.documentElement
+    const initialColorMode = root.style.getPropertyValue(
+      '--initial-color-mode'
+    ) as ThemeMode
+    setThemeMode(initialColorMode)
   }, [setThemeMode])
 
-  return (
-    <ThemeProvider theme={emotionTheme}>
-      <PageLoadingFilter loadFinished={!!themeMode} />
-      {children}
-    </ThemeProvider>
-  )
+  return <ThemeProvider theme={emotionTheme}>{children}</ThemeProvider>
 }
 
 export default EmotionThemeProvider
-
-const PageLoadingFilter = styled.div<{
-  loadFinished: boolean
-}>`
-  display: ${({ loadFinished }) => (loadFinished ? 'none' : 'block')};
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #fff;
-  width: 100%;
-  height: 100%;
-  z-index: 999999999;
-`

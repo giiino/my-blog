@@ -8,7 +8,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { useCatrgory } from '@/shared/store'
+import { useCategory } from '@/shared/store/use-category'
 import { MenuCategoriesResponse } from '@/shared/types/api/post'
 
 interface MenuProps {
@@ -16,7 +16,7 @@ interface MenuProps {
 }
 
 export function Menu({ menuCategories }: MenuProps) {
-  const { postCategory, setPostCategory } = useCatrgory()
+  const { postCategory, setPostCategory } = useCategory()
 
   const handleClick = (category: string) => {
     const newCategory = category === postCategory ? '' : category

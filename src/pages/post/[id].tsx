@@ -6,14 +6,14 @@ import { Content, PostMenu, PostWrapper } from '@/features/post/components'
 import TocHolder from '@/features/post/components/toc-holder'
 import { getPostById } from '@/pages/api/post/get'
 import SEO from '@/shared/components/lib/SEO'
-import { useCatrgory } from '@/shared/store'
+import { useCategory } from '@/shared/store/use-category'
 import { PostResponse } from '@/shared/types/api/post'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 
 const PostPage = ({
   postData
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { setPostCategory } = useCatrgory()
+  const { setPostCategory } = useCategory()
   const { title, content, coverImage, category } = postData
 
   useEffect(() => {
