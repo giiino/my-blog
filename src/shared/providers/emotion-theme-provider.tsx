@@ -1,19 +1,13 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 
 import { ThemeProvider } from '@emotion/react'
 
 import { styledThemeConf } from '../constants/conf/emotion-theme'
 import { useThemeMode } from '../store/use-theme-mode'
-import { ThemeMode } from '../types/ui'
+import { ThemeMode } from '../types/global'
 
 const EmotionThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { themeMode, setThemeMode } = useThemeMode()
-  const emotionTheme = useMemo(() => {
-    if (!themeMode) {
-      return styledThemeConf('light')
-    }
-    return styledThemeConf(themeMode)
-  }, [themeMode])
 
   useEffect(() => {
     const root = document.documentElement
@@ -21,9 +15,15 @@ const EmotionThemeProvider = ({ children }: { children: React.ReactNode }) => {
       '--initial-color-mode'
     ) as ThemeMode
     setThemeMode(initialColorMode)
-  }, [setThemeMode])
+  }, [])
 
-  return <ThemeProvider theme={emotionTheme}>{children}</ThemeProvider>
+  return (
+    <ThemeProvider
+      theme={themeMode ? styledThemeConf(themeMode) : styledThemeConf('light')}
+    >
+      {children}
+    </ThemeProvider>
+  )
 }
 
 export default EmotionThemeProvider

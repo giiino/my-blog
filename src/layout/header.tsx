@@ -24,11 +24,8 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
   const logoImage =
     themeMode === 'dark' ? '/logo-dark-mode.svg' : '/logo-light-mode.svg'
 
-  const toggleMode = () => {
-    const newThemeMode = themeMode === 'light' ? 'dark' : 'light'
-    localStorage.setItem('theme-mode', newThemeMode)
-    setThemeMode(newThemeMode)
-  }
+  const toggleMode = () =>
+    setThemeMode(themeMode === 'light' ? 'dark' : 'light')
 
   return (
     <Container position='sticky' color='inherit'>

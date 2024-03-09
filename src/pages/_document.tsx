@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 import Script from 'next/script'
 
-import { ThemeMode } from '@/shared/types/ui'
+import { TObject, ThemeMode } from '@/shared/types/global'
 
 export default function Document() {
   return (
@@ -19,10 +19,13 @@ export default function Document() {
 }
 
 function setInitialColorMode() {
+  function getZustandPersistState(key: string): TObject | null {
+    const value = window.localStorage.getItem(key)
+    return value ? JSON.parse(value).state : null
+  }
   function getInitialColorMode() {
-    const themeMode = window.localStorage.getItem(
-      'theme-mode'
-    ) as ThemeMode | null
+    const themeMode = getZustandPersistState('theme-mode')
+      ?.themeMode as ThemeMode | null
 
     if (themeMode === 'light' || themeMode === 'dark') {
       return themeMode
@@ -39,6 +42,7 @@ function setInitialColorMode() {
 
   const Mode = getInitialColorMode()
   const root = document.documentElement
+
   root.style.setProperty('--initial-color-mode', Mode)
 
   if (Mode === 'dark')

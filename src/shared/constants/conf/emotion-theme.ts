@@ -1,6 +1,6 @@
 import { Theme } from '@emotion/react'
 
-import { ThemeMode } from '@/shared/types/ui'
+import { ThemeMode } from '@/shared/types/global'
 
 export const styledThemeConf = (mode: ThemeMode): Partial<Theme> => {
   if (mode === 'light') {

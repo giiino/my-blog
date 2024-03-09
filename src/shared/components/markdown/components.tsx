@@ -1,4 +1,4 @@
-import { PropsWithChildren, Suspense } from 'react'
+import { PropsWithChildren } from 'react'
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react'
 import { NormalComponents } from 'react-markdown/lib/complex-types'
 
