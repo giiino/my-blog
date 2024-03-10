@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
-import Image from 'next/image'
 import Link from 'next/link'
+
+import { EnhancedImage } from '@/shared/components/lib/enhanced-image'
 
 export const Banner = () => {
   return (
@@ -8,7 +9,13 @@ export const Banner = () => {
       <TitleSection>
         <h2>GN&ensp;DEV</h2>
       </TitleSection>
-      <Image src='/banner.jpg' width='1200' height='400' alt='首頁大圖' />
+      <EnhancedImage
+        src='/banner.jpg'
+        compressedImageLoader='/compressed-banner.jpg'
+        alt='首頁大圖'
+        width='1200'
+        height='400'
+      />
       <EnterButton href={'/post'}>進入文章</EnterButton>
     </Container>
   )
@@ -19,9 +26,11 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 400px;
   user-select: none;
   img {
     width: 100%;
+    height: 100%;
   }
   &::before {
     content: '';
