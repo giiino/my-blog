@@ -39,7 +39,7 @@ export const EnhancedImage = ({
             height={10}
             src={compressedImageLoader!}
             alt={alt}
-            style={{ zIndex: 1 }}
+            style={{ zIndex: 1, position: 'absolute' }}
           />
         )}
         <Image
