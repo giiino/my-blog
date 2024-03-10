@@ -40,7 +40,11 @@ export default PostPage
 
 export const getServerSideProps: GetServerSideProps<{
   postData: Omit<PostResponse, 'isReadme'>
-}> = async ({ params }) => {
+}> = async ({ params, res }) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=1800, stale-while-revalidate=86400'
+  )
   const id = params?.id as string | undefined
 
   if (!id) {

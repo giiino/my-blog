@@ -31,7 +31,11 @@ export default PostIndexPage
 
 export const getServerSideProps: GetServerSideProps<{
   postData: Omit<PostResponse, 'isReadme'>
-}> = async () => {
+}> = async ({ res }) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=1800, stale-while-revalidate=86400'
+  )
   try {
     const postData = await getReadmePost()
 
