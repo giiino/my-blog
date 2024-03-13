@@ -123,5 +123,5 @@ export function Setting({ editId, ...props }: SettingProps) {
 }
 
 const MoreIcon = styled(MoreVertIcon)`
-  color: ${({ theme }) => theme.color};
+  color: var(--color-text);
 `

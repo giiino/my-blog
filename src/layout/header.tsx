@@ -89,8 +89,8 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
 }
 
 const Container = styled(AppBar)`
-  background-color: ${({ theme }) => theme.bgColor};
-  color: ${({ theme }) => theme.color};
+  background-color: var(--color-bg);
+  color: var(--color-text);
   user-select: none;
   z-index: 5;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px 0px,
@@ -105,7 +105,7 @@ const Container = styled(AppBar)`
 
   .route-btn {
     display: flex;
-    color: ${({ theme }) => theme.color};
+    color: var(--color-text);
     @media screen and (max-width: 960px) {
       display: none;
     }

@@ -44,7 +44,7 @@ const LinkWrapper = styled(Link)`
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: lighter;
-    color: ${({ theme }) => theme.card.titleColor};
+    color: var(--color-card-title-text);
   }
   .content {
     display: -webkit-box;
@@ -55,16 +55,16 @@ const LinkWrapper = styled(Link)`
     font-size: 15px;
     line-height: 1.7;
     word-break: break-all;
-    color: ${({ theme }) => theme.card.summaryColor};
+    color: var(--color-card-summary-text);
   }
   .time {
     font-size: 14px;
-    color: ${({ theme }) => theme.card.timeColor};
+    color: var(--color-card-time-text);
     margin-top: auto;
   }
   &:hover {
     .content {
-      color: ${({ theme }) => theme.card.summaryHoverColor};
+      color: var(--color-card-summary-hover-text);
     }
   }
 `

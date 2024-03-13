@@ -104,16 +104,16 @@ export default Siderbar
 
 const StyledDrawer = styled(Drawer)`
   .MuiPaper-root {
-    background: ${({ theme }) => theme.bgColor};
+    background: var(--color-bg);
   }
   .divider {
-    border-color: ${({ theme }) => theme.sidebar.dividerColor};
+    border-color: var(--color-sidebar-divider);
   }
 `
 
 const Container = styled(Stack)`
   padding: 50px 25px;
-  color: ${({ theme }) => theme.color};
+  color: var(--color-text);
 `
 
 const RouteWrapper = styled(Stack)`

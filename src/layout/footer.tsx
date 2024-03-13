@@ -48,9 +48,9 @@ const BoxWrapper = styled(Box)`
   justify-content: center;
   align-items: center;
   height: 45vh;
-  background-color: ${({ theme }) => theme.footer.bgColor};
-  color: ${({ theme }) => theme.color};
-  border-top: ${({ theme }) => theme.footer.borderTop};
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border-top: var(--color-footer-border-top);
   user-select: none;
 `
 
@@ -66,7 +66,7 @@ const RoutesWrapper = styled.div`
   font-size: 18px;
   gap: 15px;
   a {
-    color: ${({ theme }) => theme.footer.linkColor};
+    color: var(--color-footer-link);
     &:hover {
       text-decoration: underline;
     }
@@ -83,6 +83,6 @@ const Icons = styled.div`
     cursor: pointer;
   }
   a {
-    color: ${({ theme }) => theme.footer.linkColor};
+    color: var(--color-footer-link);
   }
 `

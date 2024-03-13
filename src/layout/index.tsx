@@ -22,8 +22,8 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
 const PageWrapper = styled.main`
   flex: 1;
-  color: ${({ theme }) => theme.color};
-  background-color: ${({ theme }) => theme.bgColor};
+  color: var(--color-text);
+  background-color: var(--color-bg);
 `
 
 export default Layout

@@ -45,9 +45,9 @@ export const StyleWrapper = styled.div`
       padding: 1.2em 30px 1.2em 30px;
       line-height: 1.6;
       position: relative;
-      border-left: ${({ theme }) => theme.markdown.borderLeft};
-      background-color: ${({ theme }) => theme.markdown.blockquoteBgColor};
-      color: ${({ theme }) => theme.color};
+      border-left: var(--color-markdown-blockquote-border-left);
+      background-color: var(--color-markdown-blockquote-bg);
+      color: var(--color-text);
       border-radius: 8px;
     }
     figcaption {
@@ -65,9 +65,9 @@ export const StyleWrapper = styled.div`
     }
     em {
       font-style: normal;
-      background-color: ${({ theme }) => theme.markdown.highlightBgColor};
-      color: ${({ theme }) => theme.color};
-      border: ${({ theme }) => `1px solid ${theme.markdown.highlightBorder}`};
+      background-color: var(--color-markdown-highlight-bg);
+      color: var(--color-text);
+      border: var(--color-markdown-highlight-border);
       word-break: break-all;
       padding: 2px 4px 3px;
       border-radius: 5px;

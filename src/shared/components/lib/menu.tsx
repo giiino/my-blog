@@ -88,14 +88,14 @@ const GroupListItem = ({
 const ListContainer = styled.div`
   .MuiList-root {
     padding: 0;
-    background-color: ${({ theme }) => theme.bgColor};
+    background-color: var(--color-bg);
   }
 
   .MuiButtonBase-root {
-    color: ${({ theme }) => theme.menu.color};
+    color: var(--color-menu-text);
     &:hover {
-      background-color: ${({ theme }) => theme.bgColor};
-      color: ${({ theme }) => theme.menu.hoverColor};
+      background-color: var(--color-bg);
+      color: var(--color-menu-hover-text);
     }
   }
   .Mui-selected {
