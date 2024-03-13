@@ -19,12 +19,12 @@ export default function Document() {
 }
 
 function setInitialColorMode() {
-  function getZustandPersistState(key: string): TObject | null {
+  function getStorePersistState(key: string): TObject | null {
     const value = window.localStorage.getItem(key)
     return value ? JSON.parse(value).state : null
   }
   function getInitialColorMode() {
-    const themeMode = getZustandPersistState('theme-mode')
+    const themeMode = getStorePersistState('theme-mode')
       ?.themeMode as ThemeMode | null
 
     if (themeMode === 'light' || themeMode === 'dark') {
@@ -41,12 +41,8 @@ function setInitialColorMode() {
   }
 
   const Mode = getInitialColorMode()
-  const root = document.documentElement
 
-  root.style.setProperty('--initial-color-mode', Mode)
-
-  if (Mode === 'dark')
-    document.documentElement.setAttribute('data-theme', 'dark')
+  document.documentElement.setAttribute('data-theme', Mode)
 }
 
 const blockingSetInitialColorMode = `(function() {

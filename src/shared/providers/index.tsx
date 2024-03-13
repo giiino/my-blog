@@ -10,8 +10,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { muiThemeConf } from '@/shared/constants/conf/mui-theme'
 import { reactQueryConf } from '@/shared/constants/conf/react-query'
 
-import EmotionThemeProvider from './emotion-theme-provider'
-
 const queryClient = new QueryClient(reactQueryConf)
 
 const AppProvider = ({ children }: { children: ReactNode }) => {
@@ -19,9 +17,7 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <EmotionThemeProvider>
-        <MuiThemeProvider theme={muiTheme}>{children}</MuiThemeProvider>
-      </EmotionThemeProvider>
+      <MuiThemeProvider theme={muiTheme}>{children}</MuiThemeProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>
   )
