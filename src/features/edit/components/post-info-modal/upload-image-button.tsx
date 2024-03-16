@@ -4,17 +4,12 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import { Box, BoxProps, Button } from '@mui/material'
 
 import { useUploadImage } from '../../hooks/use-mutations'
+import { ValueKeys, useFormikContext } from '../edit-formik'
 
-interface FilesButtonProps extends BoxProps {
-  imageUrl: string
-  onImageUrlChange: (image: string) => void
-}
+interface FilesButtonProps extends BoxProps {}
 
-export function UploadImageButton({
-  imageUrl,
-  onImageUrlChange,
-  ...restProps
-}: FilesButtonProps) {
+export function UploadImageButton(props: FilesButtonProps) {
+  const { setFieldValue } = useFormikContext()
   const { mutateAsync: upload } = useUploadImage()
 
   const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,16 +25,16 @@ export function UploadImageButton({
 
     const preview = URL.createObjectURL(e.target.files[0])
 
-    onImageUrlChange(preview)
+    setFieldValue(ValueKeys['封面'], preview)
     const imageFile = e.target.files[0]
 
     const url = await upload(imageFile)
 
-    onImageUrlChange(url)
+    setFieldValue(ValueKeys['封面'], url)
   }
 
   return (
-    <Box {...restProps}>
+    <Box {...props}>
       <label htmlFor='upload-input'>
         <input
           id='upload-input'

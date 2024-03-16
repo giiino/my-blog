@@ -18,49 +18,39 @@ import {
 
 import { EnhancedImage } from '@/shared/components/lib/enhanced-image'
 import { ErrorBoundary } from '@/shared/components/lib/error-boundary'
+import toast from '@/shared/lib/toast'
 import { isVoid } from '@/shared/utils/check'
 
-import { useCategories } from '../../hooks/use-edit'
+import { useCategories } from '../../hooks/use-categories'
+import { ValueKeys, useFormikContext } from '../edit-formik'
 import { UploadImageButton } from './upload-image-button'
 import { UrlImageInput } from './url-image-input'
 
 interface PostInfoModalProps extends DialogProps {
-  editId: string
-  title: string
-  category: string
-  coverImage: string
-  isReadme: boolean
   isForUpdate?: boolean
-  onTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onIdChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onCategoryChange: (_: unknown, value: string | null) => void
-  onCoverImageChange: (image: string) => void
-  onIsReadmeCheckChange: () => void
-  handleSubmit: () => void
   handleClose: () => void
 }
 
 export const PostInfoModal = ({
   open,
-  editId,
-  title,
-  category,
-  coverImage,
-  isReadme,
   isForUpdate,
-  onTitleChange,
-  onIdChange,
-  onCategoryChange,
-  onCoverImageChange,
-  onIsReadmeCheckChange,
-  handleSubmit,
   handleClose
 }: PostInfoModalProps) => {
+  const { values, errors, handleChange, submitForm, setFieldValue } =
+    useFormikContext()
   const [isUrlCoverImage, setIsUrlCoverImage] = useState(true)
   const categories = useCategories()
 
-  const handleCoverImgCheckChange = () =>
+  const handleCoverImgCheckChange = () => {
     setIsUrlCoverImage((checked) => !checked)
+  }
+
+  const handleSubmit = () => {
+    const error = Object.values(errors)[0]
+    if (error) toast.warn(error)
+    submitForm()
+  }
+
   return (
     <>
       <Dialog
@@ -78,10 +68,12 @@ export const PostInfoModal = ({
               disablePortal
               disableClearable
               freeSolo
-              value={category}
               options={categories || []}
+              value={values.category}
+              onInputChange={(_, value) =>
+                setFieldValue(ValueKeys['種類'], value)
+              }
               size='small'
-              onInputChange={onCategoryChange}
               ListboxProps={{ style: { maxHeight: '200px' } }}
               renderInput={(params) => (
                 <TextField
@@ -97,8 +89,10 @@ export const PostInfoModal = ({
             <TextField
               label='Id'
               variant='standard'
-              value={editId}
-              onChange={onIdChange}
+              value={values.id}
+              name={ValueKeys['標示ID']}
+              id={ValueKeys['標示ID']}
+              onChange={handleChange}
               size='small'
               disabled={isForUpdate}
               InputLabelProps={{
@@ -108,8 +102,10 @@ export const PostInfoModal = ({
             <TextField
               label='文章標題'
               variant='standard'
-              value={title}
-              onChange={onTitleChange}
+              value={values.title}
+              name={ValueKeys['標題']}
+              id={ValueKeys['標題']}
+              onChange={handleChange}
               size='small'
               InputLabelProps={{
                 shrink: true
@@ -117,17 +113,9 @@ export const PostInfoModal = ({
             />
             <Stack direction='row'>
               {isUrlCoverImage ? (
-                <UrlImageInput
-                  imageUrl={coverImage}
-                  onImageUrlChange={onCoverImageChange}
-                  sx={{ flex: 1 }}
-                />
+                <UrlImageInput sx={{ flex: 1 }} />
               ) : (
-                <UploadImageButton
-                  imageUrl={coverImage}
-                  onImageUrlChange={onCoverImageChange}
-                  sx={{ flex: 1 }}
-                />
+                <UploadImageButton sx={{ flex: 1 }} />
               )}
               <FormControlLabel
                 sx={{ mr: 0 }}
@@ -140,10 +128,13 @@ export const PostInfoModal = ({
                 label='外部連結'
               />
             </Stack>
-            {!isVoid(coverImage) && (
-              <ErrorBoundary fallback={ImageErrorFallback} key={coverImage}>
+            {!isVoid(values.coverImage) && (
+              <ErrorBoundary
+                fallback={ImageErrorFallback}
+                key={values.coverImage}
+              >
                 <PreviewImage
-                  src={coverImage}
+                  src={values.coverImage}
                   alt='文章編輯預覽圖'
                   width='100'
                   height='100'
@@ -168,8 +159,9 @@ export const PostInfoModal = ({
               control={
                 <Checkbox
                   disableRipple
-                  checked={isReadme}
-                  onChange={onIsReadmeCheckChange}
+                  name={ValueKeys['isReadme']}
+                  id={ValueKeys['isReadme']}
+                  onChange={handleChange}
                   sx={{ pl: 0 }}
                 />
               }

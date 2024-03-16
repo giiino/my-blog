@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic'
 import { Markdown } from '@/shared/components/markdown'
 
 import { useUploadImage } from '../../hooks/use-mutations'
+import { ValueKeys, useFormikContext } from '../edit-formik'
 import { HighlightPlugin } from './highlight-plugin'
 import { SubmitPlugin } from './submit-plugin'
 
@@ -28,17 +29,14 @@ const MdEditor = dynamic(
 )
 
 interface ContentEditorProps {
-  value: string
-  onChange: ({ text }: { text: string }) => void
+  // value: string
+  // onChange: ({ text }: { text: string }) => void
   onPostInfoModalOpen: () => void
 }
 
-export function ContentEditor({
-  value,
-  onChange,
-  onPostInfoModalOpen
-}: ContentEditorProps) {
+export function ContentEditor({ onPostInfoModalOpen }: ContentEditorProps) {
   const { mutateAsync: upload } = useUploadImage()
+  const { values, handleChange } = useFormikContext()
 
   const handleImageUpload = async (file: File) => {
     const url = await upload(file)
@@ -47,11 +45,12 @@ export function ContentEditor({
 
   return (
     <StyledMdEditor
-      value={value}
+      value={values.content}
+      name={ValueKeys['內容']}
       renderHTML={(text) => (
         <Markdown style={{ color: '#000' }}>{text}</Markdown>
       )}
-      onChange={onChange}
+      onChange={(_, e) => handleChange(e)}
       config={{ onPostInfoModalOpen }}
       onImageUpload={handleImageUpload}
       allowPasteImage

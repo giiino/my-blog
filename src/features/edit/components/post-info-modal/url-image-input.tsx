@@ -3,34 +3,25 @@ import { Autocomplete, Box, Stack, StackProps, TextField } from '@mui/material'
 import Image from 'next/image'
 
 import { useConverImages } from '../../hooks/use-queries'
+import { ValueKeys, useFormikContext } from '../edit-formik'
 
-interface UrlImageInputProps extends StackProps {
-  imageUrl: string
-  onImageUrlChange: (image: string) => void
-}
+interface UrlImageInputProps extends StackProps {}
 
-export const UrlImageInput = ({
-  imageUrl,
-  onImageUrlChange,
-  ...restProps
-}: UrlImageInputProps) => {
+export const UrlImageInput = (props: UrlImageInputProps) => {
+  const { values, setFieldValue } = useFormikContext()
   const { data: converImagesList } = useConverImages()
 
-  const handleUrlChange = (_: unknown, value: string) => {
-    onImageUrlChange(value)
-  }
-
   return (
-    <Stack {...restProps}>
+    <Stack {...props}>
       <Autocomplete
         disablePortal
         disableClearable
         freeSolo
-        value={imageUrl}
         options={converImagesList || []}
         size='small'
-        onInputChange={handleUrlChange}
         ListboxProps={{ style: { maxHeight: '200px' } }}
+        onInputChange={(_, value) => setFieldValue(ValueKeys['封面'], value)}
+        value={values.coverImage}
         renderOption={(props, option) => (
           <Box component='li' {...props}>
             <OptionImage width='50' height='50' src={option} alt='封面圖' />

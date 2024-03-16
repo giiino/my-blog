@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 
 import { axiosInstance } from '@/shared/utils/axios-instance'
 
-import { EditedItems } from './use-edit'
+import { FormValues } from '../components/edit-formik'
 
 export const useEditorData = (id: string | undefined) => {
-  return useQuery<Partial<EditedItems>>(
+  return useQuery<FormValues>(
     ['editor-data'],
     async () => {
       const response = await axiosInstance.get('/api/post/get/' + id)
