@@ -6,6 +6,7 @@ import AppBar from '@mui/material/AppBar'
 import IconButton from '@mui/material/IconButton'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -13,19 +14,25 @@ import { RouteButton } from '@/shared/components/buttons/route-button'
 import { AdminOnly } from '@/shared/components/lib/admin-only'
 import { useThemeMode } from '@/shared/store/use-theme-mode'
 
+const ThemeButton = dynamic(
+  () =>
+    import('@/shared/components/buttons/theme-button').then(
+      ({ ThemeButton }) => ThemeButton
+    ),
+  {
+    ssr: false
+  }
+)
+
 interface HeaderProps {
   setIsSidebarOpen: (isOpen: boolean) => void
 }
 
 export default function Header({ setIsSidebarOpen }: HeaderProps) {
-  const { themeMode, setThemeMode } = useThemeMode()
+  const { themeMode } = useThemeMode()
 
-  const ThemeModeIcon = themeMode === 'light' ? DarkModeIcon : LightModeIcon
   const logoImage =
     themeMode === 'dark' ? '/logo-dark-mode.svg' : '/logo-light-mode.svg'
-
-  const toggleMode = () =>
-    setThemeMode(themeMode === 'light' ? 'dark' : 'light')
 
   return (
     <Container position='sticky' color='inherit'>
@@ -47,13 +54,15 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
           sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
         >
           <Link href={'/'} style={{ marginRight: '20px' }}>
-            <Image
-              src={logoImage}
-              alt='gn-dev-logo'
-              width={100}
-              height={40}
-              style={{ display: 'block' }}
-            />
+            <h1>
+              <Image
+                src={logoImage}
+                alt='gn-dev網站名稱'
+                width={100}
+                height={40}
+                style={{ display: 'block' }}
+              />
+            </h1>
           </Link>
           <RouteButton
             className='route-btn'
@@ -82,7 +91,7 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
             </RouteButton>
           </AdminOnly>
         </Typography>
-        <ThemeModeIcon sx={{ cursor: 'pointer' }} onClick={toggleMode} />
+        <ThemeButton />
       </Toolbar>
     </Container>
   )
