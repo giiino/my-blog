@@ -6,7 +6,10 @@ import { useRouter } from 'next/router'
 import { uploadCompressImage, uploadImage } from '@/shared/services/upload'
 import { axiosInstance } from '@/shared/utils/axios-instance'
 
-import { PublishParams, UpdateParams } from '../types'
+import { FormValues, ValueKeys } from '../components/edit-formik'
+
+export type PublishParams = FormValues
+export type UpdateParams = FormValues
 
 export const usePublishPost = () => {
   const { push } = useRouter()
