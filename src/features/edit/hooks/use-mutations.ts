@@ -3,7 +3,7 @@ import { toast } from 'react-hot-toast'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 
-import { uploadCompressImage, uploadImage } from '@/shared/services/upload'
+import { uploadImage } from '@/shared/services/upload'
 import { axiosInstance } from '@/shared/utils/axios-instance'
 
 import { FormValues, ValueKeys } from '../components/edit-formik'
@@ -54,14 +54,10 @@ export const useUpdatePost = () => {
 export const useUploadImage = () => {
   return useMutation(
     async (file: File) => {
-      const [originalImage, compressedImage] = await Promise.all([
-        uploadImage(file),
-        uploadCompressImage(file)
-      ])
+      const originalImage = await uploadImage(file)
       const result =
         originalImage.url +
-        `?width=${originalImage.width}&height=${originalImage.height},` +
-        compressedImage.url
+        `?width=${originalImage.width}&height=${originalImage.height}`
       return Promise.resolve(result)
     },
     {

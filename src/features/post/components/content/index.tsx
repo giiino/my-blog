@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
-import Image from 'next/image'
 
 import { AdminOnly } from '@/shared/components/lib/admin-only'
+import { EnhancedImage } from '@/shared/components/lib/enhanced-image'
 import { Markdown } from '@/shared/components/markdown'
-import { PostCardResponse, PostResponse } from '@/shared/types/api/post'
+import { PostResponse } from '@/shared/types/api/post'
 import { isVoid } from '@/shared/utils/check'
 import { formatDate } from '@/shared/utils/format'
 
@@ -34,7 +34,13 @@ export const Content = ({ post, ...restProps }: PostContentProps) => {
         <span>{formattedUpdateTime}</span>
       </Time>
       {!isVoid(coverImage) && (
-        <CoverImage src={coverImage} alt='封面圖' width='1000' height='750' />
+        <EnhancedImage
+          src={coverImage}
+          alt='封面圖'
+          imageWidth='100%'
+          ratio={0.6}
+          containerStyle={{ marginBottom: '20px' }}
+        />
       )}
       <Markdown style={{ marginBottom: '50px' }}>{content}</Markdown>
       <RelatedPostCards />
@@ -71,10 +77,4 @@ const Time = styled.div`
   span {
     margin-left: 5px;
   }
-`
-
-const CoverImage = styled(Image)`
-  width: 100%;
-  height: auto;
-  margin-bottom: 20px;
 `

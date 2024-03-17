@@ -1,92 +1,79 @@
-import { Fragment, PropsWithChildren, useState } from 'react'
+import {
+  CSSProperties,
+  ComponentProps,
+  Fragment,
+  PropsWithChildren,
+  useState
+} from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import styled from '@emotion/styled'
-import Image, { ImageProps } from 'next/image'
 
 import { isVoid } from '../../utils/check'
 
-interface EnhancedImageProps extends ImageProps {
+interface EnhancedImageProps extends ComponentProps<typeof LazyLoadImage> {
   alt: string
-  compressedImageLoader?: string
-  flexibleSize?: { imageWidth: string; ratio: number; maxHeight?: string }
+  imageWidth: string
+  ratio: number
+  containerStyle?: CSSProperties
 }
 
 export const EnhancedImage = ({
   alt,
-  compressedImageLoader,
-  flexibleSize,
+  ratio,
+  imageWidth,
+  containerStyle,
   ...props
 }: EnhancedImageProps) => {
-  const [isLoaded, setIsLoaded] = useState(false)
   const [isError, setIsError] = useState(false)
   const imageUrl = props.src
 
   if (isError || isVoid(imageUrl)) {
     return (
-      <Wrapper flexibleSize={flexibleSize}>
-        <Image {...props} src='/img-not-found.png' alt={'圖片找不到'} />
-      </Wrapper>
+      <ImageContainer
+        className='enhanced-img'
+        ratio={ratio}
+        imageWidth={imageWidth}
+        style={containerStyle}
+      >
+        <LazyLoadImage src='/img-not-found.png' alt={'圖片找不到'} {...props} />
+      </ImageContainer>
     )
   }
 
   return (
-    <Wrapper flexibleSize={flexibleSize}>
-      <>
-        {!isLoaded && compressedImageLoader && (
-          <Image
-            {...props}
-            width={10}
-            height={10}
-            src={compressedImageLoader!}
-            alt={alt}
-            style={{ zIndex: 1, position: 'absolute' }}
-          />
-        )}
-        <Image
-          {...props}
-          alt={alt}
-          onLoad={() => setIsLoaded(true)}
-          onError={() => setIsError(true)}
-        />
-      </>
-    </Wrapper>
+    <ImageContainer
+      className='enhanced-img'
+      ratio={ratio}
+      imageWidth={imageWidth}
+      style={containerStyle}
+    >
+      <LazyLoadImage
+        {...props}
+        effect='blur'
+        onError={() => setIsError(true)}
+      />
+    </ImageContainer>
   )
 }
 
-interface WrapperProps {
-  flexibleSize:
-    | { imageWidth: string; ratio: number; maxHeight?: string }
-    | undefined
-}
-
-const Wrapper = ({
-  flexibleSize,
-  children
-}: PropsWithChildren<WrapperProps>) => {
-  if (flexibleSize) {
-    return <ImageContainer {...flexibleSize}>{children}</ImageContainer>
-  }
-
-  return <Fragment>{children}</Fragment>
-}
-
-const ImageContainer = styled.span<{
+const ImageContainer = styled.div<{
   ratio: number
   imageWidth: string
-  maxHeight?: string
 }>`
-  display: inline-block;
   position: relative;
   width: ${({ imageWidth }) => imageWidth};
-  padding-bottom: ${({ ratio, imageWidth, maxHeight }) =>
-    ratio
-      ? `min(calc(${imageWidth} * ${ratio}), ${
-          maxHeight ? maxHeight : '100vh'
-        })`
-      : 'initial'};
-  img {
+  padding-bottom: ${({ ratio, imageWidth }) =>
+    ratio ? `calc(${imageWidth} * ${ratio})` : 'initial'};
+  .lazy-load-image-loaded {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: inherit !important;
+    height: inherit !important;
+    padding-bottom: inherit;
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
   }
 `

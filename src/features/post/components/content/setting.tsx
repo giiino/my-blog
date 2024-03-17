@@ -93,6 +93,7 @@ export function Setting({ editId, ...props }: SettingProps) {
         placement='bottom-start'
         transition
         disablePortal
+        style={{ zIndex: 1 }}
       >
         {({ TransitionProps, placement }) => (
           <Grow

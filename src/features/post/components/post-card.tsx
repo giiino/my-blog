@@ -22,9 +22,8 @@ export const PostCard = ({
     <CoverImage
       src={coverImage}
       alt='封面圖片'
-      width={'400'}
-      height={'400'}
-      flexibleSize={{ imageWidth: '100%', ratio: 0.6 }}
+      ratio={0.6}
+      imageWidth={'100%'}
     />
     <h3 className='title'>{title}</h3>
     <div className='time'>{formatDate(createTime)}</div>

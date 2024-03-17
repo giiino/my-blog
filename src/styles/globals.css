@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@1,700;1,800&family=Noto+Sans+TC:wght@400;600;700&display=swap');
-
+@import 'react-lazy-load-image-component/src/effects/blur.css';
 :root {
   --primary-dark: #132743;
   --primary-link: #2583db;

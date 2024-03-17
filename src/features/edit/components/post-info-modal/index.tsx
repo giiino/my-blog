@@ -136,9 +136,9 @@ export const PostInfoModal = ({
                 <PreviewImage
                   src={values.coverImage}
                   alt='文章編輯預覽圖'
-                  width='100'
-                  height='100'
-                  flexibleSize={{ imageWidth: '100px', ratio: 1 }}
+                  imageWidth='100px'
+                  ratio={1}
+                  style={{ objectFit: 'contain' }}
                 />
               </ErrorBoundary>
             )}
@@ -202,8 +202,8 @@ const ImageErrorFallback = ({ error }: { error: Error | null }) => (
   <PreviewImage
     src={'/img-not-found.png'}
     alt='圖片顯示錯誤'
-    width='100'
-    height='100'
-    flexibleSize={{ imageWidth: '100px', ratio: 1 }}
+    imageWidth='100px'
+    ratio={1}
+    style={{ objectFit: 'contain' }}
   />
 )

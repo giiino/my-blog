@@ -1,10 +1,8 @@
-import Compressor from 'compressorjs'
-
 import { UploadedImageInfo } from '../types/api/upload'
 import { axiosInstance } from '../utils/axios-instance'
 
 export const uploadImage = (file: File | Blob) => {
-  return new Promise<UploadedImageInfo>(async (resolve, reject) => {
+  return new Promise<UploadedImageInfo>(async (resolve) => {
     const formData = new FormData()
     formData.append('image', file)
     const res = await axiosInstance.post(
@@ -20,23 +18,5 @@ export const uploadImage = (file: File | Blob) => {
       }
     )
     resolve(res.data.data)
-  })
-}
-
-export const uploadCompressImage = (file: File | Blob) => {
-  return new Promise<UploadedImageInfo>(async (resolve, reject) => {
-    new Compressor(file, {
-      quality: 0.1,
-      maxWidth: 10,
-      maxHeight: 10,
-      success(result) {
-        uploadImage(result).then((url) => {
-          resolve(url)
-        })
-      },
-      error(err) {
-        console.log(err.message)
-      }
-    })
   })
 }

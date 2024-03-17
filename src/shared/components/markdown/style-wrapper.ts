@@ -54,7 +54,6 @@ export const StyleWrapper = styled.div`
       text-align: center;
       font-size: 0.5em;
       color: var(--primary-gray-200);
-      margin-top: -10px;
     }
     a {
       color: var(--primary-link);

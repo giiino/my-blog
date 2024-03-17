@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 
@@ -6,15 +7,15 @@ import { EnhancedImage } from '@/shared/components/lib/enhanced-image'
 export const Banner = () => {
   return (
     <Container>
-      <TitleSection>
+      <TitleSection style={{ zIndex: 1 }}>
         <h2>GN&ensp;DEV</h2>
       </TitleSection>
       <EnhancedImage
         src='/banner.jpg'
-        compressedImageLoader='/compressed-banner.jpg'
         alt='首頁大圖'
-        width='1200'
-        height='400'
+        imageWidth='100%'
+        ratio={1}
+        style={{ height: '400px' }}
       />
       <EnterButton href={'/post'}>進入文章</EnterButton>
     </Container>
@@ -68,8 +69,6 @@ const TitleSection = styled.div`
       font-size: 35px;
     }
   }
-  /* 
-   */
 `
 
 const EnterButton = styled(Link)`
