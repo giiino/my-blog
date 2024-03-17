@@ -6,7 +6,7 @@ import { FormValues } from '../components/edit-formik'
 
 export const useEditorData = (id: string | undefined) => {
   return useQuery<FormValues>(
-    ['editor-data'],
+    ['editor-data', id],
     async () => {
       const response = await axiosInstance.get('/api/post/get/' + id)
       return response.data
