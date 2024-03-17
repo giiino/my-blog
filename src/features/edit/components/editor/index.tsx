@@ -29,14 +29,11 @@ const MdEditor = dynamic(
 )
 
 interface ContentEditorProps {
-  // value: string
-  // onChange: ({ text }: { text: string }) => void
   onPostInfoModalOpen: () => void
 }
-
 export function ContentEditor({ onPostInfoModalOpen }: ContentEditorProps) {
   const { mutateAsync: upload } = useUploadImage()
-  const { values, handleChange } = useFormikContext()
+  const { values, setFieldValue } = useFormikContext()
 
   const handleImageUpload = async (file: File) => {
     const url = await upload(file)
@@ -46,11 +43,12 @@ export function ContentEditor({ onPostInfoModalOpen }: ContentEditorProps) {
   return (
     <StyledMdEditor
       value={values.content}
+      id={ValueKeys['內容']}
       name={ValueKeys['內容']}
       renderHTML={(text) => (
         <Markdown style={{ color: '#000' }}>{text}</Markdown>
       )}
-      onChange={(_, e) => handleChange(e)}
+      onChange={({ text }) => setFieldValue(ValueKeys['內容'], text)}
       config={{ onPostInfoModalOpen }}
       onImageUpload={handleImageUpload}
       allowPasteImage
