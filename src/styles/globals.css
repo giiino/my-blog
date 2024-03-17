@@ -19,6 +19,7 @@
 html,
 html[data-theme="light"] {
   --color-bg: #fff;
+  --color-footer-bg: var(--primary-gray-200);
   --color-text: #000;
   --color-header-tab-hover: var(--primary-blue-4);
   --color-section-title: var(--primary-gray-400);
@@ -39,6 +40,7 @@ html[data-theme="light"] {
 
 html[data-theme="dark"] {
   --color-bg: #121212;
+  --color-footer-bg: #121212;
   --color-text: #fff;
   --color-header-tab-hover: var(--primary-gray-100);
   --color-section-title: var(--primary-gray-100);

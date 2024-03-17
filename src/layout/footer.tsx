@@ -48,7 +48,7 @@ const BoxWrapper = styled(Box)`
   justify-content: center;
   align-items: center;
   height: 45vh;
-  background-color: var(--color-bg);
+  background-color: var(--color-footer-bg);
   color: var(--color-text);
   border-top: var(--color-footer-border-top);
   user-select: none;
