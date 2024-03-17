@@ -6,15 +6,13 @@ import { axiosInstance } from '@/shared/utils/axios-instance'
 
 export const useRelatedPosts = () => {
   const { query } = useRouter()
-
-  return useQuery<PostCardResponse[]>(['related-posts'], async () => {
-    if (!query.id) {
+  const id = query.id
+  return useQuery<PostCardResponse[]>(['related-posts', id], async () => {
+    if (!id) {
       return []
     }
 
-    const response = await axiosInstance.get(
-      '/api/post/get/related?id=' + query.id
-    )
+    const response = await axiosInstance.get('/api/post/get/related?id=' + id)
     return response.data
   })
 }
