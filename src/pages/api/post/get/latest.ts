@@ -28,7 +28,7 @@ export async function getLatestPost() {
     const data = doc.data()
     return {
       id: doc.id,
-      ...pick(data, ['title', 'content', 'coverImage', 'createTime'])
+      ...pick(data, ['title', 'coverImage', 'createTime'])
     }
   })
 }

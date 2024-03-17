@@ -1,7 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 
 import { Banner, Section } from '@/features/home/components'
-import SEO from '@/shared/components/lib/SEO'
 import { PostCardResponse } from '@/shared/types/api/post'
 import { serialize } from '@/shared/utils/format'
 
@@ -12,7 +11,6 @@ const Home = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <>
-      <SEO />
       <Banner />
       <Section posts={latestPosts} title={'最新文章'} />
     </>

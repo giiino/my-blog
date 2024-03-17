@@ -8,6 +8,7 @@ import type { AppProps } from 'next/app'
 
 import Layout from '@/layout'
 import { ToTopButton } from '@/shared/components/buttons/to-top-button'
+import SEO from '@/shared/components/lib/SEO'
 import { AppLoading } from '@/shared/components/loading/app-loading'
 import AppProvider from '@/shared/providers'
 import '@/styles/globals.css'
@@ -19,6 +20,7 @@ dayjs.tz.setDefault('Asia/Taipei')
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <AppProvider>
+      <SEO />
       <Layout>
         <AppLoading />
         <Component {...pageProps} />

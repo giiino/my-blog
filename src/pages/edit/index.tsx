@@ -4,7 +4,7 @@ import { EditForm, EditFormik } from '@/features/edit/components/edit-formik'
 import { ContentEditor } from '@/features/edit/components/editor'
 import { PostInfoModal } from '@/features/edit/components/post-info-modal'
 import { usePublishPost } from '@/features/edit/hooks/use-mutations'
-import { withAdminPage } from '@/shared/HOC/with-admin-check'
+import { withAdmin } from '@/shared/HOC/with-admin'
 
 const Editor = () => {
   const { mutate: publish } = usePublishPost()
@@ -24,4 +24,4 @@ const Editor = () => {
   )
 }
 
-export default withAdminPage(Editor)
+export default withAdmin(Editor)

@@ -45,7 +45,7 @@ export const StyleWrapper = styled.div`
       padding: 1.2em 30px 1.2em 30px;
       line-height: 1.6;
       position: relative;
-      border-left: var(--color-markdown-blockquote-border-left);
+      border-left: 6px solid var(--primary-gray-400);
       background-color: var(--color-markdown-blockquote-bg);
       color: var(--color-text);
       border-radius: 8px;

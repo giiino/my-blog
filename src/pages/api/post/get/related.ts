@@ -1,17 +1,14 @@
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   query,
-  where,
-  limit,
-  getDoc,
-  doc
+  where
 } from 'firebase/firestore'
-import { NextApiRequest } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 import { db } from '@/db'
-import { ApiResponse } from '@/shared/types/api'
-import { PostCardResponse } from '@/shared/types/api/post'
 import { pick } from '@/shared/utils/format'
 
 export async function getRelatedPosts(id: string) {
@@ -35,7 +32,7 @@ export async function getRelatedPosts(id: string) {
       const data = doc.data()
       return {
         id: doc.id,
-        ...pick(data, ['title', 'content', 'coverImage', 'createTime'])
+        ...pick(data, ['title', 'coverImage', 'createTime'])
       }
     })
     .sort(() => Math.random() - 0.5)
@@ -44,7 +41,7 @@ export async function getRelatedPosts(id: string) {
 
 export default async function handler(
   req: NextApiRequest,
-  res: ApiResponse<PostCardResponse[]>
+  res: NextApiResponse
 ) {
   if (req.method !== 'GET') {
     res.status(405).end()
