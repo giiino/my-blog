@@ -45,6 +45,7 @@ export default async function handler(
       isDelete: false,
       coverImage,
       views: 0,
+      sequence: 0,
       createTime: Date.now(),
       updateTime: Date.now()
     })
