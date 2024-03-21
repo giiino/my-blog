@@ -14,7 +14,7 @@ export const Banner = () => {
         src='/banner.jpg'
         alt='首頁大圖'
         imageWidth='100%'
-        ratio={1}
+        ratio={0}
         style={{ height: '400px' }}
       />
       <EnterButton href={'/post'}>進入文章</EnterButton>
