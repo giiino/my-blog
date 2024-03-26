@@ -43,6 +43,7 @@ export default async function handler(
       content,
       isReadme,
       isDelete: false,
+      isDrast: false,
       coverImage,
       views: 0,
       sequence: 0,

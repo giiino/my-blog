@@ -1,25 +1,16 @@
 import { ReactNode } from 'react'
 
-import {
-  createTheme,
-  ThemeProvider as MuiThemeProvider
-} from '@mui/material/styles'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-import { muiThemeConf } from '@/shared/constants/conf/mui-theme'
-import { reactQueryConf } from '@/shared/constants/conf/react-query'
-
-const queryClient = new QueryClient(reactQueryConf)
+import MuiThemeProvider from './mui-theme-provider'
+import ReactQueryProvider from './react-query-provider'
 
 const AppProvider = ({ children }: { children: ReactNode }) => {
-  const muiTheme = createTheme(muiThemeConf)
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <MuiThemeProvider theme={muiTheme}>{children}</MuiThemeProvider>
+    <ReactQueryProvider>
+      <MuiThemeProvider>{children}</MuiThemeProvider>
       <ReactQueryDevtools />
-    </QueryClientProvider>
+    </ReactQueryProvider>
   )
 }
 
