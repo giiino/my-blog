@@ -36,7 +36,12 @@
 12. `/shared/store` : 全局狀態管理
 13. `/shared/types` : 全局類型
 14. `/shared/utils` : 全局工具
-15. `/shared/HOC` : 全局組件專用高階函數
+15. `/shared/HOC` : 全局組件專用高階組件
+
+## 渲染布局
+`/` : 更動程度不高使用 **ISR**
+`/post/[id]` : id量不可預測,且可能即時更動使用 **SSR**
+`/edit/[id]` : id不可預測,但屬於後台系統無須SEO,採用 **CSR**
 
 ## 啟用指令
 正式環境
