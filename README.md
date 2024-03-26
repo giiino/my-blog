@@ -1,13 +1,6 @@
 # 個人部落格
 
-網站0成本開發，使用免費serverless部屬、firebase免費方案，內容主用於紀錄學習筆記，目前僅供自己查看
-
-## 功能介紹
-使用 **markdown** 進行內容展示
-![image](https://github.com/giiino/my-blog/assets/52125591/efec96b5-9620-44d3-bb24-f2c0a0f38990)
-
-透過github三方認證登入後，檢查是否有管理權限，擁有者則可以進行文章編輯、刪除
-![image](https://github.com/giiino/my-blog/assets/52125591/1434a742-296e-464c-9223-939b023a3f0f)
+網站0成本開發(包辦UI UX設計)，使用免費serverless部屬、firebase免費方案，內容主用於紀錄學習筆記，目前僅供自己查看
 
 ## 資料夾結構
   ```
@@ -54,6 +47,20 @@ docker-compose up -d --remove-orphans
 ```
 npm run dev
 ```
+## 技術棧
+- NextJS 13 Page Router
+- react-query
+- cookies-next
+- dayjs
+- formik
+- react-markdown
+- react-markdown-editor-lite
+- react-syntax-highlighter
+- zustand
+- jsonwebtoken
+- firebase
+- ~~typeorm~~
+- ~~mongodb~~
 
 ## 功能開發紀錄
 - [ ] 留言功能
@@ -65,3 +72,10 @@ npm run dev
 ## 重要commit記錄
 - 2023/07/17 專案展開 
 - 2024/03/15 mogodb + typeorm 轉為 firebase
+
+## 功能介紹
+使用 **markdown** 進行內容展示
+![image](https://github.com/giiino/my-blog/assets/52125591/efec96b5-9620-44d3-bb24-f2c0a0f38990)
+
+透過github三方認證登入後，檢查是否有管理權限，擁有者則可以進行文章編輯、刪除
+![image](https://github.com/giiino/my-blog/assets/52125591/1434a742-296e-464c-9223-939b023a3f0f)
