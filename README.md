@@ -1,34 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 個人部落格
 
-## Getting Started
+網站0成本開發，使用免費serverless部屬、firebase免費方案，內容主用於紀錄學習筆記，目前僅供自己查看
 
-First, run the development server:
+## 功能介紹
+使用 **markdown** 進行內容展示
+![image](https://github.com/giiino/my-blog/assets/52125591/efec96b5-9620-44d3-bb24-f2c0a0f38990)
 
-```bash
+透過github三方認證登入後，檢查是否有管理權限，擁有者則可以進行文章編輯、刪除
+![image](https://github.com/giiino/my-blog/assets/52125591/1434a742-296e-464c-9223-939b023a3f0f)
+
+## 資料夾結構
+  ```
+  ├── src/
+  │    ├── db 
+  │    ├── features
+  │    ├── layout
+  │    ├── pages
+  │    ├── styles
+  │    └── shared/
+  │         ├── components
+  │         ├── constants
+  │         ├── hooks
+  │         ├── lib
+  │         ├── providers
+  │         ├── services
+  │         ├── store 
+  │         ├── types 
+  │         ├── utils 
+  │         └── HOC
+```
+1. `/db` : 主存放db初始化設定
+2. `/features` : 主針對功能模組進行拆分
+3. `/layout` : 存放全局app版型
+4. `/pages` : 本地API、SSR、SSG頁面
+5. `/styles` : 全局樣式
+6. `/shared/components` : 全局組件
+7. `/shared/constants` : 全局可用常數
+8. `/shared/hooks` : 全局可用custom hook
+9. `/shared/lib` : 全局可用二次封裝套件
+10. `/shared/providers` : 全局provider
+11. `/shared/services` : 全局外部資源服務
+12. `/shared/store` : 全局狀態管理
+13. `/shared/types` : 全局類型
+14. `/shared/utils` : 全局工具
+15. `/shared/HOC` : 全局組件專用高階函數
+
+## 啟用指令
+正式環境
+```
+docker-compose up -d --remove-orphans
+```
+開發環境
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 功能開發紀錄
+- [ ] 留言功能
+- [ ] 分類排序功能
+- [ ] 草稿文章模式
+- [ ] 熱門文章section
+- [ ] 綁定正式域名、上搜索引擎
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 重要commit記錄
+- 2023/07/17 專案展開 
+- 2024/03/15 mogodb + typeorm 轉為 firebase
