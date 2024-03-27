@@ -30,8 +30,9 @@ export const Content = ({ post, ...restProps }: PostContentProps) => {
       </Title>
       <Time>
         建立於
-        <span>{formattedCreateTime}</span>&ensp;/&ensp;修改於
-        <span>{formattedUpdateTime}</span>
+        <span>{formattedCreateTime}</span>&ensp;
+        {/* /&ensp;修改於 */}
+        {/* <span>{formattedUpdateTime}</span> */}
       </Time>
       {!isVoid(coverImage) && (
         <EnhancedImage
