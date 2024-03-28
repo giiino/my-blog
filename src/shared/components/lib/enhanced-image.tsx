@@ -31,7 +31,13 @@ export const EnhancedImage = ({
         imageWidth={imageWidth}
         style={containerStyle}
       >
-        <Image {...props} src='/img-not-found.png' alt={'圖片找不到'} />
+        <Image
+          {...props}
+          src='/img-not-found.png'
+          alt={'圖片找不到'}
+          width='800'
+          height='800'
+        />
       </ImageContainer>
     )
   }
