@@ -30,10 +30,7 @@ const Footer = () => {
             <EmailIcon fontSize='large' />
           </Link>
         </Icons>
-        <Typography
-          variant='body1'
-          sx={{ textAlign: 'center', justifySelf: 'flex-end' }}
-        >
+        <Typography variant='body1' sx={{ textAlign: 'center' }}>
           © {new Date().getFullYear()} by giiino. All rights reserved.
         </Typography>
       </InfoWrapper>
