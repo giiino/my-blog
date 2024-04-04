@@ -5,6 +5,8 @@ import CheckIcon from '@mui/icons-material/Check'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import { IconButton, IconButtonProps } from '@mui/material'
 
+import { useCopyToClipboard } from '@/shared/hooks/use-copy-to-clipboard'
+
 interface CopyButtonProps extends IconButtonProps {
   copyContent: string
 }
@@ -15,20 +17,11 @@ export const CopyButton = ({
   ...restProps
 }: CopyButtonProps) => {
   const [isActive, setIsActive] = useState(false)
-  const textAreaRef: React.RefObject<HTMLTextAreaElement> = useRef(null)
+  const [_, copy] = useCopyToClipboard()
 
-  const copyToClipboard = (text: string) => {
-    if (textAreaRef && textAreaRef.current) {
-      textAreaRef.current.style.display = ''
-      textAreaRef.current.value = text
-      textAreaRef.current.select()
-      document.execCommand('copy')
-      textAreaRef.current.style.display = 'none'
-    }
-  }
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     onClick?.(e)
-    copyToClipboard(copyContent)
+    copy(copyContent)
     setIsActive(true)
   }
 
@@ -54,7 +47,6 @@ export const CopyButton = ({
           <ContentCopyIcon fontSize='small' />
         )}
       </StyledIconButton>
-      <textarea ref={textAreaRef} style={{ display: 'none' }} readOnly />
     </>
   )
 }

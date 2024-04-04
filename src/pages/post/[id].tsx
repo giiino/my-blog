@@ -1,14 +1,23 @@
 import { useEffect } from 'react'
 
+import dynamic from 'next/dynamic'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
 
 import { Content, PostMenu, PostWrapper } from '@/features/post/components'
-import TocHolder from '@/features/post/components/toc-holder'
 import { getPostById } from '@/pages/api/post/get'
 import SEO from '@/shared/components/lib/SEO'
 import { useCategory } from '@/shared/store/use-category'
 import { PostResponse } from '@/shared/types/api/post'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
+
+const TocHolder = dynamic(
+  import('@/features/toc/components/toc-holder').then(
+    ({ TocHolder }) => TocHolder
+  ),
+  {
+    ssr: false
+  }
+)
 
 const PostPage = ({
   postData

@@ -1,15 +1,17 @@
 import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
+import { useRouter } from 'next/router'
 
-const TocHolder = (props: GridProps) => {
+import { getHeadings } from '../utils/get-headings'
+
+export const TocHolder = (props: GridProps) => {
+  const headingList = getHeadings()
   return (
     <ListContainer {...props}>
       <div></div>
     </ListContainer>
   )
 }
-
-export default TocHolder
 
 const ListContainer = styled(Grid)`
   height: 100px;

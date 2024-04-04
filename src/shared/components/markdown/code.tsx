@@ -1,5 +1,4 @@
-// https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/prism.html
-// style: coy oneDark
+// reference: https://react-syntax-highlighter.github.io/react-syntax-highlighter/demo/prism.html
 import { useMemo, useState } from 'react'
 import {
   Prism as SyntaxHighlighter,

@@ -58,7 +58,7 @@ const ContentWrapper = styled(Grid)`
   }
 `
 
-const Title = styled.h1`
+const Title = styled.h2`
   position: relative;
   font-size: 35px;
   padding-right: 50px;

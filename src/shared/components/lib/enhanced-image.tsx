@@ -35,8 +35,8 @@ export const EnhancedImage = ({
           {...props}
           src='/img-not-found.png'
           alt={'圖片找不到'}
-          width='800'
-          height='800'
+          width='1200'
+          height='500'
         />
       </ImageContainer>
     )

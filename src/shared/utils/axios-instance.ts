@@ -4,6 +4,8 @@ export const axiosInstance = axios.create({
   baseURL: '/'
 })
 
+//TODO : axios.post
+
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {

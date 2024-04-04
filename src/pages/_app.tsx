@@ -10,6 +10,7 @@ import Layout from '@/layout'
 import { ToTopButton } from '@/shared/components/buttons/to-top-button'
 import SEO from '@/shared/components/lib/SEO'
 import { AppLoading } from '@/shared/components/loading/app-loading'
+import { usePageLoaded } from '@/shared/hooks/use-page-loaded'
 import AppProvider from '@/shared/providers'
 import '@/styles/globals.css'
 
@@ -18,6 +19,7 @@ dayjs.extend(timezone)
 dayjs.tz.setDefault('Asia/Taipei')
 
 export default function App({ Component, pageProps }: AppProps) {
+  usePageLoaded()
   return (
     <AppProvider>
       <SEO />
