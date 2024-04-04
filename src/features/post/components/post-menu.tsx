@@ -9,6 +9,7 @@ interface MenuProps extends GridProps {}
 
 export function PostMenu({ ...props }: MenuProps) {
   const { data: menuCategories } = useMenuCategory()
+
   return (
     <MenuWrapper {...props}>
       <Menu menuCategories={menuCategories || []} />

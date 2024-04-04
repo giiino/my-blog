@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import styled from '@emotion/styled'
 import { Grid, GridProps } from '@mui/material'
 
@@ -8,6 +10,7 @@ import { PostResponse } from '@/shared/types/api/post'
 import { isVoid } from '@/shared/utils/check'
 import { formatDate } from '@/shared/utils/format'
 
+import { useCollectHeading } from '../../hooks/use-collect-heading'
 import { RelatedPostCards } from './related-post-cards'
 import { Setting } from './setting'
 
@@ -15,10 +18,10 @@ interface PostContentProps extends GridProps {
   post: Omit<PostResponse, 'isReadme'>
 }
 
-export const Content = ({ post, ...restProps }: PostContentProps) => {
-  const { id, title, content, updateTime, createTime, coverImage } = post
+export const Content = memo(({ post, ...restProps }: PostContentProps) => {
+  const { id, title, content, createTime, coverImage } = post
   const formattedCreateTime = formatDate(createTime)
-  const formattedUpdateTime = formatDate(updateTime)
+  const markdownRef = useCollectHeading()
 
   return (
     <ContentWrapper {...restProps}>
@@ -41,11 +44,13 @@ export const Content = ({ post, ...restProps }: PostContentProps) => {
           containerStyle={{ marginBottom: '20px' }}
         />
       )}
-      <Markdown style={{ marginBottom: '50px' }}>{content}</Markdown>
+      <Markdown ref={markdownRef} style={{ marginBottom: '50px' }}>
+        {content}
+      </Markdown>
       <RelatedPostCards />
     </ContentWrapper>
   )
-}
+})
 
 const ContentWrapper = styled(Grid)`
   margin-top: 50px;

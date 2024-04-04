@@ -1,11 +1,11 @@
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
 export const usePageLoaded = () => {
   const { asPath } = useRouter()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const splitedArr = asPath.split('#')
     const titleId = splitedArr.at(-1)
     const targetElement = document.getElementById(

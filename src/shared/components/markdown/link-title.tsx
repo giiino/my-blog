@@ -45,8 +45,9 @@ const LinkWrapper = styled(Link)<{
   opacticy: '1' | '0'
 }>`
   .link-icon {
-    opacity: ${({ opacticy }) => opacticy};
     font-size: 19px;
+    color: var(--color-markdown-link-btn);
+    opacity: ${({ opacticy }) => opacticy};
     rotate: 45deg;
     &:hover {
       color: var(--primary-link);

@@ -4,12 +4,14 @@ import styled from '@emotion/styled'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import IconButton from '@mui/material/IconButton'
 
+import { throttle } from '@/shared/utils/wrapper'
+
 export const ToTopButton = () => {
   const [lastScrollTop, setLastScrollTop] = useState(0)
   const [isShow, setIsShow] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = throttle(() => {
       const currentScrollTop = document.documentElement.scrollTop
 
       if (currentScrollTop < lastScrollTop && currentScrollTop > 300) {
@@ -19,7 +21,7 @@ export const ToTopButton = () => {
       }
 
       setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop)
-    }
+    }, 100)
 
     window.addEventListener('scroll', handleScroll)
 
@@ -30,7 +32,12 @@ export const ToTopButton = () => {
 
   if (!isShow) return null
 
-  const handleClick = () => scrollTo(0, 0)
+  const handleClick = () =>
+    scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    })
 
   return (
     <Container onClick={handleClick}>

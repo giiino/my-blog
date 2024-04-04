@@ -8,7 +8,7 @@ import { PostResponse } from '@/shared/types/api/post'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
 
 const TocHolder = dynamic(
-  import('@/features/toc/components/toc-holder').then(
+  import('@/features/post/components/toc-holder').then(
     ({ TocHolder }) => TocHolder
   ),
   {
