@@ -26,6 +26,10 @@ export default function SEO({
         key='og:description'
       />
       <meta property='og:site_name' content={title} key='og:site_name' />
+      <meta
+        name='google-site-verification'
+        content='PsaJaezT8BzRXSDjpN6XAfp-gFHTyGcvPIjScMFo9M4'
+      />
       {children}
     </Head>
   )
