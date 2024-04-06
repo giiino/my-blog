@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
+import { POST_MARKDOWN_ID } from '@/shared/constants/ui'
 import { HeadingsData, useHeadings } from '@/shared/store/use-headings'
 import { throttle } from '@/shared/utils/wrapper'
 
 const getHeadings = (): HTMLElement[] => {
-  const markdownElement = document.getElementById('post-markdown')
+  const markdownElement = document.getElementById(POST_MARKDOWN_ID)
   if (!markdownElement) return []
 
   const headings = Array.from(

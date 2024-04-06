@@ -22,14 +22,14 @@ export const StyleWrapper = styled.div`
     h1 {
       font-size: 30px;
     }
-    h2,
-    h3 {
+    h3,
+    h4 {
       scroll-margin-top: 70px;
     }
     /* Safari-only */
     @supports (-webkit-hyphens: none) {
-      h2,
-      h3 {
+      h3,
+      h4 {
         padding-top: 70px;
         margin-top: -70px;
       }
