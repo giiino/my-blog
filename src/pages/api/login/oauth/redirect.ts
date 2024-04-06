@@ -15,7 +15,7 @@ import { db } from '@/db'
 import * as constants from '@/shared/constants/auth'
 import {
   GITHUB_ACCESS_TOKEN_URL,
-  GITHUB_CLIENTid,
+  GITHUB_CLIENTID,
   GITHUB_USER_INFO_URL
 } from '@/shared/constants/auth'
 import { User } from '@/shared/types/api/login'
@@ -23,7 +23,7 @@ import { setCookie } from '@/shared/utils/cookie'
 import { pick, serialize } from '@/shared/utils/format'
 import { generateJWT } from '@/shared/utils/jwt'
 
-const clientID = GITHUB_CLIENTid
+const clientID = GITHUB_CLIENTID
 const clientSecret = process.env.GITHUB_CLIENT_SECRET
 
 export default async function handler(

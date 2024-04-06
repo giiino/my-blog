@@ -6,11 +6,12 @@ import { Grid, GridProps } from '@mui/material'
 import { AdminOnly } from '@/shared/components/lib/admin-only'
 import { EnhancedImage } from '@/shared/components/lib/enhanced-image'
 import { Markdown } from '@/shared/components/markdown'
+import { POST_MARKDOWN_ID } from '@/shared/constants/ui'
 import { PostResponse } from '@/shared/types/api/post'
 import { isVoid } from '@/shared/utils/check'
 import { formatDate } from '@/shared/utils/format'
 
-import { useCollectHeading } from '../../hooks/use-collect-heading'
+import { useHeadingsData } from '../../hooks/use-headings'
 import { RelatedPostCards } from './related-post-cards'
 import { Setting } from './setting'
 
@@ -21,7 +22,7 @@ interface PostContentProps extends GridProps {
 export const Content = memo(({ post, ...restProps }: PostContentProps) => {
   const { id, title, content, createTime, coverImage } = post
   const formattedCreateTime = formatDate(createTime)
-  const markdownRef = useCollectHeading()
+  useHeadingsData()
 
   return (
     <ContentWrapper {...restProps}>
@@ -44,7 +45,7 @@ export const Content = memo(({ post, ...restProps }: PostContentProps) => {
           containerStyle={{ marginBottom: '20px' }}
         />
       )}
-      <Markdown ref={markdownRef} style={{ marginBottom: '50px' }}>
+      <Markdown id={POST_MARKDOWN_ID} style={{ marginBottom: '50px' }}>
         {content}
       </Markdown>
       <RelatedPostCards />

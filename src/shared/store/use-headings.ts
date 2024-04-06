@@ -8,7 +8,7 @@ export interface HeadingsData extends Heading {
 
 interface HeadingsState {
   headings: HeadingsData[]
-  setHeadings: (category: HeadingsState['headings']) => void
+  setHeadings: (headings: HeadingsState['headings']) => void
 }
 
 export const useHeadings = create<HeadingsState>()((set) => ({

@@ -4,13 +4,19 @@ import { ListItem } from './list-item'
 
 interface ChildItemsProps {
   heading: Heading[]
+  activeHeadingId: string | undefined
 }
 
-export const ChildItems = ({ heading }: ChildItemsProps) => {
+export const ChildItems = ({ heading, activeHeadingId }: ChildItemsProps) => {
   return (
     <ul style={{ paddingLeft: '20px' }}>
       {heading.map((item) => (
-        <ListItem key={item.id} id={item.id} title={item.title} />
+        <ListItem
+          key={item.id}
+          title={item.title}
+          id={item.id}
+          isActive={item.id === activeHeadingId}
+        />
       ))}
     </ul>
   )

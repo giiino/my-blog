@@ -6,11 +6,14 @@ import { Grid, GridProps } from '@mui/material'
 import { useHeadings } from '@/shared/store/use-headings'
 import { scrollBarHoverStyle } from '@/styles/globals'
 
+import { useActiveHeading } from '../../hooks/use-headings'
 import { ChildItems } from './child-items'
 import { ListItem } from './list-item'
 
 export const TocHolder = (props: GridProps) => {
   const { headings } = useHeadings()
+  const activeHeadingId = useActiveHeading()
+
   return (
     <ListContainer {...props}>
       <ul>
@@ -19,11 +22,15 @@ export const TocHolder = (props: GridProps) => {
             <Fragment key={heading.id}>
               <ListItem
                 key={heading.id}
-                id={heading.id}
                 title={heading.title}
+                id={heading.id}
+                isActive={activeHeadingId === heading.id}
               />
               {heading.items.length > 0 && (
-                <ChildItems heading={heading.items} />
+                <ChildItems
+                  heading={heading.items}
+                  activeHeadingId={activeHeadingId}
+                />
               )}
             </Fragment>
           )

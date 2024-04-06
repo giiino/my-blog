@@ -1,5 +1,5 @@
-export const GITHUB_CLIENTid = '53ad4fd5fb0164057f11'
-export const LOGIN_GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENTid}`
+export const GITHUB_CLIENTID = '53ad4fd5fb0164057f11'
+export const LOGIN_GITHUB_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENTID}`
 export const GITHUB_ACCESS_TOKEN_URL = `https://github.com/login/oauth/access_token`
 export const GITHUB_USER_INFO_URL = 'https://api.github.com/user'
 
