@@ -2,13 +2,13 @@
 module.exports = {
   siteUrl: process.env.SITE_URL,
   generateRobotsTxt: true,
-  exclude: ['/tool', '/edit', 'login'],
+  exclude: ['/tools', '/edit', '/login'],
   robotsTxtOptions: {
     policies: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/tool', '/edit', 'login']
+        disallow: ['/tools', '/edit', '/login']
       }
     ]
   }
