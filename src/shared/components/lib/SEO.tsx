@@ -15,6 +15,7 @@ export default function SEO({
   return (
     <Head>
       <title key='title'>{title}</title>
+      <link rel='icon' href='/favicon.ico' />
       <meta name='viewport' content='width=device-width, user-scalable=no' />
       <meta property='og:image' content={thumbnail} key='thumbnail' />
       <meta name='description' content={description} key='description' />
