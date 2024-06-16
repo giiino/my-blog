@@ -10,6 +10,7 @@ module.exports = {
         allow: '/',
         disallow: ['/tools', '/edit', '/login']
       }
-    ]
+    ],
+    additionalSitemaps: [`${process.env.SITE_URL}/server-sitemap.xml`]
   }
 }
