@@ -17,6 +17,9 @@ const nextConfig = {
         pathname: '/**'
       }
     ]
+  },
+  experimental: {
+    bundlePagesExternals: true
   }
 }
 
