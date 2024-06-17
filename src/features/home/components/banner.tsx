@@ -1,14 +1,16 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { Lobster } from 'next/font/google'
 import Link from 'next/link'
 
 import { EnhancedImage } from '@/shared/components/lib/enhanced-image'
+
+const notoSansTC = Lobster({ subsets: ['latin'], weight: '400' })
 
 export const Banner = () => {
   return (
     <Container>
       <TitleSection style={{ zIndex: 1 }}>
-        <h2>GN&ensp;DEV</h2>
+        <h2 className={notoSansTC.className}>GN&ensp;DEV</h2>
       </TitleSection>
       <EnhancedImage
         src='/banner.jpg'
@@ -55,7 +57,6 @@ const TitleSection = styled.div`
   text-align: center;
   h2 {
     font-size: 48px;
-    font-family: 'Alegreya', serif;
     text-shadow: 3px 0px 7px rgba(182, 143, 15, 0.8),
       -3px 0px 7px rgba(182, 143, 15, 0.8), 0px 4px 7px rgba(182, 143, 15, 0.8);
   }
@@ -91,7 +92,6 @@ const EnterButton = styled(Link)`
   color: #fff;
   cursor: pointer;
   display: inline-flex;
-  font-family: 'JetBrains Mono', monospace;
   height: 48px;
   justify-content: center;
   line-height: 1;

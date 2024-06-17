@@ -42,7 +42,7 @@ const LinkWrapper = styled(Link)`
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-weight: lighter;
+    font-weight: 500;
     color: var(--color-card-title-text);
   }
   .content {
