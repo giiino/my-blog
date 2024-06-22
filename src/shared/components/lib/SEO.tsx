@@ -25,11 +25,18 @@ export default function SEO({
         content={description}
         key='og:description'
       />
-      <meta property='og:site_name' content={title} key='og:site_name' />
+      <meta
+        property='og:site_name'
+        content='GN DEV | 程式小站'
+        key='og:site_name'
+      />
       <meta
         name='google-site-verification'
         content='PsaJaezT8BzRXSDjpN6XAfp-gFHTyGcvPIjScMFo9M4'
       />
+      <link rel='icon' type='image/x-icon' href='/favicon.ico' />
+      <link rel='icon' type='image/png' href='/favicon.ico' />
+      <link rel='apple-touch-icon' href='/favicon.ico' />
       {children}
     </Head>
   )

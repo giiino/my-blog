@@ -51,16 +51,18 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
           component='div'
           sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
         >
-          <Link href={'/'} style={{ marginRight: '20px' }}>
-            <h1>
-              <Image
-                src={logoImage}
-                alt='gn-dev網站名稱'
-                width={100}
-                height={40}
-                style={{ display: 'block' }}
-              />
-            </h1>
+          <Link
+            href={'/'}
+            style={{ marginRight: '20px', position: 'relative' }}
+          >
+            <h1>GN DEV | 程式小站</h1>
+            <Image
+              src={logoImage}
+              alt='GN DEV | 程式小站'
+              width={100}
+              height={40}
+              style={{ display: 'block' }}
+            />
           </Link>
           <RouteButton
             className='route-btn'
@@ -116,5 +118,14 @@ const Container = styled(AppBar)`
     @media screen and (max-width: 960px) {
       display: none;
     }
+  }
+
+  h1 {
+    position: absolute;
+    white-space: nowrap;
+    top: -100%;
+    left: 0;
+    font-size: 12px;
+    z-index: -1;
   }
 `
