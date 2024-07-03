@@ -56,6 +56,7 @@ const ImageContainer = styled.div<{
   imageWidth: string
 }>`
   position: relative;
+  overflow: hidden;
   width: ${({ imageWidth }) => imageWidth};
   padding-bottom: ${({ ratio, imageWidth }) =>
     ratio ? `calc(${imageWidth} * ${ratio})` : 'initial'};
