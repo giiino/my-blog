@@ -34,9 +34,23 @@ export default function SEO({
         name='google-site-verification'
         content='PsaJaezT8BzRXSDjpN6XAfp-gFHTyGcvPIjScMFo9M4'
       />
-      <link rel='icon' type='image/x-icon' href='/favicon.ico' />
-      <link rel='icon' type='image/png' href='/favicon.ico' />
-      <link rel='apple-touch-icon' href='/favicon.ico' />
+      <link
+        rel='icon'
+        type='image/x-icon'
+        href='/favicon.ico'
+        key='link-image/x-icon'
+      />
+      <link
+        rel='icon'
+        type='image/png'
+        href='/favicon.ico'
+        key='link-image/png'
+      />
+      <link
+        rel='apple-touch-icon'
+        href='/favicon.ico'
+        key='link-apple-touch-icon'
+      />
       {children}
     </Head>
   )
