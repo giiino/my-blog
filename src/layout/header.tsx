@@ -55,10 +55,10 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
             href={'/'}
             style={{ marginRight: '20px', position: 'relative' }}
           >
-            <h1>GN DEV | 程式小站</h1>
+            <h1>GN Dev</h1>
             <Image
               src={logoImage}
-              alt='GN DEV | 程式小站'
+              alt='GN Dev'
               width={100}
               height={40}
               style={{ display: 'block' }}

@@ -2,11 +2,10 @@ import { CSSProperties, ComponentProps, useState } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import styled from '@emotion/styled'
-import Image, { ImageProps } from 'next/image'
 
 import { isVoid } from '../../utils/check'
 
-interface EnhancedImageProps extends ImageProps {
+interface EnhancedImageProps extends ComponentProps<typeof LazyLoadImage> {
   alt: string
   imageWidth: string
   ratio: number
@@ -31,13 +30,7 @@ export const EnhancedImage = ({
         imageWidth={imageWidth}
         style={containerStyle}
       >
-        <Image
-          {...props}
-          src='/img-not-found.png'
-          alt={'圖片找不到'}
-          width='1200'
-          height='500'
-        />
+        <LazyLoadImage src='/img-not-found.png' alt={'圖片找不到'} {...props} />
       </ImageContainer>
     )
   }
@@ -49,13 +42,9 @@ export const EnhancedImage = ({
       imageWidth={imageWidth}
       style={containerStyle}
     >
-      <Image
+      <LazyLoadImage
         {...props}
-        blurDataURL={props.src as string}
-        width='800'
-        height='800'
-        placeholder='blur'
-        alt={alt}
+        effect='blur'
         onError={() => setIsError(true)}
       />
     </ImageContainer>
@@ -70,9 +59,15 @@ const ImageContainer = styled.div<{
   width: ${({ imageWidth }) => imageWidth};
   padding-bottom: ${({ ratio, imageWidth }) =>
     ratio ? `calc(${imageWidth} * ${ratio})` : 'initial'};
-  img {
+  .lazy-load-image-loaded {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: inherit !important;
+    height: inherit !important;
+    padding-bottom: inherit;
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
   }
 `
