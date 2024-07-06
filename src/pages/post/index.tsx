@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
+import { GetStaticProps, InferGetServerSidePropsType } from 'next/types'
 
 import { Content, PostMenu, PostWrapper } from '@/features/post/components'
 import { getReadmePost } from '@/pages/api/post/get'
@@ -18,7 +18,7 @@ const TocHolder = dynamic(
 
 const PostIndexPage = ({
   postData
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetServerSidePropsType<typeof getStaticProps>) => {
   const { title, content, coverImage } = postData
   return (
     <>
@@ -38,13 +38,9 @@ const PostIndexPage = ({
 
 export default PostIndexPage
 
-export const getServerSideProps: GetServerSideProps<{
+export const getStaticProps: GetStaticProps<{
   postData: Omit<PostResponse, 'isReadme'>
-}> = async ({ res }) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=1800, stale-while-revalidate=86400'
-  )
+}> = async () => {
   try {
     const postData = await getReadmePost()
 
@@ -57,7 +53,8 @@ export const getServerSideProps: GetServerSideProps<{
     return {
       props: {
         postData: serialize(exclude(postData, ['isReadme']))
-      }
+      },
+      revalidate: 60
     }
   } catch (error) {
     return {

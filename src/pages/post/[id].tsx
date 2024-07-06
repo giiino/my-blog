@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import dynamic from 'next/dynamic'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types'
+import { GetStaticProps, InferGetServerSidePropsType } from 'next/types'
 
 import { Content, PostMenu, PostWrapper } from '@/features/post/components'
 import { getPostById } from '@/pages/api/post/get'
@@ -9,6 +9,8 @@ import SEO from '@/shared/components/lib/SEO'
 import { useCategory } from '@/shared/store/use-category'
 import { PostResponse } from '@/shared/types/api/post'
 import { exclude, markdownToTxt, serialize } from '@/shared/utils/format'
+
+import { getAllPosts } from '../api/post/get/all'
 
 const TocHolder = dynamic(
   import('@/features/post/components/toc-holder').then(
@@ -21,7 +23,7 @@ const TocHolder = dynamic(
 
 const PostPage = ({
   postData
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetServerSidePropsType<typeof getStaticProps>) => {
   const { setPostCategory } = useCategory()
   const { title, content, coverImage, category } = postData
 
@@ -47,14 +49,20 @@ const PostPage = ({
 
 export default PostPage
 
-export const getServerSideProps: GetServerSideProps<{
+export async function getStaticPaths() {
+  const posts = await getAllPosts()
+
+  const paths = posts?.map(({ id }) => ({
+    params: { id }
+  }))
+
+  return { paths, fallback: 'blocking' }
+}
+
+export const getStaticProps: GetStaticProps<{
   postData: Omit<PostResponse, 'isReadme'>
-}> = async ({ params, res }) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=1800, stale-while-revalidate=86400'
-  )
-  const id = params?.id as string | undefined
+}> = async ({ params }) => {
+  const id = params?.id as string
 
   if (!id) {
     return {
@@ -72,7 +80,8 @@ export const getServerSideProps: GetServerSideProps<{
     return {
       props: {
         postData: serialize(exclude(postData, ['isReadme']))
-      }
+      },
+      revalidate: 60
     }
   } catch (error) {
     return {

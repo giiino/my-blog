@@ -13,7 +13,6 @@ interface EnhancedImageProps extends ComponentProps<typeof LazyLoadImage> {
 }
 
 export const EnhancedImage = ({
-  alt,
   ratio,
   imageWidth,
   containerStyle,
@@ -30,7 +29,7 @@ export const EnhancedImage = ({
         imageWidth={imageWidth}
         style={containerStyle}
       >
-        <LazyLoadImage src='/img-not-found.png' alt={'圖片找不到'} {...props} />
+        <LazyLoadImage src='/img-not-found.png' {...props} alt={'圖片找不到'} />
       </ImageContainer>
     )
   }
