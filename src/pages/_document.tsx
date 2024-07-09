@@ -8,9 +8,13 @@ export default function Document() {
     <Html lang='zh-Hant-TW'>
       <Head />
       <body>
-        <Script id='theme-check' strategy='beforeInteractive'>
-          {blockingSetInitialColorMode}
-        </Script>
+        <Script
+          id='theme-check'
+          strategy='beforeInteractive'
+          dangerouslySetInnerHTML={{
+            __html: blockingSetInitialColorMode
+          }}
+        />
         <Main />
         <NextScript />
       </body>
@@ -18,14 +22,14 @@ export default function Document() {
   )
 }
 
+const blockingSetInitialColorMode = `  
 function setInitialColorMode() {
-  function getStorePersistState(key: string): TObject | null {
+  function getStorePersistState(key) {
     const value = window.localStorage.getItem(key)
     return value ? JSON.parse(value).state : null
   }
   function getInitialColorMode() {
-    const themeMode = getStorePersistState('theme-mode')
-      ?.themeMode as ThemeMode | null
+    const themeMode = getStorePersistState('theme-mode')?.themeMode
 
     if (themeMode === 'light' || themeMode === 'dark') {
       return themeMode
@@ -41,12 +45,8 @@ function setInitialColorMode() {
   }
 
   const Mode = getInitialColorMode()
-
   document.documentElement.setAttribute('data-theme', Mode)
 }
 
-const blockingSetInitialColorMode = `(function() {
-  ${setInitialColorMode.toString()}
   setInitialColorMode();
-})()
 `
