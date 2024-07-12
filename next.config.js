@@ -18,9 +18,7 @@ const nextConfig = {
       }
     ]
   },
-  experimental: {
-    bundlePagesExternals: true
-  }
+  bundlePagesRouterDependencies: true
 }
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

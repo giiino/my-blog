@@ -120,13 +120,4 @@ const Container = styled(AppBar)`
       display: none;
     }
   }
-
-  h1 {
-    position: absolute;
-    white-space: nowrap;
-    top: -100%;
-    left: 0;
-    font-size: 12px;
-    z-index: -1;
-  }
 `
