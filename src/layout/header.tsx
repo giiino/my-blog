@@ -55,14 +55,15 @@ export default function Header({ setIsSidebarOpen }: HeaderProps) {
             href={'/'}
             style={{ marginRight: '20px', position: 'relative' }}
           >
-            <h1>GN Dev</h1>
-            <Image
-              src={logoImage}
-              alt='GN Dev'
-              width={100}
-              height={40}
-              style={{ display: 'block' }}
-            />
+            <h1>
+              <Image
+                src={logoImage}
+                alt='GN DEV'
+                style={{ display: 'block' }}
+                width={100}
+                height={40}
+              />
+            </h1>
           </Link>
           <RouteButton
             className='route-btn'
