@@ -5,6 +5,7 @@ export const StyleWrapper = styled.div`
   .reacr-mark-down {
     > * {
       margin-bottom: 23px;
+      letter-spacing: 1.5px;
     }
     .paragraph {
       figure {

@@ -14,7 +14,6 @@ export default function SEO({
   children
 }: SEOProps) {
   const router = useRouter()
-  console.log(process.env.NEXT_PUBLIC_SITE_URL)
   return (
     <Head>
       <title key='title'>{title}</title>
