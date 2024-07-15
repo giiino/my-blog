@@ -83,5 +83,10 @@ export const StyleWrapper = styled.div`
       padding: 2px 4px 3px;
       border-radius: 5px;
     }
+
+    code,
+    code * {
+      letter-spacing: initial;
+    }
   }
 `
