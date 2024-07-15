@@ -8,12 +8,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const fields = postsData.map((post) => {
     if (post.isReadme)
       return {
-        loc: `${process.env.SITE_URL}/post`,
+        loc: `${process.env.NEXT_PUBLIC_SITE_URL}/post`,
         lastmod: new Date(post.createTime).toISOString()
       }
 
     return {
-      loc: `${process.env.SITE_URL}/post/${post.id}`,
+      loc: `${process.env.NEXT_PUBLIC_SITE_URL}/post/${post.id}`,
       lastmod: new Date(post.createTime).toISOString()
     }
   })
