@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react'
 
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 type SEOProps = PropsWithChildren<
   Partial<Record<'description' | 'title' | 'thumbnail', string>>
@@ -12,6 +13,7 @@ export default function SEO({
   thumbnail = '/thumbnail.png',
   children
 }: SEOProps) {
+  const router = useRouter()
   return (
     <Head>
       <title key='title'>{title}</title>
@@ -50,6 +52,11 @@ export default function SEO({
         rel='apple-touch-icon'
         href='/favicon.ico'
         key='link-apple-touch-icon'
+      />
+      <link
+        rel='canonical'
+        href={`${process.env.SITE_URL}${router.asPath}`}
+        key='canonical'
       />
       {children}
     </Head>
