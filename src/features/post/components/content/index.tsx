@@ -44,6 +44,7 @@ export const Content = memo(({ post, ...restProps }: PostContentProps) => {
           height={400}
           imageWidth='100%'
           ratio={0.6}
+          unoptimized={true}
           containerStyle={{ marginBottom: '20px' }}
         />
       )}
