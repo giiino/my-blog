@@ -17,13 +17,15 @@ export const Image = ({ alt, src }: Props) => {
   const figcaptionValue = getCustomSyntax(alt, '!')
   const ratio = height / width
 
+  const imageUrl = src.split('?')[0]
+
   return (
     <figure>
       <ImageWrapper isover={ratio > 1 ? '1' : '0'}>
         <EnhancedImage
-          src={src}
+          src={imageUrl}
           width={800}
-          height={1200}
+          height={400}
           imageWidth='100%'
           ratio={ratio}
           alt={figcaptionValue || alt}
