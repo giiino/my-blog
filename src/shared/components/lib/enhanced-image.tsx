@@ -58,6 +58,7 @@ export const EnhancedImage = ({
         width={width}
         height={height}
         alt={alt}
+        unoptimized={true}
         onError={() => setIsError(true)}
       />
     </ImageContainer>
