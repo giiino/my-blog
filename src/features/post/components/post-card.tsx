@@ -22,6 +22,8 @@ export const PostCard = ({
     <CoverImage
       src={coverImage}
       alt='封面圖片'
+      width={800}
+      height={400}
       ratio={0.6}
       imageWidth={'100%'}
     />

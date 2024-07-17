@@ -7,6 +7,8 @@ import Image, { ImageProps } from 'next/image'
 import { isVoid } from '../../utils/check'
 
 interface EnhancedImageProps extends ImageProps {
+  width: number
+  height: number
   alt: string
   imageWidth: string
   ratio: number
@@ -14,6 +16,8 @@ interface EnhancedImageProps extends ImageProps {
 }
 
 export const EnhancedImage = ({
+  width,
+  height,
   alt,
   ratio,
   imageWidth,
@@ -52,8 +56,8 @@ export const EnhancedImage = ({
       <Image
         {...props}
         blurDataURL={props.src as string}
-        width='800'
-        height='800'
+        width={width}
+        height={height}
         placeholder='blur'
         alt={alt}
         onError={() => setIsError(true)}

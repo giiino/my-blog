@@ -16,6 +16,8 @@ export const Banner = () => {
         src='/banner.jpg'
         alt='首頁大圖'
         imageWidth='100%'
+        width={1500}
+        height={800}
         ratio={0}
         style={{ height: '400px' }}
       />

@@ -40,6 +40,8 @@ export const Content = memo(({ post, ...restProps }: PostContentProps) => {
         <EnhancedImage
           src={coverImage}
           alt='封面圖'
+          width={800}
+          height={400}
           imageWidth='100%'
           ratio={0.6}
           containerStyle={{ marginBottom: '20px' }}
