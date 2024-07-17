@@ -55,10 +55,8 @@ export const EnhancedImage = ({
     >
       <Image
         {...props}
-        blurDataURL={props.src as string}
         width={width}
         height={height}
-        placeholder='blur'
         alt={alt}
         onError={() => setIsError(true)}
       />
