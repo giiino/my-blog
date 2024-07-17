@@ -22,8 +22,8 @@ export const Image = ({ alt, src }: Props) => {
       <ImageWrapper isover={ratio > 1 ? '1' : '0'}>
         <EnhancedImage
           src={src}
-          width={width * 5}
-          height={height * 5}
+          width={800}
+          height={1200}
           imageWidth='100%'
           ratio={ratio}
           alt={figcaptionValue || alt}
